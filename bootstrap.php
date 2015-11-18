@@ -2,7 +2,6 @@
 // /bootstrap.php
 
 use Doctrine\ORM\Tools\Setup;
-use Doctrine\ORM\EntityManager;
 
 // load required files
 require_once "vendor/autoload.php";
