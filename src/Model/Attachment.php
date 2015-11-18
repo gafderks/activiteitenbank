@@ -17,8 +17,16 @@ class Attachment {
      * @GeneratedValue
      */
     private $id;
-    
+
+    /**
+     * @ManyToOne(targetEntity="\Model\User", inversedBy="attachments")
+     **/
     private $creator;
+
+    /**
+     * @ManyToOne(targetEntity="\Model\Activity", inversedBy="attachments")
+     **/
+    private $activity;
     
     /**
      * @Column(type="string")
@@ -29,7 +37,7 @@ class Attachment {
      * @Column(type="string")
      */
     private $location;
-	
+
 	public function __construct() {
 		
 	}

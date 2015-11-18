@@ -22,10 +22,21 @@ class Team {
      * @Column(type="string")
      */
     private $name;
-    
+
+    /**
+     * @ManyToOne(targetEntity="\Model\Organization", inversedBy="teams")
+     **/
     private $organization;
-    
+
+    /**
+     * @OneToMany(targetEntity="\Model\User", mappedBy="team")
+     **/
     private $members;
+
+    /**
+     * @OneToMany(targetEntity="\Model\Activity", mappedBy="team")
+     **/
+    private $activities;
     
     /**
      * @Column(type="integer")

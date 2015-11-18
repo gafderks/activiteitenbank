@@ -9,8 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
  * @Entity
  * @Table(name="users")
  */
-class User 
-{
+class User {
 
     /**
      * @Id
@@ -33,15 +32,26 @@ class User
      * @Column(type="string")
      */
     private $email;
-    
-    private $organization;
 
+    /**
+     * @ManyToOne(targetEntity="\Model\Team", inversedBy="members")
+     **/
     private $team;
     
     /**
      * @Column(type="integer")
      */
     private $role;
+
+    /**
+     * @OneToMany(targetEntity="\Model\Activity", mappedBy="creator")
+     **/
+    private $activities;
+
+    /**
+     * @OneToMany(targetEntity="\Model\Attachment", mappedBy="creator")
+     **/
+    private $attachments;
     
     public function __construct() {
         

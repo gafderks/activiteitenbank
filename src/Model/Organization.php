@@ -3,7 +3,7 @@
 
 namespace Model;
 
-use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Entity
@@ -22,8 +22,16 @@ class Organization {
      * @Column(type="string")
      */
     private $name;
-    
+
+    /**
+     * @OneToMany(targetEntity="\Model\Team", mappedBy="organization")
+     **/
     private $teams;
+
+    /**
+     * @OneToMany(targetEntity="\Model\Activity", mappedBy="organization")
+     **/
+    private $activities;
     
     public function __construct() {
         

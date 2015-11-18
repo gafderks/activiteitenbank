@@ -27,7 +27,10 @@ class Activity {
      * @Column(type="string")
      */
     private $name;
-    
+
+	/**
+	 * @ManyToOne(targetEntity="\Model\User", inversedBy="activities")
+	 **/
     private $creator;
     
     /**
@@ -39,9 +42,15 @@ class Activity {
      * @Column(type="datetime")
      */
     private $modified;
-    
+
+    /**
+     * @ManyToOne(targetEntity="\Model\Team", inversedBy="activities")
+     **/
     private $team;
-    
+
+    /**
+     * @ManyToOne(targetEntity="\Model\Organization", inversedBy="activities")
+     **/
     private $organization;
         
     private $activity_areas;
@@ -75,17 +84,19 @@ class Activity {
     private $budget; // how to do this efficiently?
     
     /** 
-     * Column(type="text")
+     * @Column(type="text")
      */
     private $elaboration;
+
     private $planning;
     private $preparations;
     private $materials;
     private $budgetary;
-    
+
+    /**
+     * @OneToMany(targetEntity="\Model\Attachment", mappedBy="activity")
+     **/
     private $attachments;
-	
-	private $db;
 	
 	public function __construct($db, $identifier) {
 		
