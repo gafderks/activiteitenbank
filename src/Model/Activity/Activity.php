@@ -1,7 +1,7 @@
 <?php 
-// /src/Model/Activity.php
+// /src/Model/Activity/Activity.php
 
-namespace Model;
+namespace Model\Activity;
 
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 
@@ -52,10 +52,17 @@ class Activity {
      * @ManyToOne(targetEntity="\Model\Organization", inversedBy="activities")
      **/
     private $organization;
-        
+
     private $activity_areas;
     private $suitable_groups;
-        
+
+    /**
+     * @ManyToMany(targetEntity="\Model\Activity\Category")
+     * @JoinTable(name="activities_categories",
+     *      joinColumns={@JoinColumn(name="activity_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="category_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
     private $category;
     
     /**
@@ -88,13 +95,20 @@ class Activity {
      */
     private $elaboration;
 
+    /**
+     * @OneToOne(targetEntity="\Model\Activity\Planning\Planning")
+     */
     private $planning;
-    private $preparations;
+
+    /**
+     * @OneToOne(targetEntity="\Model\Activity\Checklist\Checklist")
+     */
+    private $checklist;
     private $materials;
     private $budgetary;
 
     /**
-     * @OneToMany(targetEntity="\Model\Attachment", mappedBy="activity")
+     * @OneToMany(targetEntity="\Model\Activity\Attachment", mappedBy="activity")
      **/
     private $attachments;
 	
@@ -219,12 +233,12 @@ class Activity {
 		$this->planning = $planning;
 	}
 
-	public function getPreparations(){
-		return $this->preparations;
+	public function getChecklist(){
+		return $this->checklist;
 	}
 
-	public function setPreparations($preparations){
-		$this->preparations = $preparations;
+	public function setChecklist($checklist){
+		$this->checklist = $checklist;
 	}
 
 	public function getMaterials(){

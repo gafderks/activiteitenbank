@@ -29,9 +29,14 @@ class Organization {
     private $teams;
 
     /**
-     * @OneToMany(targetEntity="\Model\Activity", mappedBy="organization")
+     * @OneToMany(targetEntity="\Model\Activity\Activity", mappedBy="organization")
      **/
     private $activities;
+
+    /**
+     * @OneToMany(targetEntity="\Model\Activity\Category", mappedBy="organization")
+     **/
+    private $categories;
     
     public function __construct() {
         

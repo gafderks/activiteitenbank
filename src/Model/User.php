@@ -44,12 +44,12 @@ class User {
     private $role;
 
     /**
-     * @OneToMany(targetEntity="\Model\Activity", mappedBy="creator")
+     * @OneToMany(targetEntity="\Model\Activity\Activity", mappedBy="creator")
      **/
     private $activities;
 
     /**
-     * @OneToMany(targetEntity="\Model\Attachment", mappedBy="creator")
+     * @OneToMany(targetEntity="\Model\Activity\Attachment", mappedBy="creator")
      **/
     private $attachments;
     

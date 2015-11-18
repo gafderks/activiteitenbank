@@ -34,7 +34,7 @@ class Team {
     private $members;
 
     /**
-     * @OneToMany(targetEntity="\Model\Activity", mappedBy="team")
+     * @OneToMany(targetEntity="\Model\Activity\Activity", mappedBy="team")
      **/
     private $activities;
     

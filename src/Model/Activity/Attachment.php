@@ -1,7 +1,7 @@
 <?php 
 // /src/Model/Attachment.php
 
-namespace Model;
+namespace Model\Activity;
 
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 
@@ -24,7 +24,7 @@ class Attachment {
     private $creator;
 
     /**
-     * @ManyToOne(targetEntity="\Model\Activity", inversedBy="attachments")
+     * @ManyToOne(targetEntity="\Model\Activity\Activity", inversedBy="attachments")
      **/
     private $activity;
     
