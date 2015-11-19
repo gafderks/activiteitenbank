@@ -33,7 +33,24 @@ $entityManager = \Doctrine\ORM\EntityManager::create($conn, $doctrineConfig);
 
 // start Slim
 static $app;
-$app = new \Slim\Slim();
+$app = new \Slim\Slim([
+    'debug' => true,
+    'templates.path' => 'src/View'
+]);
+
+// define the engine used for the view @see http://twig.sensiolabs.org
+$app->view = new \Slim\Views\Twig();
+$app->view->setTemplatesDirectory("src/View");
+
+// Twig configuration
+$view = $app->view();
+$view->parserOptions = ['debug' => true];
+$view->parserExtensions = [new \Slim\Views\TwigExtension()];
+
+$app->get('/hello/:name', function ($name) use ($app) {
+    $params = array('name' => $name);
+    $app->render('hello.html', $params);
+});
 
 // load Routers
 //$routerInitializer = new \Routers\Initializer($app, $entityManager);
