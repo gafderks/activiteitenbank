@@ -5,7 +5,7 @@ namespace Model\Activity\Planning;
 
 /**
  * @Entity
- * @Table(name="actions")
+ * @Table(name="planning_actions")
  */
 class Action {
 

@@ -5,7 +5,7 @@ namespace Model\Activity\Checklist;
 
 /**
  * @Entity
- * @Table(name="checklistitems")
+ * @Table(name="checklist_items")
  */
 class ChecklistItem {
 
