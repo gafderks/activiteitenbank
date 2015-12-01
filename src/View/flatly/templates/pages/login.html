@@ -1,0 +1,154 @@
+{% extends "layout.html" %}
+
+{% block title %}Login{% endblock title %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style type="text/css">
+        .form-box {
+            width: 360px;
+            margin: 90px auto 0 auto;
+        }
+
+        .form-box .header {
+            -webkit-border-top-left-radius: 4px;
+            -webkit-border-top-right-radius: 4px;
+            -webkit-border-bottom-right-radius: 0;
+            -webkit-border-bottom-left-radius: 0;
+            -moz-border-radius-topleft: 4px;
+            -moz-border-radius-topright: 4px;
+            -moz-border-radius-bottomright: 0;
+            -moz-border-radius-bottomleft: 0;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            background: #3d9970;
+            box-shadow: inset 0px -3px 0px rgba(0, 0, 0, 0.2);
+            padding: 20px 10px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 300;
+            color: #fff;
+        }
+        .form-box .body,
+        .form-box .footer {
+            padding: 10px 20px;
+            background: #fff;
+            color: #444;
+        }
+        .form-box .body > .form-group,
+        .form-box .footer > .form-group {
+            margin-top: 20px;
+        }
+        .form-box .body > .form-group > input,
+        .form-box .footer > .form-group > input {
+            border: #fff;
+        }
+        .form-box .body > .btn,
+        .form-box .footer > .btn {
+            margin-bottom: 10px;
+        }
+        .form-box .footer {
+            -webkit-border-top-left-radius: 0;
+            -webkit-border-top-right-radius: 0;
+            -webkit-border-bottom-right-radius: 4px;
+            -webkit-border-bottom-left-radius: 4px;
+            -moz-border-radius-topleft: 0;
+            -moz-border-radius-topright: 0;
+            -moz-border-radius-bottomright: 4px;
+            -moz-border-radius-bottomleft: 4px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        @media (max-width: 767px) {
+            .form-box {
+                width: 90%;
+            }
+        }
+
+        body {
+            background-color: #2C3E50;
+        }
+
+        .btn-primary {
+            background-color: #3d9970;
+        }
+
+        .body {
+            background-color: #eaeaec !important;
+        }
+
+        #footer {
+            background-color: #2C3E50;
+        }
+
+        #footer .text-muted {
+            color: #eaeaec;
+        }
+
+        .bg-danger {
+            background-color: #f2dede;
+        }
+
+    </style>
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="form-box" id="login-box">
+    <div class="header">Sign In</div>
+    <form action="" method="post">
+        <div class="body">
+            {% if login.errors is defined %}
+                {% for error in login.errors %}
+                    <p class="bg-danger error">{{ error.message|e }}</p>
+                {% endfor %}
+            {% endif %}
+
+            <div class="form-group">
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" value="{{ login.username|e }}" />
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
+            </div>
+            <!--
+                                <div class="form-group">
+                                    <input type="checkbox" name="remember_me"/> Remember me
+                                </div>
+            -->
+        </div>
+        <div class="footer">
+            <button type="submit" class="btn btn-primary btn-block" onclick="formhash(this.form, this.form.password)">Sign me in</button>
+
+            <p><a href="#">I forgot my password</a></p>
+        </div>
+    </form>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ assetsUrl }}/js/sha512.min.js"></script>
+    <script type="text/javascript">
+        function formhash(form, password) {
+            // Create a new element input, this will be our hashed password field.
+            var p = document.createElement("input");
+
+            // Add the new element to our form.
+            form.appendChild(p);
+            p.name = "p";
+            p.type = "hidden";
+            p.value = hex_sha512(password.value);
+
+            // Make sure the plaintext password doesn't get sent.
+            password.value = "";
+
+            // Finally submit the form.
+            form.submit();
+        }
+
+    </script>
+{% endblock javascripts %}

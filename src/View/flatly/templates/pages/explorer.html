@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %}Explore{% endblock title %}
+
+{% block stylesheets %}
+{{ parent() }}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<h1>Explore</h1>
+
+<div class="row">
+
+    <div class="col-md-3">
+        {% block explorer_filter %}
+            {% include "partials/explorer_filter.html" %}
+        {% endblock %}
+    </div>
+
+    <div class="col-md-9">
+
+        <table id="activity-table" class="display" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    {% for column in searchColumns %}
+                        <th>{{ column.name|e }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+
+            <tfoot>
+                <tr>
+                    {% for column in searchColumns %}
+                        <th>{{ column.name|e }}</th>
+                    {% endfor %}
+                </tr>
+            </tfoot>
+
+            <tbody>
+                <tr>
+                    <td><a href="<?php echo RootURL()."/view/".$activity->getId()."/".$activity->getSlug(); ?>"><?php echo (strlen($activity->getName())>0) ? $activity->getName() : "Untitled" ; ?></a></td>
+                    <td><?php echo ActivityCategories::Text($activity->getCategory()); ?></td>
+                    <td><?php echo Format::int2Time($activity->getDuration()); ?></td>
+                    <td><?php echo Format::float2Euro($activity->getBudget()); ?></td>
+                    <td><?php echo ActivityDifficulties::Text($activity->getDifficulty()); ?></td>
+                    <td><?php echo ActivityGuidances::Text($activity->getGuidance()); ?></td>
+                    <td><?php echo ActivityMotivations::Text($activity->getMotivation()); ?></td>
+                    <td><?php echo PublishStates::Text($activity->getPublish_state()); ?></td>
+                    <td>placeholder</td>
+                    <td>placeholder</td>
+                    <td><?php echo $activity->getCreator()->getName(); ?></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+    </div>
+
+
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+{{ parent() }}
+
+{% endblock javascripts %}
