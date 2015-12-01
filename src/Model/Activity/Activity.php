@@ -12,6 +12,8 @@ use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 class Activity {
 	    
     /**
+	 * Unique identifier for the activity.
+	 *
      * @Id
      * @Column(type="integer")
      * @GeneratedValue
@@ -19,26 +21,36 @@ class Activity {
     private $id;
     
     /**
+	 * URL friendly name for the activity that can be used as a suffix in the URL.
+	 *
      * @Column(type="string")
      */
 	private $slug;
 	
     /**
+	 * Name of the activity.
+	 *
      * @Column(type="string")
      */
     private $name;
 
 	/**
+	 * Creator of the activity.
+	 *
 	 * @ManyToOne(targetEntity="\Model\User", inversedBy="activities")
 	 */
     private $creator;
     
     /**
+	 * Date at which the activity was created.
+	 *
      * @Column(type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
      */
     private $created;
     
     /**
+	 * Date of last modification of the activity.
+	 *
      * @Column(type="datetime")
      */
     private $modified;

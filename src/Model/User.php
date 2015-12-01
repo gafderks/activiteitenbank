@@ -6,12 +6,19 @@ namespace Model;
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 
 /**
+ * Model for User.
+ *
+ * User is an object for users that are logged in. It contains information about their login credentials, preferences,
+ * contact details, team and organization membership, and their belongings.
+ *
  * @Entity
  * @Table(name="users")
  */
 class User {
 
     /**
+     * Primary key for the user.
+     *
      * @Id
      * @Column(type="integer")
      * @GeneratedValue
@@ -19,38 +26,58 @@ class User {
     private $id;
     
     /**
+     * Real name of the user.
+     *
      * @Column(type="string")
      */
     private $name;
     
     /**
+     * Username that is used for login.
+     * Primary key for the user.
+     *
      * @Column(type="string")
      */
     private $username;
     
     /**
+     * Email address for the users.
+     * This address is used for login and for sending notifications.
+     *
      * @Column(type="string")
      */
     private $email;
 
     /**
+     * Password hash that is used for login.
+     *
+     * @Column(type="string")
+     */
+    private $password;
+
+    /**
+     * Team that the user belongs to.
+     *
      * @ManyToOne(targetEntity="\Model\Team", inversedBy="members")
-     **/
+     */
     private $team;
     
     /**
+     * Role of the user.
+     * The role concerns the special permissions for the user.
+     *
      * @Column(type="integer")
      */
     private $role;
 
     /**
      * @OneToMany(targetEntity="\Model\Activity\Activity", mappedBy="creator")
-     **/
+     */
     private $activities;
 
     /**
      * @OneToMany(targetEntity="\Model\Activity\Attachment", mappedBy="creator")
-     **/
+     */
     private $attachments;
     
     public function __construct() {
