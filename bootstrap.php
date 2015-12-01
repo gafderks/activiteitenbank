@@ -5,7 +5,7 @@ use Doctrine\ORM\Tools\Setup;
 
 // load required files
 require_once "vendor/autoload.php";
-require_once "config.php";
+$config = include("config.php");
 
 // create autoloader
 function __autoload($className) {
@@ -13,45 +13,73 @@ function __autoload($className) {
 }
 spl_autoload_register('__autoload');
 
-// Create a simple "default" Doctrine ORM configuration for Annotations
+\Slim\Slim::registerAutoloader();
+
+// absolute path to the root directory
+if ( !defined('ABSPATH') )
+    define('ABSPATH', $config['absolutePath']);
+
+// create a simple "default" Doctrine ORM configuration for Annotations
 $isDevMode = true;
 $doctrineConfig = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/src"), $isDevMode);
 
 // database configuration parameters
-//$conn = [
-//    'url' => getenv('ACTIVITYBANK_DB_URL'),
-//    'driver' => 'pdo_pgsql'
-//];
-$conn = array(
-    'driver' => 'pdo_sqlite',
-    'path' => __DIR__ . '/db.sqlite',
-);
+$conn = $config['dbConnectionParams'];
 
 // obtaining the entity manager
 static $entityManager;
 $entityManager = \Doctrine\ORM\EntityManager::create($conn, $doctrineConfig);
 
+$loader = new \Twig_Loader_Filesystem("src/View/{$config['template']}/templates");
+$twig   = new \Twig_Environment($loader);
+//$twig->addExtension(new \Twig_Extensions_Extension_I18n());
+
+
 // start Slim
 static $app;
 $app = new \Slim\Slim([
-    'debug' => true,
-    'templates.path' => 'src/View'
+    'debug'          => true,
+    'templates.path' => "src/View/{$config['template']}/templates",
+//    'locales.path'   => "public/assets/{$config['template']}/locales"
 ]);
-
 // define the engine used for the view @see http://twig.sensiolabs.org
 $app->view = new \Slim\Views\Twig();
-$app->view->setTemplatesDirectory("src/View");
+$app->view->setTemplatesDirectory("src/View/{$config['template']}/templates");
+
+// twig extensions
+$app->view()->parserExtensions = array(
+    'Twig_Extension_Debug',
+//    'Twig_Extensions_Extension_I18n'
+);
 
 // Twig configuration
 $view = $app->view();
 $view->parserOptions = ['debug' => true];
 $view->parserExtensions = [new \Slim\Views\TwigExtension()];
-
-$app->get('/hello/:name', function ($name) use ($app) {
-    $params = array('name' => $name);
-    $app->render('hello.html', $params);
+// register template assets url in view
+$app->hook('slim.before', function () use ($app, $config) {
+    $app->view()->appendData(array(
+        'baseUrl' => $config['baseUrl'],
+        'assetsUrl' => "{$config['baseUrl']}/public/assets/{$config['template']}",
+    ));
 });
 
-// load Routers
-//$routerInitializer = new \Routers\Initializer($app, $entityManager);
-//$routerInitializer->enableRouters($config['Routers']);
+// language configuration
+//$locality = 'en_US'; // locality should be determined here
+//putenv("LC_ALL={$locality}"); // windows
+//setlocale(LC_ALL, $locality); // Linux
+
+//if (false === function_exists('gettext')) {
+//    throw new \Exception("You do not have the gettext library installed with PHP.");
+//}
+///**
+// * Because the .po file is named messages.po, the text domain must be named
+// * that as well. The second parameter is the base directory to start
+// * searching in.
+// */
+//bindtextdomain('default', ABSPATH . "public/assets/{$config['template']}/locale");
+//// Tell the application to use this text domain, or messages.mo.
+//textdomain('default');
+
+// load router
+require_once "router.php";
