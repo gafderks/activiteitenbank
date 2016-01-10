@@ -51,7 +51,7 @@ class Activity {
     /**
 	 * Date of last modification of the activity.
 	 *
-     * @Column(type="datetime")
+     * @Column(type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
      */
     private $modified;
 

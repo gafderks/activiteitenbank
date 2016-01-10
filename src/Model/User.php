@@ -26,11 +26,18 @@ class User {
     private $id;
     
     /**
-     * Real name of the user.
+     * First name of the user.
      *
      * @Column(type="string")
      */
-    private $name;
+    private $first_name;
+
+    /**
+     * Last name of the user.
+     *
+     * @Column(type="string")
+     */
+    private $last_name;
     
     /**
      * Username that is used for login.
@@ -49,11 +56,18 @@ class User {
     private $email;
 
     /**
-     * Password hash that is used for login.
+     * Password hash that is used for login. Includes a salt.
      *
      * @Column(type="string")
      */
     private $password;
+
+    /**
+     * Date at which the user registered.
+     *
+     * @Column(type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+     */
+    private $registered;
 
     /**
      * Team that the user belongs to.
@@ -68,7 +82,7 @@ class User {
      *
      * @Column(type="integer")
      */
-    private $role;
+    private $role;  // 1 - admin
 
     /**
      * @OneToMany(targetEntity="\Model\Activity\Activity", mappedBy="creator")
