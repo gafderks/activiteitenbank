@@ -64,5 +64,61 @@
 
 {% block javascripts %}
 {{ parent() }}
+<script type="text/javascript" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="{{ assetsUrl }}/js/bootstrap-slider.min.js"></script>
 
+<script type="text/javascript">
+    $(".filter-title, .filter-bar-title").click(function() {
+        $(this).parent().toggleClass("active");
+    });
+
+    $(".slider.left:not(.time):not(.budget)").slider({
+        tooltip: "show",
+        selection: "left"
+    });
+
+    $(".slider.right:not(.time):not(.budget)").slider({
+        tooltip: "show",
+        selection: "right"
+    });
+
+    $(".slider.left.time").slider({
+        tooltip: "show",
+        selection: "left",
+        formater: function(value) {
+            var hours   = Math.floor(value/60);
+            var minutes = String("00"+(value%60)).slice(-2);
+            return hours+":"+minutes;
+        }
+    });
+
+    $(".slider.right.time").slider({
+        tooltip: "show",
+        selection: "right",
+        formater: function(value) {
+            var hours   = Math.floor(value/60);
+            var minutes = String("00"+(value%60)).slice(-2);
+            return hours+":"+minutes;
+        }
+    });
+
+    $(".slider.left.budget").slider({
+        tooltip: "show",
+        selection: "left",
+        formater: function(value) {
+            var euros = Math.floor(value);
+            return "€ "+euros+".00";
+        }
+    });
+
+    $(".slider.right.budget").slider({
+        tooltip: "show",
+        selection: "right",
+        formater: function(value) {
+            var euros = Math.floor(value);
+            return "€ "+euros+".00";
+        }
+    });
+</script>
 {% endblock javascripts %}

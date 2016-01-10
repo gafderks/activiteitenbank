@@ -30,7 +30,7 @@ $conn = $config['dbConnectionParams'];
 static $entityManager;
 $entityManager = \Doctrine\ORM\EntityManager::create($conn, $doctrineConfig);
 
-$loader = new \Twig_Loader_Filesystem("src/View/{$config['template']}/templates");
+$loader = new \Twig_Loader_Filesystem("view/{$config['template']}/templates");
 $twig   = new \Twig_Environment($loader);
 //$twig->addExtension(new \Twig_Extensions_Extension_I18n());
 
@@ -39,12 +39,12 @@ $twig   = new \Twig_Environment($loader);
 static $app;
 $app = new \Slim\Slim([
     'debug'          => true,
-    'templates.path' => "src/View/{$config['template']}/templates",
+    'templates.path' => "view/{$config['template']}/templates",
 //    'locales.path'   => "public/assets/{$config['template']}/locales"
 ]);
 // define the engine used for the view @see http://twig.sensiolabs.org
 $app->view = new \Slim\Views\Twig();
-$app->view->setTemplatesDirectory("src/View/{$config['template']}/templates");
+$app->view->setTemplatesDirectory("view/{$config['template']}/templates");
 
 // twig extensions
 $app->view()->parserExtensions = array(
