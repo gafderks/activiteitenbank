@@ -81,5 +81,48 @@ $app->hook('slim.before', function () use ($app, $config) {
 //// Tell the application to use this text domain, or messages.mo.
 //textdomain('default');
 
-// load router
-require_once "router.php";
+// load application configuration
+$applicationConfig = include("config/config.php");
+
+// load routes
+foreach ($applicationConfig['router']['routes'] as $name => $route) {
+    switch($route['type']) {
+        case 'literal':
+            $controller = $route['options']['controller'];
+            $action = $route['options']['action'];
+
+            switch($route['method']) {
+                case 'get':
+                    $app->get(
+                        $route['options']['route'],
+                        "\\Controller\\{$controller}:{$action}Action"
+                    );
+                    break;
+                case 'post':
+                    $app->post(
+                        $route['options']['route'],
+                        "\\Controller\\{$controller}:{$action}Action"
+                    );
+                    break;
+            }
+            break;
+    }
+}
+
+// dependency injection
+foreach ($applicationConfig['resources'] as $name => $resource) {
+    switch($resource['type']) {
+        case 'service':
+            $class = '\Service\\'.$resource['service'];
+            $app->container->singleton("service_{$name}", function() use ($class) {
+              return new $class();
+            });
+            break;
+        case 'mapper':
+            $class = '\Mapper\\'.$resource['mapper'];
+            $app->container->singleton("mapper_{$name}", function() use ($class, $entityManager) {
+                return new $class($entityManager);
+            });
+            break;
+    }
+}
