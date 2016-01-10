@@ -4,7 +4,7 @@
 namespace Controller;
 
 
-class Controller
+abstract class Controller
 {
     protected $app;
 
