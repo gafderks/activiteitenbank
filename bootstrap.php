@@ -34,6 +34,9 @@ $loader = new \Twig_Loader_Filesystem("view/{$config['template']}/templates");
 $twig   = new \Twig_Environment($loader);
 //$twig->addExtension(new \Twig_Extensions_Extension_I18n());
 
+// start session
+session_cache_limiter(false);
+session_start();
 
 // start Slim
 static $app;

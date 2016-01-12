@@ -102,12 +102,20 @@ class User {
         return $this->id;
     }
     
-    public function getName(){
-        return $this->name;
+    public function getFirstName(){
+        return $this->first_name;
     }
     
-    public function setName($name){
-        $this->name = $name;
+    public function setFirstName($name){
+        $this->first_name = $name;
+    }
+
+    public function getLastName(){
+        return $this->last_name;
+    }
+
+    public function setLastName($name){
+        $this->last_name = $name;
     }
     
     public function getUsername(){
@@ -124,6 +132,14 @@ class User {
     
     public function setEmail($email){
         $this->email = $email;
+    }
+
+    public function getPassword() {
+        return $this->password;
+    }
+
+    public function setPassword($password) {
+        $this->password = $password;
     }
     
     public function getOrganization(){

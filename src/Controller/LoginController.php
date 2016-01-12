@@ -12,22 +12,51 @@ class LoginController extends Controller
 {
 
     public function indexAction() {
-        //print_r($this->getLoginService()); die;
-        $email = $this->getLoginService()->findUserByUsername('gafderks')->getName();
-        echo $email; die;
-
-        $params = array();
+        $params = [];
         $this->app->render('pages/login.html', $params);
     }
 
     public function postAction() {
 
-        $params = array(
-            'login' => array(
+        // collect errors during login process
+        $errors = [];
+
+        // load credentials that were given
+        $username = $this->app->request->post('username');
+        $password = $this->app->request->post('password');
+        $referrer = $_SERVER['HTTP_REFERER'];
+
+        // retrieve user with username $username or with email $username
+        $user = $this->getLoginService()->findUserByUsername($username);
+        if (is_null($user)) {
+            $user = $this->getLoginService()->findUserByEmail($username);
+        }
+
+        // check if user exists
+        if (is_null($user)) {
+            array_push($errors, ['message' => 'Wrong username or password']);
+        }
+
+        // attempt to login user
+        if (!is_null($user)) {
+            if ($this->getLoginService()->loginUser($user, $password)) {
+                if (isset($referrer)) {
+                    header("Location: $referrer");
+                } else {
+                    header("Location: index.php");
+                }
+            } else {
+                array_push($errors, ['message' => 'Wrong username or password']);
+            }
+        }
+
+
+        $params = [
+            'login' => [
                 'username' => $this->app->request->post('username'),
-                'errors' => [['message' => 'You did something wrong!']]
-            ),
-        );
+                'errors' => $errors
+            ],
+        ];
         $this->app->render('pages/login.html', $params);
     }
 
