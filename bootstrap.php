@@ -21,7 +21,7 @@ if ( !defined('ABSPATH') )
 
 // create a simple "default" Doctrine ORM configuration for Annotations
 $isDevMode = true;
-$doctrineConfig = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/src"), $isDevMode);
+$doctrineConfig = Setup::createAnnotationMetadataConfiguration([__DIR__ . "/src"], $isDevMode);
 
 // database configuration parameters
 $conn = $config['dbConnectionParams'];
@@ -50,10 +50,10 @@ $app->view = new \Slim\Views\Twig();
 $app->view->setTemplatesDirectory("view/{$config['template']}/templates");
 
 // twig extensions
-$app->view()->parserExtensions = array(
+$app->view()->parserExtensions = [
     'Twig_Extension_Debug',
 //    'Twig_Extensions_Extension_I18n'
-);
+];
 
 // Twig configuration
 $view = $app->view();
@@ -61,10 +61,10 @@ $view->parserOptions = ['debug' => true];
 $view->parserExtensions = [new \Slim\Views\TwigExtension()];
 // register template assets url in view
 $app->hook('slim.before', function () use ($app, $config) {
-    $app->view()->appendData(array(
+    $app->view()->appendData([
         'baseUrl' => $config['baseUrl'],
         'assetsUrl' => "{$config['baseUrl']}/public/assets/{$config['template']}",
-    ));
+    ]);
 });
 
 // language configuration
@@ -112,18 +112,23 @@ foreach ($applicationConfig['router']['routes'] as $name => $route) {
     }
 }
 
+// url helper
+$app->url = function($route) use ($config) {
+    return $config['baseUrl'] . $config['router']['routes'][$route]['options']['route'];
+};
+
 // dependency injection
 foreach ($applicationConfig['resources'] as $name => $resource) {
     switch($resource['type']) {
         case 'service':
             $class = '\Service\\'.$resource['service'];
-            $app->container->singleton("service_{$name}", function() use ($class) {
+            $app->container->singleton($name, function() use ($class) {
               return new $class();
             });
             break;
         case 'mapper':
             $class = '\Mapper\\'.$resource['mapper'];
-            $app->container->singleton("mapper_{$name}", function() use ($class, $entityManager) {
+            $app->container->singleton($name, function() use ($class, $entityManager) {
                 return new $class($entityManager);
             });
             break;
