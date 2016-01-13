@@ -63,7 +63,6 @@ class User extends \Mapper\Mapper
         $this->em->persist($user);
     }
 
-
     /**
      * Get the repository for this mapper.
      *
@@ -73,4 +72,5 @@ class User extends \Mapper\Mapper
     {
         return $this->em->getRepository('\Model\User');
     }
+    
 }
