@@ -27,9 +27,9 @@ class LoginController extends Controller
         $referrer = $_SERVER['HTTP_REFERER'];
 
         // retrieve user with username $username or with email $username
-        $user = $this->getLoginService()->findUserByUsername($username);
+        $user = $this->getUserService()->findUserByUsername($username);
         if (is_null($user)) {
-            $user = $this->getLoginService()->findUserByEmail($username);
+            $user = $this->getUserService()->findUserByEmail($username);
         }
 
         // check if user exists
@@ -61,13 +61,23 @@ class LoginController extends Controller
     }
 
     /**
-     * Get the User service.
+     * Get the Login service.
      *
      * @return \Service\LoginService
      */
     protected function getLoginService()
     {
         return $this->app->service_login;
+    }
+
+    /**
+     * Get the User service.
+     *
+     * @return \Service\UserService
+     */
+    protected function getUserService()
+    {
+        return $this->app->service_user;
     }
 
 }
