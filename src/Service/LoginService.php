@@ -8,35 +8,22 @@ class LoginService extends Service
 {
 
     /**
-     * Returns a user based on its username.
-     *
-     * @param $username string
-     * @return null|\Model\User
-     */
-    public function findUserByUsername($username) {
-        return $this->getUserMapper()->findUserByUsername($username);
-    }
-
-    /**
-     * Returns a user based on its email.
-     *
-     * @param $email
-     * @return null|\Model\User
-     */
-    public function findUserByEmail($email) {
-        return $this->getUserMapper()->findUserByEmail($email);
-    }
-
-    /**
      * Get the user mapper.
      *
      * @return \Mapper\User
      */
-    public function getUserMapper()
+    protected function getUserMapper()
     {
         return $this->app->mapper_user;
     }
 
+    /**
+     * Tries to log in a user. Returns whether login was successful.
+     *
+     * @param \Model\User $user
+     * @param             $password
+     * @return bool
+     */
     public function loginUser(\Model\User $user, $password) {
 
         // verify stored hash against plain-text password
@@ -59,4 +46,21 @@ class LoginService extends Service
 
         return false;
     }
+
+    /**
+     * Destroys the current session.
+     */
+    public function logout() {
+        session_destroy();
+    }
+
+    /**
+     * Returns the user that is currently logged in.
+     *
+     * @return null|\Model\User
+     */
+    public function getLoggedInUser() {
+        return $this->getUserMapper()->findUserById($_SESSION['id']);
+    }
+
 }
