@@ -33,11 +33,15 @@ return [
         ],
     ],
     'resources' => [
-        'login' => [
+        'service_login' => [
             'type' => 'service',
             'service' => 'LoginService',
         ],
-        'user' => [
+        'service_user' => [
+            'type' => 'service',
+            'service' => 'UserService',
+        ],
+        'mapper_user' => [
             'type' => 'mapper',
             'mapper' => 'User',
         ]
