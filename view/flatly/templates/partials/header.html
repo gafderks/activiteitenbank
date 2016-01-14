@@ -16,12 +16,12 @@
 
             <ul class="nav navbar-nav">
                 <li class=""><a href="{{ baseUrl }}"><span class="glyphicon glyphicon-home"></span>Home</a></li>
-                <li class=""><a href="{{ baseUrl }}/explore"><span class="glyphicon glyphicon-th-list"></span>Explore</a></li>
-                <li class=""><a href="{{ baseUrl }}/edit/new"><span class="glyphicon glyphicon-plus"></span>Create</a></li>
+                <li class=""><a href="{{ urlFor('activity-explore') }}"><span class="glyphicon glyphicon-th-list"></span>Explore</a></li>
+                <li class=""><a href="{{ urlFor('activity-create') }}"><span class="glyphicon glyphicon-plus"></span>Create</a></li>
                 <li class=""><a href="{{ baseUrl }}/plan"><span class="glyphicon glyphicon-calendar"></span>Plan</a></li>
             </ul>
 
-            {% if user is defined %}
+            {% if session.user is defined %}
                 {% block user_menu %}
                     {% include "partials/user_menu.html" %}
                 {% endblock %}

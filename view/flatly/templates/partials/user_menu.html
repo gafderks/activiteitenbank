@@ -1,10 +1,10 @@
 <div class=" pull-right">
     <ul class="nav navbar-nav navbar-right" id="account-menu">
         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="{{ assetsURL }}/img/scouting-groups/".strtolower(ScoutingGroups::Text($session->getUser()->getTeam()->getType())).".png"; ?>"  class="account-image-bar" />
+            <img src="{{ assetsUrl }}/img/scouting-groups/{{ session.user.team.type }}.png"  class="account-image-bar" />
             <div class="account-information">
-                <span class="account-name"><?php echo $session->getUser()->getName(); ?></span><br/>
-                <span class="account-teamname"><?php echo $session->getUser()->getTeam()->getName(); ?></span>
+                <span class="account-name">{{ session.user.firstName }} {{ session.user.lastName }}</span><br/>
+                <span class="account-teamname">{{ session.user.team.name }}</span>
             </div>
             <b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -12,18 +12,18 @@
                     <div class="navbar-content">
                         <div class="row">
                             <div class="col-md-5 col-sm-5">
-                                <img src="<?php echo RootURL()."/img/scouting-groups/".strtolower(ScoutingGroups::ImageName($session->getUser()->getTeam()->getType())).".png"; ?>" alt="Alternate Text" class="img-responsive account-image-menu" />
+                                <img src="{{ assetsUrl }}/img/scouting-groups/{{ session.user.team.type }}.png" alt="Alternate Text" class="img-responsive account-image-menu" />
                             </div>
                             <div class="col-md-7 col-sm-7">
-                                <span><?php echo $session->getUser()->getName(); ?></span>
+                                <span>{{ session.user.firstName }} {{ session.user.lastName }}</span>
                                 <p class="text-muted small">
-                                    <?php echo $session->getUser()->getEmail(); ?></p>
+                                    {{ session.user.email }}</p>
                                 <p class="text-muted small">
-                                    <?php echo $session->getUser()->getTeam()->getName();; ?><br />
-                                    <?php echo $session->getUser()->getOrganization()->getName(); ?></p>
+                                    {{ session.user.team.name }}<br />
+                                    {{ session.user.team.organization.name }}</p>
                                 <div class="divider">
                                 </div>
-                                <a href="#" class="btn btn-primary btn-sm active"><?php echo L::user_overlay_button_view_profile; ?></a>
+                                <a href="#" class="btn btn-primary btn-sm active">View profile</a>
                             </div>
                         </div>
                     </div>
@@ -31,10 +31,10 @@
                         <div class="navbar-footer-content">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
-                                    <a href="#" class="btn btn-default btn-sm"><?php echo L::user_overlay_button_settings; ?></a>
+                                    <a href="#" class="btn btn-default btn-sm">Settings</a>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
-                                    <a href="<?php echo RootURL(); ?>/logout" class="btn btn-default btn-sm pull-right"><?php echo L::user_overlay_button_sign_out; ?></a>
+                                    <a href="{{ urlFor('logout') }}" class="btn btn-default btn-sm pull-right">Sign out</a>
                                 </div>
                             </div>
                         </div>
