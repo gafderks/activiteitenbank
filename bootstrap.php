@@ -64,6 +64,7 @@ $app->hook('slim.before', function () use ($app, $config) {
     $app->view()->appendData([
         'baseUrl' => $config['baseUrl'],
         'assetsUrl' => "{$config['baseUrl']}/public/assets/{$config['template']}",
+        'session' => ['user' => $app->service_login->getLoggedInUser()],
     ]);
 });
 
@@ -99,23 +100,18 @@ foreach ($applicationConfig['router']['routes'] as $name => $route) {
                     $app->get(
                         $route['options']['route'],
                         "\\Controller\\{$controller}:{$action}Action"
-                    );
+                    )->name($name);
                     break;
                 case 'post':
                     $app->post(
                         $route['options']['route'],
                         "\\Controller\\{$controller}:{$action}Action"
-                    );
+                    )->name($name);
                     break;
             }
             break;
     }
 }
-
-// url helper
-$app->url = function($route) use ($config) {
-    return $config['baseUrl'] . $config['router']['routes'][$route]['options']['route'];
-};
 
 // dependency injection
 foreach ($applicationConfig['resources'] as $name => $resource) {

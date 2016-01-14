@@ -60,6 +60,10 @@ class LoginController extends Controller
         $this->app->render('pages/login.html', $params);
     }
 
+    public function logoutAction() {
+        throw new \Exception("Not implemented");
+    }
+
     /**
      * Get the Login service.
      *
