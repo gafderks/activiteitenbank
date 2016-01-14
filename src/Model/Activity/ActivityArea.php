@@ -1,13 +1,13 @@
 <?php
-// /src/Model/Activity/Category.php
+// /src/Model/Activity/ActivityAreas.php
 
 namespace Model\Activity;
 
 /**
  * @Entity
- * @Table(name="categories")
+ * @Table(name="activityareas")
  */
-class Category {
+class ActivityArea {
 
     /**
      * @Id
@@ -22,9 +22,14 @@ class Category {
     private $name;
 
     /**
-     * @ManyToOne(targetEntity="\Model\Organization", inversedBy="categories")
-     **/
-    private $organization;
+     * @Column(type="string")
+     */
+    private $language;
+
+    /**
+     * @Column(type="string")
+     */
+    private $image;
 
     /**
      * @return mixed
@@ -57,15 +62,29 @@ class Category {
     /**
      * @return mixed
      */
-    public function getOrganization() {
-        return $this->organization;
+    public function getLanguage() {
+        return $this->language;
     }
 
     /**
-     * @param mixed $organization
+     * @param mixed $language
      */
-    public function setOrganization($organization) {
-        $this->organization = $organization;
+    public function setLanguage($language) {
+        $this->language = $language;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage() {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image) {
+        $this->image = $image;
     }
 
 }

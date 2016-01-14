@@ -195,14 +195,6 @@ class Activity {
 		$this->motivation = $motivation;
 	}
 
-	public function getDuration(){
-		return $this->duration;
-	}
-
-	public function setDuration($duration){
-		$this->duration = $duration;
-	}
-
 	public function getBudget(){
 		return $this->budget;
 	}
@@ -257,14 +249,6 @@ class Activity {
 
 	public function setMaterials($materials){
 		$this->materials = $materials;
-	}
-
-	public function getBudgetary(){
-		return $this->budgetary;
-	}
-
-	public function setBudgetary($budgetary){
-		$this->budgetary = $budgetary;
 	}
     
     public function getAttachments() {
