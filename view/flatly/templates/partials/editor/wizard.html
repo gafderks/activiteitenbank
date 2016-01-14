@@ -1,0 +1,128 @@
+<div class="wizard">
+    <ul class="buttons">
+        <li class="wizard-label active" data-wizard-tab="elaboration">
+            <a href="#elaboration" onclick="return false;">Elaboration</a>
+        </li>
+        <li class="wizard-label" data-wizard-tab="planning">
+            <a href="#planning" onclick="return false;">Planning</a>
+        </li>
+        <li class="wizard-label" data-wizard-tab="preparations">
+            <a href="#preparations" onclick="return false;">Preparations</a>
+        </li>
+        <li class="wizard-label" data-wizard-tab="materials">
+            <a href="#materials" onclick="return false;">Materials</a>
+        </li>
+        <li class="wizard-label" data-wizard-tab="budgetary">
+            <a href="#budgetary" onclick="return false;">Budgetary</a>
+        </li>
+        <li class="wizard-label" data-wizard-tab="attachments">
+            <a href="#attachments" onclick="return false;">Attachments</a>
+        </li>
+    </ul>
+    <div class="wizard-content active" id="elaboration">
+        <div>
+            <h3 class="wizard-title">Elaboration</h3>
+            <div id="activity-elaboration" class="wysiwyg wysiwyg-extended">{{ activity.elaboration ? activity.elaboration }}</div>
+        </div>
+    </div>
+    <div class="wizard-content" id="planning">
+        <div>
+            <h3 class="wizard-title">Planning</h3>
+            <ul id="list-planning" class="list list-timeable list-removable" style="padding-bottom: 40px;">
+                {% for plan in activity.planning %}
+                <li>
+                    <a href="javascript:void(0);" class="remove-action">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </a>
+                    <input type="text" class="list-time-endurance" data-list="planning" data-list-field="endurance" value="<?php echo Format::int2Time($plan["duration"]); ?>">
+                    <span class="list-time-cumulative" data-list-field="cumulative">0:00</span>
+                    <input type="text" data-list="planning" data-list-field="name" value="<?php echo $plan["name"]; ?>">
+                </li>
+                {% endfor %}
+
+                <li class="list-new-action" data-list="planning">
+                    <span class="glyphicon glyphicon-plus"></span><a href="javascript:void(0);">Add new</a>
+                </li>
+            </ul>
+            <div id="activity-planning-graph" class="time-graph"></div>
+        </div>
+    </div>
+    <div class="wizard-content" id="preparations">
+        <div>
+            <h3 class="wizard-title">Preparations</h3>
+            <ul id="list-preparations" class="list list-removable">
+                {% for preparation in activity.preparations %}
+                <li>
+                    <input type="checkbox" disabled="">
+                    <a href="javascript:void(0);" class="remove-action">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </a>
+                    <input type="text" data-list="preparations" data-list-field="name" value="<?php echo $preparation_value; ?>">
+                </li>
+                {% endfor %}
+                <li class="list-new-action" data-list="preparations">
+                    <span class="glyphicon glyphicon-plus"></span><a href="javascript:void(0);">Add new</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="wizard-content" id="materials">
+        <div>
+            <h3 class="wizard-title">Materials</h3>
+            <ul id="list-materials" class="list list-countable list-removable">
+                {% for material in activity.materials %}
+                <li>
+                    <a href="javascript:void(0);" class="remove-action">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </a>
+                    <input type="number" min="0" class="list-counter" pattern="d*" data-list="materials" data-list-field="amount" value="<?php echo $material["amount"]; ?>">
+                    <input type="text" data-list="materials" data-list-field="name" value="<?php echo $material["name"]; ?>">
+                </li>
+                {% endfor %}
+                <li class="list-new-action" data-list="materials">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="javascript:void(0);">Add new</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="wizard-content" id="budgetary">
+        <div>
+            <h3 class="wizard-title">Budgetary</h3>
+            <ul id="list-budgetary" class="list list-removable list-countable list-budgetary">
+                {% for item in activity.budgetary %}
+                <li>
+                    <a href="javascript:void(0);" class="remove-action">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </a>
+                    <input type="number" min="0" class="list-counter" pattern="d*" data-list="budgetary" data-list-field="amount" value="<?php echo $item["amount"]; ?>">
+                    <input type="text" class="list-name" data-list="budgetary" data-list-field="name" value="<?php echo $item["name"]; ?>">
+                    <input type="text" class="list-price" data-list="budgetary" data-list-field="price" value="<?php echo Format::float2Euro($item["price"]); ?>">
+                    <span class="list-price-sum" data-list="budgetary" data-list-field="price-sum">€ 0.00</span></li>
+                {% endfor %}
+                <li class="list-new-action" data-list="budgetary">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="javascript:void(0);">Add new</a>
+                </li>
+                <li class="list-total">Total<span class="list-total-value">&euro; 0,00</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="wizard-content" id="attachments">
+        <div>
+            <h3 class="wizard-title">Attachments</h3>
+            <?php if ($mode=='create') { ?>
+            <div style="color: #ccc; font-size: 30px; font-style: italic; padding: 20px;"><?php echo L::activity_editor_save_before_attachment; ?></div>
+            <?php } else { ?>
+            <form action="<?php echo RootURL(); ?>/ajax/attachment-processor.php" id="attachmentsDropzone" class="dropzone">
+                <input type="hidden" name="activity_id" value="<?php echo $activity->getId(); ?>" />
+                <input type="hidden" name="action" value="upload" />
+                <div class="fallback">
+                    <input name="file" type="file" multiple />
+                </div>
+            </form>
+            <?php } ?>
+        </div>
+    </div>
+
+</div><!-- /.wizard -->
