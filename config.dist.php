@@ -13,13 +13,13 @@
  * - absolutePath
  */
 
-return array(
-    'dbConnectionParams' => array(
+return [
+    'dbConnectionParams' => [
         // fill in connection parameters
         // (see https://doctrine-orm.readthedocs.org/projects/doctrine-dbal/en/latest/reference/configuration.html#getting-a-connection
         // for details)
-    ),
+    ],
     'template' => 'flatly',
     'baseUrl' => 'put public root URL here',
     'absolutePath' => dirname(__FILE__) . '/'
-);
+];

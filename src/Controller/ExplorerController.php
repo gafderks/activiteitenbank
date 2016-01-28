@@ -22,9 +22,9 @@ class ExplorerController extends Controller
     ];
 
     public function indexAction() {
-        $params = array(
+        $params = [
             'searchColumns' => $this->searchColumns
-        );
+        ];
         $this->app->render('pages/explorer.html', $params);
     }
 
