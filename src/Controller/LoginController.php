@@ -12,6 +12,11 @@ class LoginController extends Controller
 {
 
     public function indexAction() {
+        // check if a user is already logged in
+        if (null !== $this->getLoginService()->getLoggedInUser()) {
+            $this->app->redirect($this->app->urlFor('index'));
+        }
+
         $params = [];
         $this->app->render('pages/login.html', $params);
     }
@@ -24,26 +29,26 @@ class LoginController extends Controller
         // load credentials that were given
         $username = $this->app->request->post('username');
         $password = $this->app->request->post('password');
-        $referrer = $_SERVER['HTTP_REFERER'];
+        $referrer = $this->app->request->post('referrer');
 
         // retrieve user with username $username or with email $username
         $user = $this->getUserService()->findUserByUsername($username);
-        if (is_null($user)) {
+        if (null === $user) {
             $user = $this->getUserService()->findUserByEmail($username);
         }
 
         // check if user exists
-        if (is_null($user)) {
+        if (null === $user) {
             array_push($errors, ['message' => 'Wrong username or password']);
         }
 
         // attempt to login user
-        if (!is_null($user)) {
+        if (null !== $user) {
             if ($this->getLoginService()->loginUser($user, $password)) {
-                if (isset($referrer)) {
-                    header("Location: $referrer");
+                if (!empty($referrer)) {
+                    $this->app->redirect($referrer);
                 } else {
-                    header("Location: index.php");
+                    $this->app->redirect($this->app->urlFor('index'));
                 }
             } else {
                 array_push($errors, ['message' => 'Wrong username or password']);
@@ -61,7 +66,10 @@ class LoginController extends Controller
     }
 
     public function logoutAction() {
-        throw new \Exception("Not implemented");
+        // logout user
+        $this->getLoginService()->logoutUser();
+        // redirect user
+        $this->app->redirect($this->app->urlFor('index'));
     }
 
     /**

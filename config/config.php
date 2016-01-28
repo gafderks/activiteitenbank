@@ -3,6 +3,15 @@
 return [
     'router' => [
         'routes' => [
+            'index' => [
+                'type' => 'literal',
+                'method' => 'get',
+                'options' => [
+                    'route' => '/explore',
+                    'controller' => 'ExplorerController',
+                    'action' => 'index',
+                ],
+            ],
             'login-form' => [
                 'type' => 'literal',
                 'method' => 'get',
