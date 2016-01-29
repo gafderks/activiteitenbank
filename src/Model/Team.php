@@ -52,14 +52,6 @@ class Team
     private $members;
 
     /**
-     * Activities that are owned by members of this team.
-     *
-     * @OneToMany(targetEntity="\Model\Activity\Activity", mappedBy="team")
-     * @var null|\Model\Activity\Activity[]
-     */
-    private $activities;
-
-    /**
      * Type of this team.
      *
      * @Column(type="string")
@@ -109,13 +101,6 @@ class Team
         return $this->members;
     }
     
-    /**
-     * @return null|\Model\Activity\Activity[]
-     */
-    public function getActivities() {
-        return $this->activities;
-    }
-
     /**
      * @return \Model\Enum\GroupType
      */
