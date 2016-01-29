@@ -1,4 +1,4 @@
-<?php 
+<?php
 // /src/Model/Team.php
 
 namespace Model;
@@ -6,74 +6,128 @@ namespace Model;
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 
 /**
+ * Model for Team.
+ *
+ * Team is a group of users.
+ *
  * @Entity
  * @Table(name="teams")
+ * @author Geert Derks <geertderks12@gmail.com>
  */
-class Team {
+class Team
+{
     
     /**
+     * Primary key for the team.
+     *
      * @Id
      * @Column(type="integer")
      * @GeneratedValue
+     * @var int
      */
     private $id;
     
     /**
+     * Natural name of the team.
+     *
      * @Column(type="string")
+     * @var string
      */
     private $name;
 
     /**
+     * Organization that this team belongs to.
+     *
      * @ManyToOne(targetEntity="\Model\Organization", inversedBy="teams")
-     **/
+     * @var \Model\Organization
+     */
     private $organization;
 
     /**
+     * Users that belong to this team.
+     *
      * @OneToMany(targetEntity="\Model\User", mappedBy="team")
-     **/
+     * @var null|\Model\User[]
+     */
     private $members;
 
     /**
+     * Activities that are owned by members of this team.
+     *
      * @OneToMany(targetEntity="\Model\Activity\Activity", mappedBy="team")
-     **/
+     * @var null|\Model\Activity\Activity[]
+     */
     private $activities;
+
+    /**
+     * Type of this team.
+     *
+     * @Column(type="string")
+     * @var \Model\Enum\GroupType
+     */
+    private $type;
     
     /**
-     * @Column(type="integer")
+     * @return int
      */
-    private $type; // bevers, rtt, verkenners, etc.
-    
-    
-    public function __construct() {
-        
-    }
-    
-    public function getId(){
+    public function getId() {
         return $this->id;
     }
     
-    public function getName(){
+    /**
+     * @return string
+     */
+    public function getName() {
         return $this->name;
     }
     
-    public function setName($name){
+    /**
+     * @param string $name
+     */
+    public function setName($name) {
         $this->name = $name;
     }
     
-    public function getOrganization(){
+    /**
+     * @return \Model\Organization
+     */
+    public function getOrganization() {
         return $this->organization;
     }
     
-    public function setOrganization(\Model\Organization $organization){
+    /**
+     * @param \Model\Organization $organization
+     */
+    public function setOrganization(Organization $organization) {
         $this->organization = $organization;
     }
     
-    public function getMembers(){
+    /**
+     * @return null|\Model\User[]
+     */
+    public function getMembers() {
         return $this->members;
     }
     
-    public function setMembers($members){
-        $this->members = $members;
+    /**
+     * @return null|\Model\Activity\Activity[]
+     */
+    public function getActivities() {
+        return $this->activities;
+    }
+
+    /**
+     * @return \Model\Enum\GroupType
+     */
+    public function getType() {
+        return new Enum\GroupType($this->type);
+    }
+
+    /**
+     * @param \Model\Enum\GroupType $type
+     */
+    public function setType(Enum\GroupType $type) {
+        $this->type = $type->value();
     }
     
 }

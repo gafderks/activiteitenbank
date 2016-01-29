@@ -1,4 +1,4 @@
-<?php 
+<?php
 // /src/Model/User.php
 
 namespace Model;
@@ -13,8 +13,10 @@ use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
  *
  * @Entity
  * @Table(name="users")
+ * @author Geert Derks <geertderks12@gmail.com>
  */
-class User {
+class User
+{
 
     /**
      * Primary key for the user.
@@ -22,36 +24,41 @@ class User {
      * @Id
      * @Column(type="integer")
      * @GeneratedValue
+     * @var int
      */
     private $id;
-    
+
     /**
      * First name of the user.
      *
      * @Column(type="string")
+     * @var string
      */
-    private $first_name;
+    private $firstName;
 
     /**
      * Last name of the user.
      *
      * @Column(type="string")
+     * @var string
      */
-    private $last_name;
-    
+    private $lastName;
+
     /**
      * Username that is used for login.
      * Primary key for the user.
      *
      * @Column(type="string")
+     * @var string
      */
     private $username;
-    
+
     /**
      * Email address for the users.
      * This address is used for login and for sending notifications.
      *
      * @Column(type="string")
+     * @var string
      */
     private $email;
 
@@ -59,6 +66,7 @@ class User {
      * Password hash that is used for login. Includes a salt.
      *
      * @Column(type="string")
+     * @var string
      */
     private $password;
 
@@ -66,6 +74,7 @@ class User {
      * Date at which the user registered.
      *
      * @Column(type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+     * @var \DateTime
      */
     private $registered;
 
@@ -73,96 +82,165 @@ class User {
      * Team that the user belongs to.
      *
      * @ManyToOne(targetEntity="\Model\Team", inversedBy="members")
+     * @var \Model\Team
      */
     private $team;
-    
+
     /**
      * Role of the user.
      * The role concerns the special permissions for the user.
      *
      * @Column(type="integer")
+     * @var \Model\Enum\UserRole
      */
-    private $role;  // 1 - admin
+    private $role;
 
     /**
+     * Activities that the user owns.
+     *
      * @OneToMany(targetEntity="\Model\Activity\Activity", mappedBy="creator")
+     * @var null|\Model\Activity\Activity[]
      */
     private $activities;
 
     /**
+     * Attachments that the user owns.
+     *
      * @OneToMany(targetEntity="\Model\Activity\Attachment", mappedBy="creator")
+     * @var null|\Model\Activity\Attachment[]
      */
     private $attachments;
-    
-    public function __construct() {
-        
-    }
-    
-    public function getId(){
+
+    /**
+     * @return int
+     */
+    public function getId() {
         return $this->id;
     }
-    
-    public function getFirstName(){
-        return $this->first_name;
-    }
-    
-    public function setFirstName($name){
-        $this->first_name = $name;
+
+    /**
+     * @return string
+     */
+    public function getFirstName() {
+        return $this->firstName;
     }
 
-    public function getLastName(){
-        return $this->last_name;
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName($firstName) {
+        $this->firstName = $firstName;
     }
 
-    public function setLastName($name){
-        $this->last_name = $name;
+    /**
+     * @return string
+     */
+    public function getLastName() {
+        return $this->lastName;
     }
-    
-    public function getUsername(){
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName($lastName) {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername() {
         return $this->username;
     }
-    
-    public function setUsername($username){
+
+    /**
+     * @param string $username
+     */
+    public function setUsername($username) {
         $this->username = $username;
     }
-    
-    public function getEmail(){
+
+    /**
+     * @return string
+     */
+    public function getEmail() {
         return $this->email;
     }
-    
-    public function setEmail($email){
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email) {
         $this->email = $email;
     }
 
+    /**
+     * @return string
+     */
     public function getPassword() {
         return $this->password;
     }
 
+    /**
+     * @param string $password
+     */
     public function setPassword($password) {
         $this->password = $password;
     }
-    
-    public function getOrganization(){
-        return $this->organization;
+
+    /**
+     * @return \Model\Organization
+     */
+    public function getOrganization() {
+        return $this->getTeam()->getOrganization();
     }
-    
-    public function setOrganization(\Model\Organization $organization){
-        $this->organization = $organization;
-    }
-    
-    public function getTeam(){
+
+    /**
+     * @return \Model\Team
+     */
+    public function getTeam() {
         return $this->team;
     }
-    
-    public function setTeam(\Model\Team $team){
+
+    /**
+     * @param \Model\Team $team
+     */
+    public function setTeam(Team $team) {
         $this->team = $team;
     }
-    
-    public function getRole(){
-        return $this->role;
+
+    /**
+     * @return \Model\Enum\UserRole
+     */
+    public function getRole() {
+        return new Enum\UserRole($this->role);
     }
-    
-    public function setRole($role){
-        $this->role = $role;
+
+    /**
+     * @param \Model\Enum\UserRole $role
+     */
+    public function setRole(Enum\UserRole $role) {
+        $this->role = $role->value();
+    }
+
+    /**
+     * @return null|\Model\Activity\Activity[]
+     */
+    public function getActivities() {
+        return $this->activities;
+    }
+
+    /**
+     * @return null|\Model\Activity\Attachment[]
+     */
+    public function getAttachments() {
+        return $this->attachments;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getRegistered() {
+        return $this->registered;
     }
 }
