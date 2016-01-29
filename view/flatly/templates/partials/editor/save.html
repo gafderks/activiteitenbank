@@ -1,0 +1,77 @@
+<div class="sidebar-item">
+
+    <h3 class="sidebar-title">
+        Save <!-- <span class="subtitle">Saved 10 seconds ago</span>-->
+    </h3>
+
+
+    <div class="sidebar-content">
+        <p><span class="glyphicon glyphicon-lock"></span>Visibility:
+                            <span class="activity-property editable" id="activity-prop-visibility-label">
+                                <?php echo Visibility::Text($activity->getVisibility()); ?></span>
+            <a href="javascript:void(0);" id="activity-prop-visibility-edit"
+               class="activity-property-edit" data-property-editor="#activity-prop-visibility-editor">
+                Edit
+            </a>
+        </p>
+        <div class="activity-property-editor" id="activity-prop-visibility-editor">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="activity-prop-visibility-radio"
+                           data-prop-text="Organization" value="<?php echo Visibility::Organization; ?>"
+                    <?php echo ($activity->getVisibility()==Visibility::Organization) ? "checked" : ""; ?>>
+                    Organization <br/><small>({{ session.user.team.organization.name }})</small>
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="activity-prop-visibility-radio"
+                           data-prop-text="Everybody" value="<?php echo Visibility::Everybody; ?>"
+                    <?php echo ($activity->getVisibility()==Visibility::Everybody) ? "checked" : ""; ?>>
+                    Everybody
+                </label>
+            </div>
+            <input type="hidden" value="<?php echo $activity->getVisibility(); ?>" id="activity-prop-visibility" />
+            <button class="btn btn-default btn-sm activity-prop-ok" data-property-type="radio"
+                    data-prop-editor="#activity-prop-visibility-editor"
+                    data-prop-radio="activity-prop-visibility-radio"
+                    data-prop-label="#activity-prop-visibility-label"
+                    data-prop-field="#activity-prop-visibility"
+                    data-property-edit="#activity-prop-visibility-edit">
+                OK
+            </button>
+            <a href="javascript:void(0);" class="activity-property-cancel"
+               data-property-edit="#activity-prop-visibility-edit"
+               data-property-editor="#activity-prop-visibility-editor">
+                Cancel
+            </a>
+        </div>
+    </div>
+
+    <a href="javascript:void(0);" style="color: #f00; margin: 5px;">
+        <span class="glyphicon glyphicon-trash"></span>Delete activity
+    </a>
+
+
+    <hr style="border-color: #ccc;" />
+
+    <div style="text-align: right">
+
+
+        {% if activity is not defined %}
+
+        <span style="margin-right: 10px; display:none;" id="status-saving">Saving...</span>
+        <button class="btn  btn-primary right" style="padding-left: 30px; padding-right: 30px;" id="save-button">Save</button>
+        {% else %}
+        <span style="margin-right: 10px; display:none;" id="status-saving"><?php echo L::activity_editor_status_saving; ?></span>
+        <span style="margin-right: 10px; display: none;" id="status-saved"><span class="glyphicon glyphicon-ok"></span>Saved</span>
+        <a href="<?php echo RootURL()."/view/".$activity->getId()."/".$activity->getSlug(); ?>">
+        <button class="btn  btn-default" style="margin-right: 5px;">View</button>
+        </a>
+
+
+        <button class="btn  btn-primary right" style="padding-left: 30px; padding-right: 30px;" id="update-button">Update</button>
+
+        {% endif %}
+    </div>
+</div>

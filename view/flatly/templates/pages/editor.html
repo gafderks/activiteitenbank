@@ -5,312 +5,39 @@
 {% block stylesheets %}
 {{ parent() }}
 
+<link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.7.3/summernote.css" rel="stylesheet">
+
 {% endblock stylesheets %}
 
 {% block content %}
 
 <h1>{{ activity ? 'Edit activity' : 'New activity' }}</h1>
 
-<input type="hidden" id="activity-id" value="{{ activity.id ? activity.id }}" />
+<input type="hidden" id="activity-id" value="{{ activity ? activity.id }}" />
 
 <div class="row">
     <div class="col-xs-12 col-md-8">
         <label for="activity-title">Name</label>
         <input type="text" class="form-control" placeholder="Name" value="{{ activity.name ? activity.name }}" id="activity-title" />
 
-        {% include "partials/editor/wizard.html" %}
+        {% include 'partials/editor/wizard.html' %}
 
-        <div class="sidebar-item">
-            <h3 class="sidebar-title" id="activityareas">
-                Activity areas
-            </h3>
-            <div class="sidebar-content">
-                <ul class="badge-selectors line-3">
-                    <li><label><input type="checkbox" value="<?php echo ActivityAreas::ChallengingScoutingTechniques; ?>" name="activity-badge-selectors" <?php echo (in_array(ActivityAreas::ChallengingScoutingTechniques, $activity->getActivity_areas())) ? "checked" : ""; ?> /><img src="{{ assetsUrl }}/img/activity-areas/challenging-scouting-techniques.png" class="badge-selectors-img" />Challenging Scouting Techniques</label></li>
-                    <li><label><input type="checkbox" value="<?php echo ActivityAreas::Expression; ?>" name="activity-badge-selectors" <?php echo (in_array(ActivityAreas::Expression, $activity->getActivity_areas())) ? "checked" : ""; ?> /><img src="{{ assetsUrl }}/img/activity-areas/expression.png" class="badge-selectors-img" />Expression</label></li>
-                    <li><label><input type="checkbox" value="<?php echo ActivityAreas::SportsAndGames; ?>" name="activity-badge-selectors" <?php echo (in_array(ActivityAreas::SportsAndGames, $activity->getActivity_areas())) ? "checked" : ""; ?> /><img src="{{ assetsUrl }}/img/activity-areas/sports-and-games.png" class="badge-selectors-img" />Sports and Games</label></li>
-                    <li><label><input type="checkbox" value="<?php echo ActivityAreas::OutdoorLife; ?>" name="activity-badge-selectors" <?php echo (in_array(ActivityAreas::OutdoorLife, $activity->getActivity_areas())) ? "checked" : ""; ?> /><img src="{{ assetsUrl }}/img/activity-areas/outdoor-life.png" class="badge-selectors-img" />Outdoor life</label></li>
-                    <li><label><input type="checkbox" value="<?php echo ActivityAreas::Identity; ?>" name="activity-badge-selectors" <?php echo (in_array(ActivityAreas::Identity, $activity->getActivity_areas())) ? "checked" : ""; ?> /><img src="{{ assetsUrl }}/img/activity-areas/identity.png" class="badge-selectors-img" />Identity</label></li>
-                    <li><label><input type="checkbox" value="<?php echo ActivityAreas::International; ?>" name="activity-badge-selectors" <?php echo (in_array(ActivityAreas::International, $activity->getActivity_areas())) ? "checked" : ""; ?> /><img src="{{ assetsUrl }}/img/activity-areas/international.png" class="badge-selectors-img" />International</label></li>
-                    <li><label><input type="checkbox" value="<?php echo ActivityAreas::Society; ?>" name="activity-badge-selectors" <?php echo (in_array(ActivityAreas::Society, $activity->getActivity_areas())) ? "checked" : ""; ?> /><img src="{{ assetsUrl }}/img/activity-areas/society.png" class="badge-selectors-img" />Society</label></li>
-                    <li><label><input type="checkbox" value="<?php echo ActivityAreas::SafeAndHealthy; ?>" name="activity-badge-selectors" <?php echo (in_array(ActivityAreas::SafeAndHealthy, $activity->getActivity_areas())) ? "checked" : ""; ?> /><img src="{{ assetsUrl }}/img/activity-areas/safe-and-healthy.png" class="badge-selectors-img" />Safe and Healthy</label></li>
-                </ul>
-            </div>
-        </div><!-- /.sidebar-item -->
+        {% include 'partials/editor/activity_areas.html' %}
 
-
-        <div class="sidebar-item">
-            <h3 class="sidebar-title" id="suitablegroups">
-                Suitable groups
-            </h3>
-            <div class="sidebar-content">
-                <ul class="badge-selectors line-1">
-                    <li><label><input type="checkbox" value="<?php echo ScoutingGroups::Bevers; ?>" name="suitable-group-badge-selectors" <?php echo (in_array(ScoutingGroups::Bevers, $activity->getSuitable_groups())) ? "checked" : ""; ?> /><img src="{{ assetsUrl }}/img/scouting-groups/bevers.png" class="badge-selectors-img" />Bevers</label></li>
-                    <li><label><input type="checkbox" value="<?php echo ScoutingGroups::Welpen; ?>" name="suitable-group-badge-selectors" <?php echo (in_array(ScoutingGroups::Welpen, $activity->getSuitable_groups())) ? "checked" : ""; ?> /><img src="{{ assetsUrl }}/img/scouting-groups/welpen.png" class="badge-selectors-img" />Welpen</label></li>
-                    <li><label><input type="checkbox" value="<?php echo ScoutingGroups::Scouts; ?>" name="suitable-group-badge-selectors" <?php echo (in_array(ScoutingGroups::Scouts, $activity->getSuitable_groups())) ? "checked" : ""; ?> /><img src="{{ assetsUrl }}/img/scouting-groups/scouts.png" class="badge-selectors-img" />Scouts</label></li>
-                    <li><label><input type="checkbox" value="<?php echo ScoutingGroups::Explorers; ?>" name="suitable-group-badge-selectors" <?php echo (in_array(ScoutingGroups::Explorers, $activity->getSuitable_groups())) ? "checked" : ""; ?> /><img src="{{ assetsUrl }}/img/scouting-groups/explorers.png" class="badge-selectors-img" />Explorers</label></li>
-                    <li><label><input type="checkbox" value="<?php echo ScoutingGroups::Roverscouts; ?>" name="suitable-group-badge-selectors" <?php echo (in_array(ScoutingGroups::Roverscouts, $activity->getSuitable_groups())) ? "checked" : ""; ?> /><img src="{{ assetsUrl }}/img/scouting-groups/roverscouts.png" class="badge-selectors-img" />Roverscouts</label></li>
-                    <li><label><input type="checkbox" value="<?php echo ScoutingGroups::Plusscouts; ?>" name="suitable-group-badge-selectors" <?php echo (in_array(ScoutingGroups::Plusscouts, $activity->getSuitable_groups())) ? "checked" : ""; ?> /><img src="{{ assetsUrl }}/img/scouting-groups/plusscouts.png" class="badge-selectors-img" />Plusscouts</label></li>
-                </ul>
-            </div>
-        </div><!-- /.sidebar-item -->
+        {% include 'partials/editor/suitable_groups.html' %}
     </div><!-- /'left side' -->
-
 
     <div id="" class="sidebar col-xs-12 col-md-4">
         <div class="row">
-            <div class="col-xs-6 col-md-12">
-                <div class="sidebar-item">
-                    <h3 class="sidebar-title">
-                        Properties
-                    </h3>
-                    <div class="sidebar-content">
-                        <p><span class="glyphicon glyphicon-inbox"></span><?php echo L::activity_sections_category; ?>: <span class="activity-property editable" id="activity-prop-category-label"><?php echo ActivityCategories::Text($activity->getCategory()); ?></span><a href="javascript:void(0);" id="activity-prop-category-edit" class="activity-property-edit" data-property-editor="#activity-prop-category-editor"><?php echo L::activity_editor_property_edit; ?></a></p>
-                        <div class="activity-property-editor" id="activity-prop-category-editor">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-category-radio" data-prop-text="<?php echo L::activity_categories_forest_game; ?>" value="<?php echo ActivityCategories::ForestGame; ?>" <?php echo ($activity->getCategory()==ActivityCategories::ForestGame) ? "checked" : ""; ?>>
-                                    Forest Game
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-category-radio" data-prop-text="<?php echo L::activity_categories_indoors; ?>" value="<?php echo ActivityCategories::Indoors; ?>" <?php echo ($activity->getCategory()==ActivityCategories::Indoors) ? "checked" : ""; ?>>
-                                    Indoors
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-category-radio" data-prop-text="<?php echo L::activity_categories_technique; ?>" value="<?php echo ActivityCategories::Technique; ?>"  <?php echo ($activity->getCategory()==ActivityCategories::Technique) ? "checked" : ""; ?>>
-                                    Technique
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-category-radio" data-prop-text="<?php echo L::activity_categories_game; ?>" value="<?php echo ActivityCategories::Game; ?>" <?php echo ($activity->getCategory()==ActivityCategories::Game) ? "checked" : ""; ?>>
-                                    Game
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-category-radio" data-prop-text="<?php echo L::activity_categories_extraordinary; ?>" value="<?php echo ActivityCategories::Extraordinary; ?>" <?php echo ($activity->getCategory()==ActivityCategories::Extraordinary) ? "checked" : ""; ?>>
-                                    Extraordinary
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-category-radio" data-prop-text="<?php echo L::activity_categories_special_occasion; ?>" value="<?php echo ActivityCategories::SpecialOccasion; ?>" <?php echo ($activity->getCategory()==ActivityCategories::SpecialOccasion) ? "checked" : ""; ?>>
-                                    Special occasion
-                                </label>
-                            </div>
-                            <input type="hidden" value="<?php echo $activity->getCategory(); ?>" id="activity-prop-category" />
-                            <button class="btn btn-default btn-sm activity-prop-ok" data-property-type="radio" data-prop-editor="#activity-prop-category-editor" data-prop-radio="activity-prop-category-radio" data-prop-label="#activity-prop-category-label" data-prop-field="#activity-prop-category" data-property-edit="#activity-prop-category-edit">OK</button><a href="javascript:void(0);" class="activity-property-cancel" data-property-editor="#activity-prop-category-editor" data-property-edit="#activity-prop-category-edit">Cancel</a></div>
-                        <p><span class="glyphicon glyphicon-flash"></span><?php echo L::activity_sections_difficulty; ?>: <span class="activity-property editable" id="activity-prop-difficulty-label"><?php echo ActivityDifficulties::Text($activity->getDifficulty()); ?></span><a href="javascript:void(0);" id="activity-prop-difficulty-edit" class="activity-property-edit" data-property-editor="#activity-prop-difficulty-editor">Edit</a></p>
-                        <div class="activity-property-editor" id="activity-prop-difficulty-editor">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="<?php echo L::activity_difficulties_very_low; ?>" value="<?php echo ActivityDifficulties::VeryLow; ?>" <?php echo ($activity->getDifficulty()==ActivityDifficulties::VeryLow) ? "checked" : ""; ?>>
-                                    Very low
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="<?php echo L::activity_difficulties_low; ?>" value="<?php echo ActivityDifficulties::Low; ?>" <?php echo ($activity->getDifficulty()==ActivityDifficulties::Low) ? "checked" : ""; ?>>
-                                    Low
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="<?php echo L::activity_difficulties_medium; ?>" value="<?php echo ActivityDifficulties::Medium; ?>"  <?php echo ($activity->getDifficulty()==ActivityDifficulties::Medium) ? "checked" : ""; ?>>
-                                    Medium
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="<?php echo L::activity_difficulties_high; ?>" value="<?php echo ActivityDifficulties::High; ?>" <?php echo ($activity->getDifficulty()==ActivityDifficulties::High) ? "checked" : ""; ?>>
-                                    High
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="<?php echo L::activity_difficulties_very_high; ?>" value="<?php echo ActivityDifficulties::VeryHigh; ?>" <?php echo ($activity->getDifficulty()==ActivityDifficulties::VeryHigh) ? "checked" : ""; ?>>
-                                    Very high
-                                </label>
-                            </div>
-                            <input type="hidden" value="<?php echo $activity->getDifficulty(); ?>" id="activity-prop-difficulty" />
-                            <button class="btn btn-default btn-sm activity-prop-ok" data-property-type="radio" data-prop-editor="#activity-prop-difficulty-editor" data-prop-radio="activity-prop-difficulty-radio" data-prop-label="#activity-prop-difficulty-label" data-prop-field="#activity-prop-difficulty" data-property-edit="#activity-prop-difficulty-edit"><?php echo L::activity_editor_property_ok; ?></button><a href="javascript:void(0);" class="activity-property-cancel" data-property-editor="#activity-prop-difficulty-editor" data-property-edit="#activity-prop-difficulty-edit"><?php echo L::activity_editor_property_cancel; ?></a></div>
-                        <p><span class="glyphicon glyphicon-eye-open"></span><?php echo L::activity_sections_guidance; ?>: <span class="activity-property editable" id="activity-prop-guidance-label"><?php echo ActivityGuidances::Text($activity->getGuidance()); ?></span><a href="javascript:void(0);" id="activity-prop-guidance-edit" class="activity-property-edit" data-property-editor="#activity-prop-guidance-editor"><?php echo L::activity_editor_property_edit; ?></a></p>
-                        <div class="activity-property-editor" id="activity-prop-guidance-editor">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-guidance-radio" data-prop-text="<?php echo L::activity_guidances_very_low; ?>" value="<?php echo ActivityGuidances::VeryLow; ?>" <?php echo ($activity->getGuidance()==ActivityGuidances::VeryLow) ? "checked" : ""; ?>>
-                                    <?php echo L::activity_guidances_very_low; ?>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-guidance-radio" data-prop-text="<?php echo L::activity_guidances_low; ?>" value="<?php echo ActivityGuidances::Low; ?>" <?php echo ($activity->getGuidance()==ActivityGuidances::Low) ? "checked" : ""; ?>>
-                                    <?php echo L::activity_guidances_low; ?>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-guidance-radio" data-prop-text="<?php echo L::activity_guidances_medium; ?>" value="<?php echo ActivityGuidances::Medium; ?>"  <?php echo ($activity->getGuidance()==ActivityGuidances::Medium) ? "checked" : ""; ?>>
-                                    <?php echo L::activity_guidances_medium; ?>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-guidance-radio" data-prop-text="<?php echo L::activity_guidances_high; ?>" value="<?php echo ActivityGuidances::High; ?>" <?php echo ($activity->getGuidance()==ActivityGuidances::High) ? "checked" : ""; ?>>
-                                    <?php echo L::activity_guidances_high; ?>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-guidance-radio" data-prop-text="<?php echo L::activity_guidances_very_high; ?>" value="<?php echo ActivityGuidances::VeryHigh; ?>" <?php echo ($activity->getGuidance()==ActivityGuidances::VeryHigh) ? "checked" : ""; ?>>
-                                    <?php echo L::activity_guidances_very_high; ?>
-                                </label>
-                            </div>
-                            <input type="hidden" value="<?php echo $activity->getGuidance(); ?>" id="activity-prop-guidance" />
-                            <button class="btn btn-default btn-sm activity-prop-ok" data-property-type="radio" data-prop-editor="#activity-prop-guidance-editor" data-prop-radio="activity-prop-guidance-radio" data-prop-label="#activity-prop-guidance-label" data-prop-field="#activity-prop-guidance" data-property-edit="#activity-prop-guidance-edit"><?php echo L::activity_editor_property_ok; ?></button><a href="javascript:void(0);" class="activity-property-cancel" data-property-editor="#activity-prop-guidance-editor" data-property-edit="#activity-prop-guidance-edit"><?php echo L::activity_editor_property_cancel; ?></a></div>
-                        <p><span class="glyphicon glyphicon-heart"></span><?php echo L::activity_sections_motivation; ?>: <span class="activity-property editable" id="activity-prop-motivation-label"><?php echo ActivityMotivations::Text($activity->getMotivation()); ?></span><a href="javascript:void(0);" id="activity-prop-motivation-edit" class="activity-property-edit" data-property-editor="#activity-prop-motivation-editor"><?php echo L::activity_editor_property_edit; ?></a></p>
-                        <div class="activity-property-editor" id="activity-prop-motivation-editor">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-motivation-radio" data-prop-text="<?php echo L::activity_motivations_very_low; ?>" value="<?php echo ActivityMotivations::VeryLow; ?>" <?php echo ($activity->getMotivation()==ActivityMotivations::VeryLow) ? "checked" : ""; ?>>
-                                    <?php echo L::activity_motivations_very_low; ?>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-motivation-radio" data-prop-text="<?php echo L::activity_motivations_low; ?>" value="<?php echo ActivityMotivations::Low; ?>" <?php echo ($activity->getMotivation()==ActivityMotivations::Low) ? "checked" : ""; ?>>
-                                    <?php echo L::activity_motivations_low; ?>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-motivation-radio" data-prop-text="<?php echo L::activity_motivations_medium; ?>" value="<?php echo ActivityMotivations::Medium; ?>"  <?php echo ($activity->getMotivation()==ActivityMotivations::Medium) ? "checked" : ""; ?>>
-                                    <?php echo L::activity_motivations_medium; ?>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-motivation-radio" data-prop-text="<?php echo L::activity_motivations_high; ?>" value="<?php echo ActivityMotivations::High; ?>" <?php echo ($activity->getMotivation()==ActivityMotivations::High) ? "checked" : ""; ?>>
-                                    <?php echo L::activity_motivations_high; ?>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-motivation-radio" data-prop-text="<?php echo L::activity_motivations_very_high; ?>" value="<?php echo ActivityMotivations::VeryHigh; ?>" <?php echo ($activity->getMotivation()==ActivityMotivations::VeryHigh) ? "checked" : ""; ?>>
-                                    <?php echo L::activity_motivations_very_high; ?>
-                                </label>
-                            </div>
-                            <input type="hidden" value="<?php echo $activity->getMotivation(); ?>" id="activity-prop-motivation" />
-                            <button class="btn btn-default btn-sm activity-prop-ok" data-property-type="radio" data-prop-editor="#activity-prop-motivation-editor" data-prop-radio="activity-prop-motivation-radio" data-prop-label="#activity-prop-motivation-label" data-prop-field="#activity-prop-motivation" data-property-edit="#activity-prop-motivation-edit"><?php echo L::activity_editor_property_ok; ?></button><a href="javascript:void(0);" class="activity-property-cancel" data-property-edit="#activity-prop-motivation-edit" data-property-editor="#activity-prop-motivation-editor"><?php echo L::activity_editor_property_cancel; ?></a></div>
-                        <p><span class="glyphicon glyphicon-time"></span><?php echo L::activity_sections_duration; ?>: <span class="activity-property uneditable" id="activity-prop-duration-label"><?php Format::int2Time($activity->getDuration()); ?></span></p>
-                        <p><span class="glyphicon glyphicon-euro"></span><?php echo L::activity_sections_budget; ?>: <span class="activity-property uneditable" id="activity-prop-budget-label">Format::float2Euro($activity->getBudget()); ?></span></p>
-                    </div>
-                </div>
+            <div class="col-xs-12 col-sm-6 col-md-12">
+                {% include 'partials/editor/properties.html' %}
             </div>
 
-            <div class="col-xs-6 col-md-12">
-                <div class="sidebar-item">
-
-                    <h3 class="sidebar-title">
-                        Save <!-- <span class="subtitle">Saved 10 seconds ago</span>-->
-                    </h3>
-
-
-                    <div class="sidebar-content">
-                        <p><span class="glyphicon glyphicon-pushpin"></span><?php echo L::activity_sections_publish_state; ?>: <span class="activity-property editable" id="activity-prop-state-label"><?php echo PublishStates::Text($activity->getPublish_state()); ?></span><a href="javascript:void(0);" id="activity-prop-state-edit" class="activity-property-edit" data-property-editor="#activity-prop-state-editor"><?php echo L::activity_editor_property_edit; ?></a></p>
-                        <div class="activity-property-editor" id="activity-prop-state-editor">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-state-radio" data-prop-text="<?php echo L::publish_states_idea; ?>" value="<?php echo PublishStates::Idea; ?>" <?php echo ($activity->getPublish_state()==PublishStates::Idea) ? "checked" : ""; ?>>
-                                    <?php echo L::publish_states_idea; ?>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-state-radio" data-prop-text="<?php echo L::publish_states_concept; ?>" value="<?php echo PublishStates::Concept; ?>" <?php echo ($activity->getPublish_state()==PublishStates::Concept) ? "checked" : ""; ?>>
-                                    <?php echo L::publish_states_concept; ?>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-state-radio" data-prop-text="<?php echo L::publish_states_partly_prepared; ?>" value="<?php echo PublishStates::PartlyPrepared; ?>" <?php echo ($activity->getPublish_state()==PublishStates::PartlyPrepared) ? "checked" : ""; ?>>
-                                    <?php echo L::publish_states_partly_prepared; ?>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-state-radio" data-prop-text="<?php echo L::publish_states_completely_prepared; ?>" value="<?php echo PublishStates::CompletelyPrepared; ?>"  <?php echo ($activity->getPublish_state()==PublishStates::CompletelyPrepared) ? "checked" : ""; ?>>
-                                    <?php echo L::publish_states_completely_prepared; ?>
-                                </label>
-                            </div>
-                            <input type="hidden" value="<?php echo $activity->getPublish_state(); ?>" id="activity-prop-state" />
-                            <button class="btn btn-default btn-sm activity-prop-ok" data-property-type="radio" data-prop-editor="#activity-prop-state-editor" data-prop-radio="activity-prop-state-radio" data-prop-label="#activity-prop-state-label" data-prop-field="#activity-prop-state" data-property-edit="#activity-prop-state-edit"><?php echo L::activity_editor_property_ok; ?></button><a href="javascript:void(0);" class="activity-property-cancel" data-property-edit="#activity-prop-state-edit" data-property-editor="#activity-prop-state-editor"><?php echo L::activity_editor_property_cancel; ?></a></div>
-                        <p><span class="glyphicon glyphicon-lock"></span><?php echo L::activity_sections_visibility; ?>: <span class="activity-property editable" id="activity-prop-visibility-label"><?php echo Visibility::Text($activity->getVisibility()); ?></span><a href="javascript:void(0);" id="activity-prop-visibility-edit" class="activity-property-edit" data-property-editor="#activity-prop-visibility-editor"><?php echo L::activity_editor_property_edit; ?></a></p>
-                        <div class="activity-property-editor" id="activity-prop-visibility-editor">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-visibility-radio" data-prop-text="<?php echo L::visibility_me; ?>" value="<?php echo Visibility::Me; ?>" <?php echo ($activity->getVisibility()==Visibility::Me) ? "checked" : ""; ?>>
-                                    <?php echo L::visibility_me; ?> <br/><small>(<?php echo $session->getUser()->getName(); ?>)</small>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-visibility-radio" data-prop-text="<?php echo L::visibility_team; ?>" value="<?php echo Visibility::Team; ?>" <?php echo ($activity->getVisibility()==Visibility::Team) ? "checked" : ""; ?>>
-                                    <?php echo L::visibility_team; ?> <br/><small>(<?php echo $session->getUser()->getTeam()->getName(); ?>)</small>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-visibility-radio" data-prop-text="<?php echo L::visibility_organization; ?>" value="<?php echo Visibility::Organization; ?>" <?php echo ($activity->getVisibility()==Visibility::Organization) ? "checked" : ""; ?>>
-                                    <?php echo L::visibility_organization; ?> <br/><small>(<?php echo $session->getUser()->getOrganization()->getName(); ?>)</small>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="activity-prop-visibility-radio" data-prop-text="<?php echo L::visibility_everybody; ?>" value="<?php echo Visibility::Everybody; ?>"  <?php echo ($activity->getVisibility()==Visibility::Everybody) ? "checked" : ""; ?>>
-                                    <?php echo L::visibility_everybody; ?>
-                                </label>
-                            </div>
-                            <input type="hidden" value="<?php echo $activity->getVisibility(); ?>" id="activity-prop-visibility" />
-                            <button class="btn btn-default btn-sm activity-prop-ok" data-property-type="radio" data-prop-editor="#activity-prop-visibility-editor" data-prop-radio="activity-prop-visibility-radio" data-prop-label="#activity-prop-visibility-label" data-prop-field="#activity-prop-visibility" data-property-edit="#activity-prop-visibility-edit"><?php echo L::activity_editor_property_ok; ?></button><a href="javascript:void(0);" class="activity-property-cancel" data-property-edit="#activity-prop-visibility-edit" data-property-editor="#activity-prop-visibility-editor"><?php echo L::activity_editor_property_cancel; ?></a></div>
-                    </div>
-
-                    <a href="javascript:void(0);" style="color: #f00; margin: 5px;"><span class="glyphicon glyphicon-trash"></span><?php echo L::activity_editor_button_delete_activity; ?></a>
-
-
-                    <hr style="border-color: #ccc;" />
-
-                    <div style="text-align: right">
-
-
-                        <?php
-                                                    if ($mode=='create') { ?>
-                        <span style="margin-right: 10px; display:none;" id="status-saving"><?php echo L::activity_editor_status_saving; ?></span>
-                        <button class="btn  btn-primary right" style="padding-left: 30px; padding-right: 30px;" id="save-button"><?php echo L::activity_editor_button_save; ?></button>
-                        <?php
-                                                    } else if ($mode=='edit') { ?>
-
-                        <span style="margin-right: 10px; display:none;" id="status-saving"><?php echo L::activity_editor_status_saving; ?></span>
-                        <span style="margin-right: 10px; display: none;" id="status-saved"><span class="glyphicon glyphicon-ok"></span><?php echo L::activity_editor_status_saved; ?></span>
-                        <a href="<?php echo RootURL()."/view/".$activity->getId()."/".$activity->getSlug(); ?>">
-                        <button class="btn  btn-default" style="margin-right: 5px;"><?php echo L::activity_editor_button_view; ?></button>
-                        </a>
-
-
-                        <button class="btn  btn-primary right" style="padding-left: 30px; padding-right: 30px;" id="update-button"><?php echo L::activity_editor_button_update; ?></button>
-
-                        <?php } ?>
-                    </div>
-                </div>
+            <div class="col-xs-12 col-sm-6 col-md-12">
+                {% include 'partials/editor/save.html' %}
             </div>
         </div>
     </div>
-
 </div>
 
 
@@ -318,6 +45,8 @@
 
 {% block javascripts %}
 {{ parent() }}
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.7.3/summernote.js"></script>
 
 <script type="text/javascript">
 
@@ -391,17 +120,17 @@
     });
 
     $(".wysiwyg-extended").summernote({
-        height: 300,
+        height: 250,
         toolbar: [
             //[groupname, [button list]]
-
+            ['', ['style']],
             ['style', ['bold', 'italic', 'underline', 'clear']],
             ['font', ['strikethrough']],
             ['fontsize', ['fontsize']],
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph']],
-            ['insert', ['picture', 'video', 'link', 'table']],
             ['misc', ['fullscreen', 'codeview']],
+            ['insert', ['picture', 'video', 'link', 'table']],
         ]
     });
 

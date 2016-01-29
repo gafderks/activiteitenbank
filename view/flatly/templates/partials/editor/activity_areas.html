@@ -1,0 +1,82 @@
+<div class="sidebar-item">
+    <h3 class="sidebar-title" id="activityareas">
+        Activity areas
+    </h3>
+    <div class="sidebar-content">
+        <ul class="badge-selectors line-3">
+            {% set activityArea = enum.activityArea %}
+            <li>
+                <label>
+                    <input type="checkbox" value="{{ activityArea.ChallengingScoutingTechniques }}"
+                           name="activity-badge-selectors"
+                           {{ activity ? ( activityArea.ChallengingScoutingTechniques in activity.activityAreasRaw ? 'checked' ) }} />
+                    <img src="{{ assetsUrl }}/img/activity-areas/challenging-scouting-techniques.png" class="badge-selectors-img" />
+                    Challenging Scouting Techniques
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" value="{{ activityArea.Expression }}"
+                           name="activity-badge-selectors"
+                           {{ activity ? ( activityArea.Expression in activity.activityAreasRaw ? 'checked' ) }} />
+                    <img src="{{ assetsUrl }}/img/activity-areas/expression.png" class="badge-selectors-img" />
+                    Expression
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" value="{{ activityArea.SportAndGames }}"
+                           name="activity-badge-selectors"
+                           {{ activity ? ( activityArea.SportAndGames in activity.activityAreasRaw ? 'checked' ) }} />
+                    <img src="{{ assetsUrl }}/img/activity-areas/sports-and-games.png" class="badge-selectors-img" />
+                    Sports and Games
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" value="{{ activityArea.OutdoorLife }}"
+                           name="activity-badge-selectors"
+                           {{ activity ? ( activityArea.OutdoorLife in activity.activityAreasRaw ? 'checked' ) }} />
+                    <img src="{{ assetsUrl }}/img/activity-areas/outdoor-life.png" class="badge-selectors-img" />
+                    Outdoor life
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" value="{{ activityArea.Identity }}"
+                           name="activity-badge-selectors"
+                           {{ activity ? ( activityArea.Identity in activity.activityAreasRaw ? 'checked' ) }} />
+                    <img src="{{ assetsUrl }}/img/activity-areas/identity.png" class="badge-selectors-img" />
+                    Identity
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" value="{{ activityArea.International }}"
+                           name="activity-badge-selectors"
+                           {{ activity ? ( activityArea.International in activity.activityAreasRaw ? 'checked' ) }} />
+                    <img src="{{ assetsUrl }}/img/activity-areas/international.png" class="badge-selectors-img" />
+                    International
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" value="{{ activityArea.Society }}"
+                           name="activity-badge-selectors"
+                           {{ activity ? ( activityArea.Society in activity.activityAreasRaw ? 'checked' ) }} />
+                    <img src="{{ assetsUrl }}/img/activity-areas/society.png" class="badge-selectors-img" />
+                    Society
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" value="{{ activityArea.SafeAndHealthy }}"
+                           name="activity-badge-selectors"
+                           {{ activity ? ( activityArea.SafeAndHealty in activity.activityAreasRaw ? 'checked' ) }} />
+                    <img src="{{ assetsUrl }}/img/activity-areas/safe-and-healthy.png" class="badge-selectors-img" />
+                    Safe and Healthy
+                </label>
+            </li>
+        </ul>
+    </div>
+</div><!-- /.sidebar-item -->

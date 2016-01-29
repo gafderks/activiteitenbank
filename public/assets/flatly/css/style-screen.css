@@ -350,10 +350,10 @@ a.external:after {
 }
 
 .wizard-content .note-editor {
-    margin-left: -40px;
-    margin-right: -40px;
-    margin-bottom: -40px;
-    margin-top: -20px;
+    /*margin-left: -40px;*/
+    /*margin-right: -40px;*/
+    /*margin-bottom: -40px;*/
+    /*margin-top: -20px;*/
 }
 
 .wizard-content h3.wizard-title {
@@ -541,15 +541,15 @@ ul.list.list-timeable>li>input[data-list-field=name] {
 -------------------------------------------------- */
 
 .note-editor .note-toolbar.btn-toolbar {
-	background-color: #fff;
-	border-bottom: 2px solid #eee;
-    float: left;
-    width: 100%;
+    /*background-color: #fff;*/
+    /*border-bottom: 2px solid #eee;*/
+    /*float: left;*/
+    /*width: 100%;*/
 }
 
 .note-editor {
-	border: 0px;
-    padding: inherit !important;
+    /*border: 0px;*/
+    /*padding: inherit !important;*/
 }
 
 /* Time Graph
