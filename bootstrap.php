@@ -49,22 +49,27 @@ $app = new \Slim\Slim([
 $app->view = new \Slim\Views\Twig();
 $app->view->setTemplatesDirectory("view/{$config['template']}/templates");
 
-// twig extensions
-$app->view()->parserExtensions = [
-    'Twig_Extension_Debug',
-//    'Twig_Extensions_Extension_I18n'
-];
-
 // Twig configuration
 $view = $app->view();
 $view->parserOptions = ['debug' => true];
-$view->parserExtensions = [new \Slim\Views\TwigExtension()];
+// twig extensions
+$view->parserExtensions = [
+    new \Slim\Views\TwigExtension(),
+    new \Twig_Extension_Debug(),
+//    'Twig_Extensions_Extension_I18n'
+];
 // register template assets url in view
 $app->hook('slim.before', function () use ($app, $config) {
     $app->view()->appendData([
         'baseUrl' => $config['baseUrl'],
         'assetsUrl' => "{$config['baseUrl']}/public/assets/{$config['template']}",
         'session' => ['user' => $app->service_login->getLoggedInUser()],
+        'enum' => [
+            'activityArea' => \Model\Enum\ActivityArea::toArray(),
+            'groupType' => \Model\Enum\GroupType::toArray(),
+            'level' => \Model\Enum\Level::toArray(),
+            'userRole' => \Model\Enum\UserRole::toArray(),
+        ],
     ]);
 });
 
