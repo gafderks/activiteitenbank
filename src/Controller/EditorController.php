@@ -13,19 +13,25 @@ class EditorController extends Controller
 {
 
     public function newAction() {
+        // if no user is logged in, redirect to login page
+        if (null === $this->getLoginService()->getLoggedInUser()) {
+            $this->app->redirect($this->app->urlFor('login-form'));
+        }
+
         $params = [
-//            'activityAreas' => [
-//                'ChallengingScoutingTechniques' => ActivityArea::ChallengingScoutingTechniques,
-//                'Expression' => ActivityArea::Expression,
-//                'SportsAndGames' => ActivityArea::SportsAndGames,
-//                'OutdoorLife' => ActivityArea::OutdoorLife,
-//                'Identity' => ActivityArea::Identity,
-//                'International' => ActivityArea::International,
-//                'Society' => ActivityArea::Society,
-//                'SafeAndHealthy' => ActivityArea::SafeAndHealthy
-//            ]
+
         ];
         $this->app->render('pages/editor.html', $params);
+    }
+
+    /**
+     * Get the Login service.
+     *
+     * @return \Service\LoginService
+     */
+    protected function getLoginService()
+    {
+        return $this->app->service_login;
     }
 
 }
