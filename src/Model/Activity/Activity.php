@@ -71,7 +71,7 @@ class Activity
      * @Column(type="array")
      * @var \Model\Enum\ActivityArea[]
      */
-    private $activity_areas;
+    private $activityAreas;
 
     /**
      * GroupTypes that this activity is suitable for.
@@ -79,10 +79,10 @@ class Activity
      * @Column(type="array")
      * @var \Model\Enum\GroupType[]
      */
-    private $suitable_groups;
+    private $suitableGroups;
 
     /**
-     * The category that this activity belongs to.
+     * The categories that this activity belongs to.
      *
      * @ManyToMany(targetEntity="\Model\Activity\Category")
      * @JoinTable(name="activities_categories",
@@ -91,7 +91,7 @@ class Activity
      *      )
      * @var \Model\Activity\Category
      */
-    private $category;
+    private $categories;
     
     /**
      * Scaled difficulty of this activity.
@@ -215,17 +215,17 @@ class Activity
     }
 
     /**
-     * @return Category
+     * @return \Model\Activity\Category[]
      */
-    public function getCategory() {
-        return $this->category;
+    public function getCategories() {
+        return $this->categories;
     }
 
     /**
-     * @param \Model\Activity\Category $category
+     * @param \Model\Activity\Category[] $category
      */
-    public function setCategory(Category $category) {
-        $this->category = $category;
+    public function setCategories(array $categories) {
+        $this->categories = $categories;
     }
 
     /**
@@ -287,29 +287,51 @@ class Activity
     /**
      * @return \Model\Enum\ActivityArea[]
      */
-    public function getActivity_areas() {
-        return $this->activity_areas;
+    public function getActivityAreas() {
+        $r = [];
+        foreach ($this->activityAreas as $activityArea) {
+            array_push($r, new \Model\Enum\ActivityArea($activityArea));
+        }
+        return $r;
     }
 
     /**
-     * @param \Model\Enum\ActivityArea[] $activity_areas
+     * @return int[]
      */
-    public function setActivity_areas(array $activity_areas) {
-        $this->activity_areas = $activity_areas;
+    public function getActivityAreasRaw() {
+        return $this->activityAreas;
+    }
+
+    /**
+     * @param \Model\Enum\ActivityArea[] $activityAreas
+     */
+    public function setActivityAreas(array $activityAreas) {
+        $this->activityAreas = $activityAreas;
     }
     
     /**
      * @return \Model\Enum\GroupType[]
      */
-    public function getSuitable_groups() {
-        return $this->suitable_groups;
+    public function getSuitableGroups() {
+        $r = [];
+        foreach ($this->suitableGroups as $suitableGroup) {
+            array_push($r, new \Model\Enum\GroupType($suitableGroup));
+        }
+        return $r;
     }
 
     /**
-     * @param \Model\Enum\GroupType[] $suitable_groups
+     * @return string[]
      */
-    public function setSuitable_groups(array $suitable_groups) {
-        $this->suitable_groups = $suitable_groups;
+    public function getSuitableGroupsRaw() {
+        return $this->suitableGroups;
+    }
+
+    /**
+     * @param \Model\Enum\GroupType[] $suitableGroups
+     */
+    public function setSuitable_groups(array $suitableGroups) {
+        $this->suitableGroups = $suitableGroups;
     }
 
     /**

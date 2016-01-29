@@ -62,7 +62,7 @@ abstract class Enum
     /**
      * Compares value of this enum to the value (of the enum) supplied.
      *
-     * @param mixed|\Model\Enum $value
+     * @param mixed|\Model\Enum\Enum $value
      * @return bool
      */
     public function is($value) {

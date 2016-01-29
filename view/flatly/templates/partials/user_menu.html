@@ -1,7 +1,7 @@
 <div class=" pull-right">
     <ul class="nav navbar-nav navbar-right" id="account-menu">
         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="{{ assetsUrl }}/img/scouting-groups/{{ session.user.team.type }}.png"  class="account-image-bar" />
+            <img src="{{ assetsUrl }}/img/scouting-groups/{{ session.user.team.type.value }}.png"  class="account-image-bar" />
             <div class="account-information">
                 <span class="account-name">{{ session.user.firstName }} {{ session.user.lastName }}</span><br/>
                 <span class="account-teamname">{{ session.user.team.name }}</span>
@@ -12,7 +12,7 @@
                     <div class="navbar-content">
                         <div class="row">
                             <div class="col-md-5 col-sm-5">
-                                <img src="{{ assetsUrl }}/img/scouting-groups/{{ session.user.team.type }}.png" alt="Alternate Text" class="img-responsive account-image-menu" />
+                                <img src="{{ assetsUrl }}/img/scouting-groups/{{ session.user.team.type.value }}.png" alt="Alternate Text" class="img-responsive account-image-menu" />
                             </div>
                             <div class="col-md-7 col-sm-7">
                                 <span>{{ session.user.firstName }} {{ session.user.lastName }}</span>
