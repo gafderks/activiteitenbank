@@ -8,12 +8,21 @@
     3: 'Medium',
     4: 'High',
     5: 'Very high'} %}
+    {% set activityCategoriesNamed = [] %}
+    {% set activityCategories = [] %}
     <div class="sidebar-content">
         <p>
             <span class="glyphicon glyphicon-inbox"></span>Category:
                             <span class="activity-property editable" id="activity-prop-category-label">
-                                No category
-                                <?php echo ActivityCategories::Text($activity->getCategory()); ?>
+                                {% if activity is defined %}
+                                    {% for category in activity.categories %}
+                                        {% set activityCategoriesNamed = activityCategoriesNamed|merge(category.name|e) %}
+                                        {% set activityCategories = activityCategories|merge(category.id) %}
+                                    {% endfor %}
+                                    {{ activityCategoriesNamed|join(', ') }}
+                                {% else %}
+                                    No category
+                                {% endif %}
                             </span>
             <a href="javascript:void(0);" id="activity-prop-category-edit" class="activity-property-edit"
                data-property-editor="#activity-prop-category-editor">Edit</a>
@@ -22,7 +31,7 @@
             {% for category in session.user.team.organization.categories %}
                 <div class="check">
                     <label>
-                        <input type="checkbox" name="activity-prop-category-check"
+                        <input type="checkbox" name="activity-prop-category-radio"
                                data-prop-text="{{ category.name|e }}"
                                value="{{ category.id }}"
                                 {{ activity ? ( category in activity.categories ? 'checked' ) }} >
@@ -30,9 +39,9 @@
                     </label>
                 </div>
             {% endfor %}
-            <input type="hidden" value="<?php echo $activity->getCategory(); ?>" id="activity-prop-category"/>
+            <input type="hidden" value="{{ activityCategories|join(',') }}" id="activity-prop-category"/>
             <button class="btn btn-default btn-sm activity-prop-ok" data-property-type="radio"
-                    data-prop-editor="#activity-prop-category-editor" data-prop-check="activity-prop-category-check"
+                    data-prop-editor="#activity-prop-category-editor" data-prop-radio="activity-prop-category-radio"
                     data-prop-label="#activity-prop-category-label" data-prop-field="#activity-prop-category"
                     data-property-edit="#activity-prop-category-edit">OK
             </button>

@@ -66,10 +66,19 @@
     $(".activity-prop-ok").click(function() {
 
         // set field
-        $($(this).data("prop-field")).val($('input[name='+$(this).data("prop-radio")+']:checked').val());
+        var values = [];
+        var checkedInputs = $('input[name='+$(this).data("prop-radio")+']:checked');
+        checkedInputs.each(function(index) {
+            values.push($(this).val());
+        });
+        $($(this).data("prop-field")).val(values.join(","));
 
         // set label
-        $($(this).data("prop-label")).text($('input[name='+$(this).data("prop-radio")+']:checked').data("prop-text"));
+        var labels = [];
+        checkedInputs.each(function(index) {
+            labels.push($(this).data("prop-text"));
+        });
+        $($(this).data("prop-label")).text(labels.join(", "));
 
         // hide editor
         $($(this).data("prop-editor")).removeClass("active");
@@ -98,7 +107,6 @@
 
     $(".badge-selectors>li>label>input[type=checkbox]").change(function() {
         $(this).parent().parent().toggleClass("active");
-
     });
 
 

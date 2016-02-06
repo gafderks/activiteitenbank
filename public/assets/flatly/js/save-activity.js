@@ -10,7 +10,8 @@ function generateActivityObject() {
     actObj.id = $("#activity-id").val();
 
     // category
-    actObj.category = parseInt($("#activity-prop-category").val());
+    var categoryArray = $("#activity-prop-category").val().split(",").map(Number);
+    actObj.category = categoryArray;
 
     // difficulty
     actObj.difficulty = parseInt($("#activity-prop-difficulty").val());
