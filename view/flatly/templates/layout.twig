@@ -17,7 +17,7 @@
 
 <body>
     {% block header %}
-        {% include "partials/header.html" %}
+        {% include "partials/header.twig" %}
     {% endblock %}
 
     <div class="container content">
@@ -25,7 +25,7 @@
     </div>
 
     {% block footer %}
-        {% include "partials/footer.html" %}
+        {% include "partials/footer.twig" %}
     {% endblock %}
 
     {% block javascripts %}

@@ -18,7 +18,7 @@ class LoginController extends Controller
         }
 
         $params = [];
-        $this->app->render('pages/login.html', $params);
+        $this->app->render('pages/login.twig', $params);
     }
 
     public function postAction() {
@@ -62,7 +62,7 @@ class LoginController extends Controller
                 'errors' => $errors
             ],
         ];
-        $this->app->render('pages/login.html', $params);
+        $this->app->render('pages/login.twig', $params);
     }
 
     public function logoutAction() {

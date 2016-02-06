@@ -21,7 +21,7 @@ class EditorController extends Controller
         $params = [
 
         ];
-        $this->app->render('pages/editor.html', $params);
+        $this->app->render('pages/editor.twig', $params);
     }
 
     /**

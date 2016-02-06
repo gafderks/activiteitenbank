@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout.twig" %}
 
 {% block title %}Explore{% endblock title %}
 
@@ -14,7 +14,7 @@
 
     <div class="col-md-3">
         {% block explorer_filter %}
-            {% include "partials/explorer_filter.html" %}
+            {% include "partials/explorer_filter.twig" %}
         {% endblock %}
     </div>
 

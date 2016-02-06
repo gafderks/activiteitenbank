@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout.twig" %}
 
 {% block title %}{{ activity ? 'Edit activity' : 'New activity' }}{% endblock title %}
 
@@ -20,21 +20,21 @@
         <label for="activity-title">Name</label>
         <input type="text" class="form-control" placeholder="Name" value="{{ activity.name ? activity.name }}" id="activity-title" />
 
-        {% include 'partials/editor/wizard.html' %}
+        {% include 'partials/editor/wizard.twig' %}
 
-        {% include 'partials/editor/activity_areas.html' %}
+        {% include 'partials/editor/activity_areas.twig' %}
 
-        {% include 'partials/editor/suitable_groups.html' %}
+        {% include 'partials/editor/suitable_groups.twig' %}
     </div><!-- /'left side' -->
 
     <div id="" class="sidebar col-xs-12 col-md-4">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-12">
-                {% include 'partials/editor/properties.html' %}
+                {% include 'partials/editor/properties.twig' %}
             </div>
 
             <div class="col-xs-12 col-sm-6 col-md-12">
-                {% include 'partials/editor/save.html' %}
+                {% include 'partials/editor/save.twig' %}
             </div>
         </div>
     </div>
@@ -47,6 +47,8 @@
 {{ parent() }}
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.7.3/summernote.js"></script>
+<script src="{{ assetsUrl }}/js/save-activity.js"></script>
+<script src="{{ assetsUrl }}/js/list.js"></script>
 
 <script type="text/javascript">
 

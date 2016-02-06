@@ -25,7 +25,7 @@ class ExplorerController extends Controller
         $params = [
             'searchColumns' => $this->searchColumns
         ];
-        $this->app->render('pages/explorer.html', $params);
+        $this->app->render('pages/explorer.twig', $params);
     }
 
 }

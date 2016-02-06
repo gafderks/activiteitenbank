@@ -112,16 +112,17 @@
         <div>
             <h3 class="wizard-title">Attachments</h3>
             <?php if ($mode=='create') { ?>
-            <div style="color: #ccc; font-size: 30px; font-style: italic; padding: 20px;"><?php echo L::activity_editor_save_before_attachment; ?></div>
-            <?php } else { ?>
-            <form action="<?php echo RootURL(); ?>/ajax/attachment-processor.php" id="attachmentsDropzone" class="dropzone">
-                <input type="hidden" name="activity_id" value="<?php echo $activity->getId(); ?>" />
+            {% if activity is defined %}
+            <form action="{{ baseUrl }}/ajax/attachment-processor.php" id="attachmentsDropzone" class="dropzone">
+                <input type="hidden" name="activity_id" value="{{ activity.id }}" />
                 <input type="hidden" name="action" value="upload" />
                 <div class="fallback">
                     <input name="file" type="file" multiple />
                 </div>
             </form>
-            <?php } ?>
+            {% else %}
+            <div style="color: #ccc; font-size: 30px; font-style: italic; padding: 20px;">You need to save this activity before you can add an attachment.</div>
+            {% endif %}
         </div>
     </div>
 

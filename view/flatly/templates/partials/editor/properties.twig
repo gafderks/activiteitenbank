@@ -2,6 +2,12 @@
     <h3 class="sidebar-title">
         Properties
     </h3>
+    {% set levels = {0: 'Unspecified',
+    1: 'Very low',
+    2: 'Low',
+    3: 'Medium',
+    4: 'High',
+    5: 'Very high'} %}
     <div class="sidebar-content">
         <p>
             <span class="glyphicon glyphicon-inbox"></span>Category:
@@ -19,7 +25,7 @@
                         <input type="checkbox" name="activity-prop-category-check"
                                data-prop-text="{{ category.name|e }}"
                                value="{{ category.id }}"
-                               {{ activity ? ( category in activity.categories ? 'checked' ) }} >
+                                {{ activity ? ( category in activity.categories ? 'checked' ) }} >
                         {{ category.name }}
                     </label>
                 </div>
@@ -31,21 +37,30 @@
                     data-property-edit="#activity-prop-category-edit">OK
             </button>
             <a href="javascript:void(0);" class="activity-property-cancel"
-               data-property-editor="#activity-prop-category-editor" data-property-edit="#activity-prop-category-edit">Cancel</a>
+               data-property-editor="#activity-prop-category-editor"
+               data-property-edit="#activity-prop-category-edit">Cancel</a>
         </div>
         <p>
             <span class="glyphicon glyphicon-flash"></span>Difficulty:
                             <span class="activity-property editable" id="activity-prop-difficulty-label">
-                                <?php echo ActivityDifficulties::Text($activity->getDifficulty()); ?></span>
+                                {{ activity ? levels[activity.difficulty.value] : 'Unspecified' }}</span>
             <a href="javascript:void(0);" id="activity-prop-difficulty-edit" class="activity-property-edit"
                data-property-editor="#activity-prop-difficulty-editor">Edit</a>
         </p>
         <div class="activity-property-editor" id="activity-prop-difficulty-editor">
             <div class="radio">
                 <label>
+                    <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="Unspecified"
+                           value="{{ enum.level.Unspecified }}"
+                            {{ activity ? ( enum.level.Unspecified== activity.difficulty.value ? 'checked' ) : 'checked' }} />
+                    Unspecified
+                </label>
+            </div>
+            <div class="radio">
+                <label>
                     <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="Very low"
                            value="{{ enum.level.VeryLow }}"
-                           {{ activity ? ( enum.level.VeryLow== activity.difficulty.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.VeryLow== activity.difficulty.value ? 'checked' ) }} />
                     Very low
                 </label>
             </div>
@@ -53,7 +68,7 @@
                 <label>
                     <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="Low"
                            value="{{ enum.level.Low }}"
-                           {{ activity ? ( enum.level.Low== activity.difficulty.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.Low== activity.difficulty.value ? 'checked' ) }} />
                     Low
                 </label>
             </div>
@@ -61,7 +76,7 @@
                 <label>
                     <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="Medium"
                            value="{{ enum.level.Medium }}"
-                           {{ activity ? ( enum.level.Medium== activity.difficulty.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.Medium== activity.difficulty.value ? 'checked' ) }} />
                     Medium
                 </label>
             </div>
@@ -69,7 +84,7 @@
                 <label>
                     <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="High"
                            value="{{ enum.level.High }}"
-                           {{ activity ? ( enum.level.High== activity.difficulty.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.High== activity.difficulty.value ? 'checked' ) }} />
                     High
                 </label>
             </div>
@@ -77,11 +92,12 @@
                 <label>
                     <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="Very high"
                            value="{{ enum.level.VeryHigh }}"
-                           {{ activity ? ( enum.level.VeryHigh== activity.difficulty.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.VeryHigh== activity.difficulty.value ? 'checked' ) }} />
                     Very high
                 </label>
             </div>
-            <input type="hidden" value="<?php echo $activity->getDifficulty(); ?>" id="activity-prop-difficulty"/>
+            <input type="hidden" value="{{ activity ? activity.difficulty.value : enum.level.Unspecified }}"
+                   id="activity-prop-difficulty"/>
             <button class="btn btn-default btn-sm activity-prop-ok" data-property-type="radio"
                     data-prop-editor="#activity-prop-difficulty-editor"
                     data-prop-radio="activity-prop-difficulty-radio"
@@ -95,7 +111,7 @@
         </div>
         <p><span class="glyphicon glyphicon-eye-open"></span>Guidance:
                             <span class="activity-property editable" id="activity-prop-guidance-label">
-                                <?php echo ActivityGuidances::Text($activity->getGuidance()); ?></span>
+                                {{ activity ? levels[activity.guidance.value] : 'Unspecified' }}</span>
             <a href="javascript:void(0);" id="activity-prop-guidance-edit"
                class="activity-property-edit" data-property-editor="#activity-prop-guidance-editor">
                 Edit</a>
@@ -103,9 +119,17 @@
         <div class="activity-property-editor" id="activity-prop-guidance-editor">
             <div class="radio">
                 <label>
+                    <input type="radio" name="activity-prop-guidance-radio" data-prop-text="Unspecified"
+                           value="{{ enum.level.Unspecified }}"
+                            {{ activity ? ( enum.level.Unspecified== activity.guidance.value ? 'checked' ) : 'checked' }} />
+                    Unspecified
+                </label>
+            </div>
+            <div class="radio">
+                <label>
                     <input type="radio" name="activity-prop-guidance-radio" data-prop-text="Very low"
                            value="{{ enum.level.VeryLow }}"
-                           {{ activity ? ( enum.level.VeryLow== activity.guidance.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.VeryLow== activity.guidance.value ? 'checked' ) }} />
                     Very low
                 </label>
             </div>
@@ -113,7 +137,7 @@
                 <label>
                     <input type="radio" name="activity-prop-guidance-radio" data-prop-text="Low"
                            value="{{ enum.level.Low }}"
-                           {{ activity ? ( enum.level.Low== activity.guidance.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.Low== activity.guidance.value ? 'checked' ) }} />
                     Low
                 </label>
             </div>
@@ -121,7 +145,7 @@
                 <label>
                     <input type="radio" name="activity-prop-guidance-radio" data-prop-text="Medium"
                            value="{{ enum.level.Medium }}"
-                           {{ activity ? ( enum.level.Medium== activity.guidance.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.Medium== activity.guidance.value ? 'checked' ) }} />
                     Medium
                 </label>
             </div>
@@ -129,7 +153,7 @@
                 <label>
                     <input type="radio" name="activity-prop-guidance-radio" data-prop-text="High"
                            value="{{ enum.level.High }}"
-                           {{ activity ? ( enum.level.High== activity.guidance.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.High== activity.guidance.value ? 'checked' ) }} />
                     High
                 </label>
             </div>
@@ -137,11 +161,12 @@
                 <label>
                     <input type="radio" name="activity-prop-guidance-radio" data-prop-text="Very high"
                            value="{{ enum.level.VeryHigh }}"
-                           {{ activity ? ( enum.level.VeryHigh== activity.guidance.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.VeryHigh== activity.guidance.value ? 'checked' ) }} />
                     Very high
                 </label>
             </div>
-            <input type="hidden" value="<?php echo $activity->getGuidance(); ?>" id="activity-prop-guidance"/>
+            <input type="hidden" value="{{ activity ? activity.guidance.value : enum.level.Unspecified }}"
+                   id="activity-prop-guidance"/>
             <button class="btn btn-default btn-sm activity-prop-ok" data-property-type="radio"
                     data-prop-editor="#activity-prop-guidance-editor"
                     data-prop-radio="activity-prop-guidance-radio"
@@ -155,16 +180,24 @@
                data-property-edit="#activity-prop-guidance-edit">Cancel</a></div>
         <p><span class="glyphicon glyphicon-heart"></span>Motivation:
                             <span class="activity-property editable" id="activity-prop-motivation-label">
-                                <?php echo ActivityMotivations::Text($activity->getMotivation()); ?></span>
+                                {{ activity ? levels[activity.motivation.value] : 'Unspecified' }}</span>
             <a href="javascript:void(0);" id="activity-prop-motivation-edit"
                class="activity-property-edit" data-property-editor="#activity-prop-motivation-editor">
                 Edit</a></p>
         <div class="activity-property-editor" id="activity-prop-motivation-editor">
             <div class="radio">
                 <label>
+                    <input type="radio" name="activity-prop-motivation-radio" data-prop-text="Unspecified"
+                           value="{{ enum.level.Unspecified }}"
+                            {{ activity ? ( enum.level.Unspecified== activity.motivation.value ? 'checked' ) : 'checked' }} />
+                    Unspecified
+                </label>
+            </div>
+            <div class="radio">
+                <label>
                     <input type="radio" name="activity-prop-motivation-radio" data-prop-text="Very low"
                            value="{{ enum.level.VeryLow }}"
-                           {{ activity ? ( enum.level.VeryLow== activity.motivation.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.VeryLow== activity.motivation.value ? 'checked' ) }} />
                     Very low
                 </label>
             </div>
@@ -172,7 +205,7 @@
                 <label>
                     <input type="radio" name="activity-prop-motivation-radio" data-prop-text="Low"
                            value="{{ enum.level.Low }}"
-                           {{ activity ? ( enum.level.Low== activity.motivation.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.Low== activity.motivation.value ? 'checked' ) }} />
                     Low
                 </label>
             </div>
@@ -180,7 +213,7 @@
                 <label>
                     <input type="radio" name="activity-prop-motivation-radio" data-prop-text="Medium"
                            value="{{ enum.level.Medium }}"
-                           {{ activity ? ( enum.level.Medium== activity.motivation.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.Medium== activity.motivation.value ? 'checked' ) }} />
                     Medium
                 </label>
             </div>
@@ -188,7 +221,7 @@
                 <label>
                     <input type="radio" name="activity-prop-motivation-radio" data-prop-text="High"
                            value="{{ enum.level.High }}"
-                           {{ activity ? ( enum.level.High== activity.motivation.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.High== activity.motivation.value ? 'checked' ) }} />
                     High
                 </label>
             </div>
@@ -196,11 +229,12 @@
                 <label>
                     <input type="radio" name="activity-prop-motivation-radio" data-prop-text="Very high"
                            value="{{ enum.level.VeryHigh }}"
-                           {{ activity ? ( enum.level.VeryHigh== activity.motivation.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.VeryHigh== activity.motivation.value ? 'checked' ) }} />
                     Very high
                 </label>
             </div>
-            <input type="hidden" value="<?php echo $activity->getMotivation(); ?>" id="activity-prop-motivation"/>
+            <input type="hidden" value="{{ activity ? activity.motivation.value : enum.level.Unspecified }}"
+                   id="activity-prop-motivation"/>
             <button class="btn btn-default btn-sm activity-prop-ok" data-property-type="radio"
                     data-prop-editor="#activity-prop-motivation-editor"
                     data-prop-radio="activity-prop-motivation-radio"

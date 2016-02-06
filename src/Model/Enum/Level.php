@@ -10,6 +10,7 @@ namespace Model\Enum;
  */
 class Level extends Enum {
 
+    const Unspecified = 0;
     const VeryLow = 1;
     const Low = 2;
     const Medium = 3;
