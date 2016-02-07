@@ -1,6 +1,6 @@
 {% extends "layout.twig" %}
 
-{% block title %}{{ activity ? 'Edit activity' : 'New activity' }}{% endblock title %}
+{% block title %}{{ activity ? 'Edit activity'|trans : 'New activity'|trans }}{% endblock title %}
 
 {% block stylesheets %}
 {{ parent() }}
@@ -11,14 +11,14 @@
 
 {% block content %}
 
-<h1>{{ activity ? 'Edit activity' : 'New activity' }}</h1>
+<h1>{{ activity ? 'Edit activity'|trans : 'New activity'|trans }}</h1>
 
 <input type="hidden" id="activity-id" value="{{ activity ? activity.id }}" />
 
 <div class="row">
     <div class="col-xs-12 col-md-8">
         <label for="activity-title">{% trans "Name" %}</label>
-        <input type="text" class="form-control" placeholder="Name" value="{{ activity.name ? activity.name }}" id="activity-title" />
+        <input type="text" class="form-control" placeholder="{% trans "Name" %}" value="{{ activity.name ? activity.name }}" id="activity-title" />
 
         {% include 'partials/editor/wizard.twig' %}
 

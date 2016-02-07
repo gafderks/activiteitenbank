@@ -4,30 +4,30 @@
             <a href="#elaboration" onclick="return false;">{% trans "Elaboration" %}</a>
         </li>
         <li class="wizard-label" data-wizard-tab="planning">
-            <a href="#planning" onclick="return false;">Planning</a>
+            <a href="#planning" onclick="return false;">{% trans "Planning" %}</a>
         </li>
         <li class="wizard-label" data-wizard-tab="preparations">
-            <a href="#preparations" onclick="return false;">Preparations</a>
+            <a href="#preparations" onclick="return false;">{% trans "Preparations" %}</a>
         </li>
         <li class="wizard-label" data-wizard-tab="materials">
-            <a href="#materials" onclick="return false;">Materials</a>
+            <a href="#materials" onclick="return false;">{% trans "Materials" %}</a>
         </li>
         <li class="wizard-label" data-wizard-tab="budgetary">
-            <a href="#budgetary" onclick="return false;">Budgetary</a>
+            <a href="#budgetary" onclick="return false;">{% trans "Budgetary" %}</a>
         </li>
         <li class="wizard-label" data-wizard-tab="attachments">
-            <a href="#attachments" onclick="return false;">Attachments</a>
+            <a href="#attachments" onclick="return false;">{% trans "Attachments" %}</a>
         </li>
     </ul>
     <div class="wizard-content active" id="elaboration">
         <div>
-            <h3 class="wizard-title">Elaboration</h3>
+            <h3 class="wizard-title">{% trans "Elaboration" %}</h3>
             <div id="activity-elaboration" class="wysiwyg wysiwyg-extended">{{ activity.elaboration ? activity.elaboration }}</div>
         </div>
     </div>
     <div class="wizard-content" id="planning">
         <div>
-            <h3 class="wizard-title">Planning</h3>
+            <h3 class="wizard-title">{% trans "Planning" %}</h3>
             <ul id="list-planning" class="list list-timeable list-removable" style="padding-bottom: 40px;">
                 {% for plan in activity.planning %}
                 <li>
@@ -41,7 +41,7 @@
                 {% endfor %}
 
                 <li class="list-new-action" data-list="planning">
-                    <span class="glyphicon glyphicon-plus"></span><a href="javascript:void(0);">Add new</a>
+                    <span class="glyphicon glyphicon-plus"></span><a href="javascript:void(0);">{% trans "Add new" %}</a>
                 </li>
             </ul>
             <div id="activity-planning-graph" class="time-graph"></div>
@@ -49,7 +49,7 @@
     </div>
     <div class="wizard-content" id="preparations">
         <div>
-            <h3 class="wizard-title">Preparations</h3>
+            <h3 class="wizard-title">{% trans "Preparations" %}</h3>
             <ul id="list-preparations" class="list list-removable">
                 {% for preparation in activity.preparations %}
                 <li>
@@ -61,14 +61,14 @@
                 </li>
                 {% endfor %}
                 <li class="list-new-action" data-list="preparations">
-                    <span class="glyphicon glyphicon-plus"></span><a href="javascript:void(0);">Add new</a>
+                    <span class="glyphicon glyphicon-plus"></span><a href="javascript:void(0);">{% trans "Add new" %}</a>
                 </li>
             </ul>
         </div>
     </div>
     <div class="wizard-content" id="materials">
         <div>
-            <h3 class="wizard-title">Materials</h3>
+            <h3 class="wizard-title">{% trans "Materials" %}</h3>
             <ul id="list-materials" class="list list-countable list-removable">
                 {% for material in activity.materials %}
                 <li>
@@ -81,14 +81,14 @@
                 {% endfor %}
                 <li class="list-new-action" data-list="materials">
                     <span class="glyphicon glyphicon-plus"></span>
-                    <a href="javascript:void(0);">Add new</a>
+                    <a href="javascript:void(0);">{% trans "Add new" %}</a>
                 </li>
             </ul>
         </div>
     </div>
     <div class="wizard-content" id="budgetary">
         <div>
-            <h3 class="wizard-title">Budgetary</h3>
+            <h3 class="wizard-title">{% trans "Budgetary" %}</h3>
             <ul id="list-budgetary" class="list list-removable list-countable list-budgetary">
                 {% for item in activity.budgetary %}
                 <li>
@@ -98,19 +98,19 @@
                     <input type="number" min="0" class="list-counter" pattern="d*" data-list="budgetary" data-list-field="amount" value="<?php echo $item["amount"]; ?>">
                     <input type="text" class="list-name" data-list="budgetary" data-list-field="name" value="<?php echo $item["name"]; ?>">
                     <input type="text" class="list-price" data-list="budgetary" data-list-field="price" value="<?php echo Format::float2Euro($item["price"]); ?>">
-                    <span class="list-price-sum" data-list="budgetary" data-list-field="price-sum">€ 0.00</span></li>
+                    <span class="list-price-sum" data-list="budgetary" data-list-field="price-sum">&euro; 0.00</span></li>
                 {% endfor %}
                 <li class="list-new-action" data-list="budgetary">
                     <span class="glyphicon glyphicon-plus"></span>
-                    <a href="javascript:void(0);">Add new</a>
+                    <a href="javascript:void(0);">{% trans "Add new" %}</a>
                 </li>
-                <li class="list-total">Total<span class="list-total-value">&euro; 0,00</span></li>
+                <li class="list-total">{% trans "Total" %}<span class="list-total-value">&euro; 0,00</span></li>
             </ul>
         </div>
     </div>
     <div class="wizard-content" id="attachments">
         <div>
-            <h3 class="wizard-title">Attachments</h3>
+            <h3 class="wizard-title">{% trans "Attachments" %}</h3>
             <?php if ($mode=='create') { ?>
             {% if activity is defined %}
             <form action="{{ baseUrl }}/ajax/attachment-processor.php" id="attachmentsDropzone" class="dropzone">
@@ -121,7 +121,7 @@
                 </div>
             </form>
             {% else %}
-            <div style="color: #ccc; font-size: 30px; font-style: italic; padding: 20px;">You need to save this activity before you can add an attachment.</div>
+            <div style="color: #ccc; font-size: 30px; font-style: italic; padding: 20px;">{% trans "You need to save this activity before you can add an attachment." %}</div>
             {% endif %}
         </div>
     </div>

@@ -1,6 +1,6 @@
 <div class="sidebar-item">
     <h3 class="sidebar-title" id="suitablegroups">
-        Suitable groups
+        {% trans "Suitable groups" %}
     </h3>
     <div class="sidebar-content">
         <ul class="badge-selectors line-1">
@@ -11,7 +11,7 @@
                            name="suitable-group-badge-selectors"
                            {{ activity ? ( groupType.Bevers in activity.suitableGroupsRaw ? 'checked' ) }} />
                     <img src="{{ assetsUrl }}/img/scouting-groups/bevers.png" class="badge-selectors-img" />
-                    Bevers
+                    {% trans "Bevers" %}
                 </label>
             </li>
             <li>
@@ -20,7 +20,7 @@
                            name="suitable-group-badge-selectors"
                            {{ activity ? ( groupType.Welpen in activity.suitableGroupsRaw ? 'checked' ) }} />
                     <img src="{{ assetsUrl }}/img/scouting-groups/welpen.png" class="badge-selectors-img" />
-                    Welpen
+                    {% trans "Welpen" %}
                 </label>
             </li>
             <li>
@@ -29,7 +29,7 @@
                            name="suitable-group-badge-selectors"
                            {{ activity ? ( groupType.Scouts in activity.suitableGroupsRaw ? 'checked' ) }} />
                     <img src="{{ assetsUrl }}/img/scouting-groups/scouts.png" class="badge-selectors-img" />
-                    Scouts
+                    {% trans "Scouts" %}
                 </label>
             </li>
             <li>
@@ -38,7 +38,7 @@
                            name="suitable-group-badge-selectors"
                            {{ activity ? ( groupType.Explorers in activity.suitableGroupsRaw ? 'checked' ) }} />
                     <img src="{{ assetsUrl }}/img/scouting-groups/explorers.png" class="badge-selectors-img" />
-                    Explorers
+                    {% trans "Explorers" %}
                 </label>
             </li>
             <li>
@@ -47,7 +47,7 @@
                            name="suitable-group-badge-selectors"
                            {{ activity ? ( groupType.Roverscouts in activity.suitableGroupsRaw ? 'checked' ) }} />
                     <img src="{{ assetsUrl }}/img/scouting-groups/roverscouts.png" class="badge-selectors-img" />
-                    Roverscouts
+                    {% trans "Roverscouts" %}
                 </label>
             </li>
             <li>
@@ -56,7 +56,7 @@
                            name="suitable-group-badge-selectors"
                            {{ activity ? ( groupType.Plusscouts in activity.suitableGroupsRaw ? 'checked' ) }} />
                     <img src="{{ assetsUrl }}/img/scouting-groups/plusscouts.png" class="badge-selectors-img" />
-                    Plusscouts
+                    {% trans "Plusscouts" %}
                 </label>
             </li>
         </ul>

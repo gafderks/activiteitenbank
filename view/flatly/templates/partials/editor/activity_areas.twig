@@ -1,6 +1,6 @@
 <div class="sidebar-item">
     <h3 class="sidebar-title" id="activityareas">
-        Activity areas
+        {% trans "Activity areas" %}
     </h3>
     <div class="sidebar-content">
         <ul class="badge-selectors line-3">
@@ -11,7 +11,7 @@
                            name="activity-badge-selectors"
                            {{ activity ? ( activityArea.ChallengingScoutingTechniques in activity.activityAreasRaw ? 'checked' ) }} />
                     <img src="{{ assetsUrl }}/img/activity-areas/challenging-scouting-techniques.png" class="badge-selectors-img" />
-                    Challenging Scouting Techniques
+                    {% trans "Challenging Scouting Techniques" %}
                 </label>
             </li>
             <li>
@@ -20,7 +20,7 @@
                            name="activity-badge-selectors"
                            {{ activity ? ( activityArea.Expression in activity.activityAreasRaw ? 'checked' ) }} />
                     <img src="{{ assetsUrl }}/img/activity-areas/expression.png" class="badge-selectors-img" />
-                    Expression
+                    {% trans "Expression" %}
                 </label>
             </li>
             <li>
@@ -29,7 +29,7 @@
                            name="activity-badge-selectors"
                            {{ activity ? ( activityArea.SportsAndGames in activity.activityAreasRaw ? 'checked' ) }} />
                     <img src="{{ assetsUrl }}/img/activity-areas/sports-and-games.png" class="badge-selectors-img" />
-                    Sports and Games
+                    {% trans "Sports and Games" %}
                 </label>
             </li>
             <li>
@@ -38,7 +38,7 @@
                            name="activity-badge-selectors"
                            {{ activity ? ( activityArea.OutdoorLife in activity.activityAreasRaw ? 'checked' ) }} />
                     <img src="{{ assetsUrl }}/img/activity-areas/outdoor-life.png" class="badge-selectors-img" />
-                    Outdoor life
+                    {% trans "Outdoor life" %}
                 </label>
             </li>
             <li>
@@ -47,7 +47,7 @@
                            name="activity-badge-selectors"
                            {{ activity ? ( activityArea.Identity in activity.activityAreasRaw ? 'checked' ) }} />
                     <img src="{{ assetsUrl }}/img/activity-areas/identity.png" class="badge-selectors-img" />
-                    Identity
+                    {% trans "Identity" %}
                 </label>
             </li>
             <li>
@@ -56,7 +56,7 @@
                            name="activity-badge-selectors"
                            {{ activity ? ( activityArea.International in activity.activityAreasRaw ? 'checked' ) }} />
                     <img src="{{ assetsUrl }}/img/activity-areas/international.png" class="badge-selectors-img" />
-                    International
+                    {% trans "International" %}
                 </label>
             </li>
             <li>
@@ -65,7 +65,7 @@
                            name="activity-badge-selectors"
                            {{ activity ? ( activityArea.Society in activity.activityAreasRaw ? 'checked' ) }} />
                     <img src="{{ assetsUrl }}/img/activity-areas/society.png" class="badge-selectors-img" />
-                    Society
+                    {% trans "Society" %}
                 </label>
             </li>
             <li>
@@ -74,7 +74,7 @@
                            name="activity-badge-selectors"
                            {{ activity ? ( activityArea.SafeAndHealty in activity.activityAreasRaw ? 'checked' ) }} />
                     <img src="{{ assetsUrl }}/img/activity-areas/safe-and-healthy.png" class="badge-selectors-img" />
-                    Safe and Healthy
+                    {% trans "Safe and Healthy" %}
                 </label>
             </li>
         </ul>
