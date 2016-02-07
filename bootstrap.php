@@ -42,7 +42,6 @@ session_start();
 static $app;
 $app = new \Slim\Slim([
     'debug'          => true,
-    'templates.path' => "view/{$config['template']}/templates",
 //    'locales.path'   => "public/assets/{$config['template']}/locales"
 ]);
 // define the engine used for the view @see http://twig.sensiolabs.org
@@ -56,7 +55,7 @@ $view->parserOptions = ['debug' => true];
 $view->parserExtensions = [
     new \Slim\Views\TwigExtension(),
     new \Twig_Extension_Debug(),
-//    'Twig_Extensions_Extension_I18n'
+    new \Twig_Extensions_Extension_I18n(),
 ];
 // register template assets url in view
 $app->hook('slim.before', function () use ($app, $config) {
@@ -73,22 +72,26 @@ $app->hook('slim.before', function () use ($app, $config) {
     ]);
 });
 
-// language configuration
-//$locality = 'en_US'; // locality should be determined here
-//putenv("LC_ALL={$locality}"); // windows
-//setlocale(LC_ALL, $locality); // Linux
+// language configuration @see https://github.com/roboter/slim-i18n-working-example/blob/master/htdocs/index.php#L51
+$locality = 'nl_NL'; // locality should be determined here
+if (defined('LC_MESSAGES')) {
+    setlocale(LC_MESSAGES, $locality); // Linux
+} else {
+    putenv("LC_MESSAGES={$locality}"); // Windows
+}
 
-//if (false === function_exists('gettext')) {
-//    throw new \Exception("You do not have the gettext library installed with PHP.");
-//}
-///**
-// * Because the .po file is named messages.po, the text domain must be named
-// * that as well. The second parameter is the base directory to start
-// * searching in.
-// */
-//bindtextdomain('default', ABSPATH . "public/assets/{$config['template']}/locale");
-//// Tell the application to use this text domain, or messages.mo.
-//textdomain('default');
+if (false === function_exists('gettext')) {
+    throw new \Exception("You do not have the gettext library installed with PHP.");
+}
+/**
+ * Because the .po file is named messages.po, the text domain must be named
+ * that as well. The second parameter is the base directory to start
+ * searching in.
+ */
+bindtextdomain('messages', "view/{$config['template']}/locales");
+bind_textdomain_codeset('messages', 'UTF-8');
+// Tell the application to use this text domain, or messages.mo.
+textdomain('messages');
 
 // load application configuration
 $applicationConfig = include("config/config.php");
