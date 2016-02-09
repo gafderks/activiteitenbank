@@ -55,6 +55,9 @@ return [
                     'route' => '/create',
                     'controller' => 'EditorController',
                     'action' => 'new',
+                    'middleware' => [
+                        
+                    ],
                 ],
             ],
             'activity-edit' => [

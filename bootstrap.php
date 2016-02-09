@@ -3,9 +3,18 @@
 
 use Doctrine\ORM\Tools\Setup;
 
+/********************************************************************************
+ * Load configuration
+ *******************************************************************************/
+
+$config = include("config.php");
+
+/********************************************************************************
+ * Set up autoloader
+ *******************************************************************************/
+
 // load required files
 require_once "vendor/autoload.php";
-$config = include("config.php");
 
 // create autoloader
 function __autoload($className) {
@@ -15,9 +24,9 @@ spl_autoload_register('__autoload');
 
 \Slim\Slim::registerAutoloader();
 
-// absolute path to the root directory
-if ( !defined('ABSPATH') )
-    define('ABSPATH', $config['absolutePath']);
+/********************************************************************************
+ * Set up Doctrine ORM
+ *******************************************************************************/
 
 // create a simple "default" Doctrine ORM configuration for Annotations
 $isDevMode = true;
@@ -30,19 +39,21 @@ $conn = $config['dbConnectionParams'];
 static $entityManager;
 $entityManager = \Doctrine\ORM\EntityManager::create($conn, $doctrineConfig);
 
-$loader = new \Twig_Loader_Filesystem("view/{$config['template']}/templates");
-$twig   = new \Twig_Environment($loader);
-//$twig->addExtension(new \Twig_Extensions_Extension_I18n());
+/********************************************************************************
+ * Start session
+ *******************************************************************************/
 
 // start session
 session_cache_limiter(false);
 session_start();
 
+/********************************************************************************
+ * Start Slim and Twig
+ *******************************************************************************/
+
 // start Slim
-static $app;
 $app = new \Slim\Slim([
-    'debug'          => true,
-//    'locales.path'   => "public/assets/{$config['template']}/locales"
+    'debug' => true,
 ]);
 // define the engine used for the view @see http://twig.sensiolabs.org
 $app->view = new \Slim\Views\Twig();
@@ -57,7 +68,7 @@ $view->parserExtensions = [
     new \Twig_Extension_Debug(),
     new \Twig_Extensions_Extension_I18n(),
 ];
-// register template assets url in view
+// register default data that is supplied to the templates
 $app->hook('slim.before', function () use ($app, $config) {
     $app->view()->appendData([
         'baseUrl' => $config['baseUrl'],
@@ -72,6 +83,10 @@ $app->hook('slim.before', function () use ($app, $config) {
     ]);
 });
 
+/********************************************************************************
+ * Set up I18n
+ *******************************************************************************/
+
 // language configuration @see https://github.com/roboter/slim-i18n-working-example/blob/master/htdocs/index.php#L51
 $locality = 'nl_NL'; // locality should be determined here
 if (defined('LC_MESSAGES')) {
@@ -83,6 +98,7 @@ if (defined('LC_MESSAGES')) {
 if (false === function_exists('gettext')) {
     throw new \Exception("You do not have the gettext library installed with PHP.");
 }
+
 /**
  * Because the .po file is named messages.po, the text domain must be named
  * that as well. The second parameter is the base directory to start
@@ -93,11 +109,26 @@ bind_textdomain_codeset('messages', 'UTF-8');
 // Tell the application to use this text domain, or messages.mo.
 textdomain('messages');
 
+/********************************************************************************
+ * Load routes from configuration
+ *******************************************************************************/
+
 // load application configuration
 $applicationConfig = include("config/config.php");
 
+// load middleware delegate
+$middlewareDelegate = function ($routeConfig) {
+    return function () use ($routeConfig) {
+        if (isset($routeConfig['options']['middleware'])) {
+            foreach($routeConfig['options']['middleware'] as $middleware) {
+                call_user_func($middleware);
+            }
+        }
+    };
+};
+
 // load routes
-foreach ($applicationConfig['router']['routes'] as $name => $route) {
+foreach($applicationConfig['router']['routes'] as $name => $route) {
     switch($route['type']) {
         case 'literal':
             $controller = $route['options']['controller'];
@@ -107,12 +138,28 @@ foreach ($applicationConfig['router']['routes'] as $name => $route) {
                 case 'get':
                     $app->get(
                         $route['options']['route'],
+                        $middlewareDelegate($route),
                         "\\Controller\\{$controller}:{$action}Action"
                     )->name($name);
                     break;
                 case 'post':
                     $app->post(
                         $route['options']['route'],
+                        $middlewareDelegate($route),
+                        "\\Controller\\{$controller}:{$action}Action"
+                    )->name($name);
+                    break;
+                case 'put':
+                    $app->put(
+                        $route['options']['route'],
+                        $middlewareDelegate($route),
+                        "\\Controller\\{$controller}:{$action}Action"
+                    )->name($name);
+                    break;
+                case 'delete':
+                    $app->delete(
+                        $route['options']['route'],
+                        $middlewareDelegate($route),
                         "\\Controller\\{$controller}:{$action}Action"
                     )->name($name);
                     break;
@@ -120,6 +167,10 @@ foreach ($applicationConfig['router']['routes'] as $name => $route) {
             break;
     }
 }
+
+/********************************************************************************
+ * Load services into the app container
+ *******************************************************************************/
 
 // dependency injection
 foreach ($applicationConfig['resources'] as $name => $resource) {
