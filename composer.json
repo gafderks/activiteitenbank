@@ -5,7 +5,8 @@
         "slim/slim": "^2.6",
         "slim/views": "^0.1.3",
         "twig/twig": "^1.23",
-        "twig/extensions": "^1.3"
+        "twig/extensions": "^1.3",
+        "respect/validation": "2.0.x-dev"
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "*"

@@ -56,7 +56,7 @@ return [
                     'controller' => 'EditorController',
                     'action' => 'new',
                     'middleware' => [
-                        
+
                     ],
                 ],
             ],
@@ -69,13 +69,43 @@ return [
                     'action' => 'edit',
                 ],
             ],
-            'activity-post' => [
+            'api-activity-post' => [
                 'type' => 'literal',
                 'method' => 'post',
                 'options' => [
-                    'route' => '/edit/:id',
-                    'controller' => 'EditorController',
-                    'action' => 'post',
+                    'route' => '/api/activity',
+                    'controller' => 'ActivityController',
+                    'action' => 'create',
+                    'middleware' => [
+                        '\Service\ValidatorService::validateApiActivity',
+                    ]
+                ],
+            ],
+            'api-activity-put' => [
+                'type' => 'literal',
+                'method' => 'put',
+                'options' => [
+                    'route' => '/api/activity/:id',
+                    'controller' => 'ActivityController',
+                    'action' => 'update',
+                ],
+            ],
+            'api-activity-get' => [
+                'type' => 'literal',
+                'method' => 'get',
+                'options' => [
+                    'route' => '/api/activity/:id',
+                    'controller' => 'ActivityController',
+                    'action' => 'get',
+                ],
+            ],
+            'api-activity-delete' => [
+                'type' => 'literal',
+                'method' => 'delete',
+                'options' => [
+                    'route' => '/api/activity/:id',
+                    'controller' => 'ActivityController',
+                    'action' => 'delete',
                 ],
             ],
         ],
@@ -88,6 +118,14 @@ return [
         'service_user' => [
             'type' => 'service',
             'service' => 'UserService',
+        ],
+        'service_activity' => [
+            'type' => 'service',
+            'service' => 'ActivityService',
+        ],
+        'service_validator' => [
+            'type' => 'service',
+            'service' => 'ValidatorService',
         ],
         'mapper_user' => [
             'type' => 'mapper',
