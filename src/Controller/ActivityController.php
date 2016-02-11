@@ -77,6 +77,8 @@ class ActivityController extends Controller
         $activity->setDifficulty(new \Model\Enum\Level($input->difficulty));
         $activity->setGuidance(new \Model\Enum\Level($input->guidance));
         $activity->setMotivation(new \Model\Enum\Level($input->motivation));
+        $activity->setActivityAreas($input->activityAreas);
+        $activity->setSuitable_groups($input->groups);
 
         // set planning
         $planning = new \Model\Activity\Planning\Planning();
