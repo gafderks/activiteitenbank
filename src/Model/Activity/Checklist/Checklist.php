@@ -3,6 +3,8 @@
 
 namespace Model\Activity\Checklist;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Model for Checklist.
  *
@@ -10,7 +12,7 @@ namespace Model\Activity\Checklist;
  * @Table(name="checklists")
  * @author Geert Derks <geertderks12@gmail.com>
  */
-class Checklist
+class Checklist implements \JsonSerializable
 {
 
     /**
@@ -27,10 +29,17 @@ class Checklist
      * Items that belong to this checklist.
      *
      * @OneToMany(targetEntity="\Model\Activity\Checklist\ChecklistItem", mappedBy="checklist")
-     * @OrderBy({"order" = "ASC"})
+     * @OrderBy({"position" = "ASC"})
      * @var null|\Model\Activity\Checklist\ChecklistItem[]
      */
     private $items;
+
+    /**
+     * Checklist constructor.
+     */
+    public function __construct() {
+        $this->items = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -47,4 +56,17 @@ class Checklist
     }
 
 
-}
+    /**
+     * Specify data which should be serialized to JSON
+     *
+     * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     *        which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'items' => $this->items->toArray(),
+        ];
+    }}

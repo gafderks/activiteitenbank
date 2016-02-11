@@ -10,7 +10,7 @@ namespace Model\Activity\Budget;
  * @Table(name="budget_expenses")
  * @author Geert Derks <geertderks12@gmail.com>
  */
-class Expense
+class Expense implements \JsonSerializable
 {
 
     /**
@@ -29,7 +29,7 @@ class Expense
      * @Column(type="integer")
      * @var int
      */
-    private $order;
+    private $position;
 
     /**
      * Budget that this expense belongs to.
@@ -73,15 +73,15 @@ class Expense
     /**
      * @return int
      */
-    public function getOrder() {
-        return $this->order;
+    public function getPosition() {
+        return $this->position;
     }
 
     /**
-     * @param int $order
+     * @param int $position
      */
-    public function setOrder($order) {
-        $this->order = $order;
+    public function setPosition($position) {
+        $this->position = $position;
     }
 
     /**
@@ -141,4 +141,20 @@ class Expense
     }
 
 
-}
+    /**
+     * Specify data which should be serialized to JSON
+     *
+     * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     *        which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'position' => $this->position,
+            'amount' => $this->amount,
+            'description' => $this->description,
+            'cost' => $this->cost,
+        ];
+    }}

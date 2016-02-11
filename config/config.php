@@ -130,6 +130,10 @@ return [
         'mapper_user' => [
             'type' => 'mapper',
             'mapper' => 'User',
-        ]
+        ],
+        'mapper_activity' => [
+            'type' => 'mapper',
+            'mapper' => 'Activity',
+        ],
     ],
 ];

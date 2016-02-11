@@ -5,8 +5,6 @@ function generateActivityObject() {
     // title
     actObj.title = $("#activity-title").val();
 
-    actObj.slug = convertToSlug(actObj.title);
-
     actObj.id = $("#activity-id").val();
 
     // category
@@ -46,18 +44,18 @@ function generateActivityObject() {
     $("#list-planning").find("li:not(.list-new-action)").each(function () {
         var planning_part = {};
         planning_part.duration = timeToIntMins($(this).find("[data-list-field=endurance]").val());
-        planning_part.name = $(this).find("[data-list-field=name]").val();
+        planning_part.description = $(this).find("[data-list-field=name]").val();
 
         planning.push(planning_part);
     });
     actObj.planning = planning;
 
-    // preparations
-    var preparations = [];
+    // preparations checklist
+    var checklist = [];
     $("#list-preparations").find("li:not(.list-new-action)").each(function () {
-        preparations.push($(this).find("[data-list-field=name]").val());
+        checklist.push($(this).find("[data-list-field=name]").val());
     });
-    actObj.preparations = preparations;
+    actObj.checklist = checklist;
 
 
     // materials
@@ -77,7 +75,7 @@ function generateActivityObject() {
         var budgetary_part = {};
         budgetary_part.amount = parseInt($(this).find("[data-list-field=amount]").val());
         budgetary_part.description = $(this).find("[data-list-field=name]").val();
-        budgetary_part.price = currencyToFloat($(this).find("[data-list-field=price]").val());
+        budgetary_part.cost = currencyToFloat($(this).find("[data-list-field=price]").val());
 
         budgetary.push(budgetary_part);
     });
@@ -85,15 +83,6 @@ function generateActivityObject() {
 
 
     return actObj;
-}
-
-function convertToSlug(text) {
-    "use strict";
-    return text
-        .toLowerCase()
-        .replace(/[^\w ]+/g, '')
-        .replace(/\s+/g, '-')
-        ;
 }
     
     

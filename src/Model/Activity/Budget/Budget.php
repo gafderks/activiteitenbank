@@ -3,6 +3,8 @@
 
 namespace Model\Activity\Budget;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Model for Budget.
  *
@@ -10,7 +12,7 @@ namespace Model\Activity\Budget;
  * @Table(name="budgets")
  * @author Geert Derks <geertderks12@gmail.com>
  */
-class Budget
+class Budget implements \JsonSerializable
 {
 
     /**
@@ -27,10 +29,17 @@ class Budget
      * Expenses that belong to this budget.
      *
      * @OneToMany(targetEntity="\Model\Activity\Budget\Expense", mappedBy="budget")
-     * @OrderBy({"order" = "ASC"})
+     * @OrderBy({"position" = "ASC"})
      * @var null|\Model\Activity\Budget\Expense[]
      */
     private $expenses;
+
+    /**
+     * Budget constructor.
+     */
+    public function __construct() {
+        $this->expenses = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -45,4 +54,18 @@ class Budget
     public function getExpenses() {
         return $this->expenses;
     }
-}
+
+    /**
+     * Specify data which should be serialized to JSON
+     *
+     * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     *        which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'expenses' => $this->expenses->toArray(),
+        ];
+    }}

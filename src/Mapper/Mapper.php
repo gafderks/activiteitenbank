@@ -23,8 +23,7 @@ abstract class Mapper
      *
      * @param EntityManager $em
      */
-    public function __construct(EntityManager $em)
-    {
+    public function __construct(EntityManager $em) {
         $this->em = $em;
         $this->app = \Slim\Slim::getInstance();
     }
@@ -32,9 +31,15 @@ abstract class Mapper
     /**
      * Flush.
      */
-    public function flush()
-    {
+    public function flush() {
         $this->em->flush();
+    }
+
+    /**
+     * Clear.
+     */
+    public function clear() {
+        $this->em->clear();
     }
 
     /**

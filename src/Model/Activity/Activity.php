@@ -10,9 +10,10 @@ use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
  *
  * @Entity
  * @Table(name="activities")
+ * @SWG\Definition()
  * @author Geert Derks <geertderks12@gmail.com>
  */
-class Activity
+class Activity implements \JsonSerializable
 {
 
     /**
@@ -22,6 +23,7 @@ class Activity
      * @Column(type="integer")
      * @GeneratedValue
      * @var int
+     * @SWG\Property()
      */
     private $id;
     
@@ -30,6 +32,7 @@ class Activity
      *
      * @Column(type="string")
      * @var string
+     * @SWG\Property()
      */
     private $slug;
 
@@ -38,6 +41,7 @@ class Activity
      *
      * @Column(type="string")
      * @var string
+     * @SWG\Property()
      */
     private $name;
 
@@ -46,6 +50,7 @@ class Activity
      *
      * @ManyToOne(targetEntity="\Model\User", inversedBy="activities")
      * @var \Model\User
+     * @SWG\Property()
      */
     private $creator;
     
@@ -54,6 +59,7 @@ class Activity
      *
      * @Column(type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
      * @var \DateTime
+     * @SWG\Property()
      */
     private $created;
     
@@ -62,6 +68,7 @@ class Activity
      *
      * @Column(type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
      * @var \DateTime
+     * @SWG\Property()
      */
     private $modified;
 
@@ -70,6 +77,7 @@ class Activity
      *
      * @Column(type="array")
      * @var \Model\Enum\ActivityArea[]
+     * @SWG\Property()
      */
     private $activityAreas;
 
@@ -78,6 +86,7 @@ class Activity
      *
      * @Column(type="array")
      * @var \Model\Enum\GroupType[]
+     * @SWG\Property()
      */
     private $suitableGroups;
 
@@ -90,6 +99,7 @@ class Activity
      *      inverseJoinColumns={@JoinColumn(name="category_id", referencedColumnName="id", unique=true)}
      *      )
      * @var \Model\Activity\Category
+     * @SWG\Property()
      */
     private $categories;
     
@@ -98,6 +108,7 @@ class Activity
      *
      * @Column(type="integer")
      * @var \Model\Enum\Level
+     * @SWG\Property()
      */
     private $difficulty;
     
@@ -106,6 +117,7 @@ class Activity
      *
      * @Column(type="integer")
      * @var \Model\Enum\Level
+     * @SWG\Property()
      */
     private $guidance;
 
@@ -114,6 +126,7 @@ class Activity
      *
      * @Column(type="integer")
      * @var \Model\Enum\Level
+     * @SWG\Property()
      */
     private $motivation;
     
@@ -122,6 +135,7 @@ class Activity
      *
      * @Column(type="text")
      * @var string
+     * @SWG\Property()
      */
     private $elaboration;
 
@@ -130,6 +144,7 @@ class Activity
      *
      * @OneToOne(targetEntity="\Model\Activity\Planning\Planning")
      * @var \Model\Activity\Planning\Planning
+     * @SWG\Property()
      */
     private $planning;
 
@@ -138,6 +153,7 @@ class Activity
      *
      * @OneToOne(targetEntity="\Model\Activity\Checklist\Checklist")
      * @var \Model\Activity\Checklist\Checklist
+     * @SWG\Property()
      */
     private $checklist;
 
@@ -146,6 +162,7 @@ class Activity
      *
      * @OneToOne(targetEntity="\Model\Activity\MaterialList\MaterialList")
      * @var \Model\Activity\MaterialList\MaterialList
+     * @SWG\Property()
      */
     private $materials;
 
@@ -154,6 +171,7 @@ class Activity
      *
      * @OneToOne(targetEntity="\Model\Activity\Budget\Budget")
      * @var \Model\Activity\Budget\Budget
+     * @SWG\Property()
      */
     private $budget;
 
@@ -162,6 +180,7 @@ class Activity
      *
      * @OneToMany(targetEntity="\Model\Activity\Attachment", mappedBy="activity")
      * @var null|\Model\Activity\Attachment[]
+     * @SWG\Property()
      */
     private $attachments;
 
@@ -283,6 +302,34 @@ class Activity
     public function setBudget(Budget\Budget $budget) {
         $this->budget = $budget;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreated() {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     */
+    public function setCreated(\DateTime $created) {
+        $this->created = $created;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getModified() {
+        return $this->modified;
+    }
+
+    /**
+     * @param \DateTime $modified
+     */
+    public function setModified(\DateTime $modified) {
+        $this->modified = $modified;
+    }
     
     /**
      * @return \Model\Enum\ActivityArea[]
@@ -292,14 +339,8 @@ class Activity
         foreach ($this->activityAreas as $activityArea) {
             array_push($r, new \Model\Enum\ActivityArea($activityArea));
         }
-        return $r;
-    }
 
-    /**
-     * @return int[]
-     */
-    public function getActivityAreasRaw() {
-        return $this->activityAreas;
+        return $r;
     }
 
     /**
@@ -307,6 +348,13 @@ class Activity
      */
     public function setActivityAreas(array $activityAreas) {
         $this->activityAreas = $activityAreas;
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getActivityAreasRaw() {
+        return $this->activityAreas;
     }
     
     /**
@@ -317,14 +365,8 @@ class Activity
         foreach ($this->suitableGroups as $suitableGroup) {
             array_push($r, new \Model\Enum\GroupType($suitableGroup));
         }
-        return $r;
-    }
 
-    /**
-     * @return string[]
-     */
-    public function getSuitableGroupsRaw() {
-        return $this->suitableGroups;
+        return $r;
     }
 
     /**
@@ -332,6 +374,13 @@ class Activity
      */
     public function setSuitable_groups(array $suitableGroups) {
         $this->suitableGroups = $suitableGroups;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSuitableGroupsRaw() {
+        return $this->suitableGroups;
     }
 
     /**
@@ -397,4 +446,34 @@ class Activity
         return $this->attachments;
     }
 
+    /**
+     * Specify data which should be serialized to JSON
+     *
+     * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     *        which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize() {
+        return [
+            'id'             => $this->id,
+            'slug'           => $this->slug,
+            'name'           => $this->name,
+            //'creator' => $this->creator,
+            'created'        => $this->created,
+            'modified'       => $this->modified,
+            'activityAreas'  => $this->activityAreas,
+            'suitableGroups' => $this->suitableGroups,
+            'categories'     => $this->categories,
+            'difficulty'     => $this->difficulty,
+            'guidance'       => $this->guidance,
+            'motivation'     => $this->motivation,
+            'elaboration'    => $this->elaboration,
+            'planning'       => $this->planning,
+            'checklist'      => $this->checklist,
+            'materials'      => $this->materials,
+            'budget'         => $this->budget,
+            'attachments'    => $this->attachments,
+        ];
+    }
 }

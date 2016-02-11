@@ -10,7 +10,7 @@ namespace Model\Activity\Checklist;
  * @Table(name="checklist_items")
  * @author Geert Derks <geertderks12@gmail.com>
  */
-class ChecklistItem
+class ChecklistItem implements \JsonSerializable
 {
 
     /**
@@ -29,7 +29,7 @@ class ChecklistItem
      * @Column(type="integer")
      * @var int
      */
-    private $order;
+    private $position;
 
     /**
      * Checklist that this item belongs to.
@@ -38,14 +38,6 @@ class ChecklistItem
      * @var \Model\Activity\Checklist\Checklist
      */
     private $checklist;
-
-    /**
-     * Completion status of this checklist item.
-     *
-     * @Column(type="boolean")
-     * @var bool
-     */
-    private $completed;
 
     /**
      * Description of this item.
@@ -65,15 +57,15 @@ class ChecklistItem
     /**
      * @return int
      */
-    public function getOrder() {
-        return $this->order;
+    public function getPosition() {
+        return $this->position;
     }
 
     /**
-     * @param int $order
+     * @param int $position
      */
-    public function setOrder($order) {
-        $this->order = $order;
+    public function setPosition($position) {
+        $this->position = $position;
     }
 
     /**
@@ -91,20 +83,6 @@ class ChecklistItem
     }
 
     /**
-     * @return bool
-     */
-    public function getCompleted() {
-        return $this->completed;
-    }
-
-    /**
-     * @param bool $completed
-     */
-    public function setCompleted($completed) {
-        $this->completed = $completed;
-    }
-
-    /**
      * @return string
      */
     public function getDescription() {
@@ -118,4 +96,18 @@ class ChecklistItem
         $this->description = $description;
     }
 
-}
+    /**
+     * Specify data which should be serialized to JSON
+     *
+     * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     *        which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'position' => $this->position,
+            'description' => $this->description,
+        ];
+    }}

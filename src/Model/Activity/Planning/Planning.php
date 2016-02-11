@@ -3,6 +3,8 @@
 
 namespace Model\Activity\Planning;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Model for Planning.
  *
@@ -10,7 +12,7 @@ namespace Model\Activity\Planning;
  * @Table(name="plannings")
  * @author Geert Derks <geertderks12@gmail.com>
  */
-class Planning
+class Planning implements \JsonSerializable
 {
 
     /**
@@ -27,10 +29,17 @@ class Planning
      * Actions that belong to this planning.
      *
      * @OneToMany(targetEntity="\Model\Activity\Planning\Action", mappedBy="planning")
-     * @OrderBy({"order" = "ASC"})
+     * @OrderBy({"position" = "ASC"})
      * @var null|Action[]
      */
     private $actions;
+
+    /**
+     * Planning constructor.
+     */
+    public function __construct() {
+        $this->actions = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -46,4 +55,17 @@ class Planning
         return $this->actions;
     }
 
-}
+    /**
+     * Specify data which should be serialized to JSON
+     *
+     * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     *        which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'actions' => $this->actions->toArray()
+        ];
+    }}

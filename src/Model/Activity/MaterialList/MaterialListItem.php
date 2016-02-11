@@ -10,7 +10,7 @@ namespace Model\Activity\MaterialList;
  * @Table(name="materiallist_items")
  * @author Geert Derks <geertderks12@gmail.com>
  */
-class MaterialListItem
+class MaterialListItem implements \JsonSerializable
 {
 
     /**
@@ -29,7 +29,7 @@ class MaterialListItem
      * @Column(type="integer")
      * @var int
      */
-    private $order;
+    private $position;
 
     /**
      * Amount of the item.
@@ -65,15 +65,15 @@ class MaterialListItem
     /**
      * @return int
      */
-    public function getOrder() {
-        return $this->order;
+    public function getPosition() {
+        return $this->position;
     }
 
     /**
-     * @param int $order
+     * @param int $position
      */
-    public function setOrder($order) {
-        $this->order = $order;
+    public function setPosition($position) {
+        $this->position = $position;
     }
 
     /**
@@ -119,4 +119,19 @@ class MaterialListItem
     }
 
 
-}
+    /**
+     * Specify data which should be serialized to JSON
+     *
+     * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     *        which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'position' => $this->position,
+            'amount' => $this->amount,
+            'description' => $this->description,
+        ];
+    }}

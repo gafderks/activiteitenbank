@@ -36,9 +36,9 @@ class ValidatorService extends Service
                 ))
                 ->attribute('planning', v::arrType()->each(
                     v::attribute('duration', v::intVal()->min(0))
-                        ->attribute('name', v::strType())
+                        ->attribute('description', v::strType())
                 ))
-                ->attribute('preparations', v::arrType()->each(
+                ->attribute('checklist', v::arrType()->each(
                     v::strType()
                 ))
                 ->attribute('materials', v::arrType()->each(
@@ -48,7 +48,7 @@ class ValidatorService extends Service
                 ->attribute('budget', v::arrType()->each(
                     v::attribute('amount', v::intVal()->min(0))
                         ->attribute('description', v::strType())
-                        ->attribute('price', v::floatType())
+                        ->attribute('cost', v::floatType())
                 ));
 
         try {
