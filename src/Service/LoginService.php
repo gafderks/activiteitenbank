@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Service;
-
 
 /**
  * Class LoginService
@@ -18,16 +16,6 @@ class LoginService extends Service
      * @var string Index in the session variable where the Id of the currently logged in user is stored.
      */
     private $userIdSessionIndex = 'userId';
-
-    /**
-     * Get the user mapper.
-     *
-     * @return \Mapper\User
-     */
-    protected function getUserMapper()
-    {
-        return $this->app->mapper_user;
-    }
 
     /**
      * Tries to log in a user. Returns whether login was successful.
@@ -82,10 +70,12 @@ class LoginService extends Service
     }
 
     /**
-     * Destroys the current session.
+     * Get the user mapper.
+     *
+     * @return \Mapper\User
      */
-    public function logoutUser() {
-        session_destroy();
+    protected function getUserMapper() {
+        return $this->app->mapper_user;
     }
 
     /**
@@ -99,6 +89,13 @@ class LoginService extends Service
         } else {
             return $this->getUserMapper()->findUserById($_SESSION[$this->userIdSessionIndex]);
         }
+    }
+
+    /**
+     * Destroys the current session.
+     */
+    public function logoutUser() {
+        session_destroy();
     }
 
 }
