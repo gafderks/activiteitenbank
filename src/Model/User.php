@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
  * @Table(name="users")
  * @author Geert Derks <geertderks12@gmail.com>
  */
-class User
+class User implements \JsonSerializable
 {
 
     /**
@@ -242,5 +242,24 @@ class User
      */
     public function getRegistered() {
         return $this->registered;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     *
+     * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     *        which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'firstName' => $this->firstName,
+            'lastName' => $this->lastName,
+            'username' => $this->username,
+            'email' => $this->email,
+            'registered' => $this->registered,
+        ];
     }
 }
