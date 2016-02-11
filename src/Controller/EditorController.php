@@ -2,7 +2,6 @@
 // /src/Controller/EditorController.php
 
 namespace Controller;
-use \Model\Enum\ActivityArea;
 
 /**
  * Class EditorController
