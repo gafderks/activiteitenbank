@@ -23,6 +23,19 @@ class EditorController extends Controller
         $this->app->render('pages/editor.twig', $params);
     }
 
+    public function editAction($id) {
+        $activity = $this->getActivityMapper()->findActivityById($id);
+
+        if (is_null($activity)) {
+            $this->app->halt(404, json_encode("Activity with the specified ID was not found"));
+        }
+
+        $params = [
+            'activity' => $activity,
+        ];
+        $this->app->render('pages/editor.twig', $params);
+    }
+
     /**
      * Get the Login service.
      *
@@ -31,6 +44,15 @@ class EditorController extends Controller
     protected function getLoginService()
     {
         return $this->app->service_login;
+    }
+
+    /**
+     * Get the activity mapper.
+     *
+     * @return \Mapper\Activity
+     */
+    protected function getActivityMapper() {
+        return $this->app->mapper_activity;
     }
 
 }

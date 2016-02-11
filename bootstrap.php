@@ -68,6 +68,11 @@ $view->parserExtensions = [
     new \Twig_Extension_Debug(),
     new \Twig_Extensions_Extension_I18n(),
 ];
+// register custom filters
+$int2time = new Twig_SimpleFilter('int2time', ['\View\Format', 'int2Time']);
+$float2euro = new Twig_SimpleFilter('float2euro', ['\View\Format', 'float2Euro']);
+$app->view->getInstance()->addFilter($int2time);
+$app->view->getInstance()->addFilter($float2euro);
 // register default data that is supplied to the templates
 $app->hook('slim.before', function () use ($app, $config) {
     $app->view()->appendData([

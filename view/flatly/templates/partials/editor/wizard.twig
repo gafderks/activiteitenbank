@@ -29,14 +29,15 @@
         <div>
             <h3 class="wizard-title">{% trans "Planning" %}</h3>
             <ul id="list-planning" class="list list-timeable list-removable" style="padding-bottom: 40px;">
-                {% for plan in activity.planning %}
+                {% for action in activity.planning.actions %}
                 <li>
                     <a href="javascript:void(0);" class="remove-action">
                         <span class="glyphicon glyphicon-minus"></span>
                     </a>
-                    <input type="text" class="list-time-endurance" data-list="planning" data-list-field="endurance" value="<?php echo Format::int2Time($plan["duration"]); ?>">
+                    <input type="text" class="list-time-endurance" data-list="planning" data-list-field="endurance"
+                           value="{{ action.timeSpan|int2time }}">
                     <span class="list-time-cumulative" data-list-field="cumulative">0:00</span>
-                    <input type="text" data-list="planning" data-list-field="name" value="<?php echo $plan["name"]; ?>">
+                    <input type="text" data-list="planning" data-list-field="name" value="{{ action.description }}">
                 </li>
                 {% endfor %}
 
@@ -51,17 +52,18 @@
         <div>
             <h3 class="wizard-title">{% trans "Preparations" %}</h3>
             <ul id="list-preparations" class="list list-removable">
-                {% for preparation in activity.preparations %}
+                {% for item in activity.checklist.items %}
                 <li>
                     <input type="checkbox" disabled="">
                     <a href="javascript:void(0);" class="remove-action">
                         <span class="glyphicon glyphicon-minus"></span>
                     </a>
-                    <input type="text" data-list="preparations" data-list-field="name" value="<?php echo $preparation_value; ?>">
+                    <input type="text" data-list="preparations" data-list-field="name" value="{{ item.description }}">
                 </li>
                 {% endfor %}
                 <li class="list-new-action" data-list="preparations">
-                    <span class="glyphicon glyphicon-plus"></span><a href="javascript:void(0);">{% trans "Add new" %}</a>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="javascript:void(0);">{% trans "Add new" %}</a>
                 </li>
             </ul>
         </div>
@@ -70,13 +72,14 @@
         <div>
             <h3 class="wizard-title">{% trans "Materials" %}</h3>
             <ul id="list-materials" class="list list-countable list-removable">
-                {% for material in activity.materials %}
+                {% for material in activity.materials.materials %}
                 <li>
                     <a href="javascript:void(0);" class="remove-action">
                         <span class="glyphicon glyphicon-minus"></span>
                     </a>
-                    <input type="number" min="0" class="list-counter" pattern="d*" data-list="materials" data-list-field="amount" value="<?php echo $material["amount"]; ?>">
-                    <input type="text" data-list="materials" data-list-field="name" value="<?php echo $material["name"]; ?>">
+                    <input type="number" min="0" class="list-counter" pattern="d*" data-list="materials"
+                           data-list-field="amount" value="{{ material.amount }}">
+                    <input type="text" data-list="materials" data-list-field="name" value="{{ material.description }}">
                 </li>
                 {% endfor %}
                 <li class="list-new-action" data-list="materials">
@@ -90,14 +93,17 @@
         <div>
             <h3 class="wizard-title">{% trans "Budgetary" %}</h3>
             <ul id="list-budgetary" class="list list-removable list-countable list-budgetary">
-                {% for item in activity.budgetary %}
+                {% for item in activity.budget.expenses %}
                 <li>
                     <a href="javascript:void(0);" class="remove-action">
                         <span class="glyphicon glyphicon-minus"></span>
                     </a>
-                    <input type="number" min="0" class="list-counter" pattern="d*" data-list="budgetary" data-list-field="amount" value="<?php echo $item["amount"]; ?>">
-                    <input type="text" class="list-name" data-list="budgetary" data-list-field="name" value="<?php echo $item["name"]; ?>">
-                    <input type="text" class="list-price" data-list="budgetary" data-list-field="price" value="<?php echo Format::float2Euro($item["price"]); ?>">
+                    <input type="number" min="0" class="list-counter" pattern="d*" data-list="budgetary"
+                           data-list-field="amount" value="{{ item.amount }}">
+                    <input type="text" class="list-name" data-list="budgetary" data-list-field="name"
+                           value="{{ item.description }}">
+                    <input type="text" class="list-price" data-list="budgetary" data-list-field="price"
+                           value="{{ item.cost|float2euro }}">
                     <span class="list-price-sum" data-list="budgetary" data-list-field="price-sum">&euro; 0.00</span></li>
                 {% endfor %}
                 <li class="list-new-action" data-list="budgetary">
@@ -121,7 +127,9 @@
                 </div>
             </form>
             {% else %}
-            <div style="color: #ccc; font-size: 30px; font-style: italic; padding: 20px;">{% trans "You need to save this activity before you can add an attachment." %}</div>
+            <div style="color: #ccc; font-size: 30px; font-style: italic; padding: 20px;">
+                {% trans "You need to save this activity before you can add an attachment." %}
+            </div>
             {% endif %}
         </div>
     </div>

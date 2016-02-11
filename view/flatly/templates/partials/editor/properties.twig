@@ -52,7 +52,7 @@
         <p>
             <span class="glyphicon glyphicon-flash"></span>{% trans "Difficulty" %}:
                             <span class="activity-property editable" id="activity-prop-difficulty-label">
-                                {{ activity ? levels[activity.difficulty.value] : 'Unspecified'|trans }}</span>
+                                {{ activity ? levels[activity.difficulty.value]|trans : 'Unspecified'|trans }}</span>
             <a href="javascript:void(0);" id="activity-prop-difficulty-edit" class="activity-property-edit"
                data-property-editor="#activity-prop-difficulty-editor">{% trans "Edit" %}</a>
         </p>
@@ -61,7 +61,7 @@
                 <label>
                     <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="{% trans 'Unspecified' %}"
                            value="{{ enum.level.Unspecified }}"
-                            {{ activity ? ( enum.level.Unspecified== activity.difficulty.value ? 'checked' ) : 'checked' }} />
+                            {{ activity ? ( enum.level.Unspecified == activity.difficulty.value ? 'checked' ) : 'checked' }} />
                     {% trans "Unspecified" %}
                 </label>
             </div>
@@ -69,7 +69,7 @@
                 <label>
                     <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="{% trans 'Very low' %}"
                            value="{{ enum.level.VeryLow }}"
-                            {{ activity ? ( enum.level.VeryLow== activity.difficulty.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.VeryLow == activity.difficulty.value ? 'checked' ) }} />
                     {% trans 'Very low' %}
                 </label>
             </div>
@@ -77,7 +77,7 @@
                 <label>
                     <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="{% trans 'Low' %}"
                            value="{{ enum.level.Low }}"
-                            {{ activity ? ( enum.level.Low== activity.difficulty.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.Low == activity.difficulty.value ? 'checked' ) }} />
                     {% trans 'Low' %}
                 </label>
             </div>
@@ -85,7 +85,7 @@
                 <label>
                     <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="{% trans 'Medium' %}"
                            value="{{ enum.level.Medium }}"
-                            {{ activity ? ( enum.level.Medium== activity.difficulty.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.Medium == activity.difficulty.value ? 'checked' ) }} />
                     {% trans 'Medium' %}
                 </label>
             </div>
@@ -93,7 +93,7 @@
                 <label>
                     <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="{% trans 'High' %}"
                            value="{{ enum.level.High }}"
-                            {{ activity ? ( enum.level.High== activity.difficulty.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.High == activity.difficulty.value ? 'checked' ) }} />
                     {% trans 'High' %}
                 </label>
             </div>
@@ -101,7 +101,7 @@
                 <label>
                     <input type="radio" name="activity-prop-difficulty-radio" data-prop-text="{% trans 'Very high' %}"
                            value="{{ enum.level.VeryHigh }}"
-                            {{ activity ? ( enum.level.VeryHigh== activity.difficulty.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.VeryHigh == activity.difficulty.value ? 'checked' ) }} />
                     {% trans 'Very high' %}
                 </label>
             </div>
@@ -120,7 +120,7 @@
         </div>
         <p><span class="glyphicon glyphicon-eye-open"></span>{% trans "Guidance" %}:
                             <span class="activity-property editable" id="activity-prop-guidance-label">
-                                {{ activity ? levels[activity.guidance.value] : 'Unspecified'|trans }}</span>
+                                {{ activity ? levels[activity.guidance.value]|trans : 'Unspecified'|trans }}</span>
             <a href="javascript:void(0);" id="activity-prop-guidance-edit"
                class="activity-property-edit" data-property-editor="#activity-prop-guidance-editor">
                 {% trans 'Edit' %}</a>
@@ -130,7 +130,7 @@
                 <label>
                     <input type="radio" name="activity-prop-guidance-radio" data-prop-text="{% trans 'Unspecified' %}"
                            value="{{ enum.level.Unspecified }}"
-                            {{ activity ? ( enum.level.Unspecified== activity.guidance.value ? 'checked' ) : 'checked' }} />
+                            {{ activity ? ( enum.level.Unspecified == activity.guidance.value ? 'checked' ) : 'checked' }} />
                     {% trans 'Unspecified' %}
                 </label>
             </div>
@@ -138,7 +138,7 @@
                 <label>
                     <input type="radio" name="activity-prop-guidance-radio" data-prop-text="{% trans 'Very low' %}"
                            value="{{ enum.level.VeryLow }}"
-                            {{ activity ? ( enum.level.VeryLow== activity.guidance.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.VeryLow == activity.guidance.value ? 'checked' ) }} />
                     {% trans 'Very low' %}
                 </label>
             </div>
@@ -146,7 +146,7 @@
                 <label>
                     <input type="radio" name="activity-prop-guidance-radio" data-prop-text="{% trans 'Low' %}"
                            value="{{ enum.level.Low }}"
-                            {{ activity ? ( enum.level.Low== activity.guidance.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.Low == activity.guidance.value ? 'checked' ) }} />
                     {% trans 'Low' %}
                 </label>
             </div>
@@ -154,7 +154,7 @@
                 <label>
                     <input type="radio" name="activity-prop-guidance-radio" data-prop-text="{% trans 'Medium' %}"
                            value="{{ enum.level.Medium }}"
-                            {{ activity ? ( enum.level.Medium== activity.guidance.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.Medium == activity.guidance.value ? 'checked' ) }} />
                     {% trans 'Medium' %}
                 </label>
             </div>
@@ -162,7 +162,7 @@
                 <label>
                     <input type="radio" name="activity-prop-guidance-radio" data-prop-text="{% trans 'High' %}"
                            value="{{ enum.level.High }}"
-                            {{ activity ? ( enum.level.High== activity.guidance.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.High == activity.guidance.value ? 'checked' ) }} />
                     {% trans 'High' %}
                 </label>
             </div>
@@ -170,7 +170,7 @@
                 <label>
                     <input type="radio" name="activity-prop-guidance-radio" data-prop-text="{% trans 'Very high' %}"
                            value="{{ enum.level.VeryHigh }}"
-                            {{ activity ? ( enum.level.VeryHigh== activity.guidance.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.VeryHigh == activity.guidance.value ? 'checked' ) }} />
                     {% trans 'Very high' %}
                 </label>
             </div>
@@ -189,7 +189,7 @@
                data-property-edit="#activity-prop-guidance-edit">{% trans "Cancel" %}</a></div>
         <p><span class="glyphicon glyphicon-heart"></span>{% trans "Motivation" %}:
                             <span class="activity-property editable" id="activity-prop-motivation-label">
-                                {{ activity ? levels[activity.motivation.value] : 'Unspecified'|trans }}</span>
+                                {{ activity ? levels[activity.motivation.value]|trans : 'Unspecified'|trans }}</span>
             <a href="javascript:void(0);" id="activity-prop-motivation-edit"
                class="activity-property-edit" data-property-editor="#activity-prop-motivation-editor">
                 {% trans 'Edit' %}</a></p>
@@ -198,7 +198,7 @@
                 <label>
                     <input type="radio" name="activity-prop-motivation-radio" data-prop-text="{% trans 'Unspecified' %}"
                            value="{{ enum.level.Unspecified }}"
-                            {{ activity ? ( enum.level.Unspecified== activity.motivation.value ? 'checked' ) : 'checked' }} />
+                            {{ activity ? ( enum.level.Unspecified == activity.motivation.value ? 'checked' ) : 'checked' }} />
                     {% trans 'Unspecified' %}
                 </label>
             </div>
@@ -206,7 +206,7 @@
                 <label>
                     <input type="radio" name="activity-prop-motivation-radio" data-prop-text="{% trans 'Very low' %}"
                            value="{{ enum.level.VeryLow }}"
-                            {{ activity ? ( enum.level.VeryLow== activity.motivation.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.VeryLow == activity.motivation.value ? 'checked' ) }} />
                     {% trans 'Very low' %}
                 </label>
             </div>
@@ -214,7 +214,7 @@
                 <label>
                     <input type="radio" name="activity-prop-motivation-radio" data-prop-text="{% trans 'Low' %}"
                            value="{{ enum.level.Low }}"
-                            {{ activity ? ( enum.level.Low== activity.motivation.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.Low == activity.motivation.value ? 'checked' ) }} />
                     {% trans 'Low' %}
                 </label>
             </div>
@@ -222,7 +222,7 @@
                 <label>
                     <input type="radio" name="activity-prop-motivation-radio" data-prop-text="{% trans 'Medium' %}"
                            value="{{ enum.level.Medium }}"
-                            {{ activity ? ( enum.level.Medium== activity.motivation.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.Medium == activity.motivation.value ? 'checked' ) }} />
                     {% trans 'Medium' %}
                 </label>
             </div>
@@ -230,7 +230,7 @@
                 <label>
                     <input type="radio" name="activity-prop-motivation-radio" data-prop-text="{% trans 'High' %}"
                            value="{{ enum.level.High }}"
-                            {{ activity ? ( enum.level.High== activity.motivation.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.High == activity.motivation.value ? 'checked' ) }} />
                     {% trans 'High' %}
                 </label>
             </div>
@@ -238,7 +238,7 @@
                 <label>
                     <input type="radio" name="activity-prop-motivation-radio" data-prop-text="{% trans 'Very high' %}"
                            value="{{ enum.level.VeryHigh }}"
-                            {{ activity ? ( enum.level.VeryHigh== activity.motivation.value ? 'checked' ) }} />
+                            {{ activity ? ( enum.level.VeryHigh == activity.motivation.value ? 'checked' ) }} />
                     {% trans 'Very high' %}
                 </label>
             </div>
@@ -259,10 +259,8 @@
             </a>
         </div>
         <p><span class="glyphicon glyphicon-time"></span>{% trans "Duration" %}:
-                            <span class="activity-property uneditable" id="activity-prop-duration-label">
-                                <?php Format::int2Time($activity->getDuration()); ?></span></p>
+                            <span class="activity-property uneditable" id="activity-prop-duration-label"></span></p>
         <p><span class="glyphicon glyphicon-euro"></span>{% trans "Budget" %}:
-                            <span class="activity-property uneditable" id="activity-prop-budget-label">
-                                Format::float2Euro($activity->getBudget()); ?></span></p>
+                            <span class="activity-property uneditable" id="activity-prop-budget-label"></span></p>
     </div>
 </div>
