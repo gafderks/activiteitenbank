@@ -5,15 +5,13 @@
 {% block stylesheets %}
 {{ parent() }}
 
-<link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.7.3/summernote.css" rel="stylesheet">
-
 {% endblock stylesheets %}
 
 {% block content %}
 
 <h1>{{ activity ? 'Edit activity'|trans : 'New activity'|trans }}</h1>
 
-<input type="hidden" id="activity-id" value="{{ activity ? activity.id }}" />
+    <input type="hidden" id="activity-id" value="{{ activity ? activity.id }}" />
 
 <div class="row">
     <div class="col-xs-12 col-md-8">
@@ -155,7 +153,7 @@
         skin: '../../ckeditor-skin-minimalist'
     });
 
-    CKEDITOR.config
+
 
 
 

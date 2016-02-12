@@ -25,8 +25,14 @@ class ActivityService extends Service
         return $name;
     }
 
+    /**
+     * Placeholder method. Sanitizing takes place at output.
+     *
+     * @param $elaboration
+     * @return mixed
+     */
     public function sanitizeElaboration($elaboration) {
-        // TODO
+        //$elaboration = str_replace(['<', '>'], ['&lt;', '&gt;'], $elaboration);
         return $elaboration;
     }
 
