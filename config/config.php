@@ -48,6 +48,15 @@ return [
                     'action' => 'index',
                 ],
             ],
+            'activity-view' => [
+                'type' => 'literal',
+                'method' => 'get',
+                'options' => [
+                    'route' => '/view/:id(/:slug)',
+                    'controller' => 'ViewerController',
+                    'action' => 'view',
+                ],
+            ],
             'activity-create' => [
                 'type' => 'literal',
                 'method' => 'get',
