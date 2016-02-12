@@ -70,7 +70,7 @@ return [
                 'type' => 'literal',
                 'method' => 'get',
                 'options' => [
-                    'route' => '/edit/:id',
+                    'route' => '/edit/:id(/:slug)',
                     'controller' => 'EditorController',
                     'action' => 'edit',
                 ],
