@@ -16,14 +16,6 @@ $config = include("config.php");
 // load required files
 require_once "vendor/autoload.php";
 
-// create autoloader
-function __autoload($className) {
-    include __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . str_replace('\\', '/', $className) . '.php';
-}
-spl_autoload_register('__autoload');
-
-\Slim\Slim::registerAutoloader();
-
 /********************************************************************************
  * Set up Doctrine ORM
  *******************************************************************************/
