@@ -64,9 +64,6 @@ return [
                     'route' => '/create',
                     'controller' => 'EditorController',
                     'action' => 'new',
-                    'middleware' => [
-
-                    ],
                 ],
             ],
             'activity-edit' => [
@@ -87,7 +84,7 @@ return [
                     'action' => 'create',
                     'middleware' => [
                         '\Service\ValidatorService::validateApiActivity',
-                    ]
+                    ],
                 ],
             ],
             'api-activity-put' => [
@@ -97,6 +94,9 @@ return [
                     'route' => '/api/activity/:id',
                     'controller' => 'ActivityController',
                     'action' => 'update',
+                    'middleware' => [
+                        '\Service\ValidatorService::validateApiActivity',
+                    ],
                 ],
             ],
             'api-activity-get' => [

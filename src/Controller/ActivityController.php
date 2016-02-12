@@ -29,8 +29,37 @@ class ActivityController extends Controller
         $this->app->response->body(json_encode($activity));
     }
 
-    public function updateAction() {
-        throw new \Exception("Not implemented");
+    public function updateAction($id) {
+        // TODO check if allowed to update
+        $activity = $this->getActivityMapper()->findActivityById($id);
+
+        if (is_null($activity)) {
+            $this->app->halt(404, json_encode("Activity with the specified ID was not found"));
+        }
+
+        // load input
+        $input = json_decode($this->app->request->getBody());
+
+        // set up meta data
+        $now = new \DateTime('now');
+        $activity->setModified($now);
+
+        // set the properties of the activity
+        $activity = $this->getActivityService()->setActivityFromObject($activity, $input);
+
+        // save the activity
+        $this->getActivityMapper()->persist($activity);
+
+        // apply all modifications
+        $this->getActivityMapper()->flush();
+        // forces the entity manager to reload the activity in the next line
+        $this->getActivityMapper()->clear();
+        $newActivity = $this->getActivityMapper()->findActivityById($activity->getId());
+
+        // show response
+        $this->app->response->setStatus(202);
+        $this->app->response->headers->set('Content-Type', 'application/json');
+        $this->app->response->body(json_encode($newActivity));
     }
 
     /**
@@ -70,78 +99,10 @@ class ActivityController extends Controller
         $activity->setCreated($now);
         $activity->setModified($now);
 
-        // set flat properties
-        $activity->setName($input->title);
-        $activity->setSlug($this->getActivityService()->generateSlug($activity->getName()));
-        $activity->setElaboration($this->getActivityService()->sanitizeElaboration($input->elaboration));
-        $activity->setDifficulty(new \Model\Enum\Level($input->difficulty));
-        $activity->setGuidance(new \Model\Enum\Level($input->guidance));
-        $activity->setMotivation(new \Model\Enum\Level($input->motivation));
-        $activity->setActivityAreas($input->activityAreas);
-        $activity->setSuitable_groups($input->groups);
+        // set the properties of the activity
+        $activity = $this->getActivityService()->setActivityFromObject($activity, $input);
 
-        // set planning
-        $planning = new \Model\Activity\Planning\Planning();
-        $position = 0;
-        foreach($input->planning as $planningAction) {
-            $action = new \Model\Activity\Planning\Action();
-            $action->setPlanning($planning);
-            $action->setDescription($planningAction->description);
-            $action->setTimeSpan($planningAction->duration);
-            $action->setPosition($position);
-            $this->getActivityMapper()->persist($action);
-            $position++;
-        }
-        $activity->setPlanning($planning);
-        $this->getActivityMapper()->persist($planning);
-
-        // set checklist
-        $checklist = new \Model\Activity\Checklist\Checklist();
-        $position = 0;
-        foreach($input->checklist as $checklistItem) {
-            $item = new \Model\Activity\Checklist\ChecklistItem();
-            $item->setChecklist($checklist);
-            $item->setDescription($checklistItem);
-            $item->setPosition($position);
-            $this->getActivityMapper()->persist($item);
-            $position++;
-        }
-        $activity->setChecklist($checklist);
-        $this->getActivityMapper()->persist($checklist);
-
-        // set material list
-        $materialList = new \Model\Activity\MaterialList\MaterialList();
-        $position = 0;
-        foreach($input->materials as $materialItem) {
-            $item = new \Model\Activity\MaterialList\MaterialListItem();
-            $item->setMaterialList($materialList);
-            $item->setAmount($materialItem->amount);
-            $item->setDescription($materialItem->description);
-            $item->setPosition($position);
-            $this->getActivityMapper()->persist($item);
-            $position++;
-        }
-        $activity->setMaterials($materialList);
-        $this->getActivityMapper()->persist($materialList);
-
-        // set budgetary
-        $budgetary = new \Model\Activity\Budget\Budget();
-        $position = 0;
-        foreach($input->budget as $budgetItem) {
-            $item = new \Model\Activity\Budget\Expense();
-            $item->setBudget($budgetary);
-            $item->setAmount($budgetItem->amount);
-            $item->setDescription($budgetItem->description);
-            $item->setCost($budgetItem->cost);
-            $item->setPosition($position);
-            $this->getActivityMapper()->persist($item);
-            $position++;
-        }
-        $activity->setBudget($budgetary);
-        $this->getActivityMapper()->persist($budgetary);
-
-        /* Attachments are uploaded via separate requests */
-
+        // save the activity
         $this->getActivityMapper()->persist($activity);
 
         // apply all modifications
