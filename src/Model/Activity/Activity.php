@@ -189,6 +189,8 @@ class Activity implements \JsonSerializable
      */
     public function __construct() {
         $this->categories = new ArrayCollection();
+        $this->activityAreas = new \Zend\Stdlib\ArrayObject();
+        $this->suitableGroups = new \Zend\Stdlib\ArrayObject();
     }
 
     /**
