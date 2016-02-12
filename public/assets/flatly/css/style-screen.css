@@ -537,7 +537,7 @@ ul.list.list-timeable>li>input[data-list-field=name] {
     width: 60%;
 }
 
-/* SummerNote override
+/* CKEditor override
 -------------------------------------------------- */
 
 .note-editor .note-toolbar.btn-toolbar {
@@ -547,9 +547,13 @@ ul.list.list-timeable>li>input[data-list-field=name] {
     /*width: 100%;*/
 }
 
-.note-editor {
-    /*border: 0px;*/
-    /*padding: inherit !important;*/
+.cke_editor_activityElaboration {
+    border-top: 0px;
+    border-bottom: 0px;
+}
+
+.cke_editor_activityElaboration .cke_top {
+    background-color: #f8f8f8;
 }
 
 /* Time Graph
