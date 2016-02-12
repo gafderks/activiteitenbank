@@ -75,7 +75,7 @@ class Activity implements \JsonSerializable
     /**
      * Activity areas that the activity belongs to.
      *
-     * @Column(type="simple_array")
+     * @Column(type="simple_array", nullable=true)
      * @var \Model\Enum\ActivityArea[]
      * @SWG\Property()
      */
@@ -84,7 +84,7 @@ class Activity implements \JsonSerializable
     /**
      * GroupTypes that this activity is suitable for.
      *
-     * @Column(type="simple_array")
+     * @Column(type="simple_array", nullable=true)
      * @var \Model\Enum\GroupType[]
      * @SWG\Property()
      */
