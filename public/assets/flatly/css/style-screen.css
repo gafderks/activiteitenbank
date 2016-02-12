@@ -548,8 +548,8 @@ ul.list.list-timeable>li>input[data-list-field=name] {
 }
 
 .cke_editor_activityElaboration {
-    border-top: 0px;
-    border-bottom: 0px;
+    border-top: 0px !important;
+    border-bottom: 0px !important;
 }
 
 .cke_editor_activityElaboration .cke_top {
