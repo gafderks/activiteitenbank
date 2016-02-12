@@ -29,6 +29,11 @@ $twig = new \Twig_Environment($loader, array(
 ));
 $twig->addExtension(new \Twig_Extensions_Extension_I18n());
 $twig->addExtension(new \Slim\Views\TwigExtension());
+// register custom filters
+$int2time = new Twig_SimpleFilter('int2time', ['\View\Format', 'int2Time']);
+$float2euro = new Twig_SimpleFilter('float2euro', ['\View\Format', 'float2Euro']);
+$twig->addFilter($int2time);
+$twig->addFilter($float2euro);
 // configure Twig the way you want
 
 // iterate over all your templates
