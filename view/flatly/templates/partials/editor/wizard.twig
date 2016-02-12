@@ -21,8 +21,10 @@
     </ul>
     <div class="wizard-content active" id="elaboration">
         <div>
-            <h3 class="wizard-title">{% trans "Elaboration" %}</h3>
-            <div id="activity-elaboration" class="wysiwyg wysiwyg-extended">{{ activity.elaboration ? activity.elaboration }}</div>
+            {#<h3 class="wizard-title">{% trans "Elaboration" %}</h3>#}
+            <textarea id="activityElaboration" class="wysiwyg wysiwyg-extended">
+                {{ activity.elaboration ? activity.elaboration }}
+            </textarea>
         </div>
     </div>
     <div class="wizard-content" id="planning">

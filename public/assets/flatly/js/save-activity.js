@@ -37,7 +37,7 @@ function generateActivityObject() {
     actObj.groups = groups;
 
     // elaboration
-    actObj.elaboration = $("#activity-elaboration").summernote('code');
+    actObj.elaboration = CKEDITOR.instances.activityElaboration.getData();
 
     // planning
     var planning = [];
