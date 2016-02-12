@@ -78,6 +78,7 @@ $app->hook('slim.before', function () use ($app, $config) {
     $app->view()->appendData([
         'baseUrl' => $config['baseUrl'],
         'assetsUrl' => "{$config['baseUrl']}/public/assets/{$config['template']}",
+        'componentsUrl' => "{$config['baseUrl']}/public/assets/vendor",
         'session' => ['user' => $app->service_login->getLoggedInUser()],
         'enum' => [
             'activityArea' => \Model\Enum\ActivityArea::toArray(),

@@ -7,9 +7,9 @@
     <title>{% block title %}{% endblock %} - Activities</title>
     {% block stylesheets %}
         {# Bootstrap #}
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="{{ componentsUrl }}/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/flatly/bootstrap.min.css" rel="stylesheet" />
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="{{ componentsUrl }}/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
         <link href="{{ assetsUrl }}/css/style-screen.css" rel="stylesheet" />
         <link href="{{ assetsUrl }}/img/favicon.ico" rel="icon" />
     {% endblock %}
@@ -29,8 +29,8 @@
     {% endblock %}
 
     {% block javascripts %}
-        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="{{ componentsUrl }}/jquery/dist/jquery.min.js"></script>
+        <script src="{{ componentsUrl }}/bootstrap/dist/js/bootstrap.min.js"></script>
     {% endblock %}
 </body>
 </html>
