@@ -75,7 +75,7 @@ class Activity implements \JsonSerializable
     /**
      * Activity areas that the activity belongs to.
      *
-     * @Column(type="array")
+     * @Column(type="simple_array")
      * @var \Model\Enum\ActivityArea[]
      * @SWG\Property()
      */
@@ -84,7 +84,7 @@ class Activity implements \JsonSerializable
     /**
      * GroupTypes that this activity is suitable for.
      *
-     * @Column(type="array")
+     * @Column(type="simple_array")
      * @var \Model\Enum\GroupType[]
      * @SWG\Property()
      */
@@ -183,6 +183,13 @@ class Activity implements \JsonSerializable
      * @SWG\Property()
      */
     private $attachments;
+
+    /**
+     * Activity constructor.
+     */
+    public function __construct() {
+        $this->categories = new ArrayCollection();
+    }
 
     /**
      * @return int
