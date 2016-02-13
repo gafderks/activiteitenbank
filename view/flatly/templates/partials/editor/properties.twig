@@ -13,17 +13,17 @@
     <div class="sidebar-content">
         <p>
             <span class="glyphicon glyphicon-inbox"></span>{% trans "Category" %}:
-                            <span class="activity-property editable" id="activity-prop-category-label">
-                                {% if activity is defined %}
-                                    {% for category in activity.categories %}
-                                        {% set activityCategoriesNamed = activityCategoriesNamed|merge(category.name|e) %}
-                                        {% set activityCategories = activityCategories|merge(category.id) %}
-                                    {% endfor %}
-                                    {{ activityCategoriesNamed|join(', ') }}
-                                {% else %}
-                                    {% trans "No category" %}
-                                {% endif %}
-                            </span>
+                <span class="activity-property editable" id="activity-prop-category-label">
+                    {% if activity is defined %}
+                        {% for category in activity.categories %}
+                            {% set activityCategoriesNamed = activityCategoriesNamed|merge(category.name|e) %}
+                            {% set activityCategories = activityCategories|merge(category.id) %}
+                        {% endfor %}
+                        {{ activityCategoriesNamed|join(', ') }}
+                    {% else %}
+                        {% trans "No category" %}
+                    {% endif %}
+                </span>
             <a href="javascript:void(0);" id="activity-prop-category-edit" class="activity-property-edit"
                data-property-editor="#activity-prop-category-editor">{% trans "Edit" %}</a>
         </p>
