@@ -163,7 +163,7 @@
         $("#status-saving").show();
         $.ajax({
             type: "POST",
-            url: "{{ baseUrl }}/api/activity",
+            url: "{{ urlFor('api-activity-post') }}",
             data: JSON.stringify(generateActivityObject())
         })
         .done(function(msg, textStatus, xhr) {
@@ -187,7 +187,7 @@
         $("#status-saving").show();
         $.ajax({
             type: "PUT",
-            url: "{{ baseUrl }}/api/activity/{{ activity.id }}",
+            url: "{{ urlFor('api-activity-put', {"id": activity.id}) }}",
             data: JSON.stringify(generateActivityObject())
         })
         .done(function(msg, textStatus, xhr) {
