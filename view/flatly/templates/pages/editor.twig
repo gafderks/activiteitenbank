@@ -161,60 +161,54 @@
     $("#save-button").click(function() {
         $("#save-button").attr("disabled", "disabled");
         $("#status-saving").show();
-        console.log("clicked");
         $.ajax({
-                    type: "POST",
-                    url: "{{ baseUrl }}/api/activity",
-                    data: JSON.stringify(generateActivityObject())
-                })
-                .done(function( msg,textStatus, xhr ) {
-                    console.log( msg );
-                    if (xhr.status == 201) {
-                        window.location.href = "{{ baseUrl }}/edit/"+msg.id+"/"+msg.slug;
-                    } else {
-                        alert("Saving failed...");
-                    }
-
-                })
-                .fail(function (a, b) {
-                    console.log("No luck..." + b);
-                    alert("{{ "Saving failed... Are you still connected?"|trans }}");
-                    $("#save-button").removeAttr("disabled");
-                });
-
+            type: "POST",
+            url: "{{ baseUrl }}/api/activity",
+            data: JSON.stringify(generateActivityObject())
+        })
+        .done(function(msg, textStatus, xhr) {
+            console.log(msg);
+            if (xhr.status == 201) {
+                window.location.href = "{{ baseUrl }}/edit/" + msg.id + "/" + msg.slug;
+            } else {
+                alert("Saving failed...");
+            }
+        })
+        .fail(function (a, b) {
+            console.log("No luck..." + b);
+            alert("{{ "Saving failed... Are you still connected?"|trans }}");
+            $("#save-button").removeAttr("disabled");
+        });
     });
 
 
     $("#update-button").click(function() {
         $("#update-button").attr("disabled", "disabled");
         $("#status-saving").show();
-        console.log("clicked");
         $.ajax({
-                    type: "POST",
-                    url: "<?php echo RootURL(); ?>/ajax/activity-processor.php",
-                    data: { action: "save", activity: updateActivity() }
-                })
-                .done(function( msg ) {
-                    console.log( msg );
-                    if (msg.status == 'OK') {
-                        $("#update-button").removeAttr("disabled");
-                        $("#status-saving").hide();
-                        $("#status-saved").show();
-                        setTimeout(function() { $("#status-saved").fadeOut(); }, 2000);
-
-                    } else {
-                        $("#update-button").removeAttr("disabled");
-                        $("#status-saving").hide();
-                        alert("Saving failed...");
-                    }
-                })
-                .fail(function (a, b) {
-                    console.log("No luck..." + b);
-                    $("#status-saving").hide();
-                    alert("Saving failed...");
-                    $("#update-button").removeAttr("disabled");
-                });
-
+            type: "PUT",
+            url: "{{ baseUrl }}/api/activity/{{ activity.id }}",
+            data: JSON.stringify(generateActivityObject())
+        })
+        .done(function(msg, textStatus, xhr) {
+            console.log(msg);
+            if (xhr.status == 202) {
+                $("#update-button").removeAttr("disabled");
+                $("#status-saving").hide();
+                $("#status-saved").show();
+                setTimeout(function() { $("#status-saved").fadeOut(); }, 2000);
+            } else {
+                $("#update-button").removeAttr("disabled");
+                $("#status-saving").hide();
+                alert("Saving failed...");
+            }
+        })
+        .fail(function (a, b) {
+            console.log("No luck..." + b);
+            $("#status-saving").hide();
+            alert("{{ "Saving failed... Are you still connected?"|trans }}");
+            $("#update-button").removeAttr("disabled");
+        });
     });
 
     </script>
