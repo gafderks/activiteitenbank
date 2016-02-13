@@ -63,14 +63,18 @@ $view->parserExtensions = [
 // register custom filters
 $int2time = new Twig_SimpleFilter('int2time', ['\View\Format', 'int2Time']);
 $float2euro = new Twig_SimpleFilter('float2euro', ['\View\Format', 'float2Euro']);
+$bb2html = new Twig_SimpleFilter('bb2Html', ['\View\Format', 'bb2Html']);
 $app->view->getInstance()->addFilter($int2time);
 $app->view->getInstance()->addFilter($float2euro);
+$app->view->getInstance()->addFilter($bb2html);
+// register url config
+$app->config = ['baseUrl' => $config['baseUrl'],
+                'assetsUrl' => "{$config['baseUrl']}/public/assets/{$config['template']}",
+                'componentsUrl' => "{$config['baseUrl']}/public/assets/vendor"];
+
 // register default data that is supplied to the templates
 $app->hook('slim.before', function () use ($app, $config) {
-    $app->view()->appendData([
-        'baseUrl' => $config['baseUrl'],
-        'assetsUrl' => "{$config['baseUrl']}/public/assets/{$config['template']}",
-        'componentsUrl' => "{$config['baseUrl']}/public/assets/vendor",
+    $app->view()->appendData(array_merge($app->config, [
         'session' => ['user' => $app->service_login->getLoggedInUser()],
         'enum' => [
             'activityArea' => \Model\Enum\ActivityArea::toArray(),
@@ -78,7 +82,7 @@ $app->hook('slim.before', function () use ($app, $config) {
             'level' => \Model\Enum\Level::toArray(),
             'userRole' => \Model\Enum\UserRole::toArray(),
         ],
-    ]);
+    ]));
 });
 
 /********************************************************************************

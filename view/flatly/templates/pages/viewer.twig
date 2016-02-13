@@ -1,0 +1,289 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ activity.name }}{% endblock title %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container content">
+
+        <h1>{{ activity.name }}</h1>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+
+                <h3 class="activity-section">
+                    {{ "Elaboration"|trans }}
+                    <span>
+                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#elaboration">
+                            {{ "Edit"|trans }}
+                        </a>
+                    </span>
+                </h3>
+                {{ activity.elaboration|bb2Html|raw }}
+
+
+                <h3 class="activity-section">
+                    {{ "Planning"|trans }}
+                    <span>
+                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#planning">
+                            {{ "Edit"|trans }}
+                        </a>
+                    </span>
+                </h3>
+                <ul class="list">
+                    {% set timeCumulative = 0 %}
+                    {% for action in activity.planning.actions %}
+                        <li>
+                            <span>{{ action.timeSpan|int2time }}</span>
+                            {% set timeCumulative = timeCumulative + action.timeSpan %}
+                            <span>{{ timeCumulative|int2time }}</span>
+                            <span>{{ action.description }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <div id="activity-planning-graph" class="time-graph"></div>
+
+                <h3 class="activity-section">
+                    {{ "Preparations"|trans }}
+                    <span>
+                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#preparations">
+                            {{ "Edit"|trans }}
+                        </a>
+                    </span>
+                </h3>
+                <ul class="list">
+                    {% for item in activity.checklist.items %}
+                        <li>
+                            <input type="checkbox" disabled="disabled">
+                            <span>{{ item.description }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+
+                <h3 class="activity-section">
+                    {{ "Materials"|trans }}
+                    <span>
+                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#materials">
+                            {{ "Edit"|trans }}
+                        </a>
+                    </span>
+                </h3>
+                <ul class="list">
+                    {% for material in activity.materials.materials %}
+                        <li>
+                            <span>{{ material.amount }}</span>
+                            <span>{{ material.description }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <h3 class="activity-section">
+                    {{ "Budgetary"|trans }}
+                    <span>
+                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#budgetary">
+                            {{ "Edit"|trans }}
+                        </a>
+                    </span>
+                </h3>
+                <ul class="list">
+                    {% set total = 0 %}
+                    {% for item in activity.budget.expenses %}
+                        <li>
+                            <span>{{ item.amount }}</span>
+                            <span>{{ item.description }}</span>
+                            <span>{{ item.cost|float2euro|raw }}</span>
+                            {% set subtotal = item.cost * item.amount %}
+                            <span>{{ subtotal|float2euro|raw }}</span>
+                            {% set total = total + subtotal %}
+                        </li>
+                    {% endfor %}
+                    <li class="list-total">{{ "Total"|trans }}
+                        <span class="list-total-value">{{ total|float2euro|raw }}</span>
+                    </li>
+                </ul>
+
+                <h3 class="activity-section">
+                    {{ "Attachments"|trans }}
+                    <span>
+                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#attachments">
+                            {{ "Edit"|trans }}
+                        </a>
+                    </span>
+                </h3>
+                <ul class="list">
+                    {% for item in activity.attachments.attachments %}
+                        <li>
+                            <a href="{{ item.URL }}">{{ item.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+            <div class="sidebar col-xs-12 col-md-4">
+                <div class="row">
+                    <div class="col-xs-6 col-md-12">
+                        <div class="sidebar-item">
+                            <h3 class="sidebar-title">
+                                {{ "Actions"|trans }}
+                            </h3>
+                            <div class="sidebar-content">
+                                <p>
+                                    <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}"
+                                       style="color: #000; margin: 5px;">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                        <strong>{{ "Edit activity"|trans }}</strong>
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="javascript:void(0);" style="color: #000; margin: 5px;">
+                                        <span class="glyphicon glyphicon-print"></span>
+                                        {{ "Print activity"|trans }}
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="javascript:void(0);" style="color: #000; margin: 5px;">
+                                        <span class="glyphicon glyphicon-download"></span>
+                                        {{ "Download PDF"|trans }}
+                                    </a>
+                                </p>
+                                <hr />
+                                <a href="javascript:void(0);" style="color: #f00; margin: 5px;"><span class="glyphicon glyphicon-trash"></span>{{ "Delete activity"|trans }}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-12">
+                        <div class="sidebar-item">
+                            <h3 class="sidebar-title">
+                                {{ "Properties"|trans }}
+                            </h3>
+
+                            {% set levels = {0: 'Unspecified',
+                            1: 'Very low',
+                            2: 'Low',
+                            3: 'Medium',
+                            4: 'High',
+                            5: 'Very high'} %}
+
+                            <div class="sidebar-content">
+                                <p>
+                                    {% set activityCategoriesNamed = [] %}
+                                    {% set activityCategories = [] %}
+                                    <span class="glyphicon glyphicon-inbox"></span>{{ "Category"|trans }}:
+                                    <span class="activity-property editable" id="activity-prop-category-label">
+                                        {% for category in activity.categories %}
+                                            {% set activityCategoriesNamed = activityCategoriesNamed|merge(category.name|e) %}
+                                            {% set activityCategories = activityCategories|merge(category.id) %}
+                                        {% endfor %}
+                                        {{ activityCategoriesNamed|join(', ') }}
+                                    </span>
+                                </p>
+                                <p>
+                                    <span class="glyphicon glyphicon-flash"></span>{{ "Difficulty"|trans }}:
+                                    <span class="activity-property" id="activity-prop-difficulty-label">
+                                        {{ levels[activity.difficulty.value]|trans }}
+                                    </span>
+                                </p>
+                                <p>
+                                    <span class="glyphicon glyphicon-eye-open"></span>{{ "Guidance"|trans }}:
+                                    <span class="activity-property editable" id="activity-prop-guidance-label">
+                                        {{ levels[activity.guidance.value]|trans }}
+                                    </span>
+                                </p>
+                                <p>
+                                    <span class="glyphicon glyphicon-heart"></span>{{ "Motivation"|trans }}:
+                                    <span class="activity-property editable" id="activity-prop-motivation-label">
+                                        {{ levels[activity.motivation.value]|trans }}
+                                    </span>
+                                </p>
+                                <p>
+                                    <span class="glyphicon glyphicon-time"></span>{{ "Duration"|trans }}:
+                                    <span class="activity-property uneditable" id="activity-prop-duration-label">
+                                        <?php echo Format::int2Time($activity->getDuration()); ?>
+                                    </span>
+                                </p>
+                                <p>
+                                    <span class="glyphicon glyphicon-euro"></span>{{ "Budget"|trans }}:
+                                    <span class="activity-property uneditable" id="activity-prop-budget-label">
+                                        <?php echo Format::float2Euro($activity->getBudget()); ?>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-md-12">
+                        <div class="sidebar-item">
+                            <h3 class="sidebar-title">
+                                {{ "Suitable groups"|trans }}
+                            </h3>
+
+                            <div class="sidebar-content">
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-md-12">
+                        <div class="sidebar-item">
+                            <h3 class="sidebar-title">
+                                {{ "Activity areas"|trans }}
+                            </h3>
+
+                            <div class="sidebar-content">
+                                <ul class="badge-selectors line-3">
+                                    <?php if (in_array(ActivityAreas::ChallengingScoutingTechniques, $activity->getActivity_areas())) { ?>
+                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/challenging-scouting-techniques.png" class="badge-selectors-img" /><?php echo L::activity_areas_challenging_scouting_techniques; ?></label></li>
+                                    <?php } ?>
+                                    <?php if (in_array(ActivityAreas::Expression, $activity->getActivity_areas())) { ?>
+                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/expression.png" class="badge-selectors-img" /><?php echo L::activity_areas_expression; ?></label></li>
+                                    <?php } ?>
+                                    <?php if (in_array(ActivityAreas::SportsAndGames, $activity->getActivity_areas())) { ?>
+                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/sports-and-games.png" class="badge-selectors-img" /><?php echo L::activity_areas_sports_and_games; ?></label></li>
+                                    <?php } ?>
+                                    <?php if (in_array(ActivityAreas::OutdoorLife, $activity->getActivity_areas())) { ?>
+                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/outdoor-life.png" class="badge-selectors-img" /><?php echo L::activity_areas_outdoor_life; ?></label></li>
+                                    <?php } ?>
+                                    <?php if (in_array(ActivityAreas::Identity, $activity->getActivity_areas())) { ?>
+                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/identity.png" class="badge-selectors-img" /><?php echo L::activity_areas_identity; ?></label></li>
+                                    <?php } ?>
+                                    <?php if (in_array(ActivityAreas::International, $activity->getActivity_areas())) { ?>
+                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/international.png" class="badge-selectors-img" /><?php echo L::activity_areas_international; ?></label></li>
+                                    <?php } ?>
+                                    <?php if (in_array(ActivityAreas::Society, $activity->getActivity_areas())) { ?>
+                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/society.png" class="badge-selectors-img" /><?php echo L::activity_areas_society; ?></label></li>
+                                    <?php } ?>
+                                    <?php if (in_array(ActivityAreas::SafeAndHealthy, $activity->getActivity_areas())) { ?>
+                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/safe-and-healthy.png" class="badge-selectors-img" /><?php echo L::activity_areas_safe_and_healthy; ?></label></li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(".badge-selectors>li>label>input[type=checkbox]:checked").parent().parent().addClass("active");
+    </script>
+
+{% endblock javascripts %}

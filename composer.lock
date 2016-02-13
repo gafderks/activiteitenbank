@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "521f7ed51b14aa5355f5fc665d404bf4",
-    "content-hash": "d1ac70fe40555463e285bd8e12b4fbe3",
+    "hash": "9023e274fb223ef73b337dbf6eb8a886",
+    "content-hash": "606eab89ed27a98c9338c280f35d8edf",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -670,6 +670,43 @@
                 "validator"
             ],
             "time": "2015-08-13 07:41:01"
+        },
+        {
+            "name": "samclarke/sbb-code-parser",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kokspflanze/SBBCodeParser.git",
+                "reference": "50b23966a19d6c4153cca9c476c1a09d98892171"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kokspflanze/SBBCodeParser/zipball/50b23966a19d6c4153cca9c476c1a09d98892171",
+                "reference": "50b23966a19d6c4153cca9c476c1a09d98892171",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "SBBCodeParser.php",
+                    "classes/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Sam Clarke"
+                }
+            ],
+            "description": "fork from https://github.com/samclarke/SBBCodeParser",
+            "homepage": "https://github.com/kokspflanze/SBBCodeParser",
+            "keywords": [
+                "SBBCodeParser"
+            ],
+            "time": "2015-08-31 23:24:42"
         },
         {
             "name": "slim/slim",
