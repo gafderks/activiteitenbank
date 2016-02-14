@@ -215,13 +215,13 @@
                                 <p>
                                     <span class="glyphicon glyphicon-time"></span>{{ "Duration"|trans }}:
                                     <span class="activity-property uneditable" id="activity-prop-duration-label">
-                                        {{ planningTimeCumulative|int2time }}
+                                        {{ activity.planning.totalDuration|int2time }}
                                     </span>
                                 </p>
                                 <p>
                                     <span class="glyphicon glyphicon-euro"></span>{{ "Budget"|trans }}:
                                     <span class="activity-property uneditable" id="activity-prop-budget-label">
-                                        {{ budgetTotal|float2euro|raw }}
+                                        {{ activity.budget.totalCost|float2euro|raw }}
                                     </span>
                                 </p>
                             </div>

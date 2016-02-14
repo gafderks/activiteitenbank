@@ -1,6 +1,6 @@
 {% extends "layout.twig" %}
 
-{% block title %}Explore{% endblock title %}
+{% block title %}{% trans "Explore" %}{% endblock title %}
 
 {% block stylesheets %}
 {{ parent() }}
@@ -8,7 +8,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
-<h1>Explore</h1>
+<h1>{% trans "Explore" %}</h1>
 
 <div class="row">
 
@@ -24,7 +24,7 @@
             <thead>
                 <tr>
                     {% for column in searchColumns %}
-                        <th>{{ column.name|e }}</th>
+                        <th>{{ column.name|trans }}</th>
                     {% endfor %}
                 </tr>
             </thead>
@@ -32,25 +32,39 @@
             <tfoot>
                 <tr>
                     {% for column in searchColumns %}
-                        <th>{{ column.name|e }}</th>
+                        <th>{{ column.name|trans }}</th>
                     {% endfor %}
                 </tr>
             </tfoot>
 
             <tbody>
-                <tr>
-                    <td><a href="<?php echo RootURL()."/view/".$activity->getId()."/".$activity->getSlug(); ?>"><?php echo (strlen($activity->getName())>0) ? $activity->getName() : "Untitled" ; ?></a></td>
-                    <td><?php echo ActivityCategories::Text($activity->getCategory()); ?></td>
-                    <td><?php echo Format::int2Time($activity->getDuration()); ?></td>
-                    <td><?php echo Format::float2Euro($activity->getBudget()); ?></td>
-                    <td><?php echo ActivityDifficulties::Text($activity->getDifficulty()); ?></td>
-                    <td><?php echo ActivityGuidances::Text($activity->getGuidance()); ?></td>
-                    <td><?php echo ActivityMotivations::Text($activity->getMotivation()); ?></td>
-                    <td><?php echo PublishStates::Text($activity->getPublish_state()); ?></td>
-                    <td>placeholder</td>
-                    <td>placeholder</td>
-                    <td><?php echo $activity->getCreator()->getName(); ?></td>
-                </tr>
+                {% set levels = {0: 'Unspecified',
+                1: 'Very low',
+                2: 'Low',
+                3: 'Medium',
+                4: 'High',
+                5: 'Very high'} %}
+                {% for activity in activities %}
+                    <tr>
+                        <td><a href="{{ urlFor('activity-view', {"id": activity.id, "slug": activity.slug}) }}">{{ activity.name }}</a></td>
+                        {% set activityCategoriesNamed = [] %}
+                        {% set activityCategories = [] %}
+                        {% for category in activity.categories %}
+                            {% set activityCategoriesNamed = activityCategoriesNamed|merge(category.name|e) %}
+                            {% set activityCategories = activityCategories|merge(category.id) %}
+                        {% endfor %}
+                        <td>{{ activityCategoriesNamed|join(', ') }}</td>
+                        <td>{{ activity.planning.totalDuration|int2time|raw }}</td>
+                        <td>{{ activity.budget.totalCost|float2euro|raw }}</td>
+                        <td>{{ levels[activity.difficulty.value]|trans }}</td>
+                        <td>{{ levels[activity.guidance.value]|trans }}</td>
+                        <td>{{ levels[activity.motivation.value]|trans }}</td>
+                        <td><?php echo PublishStates::Text($activity->getPublish_state()); ?></td>
+                        <td>placeholder</td>
+                        <td>placeholder</td>
+                        <td>{{ activity.creator.name }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
 
@@ -66,7 +80,7 @@
 {{ parent() }}
 <script type="text/javascript" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="//cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-<script type="text/javascript" src="{{ assetsUrl }}/js/bootstrap-slider.min.js"></script>
+<script type="text/javascript" src="{{ componentsUrl }}/bootstrap-slider/bootstrap-slider.js"></script>
 
 <script type="text/javascript">
     $(".filter-title, .filter-bar-title").click(function() {

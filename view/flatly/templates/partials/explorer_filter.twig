@@ -1,103 +1,82 @@
 <div class="filter-bar">
-    <h3 class="filter-bar-title"><span class="glyphicon"></span>Filters</h3>
+    <h3 class="filter-bar-title"><span class="glyphicon"></span>{% trans "Filters" %}</h3>
     <div class="filter-bar-content">
         <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon"></span>Keyword</h3>
+            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Keyword" %}</h3>
             <div class="filter-content">
-                <input id="filter-term" type="text" placeholder="Narrow results" />
+                <input id="filter-term" type="text" placeholder="{% trans "Narrow results" %}" />
             </div>
         </div>
         <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon"></span>Category</h3>
+            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Category" %}</h3>
             <div class="filter-content">
-                <div class="radio">
-                    <label>
-                        <input type="checkbox" name="filter-category" data-filter-text="<?php echo ActivityCategories::Text(ActivityCategories::ForestGame); ?>" value="1" >
-                        Forest game
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="checkbox" name="filter-category" data-filter-text="<?php echo ActivityCategories::Text(ActivityCategories::Indoors); ?>" value="2" >
-                        Indoors
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="checkbox" name="filter-category" data-filter-text="<?php echo ActivityCategories::Text(ActivityCategories::Technique); ?>" value="3" >
-                        Technique
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="checkbox" name="filter-category" data-filter-text="<?php echo ActivityCategories::Text(ActivityCategories::Game); ?>" value="4" >
-                        Game
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="checkbox" name="filter-category" data-filter-text="<?php echo ActivityCategories::Text(ActivityCategories::Extraordinary); ?>" value="5" >
-                        Extraordinary
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="checkbox" name="filter-category" data-filter-text="<?php echo ActivityCategories::Text(ActivityCategories::SpecialOccasion); ?>" value="6" >
-                        Special occasion
-                    </label>
-                </div>
-
+                {% for category in session.user.team.organization.categories %}
+                    <div class="radio">
+                        <label>
+                            <input type="checkbox" name="filter-category" data-filter-text="{{ category.name }}">
+                            {{ category.name }}
+                        </label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         <div class="filter-item">
-            <h3 class="filter-title"><span class="glyphicon"></span>Duration</h3>
+            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Duration" %}</h3>
+            {% set durations = [] %}
+            {% for activity in activities %}
+                {% set durations = durations|merge([activity.planning.totalDuration]) %}
+            {% endfor %}
             <div class="filter-content">
-                <input class="slider left time" type="text" data-slider-min="<?php echo min($times); ?>" data-slider-max="<?php echo max($times); ?>" data-slider-step="1" data-slider-value="<?php echo min($times); ?>"/>
+                <input class="slider left time" type="text" data-slider-min="{{ min(durations) }}" data-slider-max="{{ max(durations) }}" data-slider-step="1" data-slider-value="{{ min(durations) }}"/>
                 <input type="hidden" value="" />
-                <span class="slider-left"><?php echo Format::int2Time(min($times)); ?></span>
-                <span class="slider-right"><?php echo Format::int2Time(max($times)); ?></span>
+                <span class="slider-left">{{ min(durations)|int2time }}</span>
+                <span class="slider-right">{{ max(durations)|int2time }}</span>
             </div>
         </div>
         <div class="filter-item">
-            <h3 class="filter-title"><span class="glyphicon"></span>Budgetary</h3>
+            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Budgetary" %}</h3>
+            {% set budgets = [] %}
+            {% for activity in activities %}
+                {% set budgets = budgets|merge([activity.budget.totalCost]) %}
+            {% endfor %}
             <div class="filter-content">
-                <input class="slider left budget" type="text" data-slider-min="<?php echo min($budgets); ?>" data-slider-max="<?php echo max($budgets); ?>" data-slider-step="1" data-slider-value="<?php echo max($budgets); ?>"/>
-                <span class="slider-left"><?php echo Format::float2Euro(min($budgets)); ?></span>
-                <span class="slider-right"><?php echo Format::float2Euro(max($budgets)); ?></span>
+                <input class="slider left budget" type="text" data-slider-min="{{ min(budgets) }}" data-slider-max="{{ max(budgets) }}" data-slider-step="1" data-slider-value="{{ max(budgets) }}"/>
+                <span class="slider-left">{{ min(budgets)|float2euro|raw }}</span>
+                <span class="slider-right">{{ max(budgets)|float2euro|raw }}</span>
             </div>
         </div>
         <div class="filter-item">
-            <h3 class="filter-title"><span class="glyphicon"></span>Difficulty</h3>
+            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Difficulty" %}</h3>
             <div class="filter-content">
-                <input class="slider left level" type="text" data-slider-min="<?php echo ActivityDifficulties::VeryLow; ?>" data-slider-max="<?php echo ActivityDifficulties::VeryHigh; ?>" data-slider-step="1" data-slider-value="<?php echo ActivityDifficulties::VeryHigh; ?>"/>
-                <span class="slider-left">Very Low</span>
-                <span class="slider-right">Very High</span>
+                <input class="slider left level" type="text" data-slider-min="{{ enum.level.VeryLow }}" data-slider-max="{{ enum.level.VeryHigh }}" data-slider-step="1" data-slider-value="{{ enum.level.VeryHigh }}"/>
+                <span class="slider-left">{% trans "Very low" %}</span>
+                <span class="slider-right">{% trans "Very high" %}</span>
             </div>
         </div>
         <div class="filter-item">
-            <h3 class="filter-title"><span class="glyphicon"></span>Guidance</h3>
+            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Guidance" %}</h3>
             <div class="filter-content">
-                <input class="slider left level" type="text" data-slider-min="<?php echo ActivityGuidances::VeryLow; ?>" data-slider-max="<?php echo ActivityGuidances::VeryHigh; ?>" data-slider-step="1" data-slider-value="<?php echo ActivityGuidances::VeryHigh; ?>"/>
-                <span class="slider-left">Very Low</span>
-                <span class="slider-right">Very High</span>
+                <input class="slider left level" type="text" data-slider-min="{{ enum.level.VeryLow }}" data-slider-max="{{ enum.level.VeryHigh }}" data-slider-step="1" data-slider-value="{{ enum.level.VeryHigh }}"/>
+                <span class="slider-left">{% trans "Very low" %}</span>
+                <span class="slider-right">{% trans "Very high" %}</span>
             </div>
         </div>
         <div class="filter-item">
-            <h3 class="filter-title"><span class="glyphicon"></span>Motivation</h3>
+            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Motivation" %}</h3>
             <div class="filter-content">
-                <input class="slider left level" type="text" data-slider-min="<?php echo ActivityMotivations::VeryLow; ?>" data-slider-max="<?php echo ActivityMotivations::VeryHigh; ?>" data-slider-step="1" data-slider-value="<?php echo ActivityMotivations::VeryHigh; ?>"/>
-                <span class="slider-left">Very Low</span>
-                <span class="slider-right">Very High</span>
+                <input class="slider left level" type="text" data-slider-min="{{ enum.level.VeryLow }}" data-slider-max="{{ enum.level.VeryHigh }}" data-slider-step="1" data-slider-value="{{ enum.level.VeryHigh }}"/>
+                <span class="slider-left">{% trans "Very low" %}</span>
+                <span class="slider-right">{% trans "Very high" %}</span>
             </div>
         </div>
         <div class="filter-item">
-            <h3 class="filter-title"><span class="glyphicon"></span>Activity areas</h3>
+            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Activity areas" %}</h3>
             <div class="filter-content">
 
             </div>
         </div>
         <div class="filter-item">
-            <h3 class="filter-title"><span class="glyphicon"></span>Suitable groups</h3>
+            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Suitable groups" %}</h3>
             <div class="filter-content">
                 <div class="radio">
                     <label>

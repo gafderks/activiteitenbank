@@ -23,9 +23,19 @@ class ExplorerController extends Controller
 
     public function indexAction() {
         $params = [
-            'searchColumns' => $this->searchColumns
+            'searchColumns' => $this->searchColumns,
+            'activities' => $this->getActivityMapper()->findAll()
         ];
         $this->app->render('pages/explorer.twig', $params);
+    }
+
+    /**
+     * Get the activity mapper.
+     *
+     * @return \Mapper\Activity
+     */
+    protected function getActivityMapper() {
+        return $this->app->mapper_activity;
     }
 
 }
