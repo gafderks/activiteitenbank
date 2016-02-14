@@ -431,6 +431,10 @@ ul.list>li{
     border-bottom: #eee solid 1px;   
 }
 
+ul.list>li>span {
+    margin-right: 20px;
+}
+
 ul.list>li>input[type=checkbox] {
     margin-right: 20px;
 }

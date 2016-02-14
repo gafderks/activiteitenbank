@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: activiteitenbank\n"
-"POT-Creation-Date: 2016-02-12 18:48+0100\n"
-"PO-Revision-Date: 2016-02-12 18:51+0100\n"
+"POT-Creation-Date: 2016-02-14 02:36+0100\n"
+"PO-Revision-Date: 2016-02-14 02:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -16,6 +16,7 @@ msgstr ""
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:33
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:53
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:391
 msgid "Edit activity"
 msgstr "Activiteit aanpassen"
 
@@ -31,34 +32,42 @@ msgid "Name"
 msgstr "Naam"
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:270
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:306
 msgid "Saving failed... Are you still connected?"
 msgstr "Opslaan mislukt... Ben je nog verbonden met internet?"
 
 #: 27/276c674c2009253eb722a39b71c13e7b402a8d760f4d72a47fefe1bcb1663bd8.php:23
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:540
 msgid "Suitable groups"
 msgstr "Geschikte groepen"
 
 #: 27/276c674c2009253eb722a39b71c13e7b402a8d760f4d72a47fefe1bcb1663bd8.php:49
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:557
 msgid "Bevers"
 msgstr "Bevers"
 
 #: 27/276c674c2009253eb722a39b71c13e7b402a8d760f4d72a47fefe1bcb1663bd8.php:70
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:568
 msgid "Welpen"
 msgstr "Welpen"
 
 #: 27/276c674c2009253eb722a39b71c13e7b402a8d760f4d72a47fefe1bcb1663bd8.php:91
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:579
 msgid "Scouts"
 msgstr "Scouts"
 
 #: 27/276c674c2009253eb722a39b71c13e7b402a8d760f4d72a47fefe1bcb1663bd8.php:112
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:590
 msgid "Explorers"
 msgstr "Explorers"
 
 #: 27/276c674c2009253eb722a39b71c13e7b402a8d760f4d72a47fefe1bcb1663bd8.php:133
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:601
 msgid "Roverscouts"
 msgstr "Roverscouts"
 
 #: 27/276c674c2009253eb722a39b71c13e7b402a8d760f4d72a47fefe1bcb1663bd8.php:154
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:612
 msgid "Plusscouts"
 msgstr "Plusscouts"
 
@@ -75,6 +84,12 @@ msgstr "Zichtbaarheid"
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:148
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:307
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:466
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:74
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:97
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:191
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:231
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:273
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:341
 msgid "Edit"
 msgstr "Bewerken"
 
@@ -105,6 +120,7 @@ msgid "Cancel"
 msgstr "Annuleren"
 
 #: 34/34b4c664b8644f1a88918ff1cb0fbd86f61fbd6c7bbbe26fbdb3b2f376a4745e.php:101
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:416
 msgid "Delete activity"
 msgstr "Verwijder activiteit"
 
@@ -130,10 +146,12 @@ msgid "Update"
 msgstr "Bijwerken"
 
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:23
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:426
 msgid "Properties"
 msgstr "Eigenschappen"
 
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:40
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:445
 msgid "Category"
 msgstr "Categorie"
 
@@ -142,6 +160,7 @@ msgid "No category"
 msgstr "Geen categorie"
 
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:138
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:474
 msgid "Difficulty"
 msgstr "Moeilijkheidsgraad"
 
@@ -203,18 +222,22 @@ msgid "Very high"
 msgstr "Zeer hoog"
 
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:296
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:486
 msgid "Guidance"
 msgstr "Begeleiding"
 
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:455
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:498
 msgid "Motivation"
 msgstr "Motivatie"
 
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:616
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:510
 msgid "Duration"
 msgstr "Tijdsduur"
 
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:621
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:522
 msgid "Budget"
 msgstr "Budget"
 
@@ -234,34 +257,102 @@ msgstr "Instellingen"
 msgid "Sign out"
 msgstr "Uitloggen"
 
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:65
 #: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:24
 msgid "Elaboration"
 msgstr "Uitwerking"
 
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:88
 #: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:30
 #: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:75
 msgid "Planning"
 msgstr "Planning"
 
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:182
 #: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:36
 #: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:120
 msgid "Preparations"
 msgstr "Voorbereidingen"
 
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:222
 #: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:42
 #: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:159
 msgid "Materials"
 msgstr "Materialen"
 
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:264
 #: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:48
 #: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:202
 msgid "Budgetary"
 msgstr "Begroting"
 
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:320
+#: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:246
+msgid "Total"
+msgstr "Totaal"
+
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:332
 #: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:54
 #: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:255
 msgid "Attachments"
 msgstr "Bijlagen"
+
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:378
+msgid "Actions"
+msgstr "Acties"
+
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:400
+msgid "Print activity"
+msgstr "Activiteit afdrukken"
+
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:409
+msgid "Download PDF"
+msgstr "Downloaden als PDF"
+
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:627
+#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:23
+msgid "Activity areas"
+msgstr "Activiteitengebieden"
+
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:644
+#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:49
+msgid "Challenging Scouting Techniques"
+msgstr "Uitdagende Scouting Technieken"
+
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:655
+#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:70
+msgid "Expression"
+msgstr "Expressie"
+
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:666
+#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:91
+msgid "Sports and Games"
+msgstr "Sport en Spel"
+
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:677
+#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:112
+msgid "Outdoor life"
+msgstr "Buitenleven"
+
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:688
+#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:133
+msgid "Identity"
+msgstr "Identiteit"
+
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:699
+#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:154
+msgid "International"
+msgstr "Internationaal"
+
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:710
+#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:175
+msgid "Society"
+msgstr "Samenleving"
+
+#: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:721
+#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:196
+msgid "Safe and Healthy"
+msgstr "Veilig en Gezond"
 
 #: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:109
 #: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:149
@@ -269,10 +360,6 @@ msgstr "Bijlagen"
 #: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:241
 msgid "Add new"
 msgstr "Toevoegen"
-
-#: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:246
-msgid "Total"
-msgstr "Totaal"
 
 #: 6f/6fc193f98aa40261fb1ecf361793900015dd5bcf7302d2337e1540f5679977f8.php:280
 msgid "You need to save this activity before you can add an attachment."
@@ -301,39 +388,3 @@ msgstr "Plannen"
 #: ae/ae3ae8814dfcdc446e874d64a1564f0ae0fca1d847416cad8f39ea5039a703ed.php:89
 msgid "Login"
 msgstr "Login"
-
-#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:23
-msgid "Activity areas"
-msgstr "Activiteitengebieden"
-
-#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:49
-msgid "Challenging Scouting Techniques"
-msgstr "Uitdagende Scouting Technieken"
-
-#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:70
-msgid "Expression"
-msgstr "Expressie"
-
-#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:91
-msgid "Sports and Games"
-msgstr "Sport en Spel"
-
-#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:112
-msgid "Outdoor life"
-msgstr "Buitenleven"
-
-#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:133
-msgid "Identity"
-msgstr "Identiteit"
-
-#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:154
-msgid "International"
-msgstr "Internationaal"
-
-#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:175
-msgid "Society"
-msgstr "Samenleving"
-
-#: b8/b8822a45dc7fc382cdab6c44874c81886d03cc6694ea4841458f87326a55c2b0.php:196
-msgid "Safe and Healthy"
-msgstr "Veilig en Gezond"

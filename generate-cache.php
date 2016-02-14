@@ -32,8 +32,10 @@ $twig->addExtension(new \Slim\Views\TwigExtension());
 // register custom filters
 $int2time = new Twig_SimpleFilter('int2time', ['\View\Format', 'int2Time']);
 $float2euro = new Twig_SimpleFilter('float2euro', ['\View\Format', 'float2Euro']);
+$bb2html = new Twig_SimpleFilter('bb2Html', ['\View\Format', 'bb2Html']);
 $twig->addFilter($int2time);
 $twig->addFilter($float2euro);
+$twig->addFilter($bb2html);
 // configure Twig the way you want
 
 // iterate over all your templates

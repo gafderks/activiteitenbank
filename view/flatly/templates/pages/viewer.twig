@@ -36,18 +36,27 @@
                     </span>
                 </h3>
                 <ul class="list">
-                    {% set timeCumulative = 0 %}
+                    {% set planningTimeCumulative = 0 %}
                     {% for action in activity.planning.actions %}
                         <li>
                             <span>{{ action.timeSpan|int2time }}</span>
-                            {% set timeCumulative = timeCumulative + action.timeSpan %}
-                            <span>{{ timeCumulative|int2time }}</span>
+                            {% set planningTimeCumulative = planningTimeCumulative + action.timeSpan %}
+                            <span>{{ planningTimeCumulative|int2time }}</span>
                             <span>{{ action.description }}</span>
                         </li>
                     {% endfor %}
                 </ul>
 
-                <div id="activity-planning-graph" class="time-graph"></div>
+                <div id="activity-planning-graph" class="time-graph" style="position: relative; margin: inherit;">
+                    {% set count = 0 %}
+                    {% for action in activity.planning.actions %}
+                        {% set percent = (action.timeSpan / planningTimeCumulative) * 100 %}
+                        <div class="bg-accent-{{ count % 5 }}" style="width: {{ percent }}%"
+                             title="{{ action.description }} ({{ percent|round }}%)">
+                            <span style="width: {{ percent }}%;">{{ action.description }}</span></div>
+                        {% set count = count + 1 %}
+                    {% endfor %}
+                </div>
 
                 <h3 class="activity-section">
                     {{ "Preparations"|trans }}
@@ -93,19 +102,19 @@
                     </span>
                 </h3>
                 <ul class="list">
-                    {% set total = 0 %}
+                    {% set budgetTotal = 0 %}
                     {% for item in activity.budget.expenses %}
                         <li>
                             <span>{{ item.amount }}</span>
-                            <span>{{ item.description }}</span>
-                            <span>{{ item.cost|float2euro|raw }}</span>
+                            <span class="list-name" style="display: inline-block; width: 60%;">{{ item.description }}</span>
+                            <span class="list-price" style="display: inline-block;">{{ item.cost|float2euro|raw }}</span>
                             {% set subtotal = item.cost * item.amount %}
-                            <span>{{ subtotal|float2euro|raw }}</span>
-                            {% set total = total + subtotal %}
+                            <span class="list-price-sum">{{ subtotal|float2euro|raw }}</span>
+                            {% set budgetTotal = budgetTotal + subtotal %}
                         </li>
                     {% endfor %}
                     <li class="list-total">{{ "Total"|trans }}
-                        <span class="list-total-value">{{ total|float2euro|raw }}</span>
+                        <span class="list-total-value">{{ budgetTotal|float2euro|raw }}</span>
                     </li>
                 </ul>
 
@@ -129,7 +138,7 @@
 
             <div class="sidebar col-xs-12 col-md-4">
                 <div class="row">
-                    <div class="col-xs-6 col-md-12">
+                    <div class="col-xs-12 col-sm-6 col-md-12">
                         <div class="sidebar-item">
                             <h3 class="sidebar-title">
                                 {{ "Actions"|trans }}
@@ -159,7 +168,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-6 col-md-12">
+                    <div class="col-xs-12 col-sm-6 col-md-12">
                         <div class="sidebar-item">
                             <h3 class="sidebar-title">
                                 {{ "Properties"|trans }}
@@ -206,64 +215,84 @@
                                 <p>
                                     <span class="glyphicon glyphicon-time"></span>{{ "Duration"|trans }}:
                                     <span class="activity-property uneditable" id="activity-prop-duration-label">
-                                        <?php echo Format::int2Time($activity->getDuration()); ?>
+                                        {{ planningTimeCumulative|int2time }}
                                     </span>
                                 </p>
                                 <p>
                                     <span class="glyphicon glyphicon-euro"></span>{{ "Budget"|trans }}:
                                     <span class="activity-property uneditable" id="activity-prop-budget-label">
-                                        <?php echo Format::float2Euro($activity->getBudget()); ?>
+                                        {{ budgetTotal|float2euro|raw }}
                                     </span>
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-xs-6 col-md-12">
+                    <div class="col-xs-12 col-sm-6 col-md-12">
                         <div class="sidebar-item">
                             <h3 class="sidebar-title">
                                 {{ "Suitable groups"|trans }}
                             </h3>
 
                             <div class="sidebar-content">
-
-
+                                {% set groupType = enum.groupType %}
+                                <ul class="badge-selectors line-3">
+                                    {% if groupType.Bevers in activity.suitableGroupsRaw %}
+                                        <li class="active"><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="{{ assetsUrl }}/img/scouting-groups/bevers.png" class="badge-selectors-img" />{{ "Bevers"|trans }}</label></li>
+                                    {% endif %}
+                                    {% if groupType.Welpen in activity.suitableGroupsRaw %}
+                                        <li class="active"><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="{{ assetsUrl }}/img/scouting-groups/welpen.png" class="badge-selectors-img" />{{ "Welpen"|trans }}</label></li>
+                                    {% endif %}
+                                    {% if groupType.Scouts in activity.suitableGroupsRaw %}
+                                        <li class="active"><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="{{ assetsUrl }}/img/scouting-groups/scouts.png" class="badge-selectors-img" />{{ "Scouts"|trans }}</label></li>
+                                    {% endif %}
+                                    {% if groupType.Explorers in activity.suitableGroupsRaw %}
+                                        <li class="active"><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="{{ assetsUrl }}/img/scouting-groups/explorers.png" class="badge-selectors-img" />{{ "Explorers"|trans }}</label></li>
+                                    {% endif %}
+                                    {% if groupType.Roverscouts in activity.suitableGroupsRaw %}
+                                        <li class="active"><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="{{ assetsUrl }}/img/scouting-groups/roverscouts.png" class="badge-selectors-img" />{{ "Roverscouts"|trans }}</label></li>
+                                    {% endif %}
+                                    {% if groupType.Plusscouts in activity.suitableGroupsRaw %}
+                                        <li class="active"><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="{{ assetsUrl }}/img/scouting-groups/plusscouts.png" class="badge-selectors-img" />{{ "Plusscouts"|trans }}</label></li>
+                                    {% endif %}
+                                </ul>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-xs-6 col-md-12">
+                    <div class="col-xs-12 col-sm-6 col-md-12">
                         <div class="sidebar-item">
                             <h3 class="sidebar-title">
                                 {{ "Activity areas"|trans }}
                             </h3>
 
                             <div class="sidebar-content">
+                                {% set activityArea = enum.activityArea %}
                                 <ul class="badge-selectors line-3">
-                                    <?php if (in_array(ActivityAreas::ChallengingScoutingTechniques, $activity->getActivity_areas())) { ?>
-                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/challenging-scouting-techniques.png" class="badge-selectors-img" /><?php echo L::activity_areas_challenging_scouting_techniques; ?></label></li>
-                                    <?php } ?>
-                                    <?php if (in_array(ActivityAreas::Expression, $activity->getActivity_areas())) { ?>
-                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/expression.png" class="badge-selectors-img" /><?php echo L::activity_areas_expression; ?></label></li>
-                                    <?php } ?>
-                                    <?php if (in_array(ActivityAreas::SportsAndGames, $activity->getActivity_areas())) { ?>
-                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/sports-and-games.png" class="badge-selectors-img" /><?php echo L::activity_areas_sports_and_games; ?></label></li>
-                                    <?php } ?>
-                                    <?php if (in_array(ActivityAreas::OutdoorLife, $activity->getActivity_areas())) { ?>
-                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/outdoor-life.png" class="badge-selectors-img" /><?php echo L::activity_areas_outdoor_life; ?></label></li>
-                                    <?php } ?>
-                                    <?php if (in_array(ActivityAreas::Identity, $activity->getActivity_areas())) { ?>
-                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/identity.png" class="badge-selectors-img" /><?php echo L::activity_areas_identity; ?></label></li>
-                                    <?php } ?>
-                                    <?php if (in_array(ActivityAreas::International, $activity->getActivity_areas())) { ?>
-                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/international.png" class="badge-selectors-img" /><?php echo L::activity_areas_international; ?></label></li>
-                                    <?php } ?>
-                                    <?php if (in_array(ActivityAreas::Society, $activity->getActivity_areas())) { ?>
-                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/society.png" class="badge-selectors-img" /><?php echo L::activity_areas_society; ?></label></li>
-                                    <?php } ?>
-                                    <?php if (in_array(ActivityAreas::SafeAndHealthy, $activity->getActivity_areas())) { ?>
-                                    <li><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="<?php echo RootURL(); ?>/img/activity-areas/safe-and-healthy.png" class="badge-selectors-img" /><?php echo L::activity_areas_safe_and_healthy; ?></label></li>
-                                    <?php } ?>
+                                    {% if activityArea.ChallengingScoutingTechniques in activity.activityAreasRaw %}
+                                        <li class="active"><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="{{ assetsUrl }}/img/activity-areas/challenging-scouting-techniques.png" class="badge-selectors-img" />{{ "Challenging Scouting Techniques"|trans }}</label></li>
+                                    {% endif %}
+                                    {% if activityArea.Expression in activity.activityAreasRaw %}
+                                        <li class="active"><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="{{ assetsUrl }}/img/activity-areas/expression.png" class="badge-selectors-img" />{{ "Expression"|trans }}</label></li>
+                                    {% endif %}
+                                    {% if activityArea.SportsAndGames in activity.activityAreasRaw %}
+                                        <li class="active"><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="{{ assetsUrl }}/img/activity-areas/sports-and-games.png" class="badge-selectors-img" />{{ "Sports and Games"|trans }}</label></li>
+                                    {% endif %}
+                                    {% if activityArea.OutdoorLife in activity.activityAreasRaw %}
+                                        <li class="active"><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="{{ assetsUrl }}/img/activity-areas/outdoor-life.png" class="badge-selectors-img" />{{ "Outdoor life"|trans }}</label></li>
+                                    {% endif %}
+                                    {% if activityArea.Identity in activity.activityAreasRaw %}
+                                        <li class="active"><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="{{ assetsUrl }}/img/activity-areas/identity.png" class="badge-selectors-img" />{{ "Identity"|trans }}</label></li>
+                                    {% endif %}
+                                    {% if activityArea.International in activity.activityAreasRaw %}
+                                        <li class="active"><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="{{ assetsUrl }}/img/activity-areas/international.png" class="badge-selectors-img" />{{ "International"|trans }}</label></li>
+                                    {% endif %}
+                                    {% if activityArea.Society in activity.activityAreasRaw %}
+                                        <li class="active"><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="{{ assetsUrl }}/img/activity-areas/society.png" class="badge-selectors-img" />{{ "Society"|trans }}</label></li>
+                                    {% endif %}
+                                    {% if activityArea.SafeAndHealthy in activity.activityAreasRaw %}
+                                        <li class="active"><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="{{ assetsUrl }}/img/activity-areas/safe-and-healthy.png" class="badge-selectors-img" />{{ "Safe and Healthy"|trans }}</label></li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
@@ -281,9 +310,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-
-    <script type="text/javascript">
-        $(".badge-selectors>li>label>input[type=checkbox]:checked").parent().parent().addClass("active");
-    </script>
 
 {% endblock javascripts %}
