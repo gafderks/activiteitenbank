@@ -21,6 +21,15 @@ class Activity extends \Mapper\Mapper
     }
 
     /**
+     * Returns all activities.
+     *
+     * @return array
+     */
+    public function findAll() {
+        return $this->getRepository()->findAll();
+    }
+
+    /**
      * Persists an object.
      *
      * @param $object

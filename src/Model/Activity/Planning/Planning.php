@@ -56,6 +56,19 @@ class Planning implements \JsonSerializable
     }
 
     /**
+     * Returns the total duration of the activity.
+     *
+     * @return int
+     */
+    public function getTotalDuration() {
+        $time = 0;
+        foreach($this->actions as $action) {
+            $time += $action->getTimeSpan();
+        }
+        return $time;
+    }
+
+    /**
      * Specify data which should be serialized to JSON
      *
      * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php

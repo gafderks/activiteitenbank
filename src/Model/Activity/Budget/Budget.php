@@ -56,6 +56,19 @@ class Budget implements \JsonSerializable
     }
 
     /**
+     * Returns the total cost of the activity.
+     *
+     * @return float|int
+     */
+    public function getTotalCost() {
+        $total = 0;
+        foreach($this->expenses as $expense) {
+            $total += ($expense->getCost() * $expense->getAmount());
+        }
+        return $total;
+    }
+
+    /**
      * Specify data which should be serialized to JSON
      *
      * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
