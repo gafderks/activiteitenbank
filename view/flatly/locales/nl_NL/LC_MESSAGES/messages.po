@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: activiteitenbank\n"
-"POT-Creation-Date: 2016-02-14 23:43+0100\n"
-"PO-Revision-Date: 2016-02-14 23:44+0100\n"
+"POT-Creation-Date: 2016-02-15 19:24+0100\n"
+"PO-Revision-Date: 2016-02-15 19:39+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -380,10 +380,75 @@ msgid "You need to save this activity before you can add an attachment."
 msgstr "Je moet deze activiteit opslaan voordat je een bijlage kunt toevoegen."
 
 #: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:34
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:52
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:55
 #: ae/ae3ae8814dfcdc446e874d64a1564f0ae0fca1d847416cad8f39ea5039a703ed.php:53
 msgid "Explore"
 msgstr "Verkennen"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:299
+msgid "No data available in table"
+msgstr "Geen resultaten aanwezig in de tabel"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:303
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr "_START_ tot _END_ van _TOTAL_ resultaten"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:307
+msgid "Showing 0 to 0 of 0 entries"
+msgstr "Weergave van 0 tot 0 van 0 items"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:311
+msgid "(filtered from _MAX_ total entries)"
+msgstr "(gefilterd uit _MAX_ items)"
+
+# Thousand separator
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:317
+msgid ","
+msgstr "."
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:321
+msgid "Show _MENU_ entries"
+msgstr "_MENU_ resultaten weergeven"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:325
+msgid "Loading..."
+msgstr "Bezig..."
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:329
+msgid "Processing..."
+msgstr "Verwerken..."
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:333
+msgid "Search"
+msgstr "Zoeken"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:337
+msgid "No matching records found"
+msgstr "Geen resultaten om weer te geven"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:342
+msgid "First"
+msgstr "Eerste"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:346
+msgid "Last"
+msgstr "Laatste"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:350
+msgid "Next"
+msgstr "Volgende"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:354
+msgid "Previous"
+msgstr "Vorige"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:360
+msgid "activate to sort column ascending"
+msgstr "activeer om de kolom oplopend te sorteren"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:364
+msgid "activate to sort column descending"
+msgstr "activeer om de kolom afnemend te sorteren"
 
 #: ae/ae3ae8814dfcdc446e874d64a1564f0ae0fca1d847416cad8f39ea5039a703ed.php:27
 msgid "Toggle navigation"
@@ -397,11 +462,7 @@ msgstr "Home"
 msgid "Create"
 msgstr "Nieuw"
 
-#: ae/ae3ae8814dfcdc446e874d64a1564f0ae0fca1d847416cad8f39ea5039a703ed.php:65
-msgid "Plan"
-msgstr "Plannen"
-
-#: ae/ae3ae8814dfcdc446e874d64a1564f0ae0fca1d847416cad8f39ea5039a703ed.php:89
+#: ae/ae3ae8814dfcdc446e874d64a1564f0ae0fca1d847416cad8f39ea5039a703ed.php:83
 msgid "Login"
 msgstr "Login"
 
@@ -416,3 +477,6 @@ msgstr "Zoekterm"
 #: e9/e9ca4e416a5bc8cddc35152bca90d7e86fd1caa08a1b389512844b45275605b7.php:33
 msgid "Narrow results"
 msgstr "Resultaten verfijnen"
+
+#~ msgid "Plan"
+#~ msgstr "Plannen"

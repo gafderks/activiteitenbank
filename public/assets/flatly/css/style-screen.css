@@ -847,20 +847,24 @@ li.paginate_button:hover {
     border: 1px solid transparent !important;
 }
 
-table.dataTable.display tbody tr.even:hover > .sorting_1, table.dataTable.display tbody tr.odd:hover > .sorting_1 {
+table.dataTable.display tbody tr:hover {
     background-color: whitesmoke !important;
 }
 
-table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
-    background-color: #fbfbfb;
+table.dataTable.display thead tr {
+    border-bottom: solid 3px #eee;
 }
 
-table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
-    background-color: #fbfbfb;
+table.dataTable.display tfoot tr {
+    border-top: solid 3px #eee;
 }
 
-table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
-    background-color: #fbfbfb;
+table.dataTable.display tbody tr {
+    border-bottom: solid 1px #eee;
+}
+
+table.dataTable.display tbody tr td {
+    padding: 8px;
 }
 
 /* Fix tooltips

@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
 {{ parent() }}
-
+    <link href="{{ componentsUrl }}/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
 {% endblock stylesheets %}
 
 {% block content %}
@@ -53,12 +53,24 @@
                             {% set activityCategoriesNamed = activityCategoriesNamed|merge(category.name|e) %}
                             {% set activityCategories = activityCategories|merge(category.id) %}
                         {% endfor %}
-                        <td>{{ activityCategoriesNamed|join(', ') }}</td>
-                        <td>{{ activity.planning.totalDuration|int2time|raw }}</td>
-                        <td>{{ activity.budget.totalCost|float2euro|raw }}</td>
-                        <td>{{ levels[activity.difficulty.value]|trans }}</td>
-                        <td>{{ levels[activity.guidance.value]|trans }}</td>
-                        <td>{{ levels[activity.motivation.value]|trans }}</td>
+                        <td data-order="{{ activityCategories.join(',') }}">
+                            {{ activityCategoriesNamed|join(', ') }}
+                        </td>
+                        <td data-order="{{ activity.planning.totalDuration }}">
+                            {{ activity.planning.totalDuration|int2time|raw }}
+                        </td>
+                        <td data-order="{{ activity.budget.totalCost }}">
+                            {{ activity.budget.totalCost|float2euro|raw }}
+                        </td>
+                        <td data-order="{{ activity.difficulty.value }}">
+                            {{ levels[activity.difficulty.value]|trans }}
+                        </td>
+                        <td data-order="{{ activity.guidance.value }}">
+                            {{ levels[activity.guidance.value]|trans }}
+                        </td>
+                        <td data-order="{{ activity.motivation.value }}">
+                            {{ levels[activity.motivation.value]|trans }}
+                        </td>
                         <td>placeholder</td>
                         <td>placeholder</td>
                         <td>{{ activity.creator.name }}</td>
@@ -67,21 +79,110 @@
             </tbody>
         </table>
 
-
-
     </div>
-
 
 </div>
 {% endblock content %}
 
 {% block javascripts %}
 {{ parent() }}
-<script type="text/javascript" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="//cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="{{ componentsUrl }}/datatables.net/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{{ componentsUrl }}/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="{{ componentsUrl }}/bootstrap-slider/bootstrap-slider.js"></script>
 
 <script type="text/javascript">
+
+    $(document).ready(function() {
+        var act_table = $('#activity-table').DataTable( {
+            "dom": '<"table-top">t<"table-bottom"lip>',
+            "order": [[ 0, "asc" ]],
+            "columnDefs" : [
+                {% set key = 0 %}
+                {% for column in searchColumns %}
+                {
+                    "targets": {{ key }},
+                    "visible": {{ column.visible ? "true" : "false" }},
+                    "searchable": {{ column.searchable ? "true" : "false" }}
+                    {% set key = key + 1 %}
+                },
+                {% endfor %}
+            ],
+            "language": {
+                "sEmptyTable":     "{{ "No data available in table"|trans }}",
+                "sInfo":           "{{ "Showing _START_ to _END_ of _TOTAL_ entries"|trans }}",
+                "sInfoEmpty":      "{{ "Showing 0 to 0 of 0 entries"|trans }}",
+                "sInfoFiltered":   "{{ "(filtered from _MAX_ total entries)"|trans }}",
+                "sInfoPostFix":    "",
+                "sInfoThousands":  "{% trans %},{% notes %}thousands separator{% endtrans %}",
+                "sLengthMenu":     "{{ "Show _MENU_ entries"|trans }}",
+                "sLoadingRecords": "{{ "Loading..."|trans }}",
+                "sProcessing":     "{{ "Processing..."|trans }}",
+                "sSearch":         "{{ "Search"|trans }}:",
+                "sZeroRecords":    "{{ "No matching records found"|trans }}",
+                "oPaginate": {
+                    "sFirst":    "{{ "First"|trans }}",
+                    "sLast":     "{{ "Last"|trans }}",
+                    "sNext":     "{{ "Next"|trans }}",
+                    "sPrevious": "{{ "Previous"|trans }}"
+                },
+                "oAria": {
+                    "sSortAscending":  ": {{ "activate to sort column ascending"|trans }}",
+                    "sSortDescending": ": {{ "activate to sort column descending"|trans }}"
+                }
+            }
+        });
+    });
+
+    /* Custom filtering function which will search data in column four between two values */
+    $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex ) {
+
+                var f_term = $('#filter-term').val();
+                var f_category = [];
+                $("[name=filter-category]:checked").each(function() {
+                    f_category.push($(this).data("filter-text"));
+                });
+                console.log(f_category);
+
+                var name = data[0];
+                var category = data[1];
+                var duration = data[2];
+                var budget = data[3];
+                var difficulty = data[4];
+                var guidance = data[5];
+                var motivation = data[6];
+                var state = data[7];
+                var activity_areas = data[8];
+                var suitable_groups = data[9];
+                var creator = data[10];
+
+
+                // term filter
+                if (f_term.length > 0) {
+                    var patt = new RegExp(f_term, "i");
+                    var one = false;
+                    for(var i=0;i<data.length;i++) {
+                        if (patt.test(data[i])) {
+                            one = true;
+                        }
+                    }
+                    if (!one) {
+                        return false;
+                    }
+                }
+
+
+                // category filter
+                if (f_category.length > 0) {
+                    if (f_category.indexOf(category)==-1) {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+    );
+
     $(".filter-title, .filter-bar-title").click(function() {
         $(this).parent().toggleClass("active");
     });

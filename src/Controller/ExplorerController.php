@@ -18,7 +18,7 @@ class ExplorerController extends Controller
         ['name' => 'Motivation', 'visible' => false, 'searchable' => true],
         ['name' => 'Activity areas', 'visible' => false, 'searchable' => true],
         ['name' => 'Suitable groups', 'visible' => false, 'searchable' => true],
-        ['name' => 'Creator', 'visible' => true, 'searchable' => true],
+        ['name' => 'Creator', 'visible' => false, 'searchable' => true],
     ];
 
     public function indexAction() {

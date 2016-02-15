@@ -24,6 +24,8 @@
     "font-awesome": "fontawesome#^4.5.0",
     "ckeditor": "^4.5.7",
     "ckeditor-skin-minimalist": "albatrossdigital/ckeditor-skin-minimalist",
-    "bootstrap-slider": "*"
+    "bootstrap-slider": "*",
+    "datatables.net": "^1.10.11",
+    "datatables.net-bs": "^1.10.11"
   }
 }
