@@ -867,6 +867,58 @@ table.dataTable.display tbody tr td {
     padding: 8px;
 }
 
+/* override column visibility menu */
+a.buttons-colvis {
+
+}
+
+.colvis {
+    text-align: right;
+    padding-bottom: 5px;
+}
+
+.colvis > div > a.buttons-colvis {
+    background-color: transparent;
+    color: #18bc9c;
+    border: none;
+}
+
+.buttons-columnVisibility {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.buttons-columnVisibility.active {
+    background: #2c3e50;
+    color: white;
+}
+
+.buttons-columnVisibility:before {
+    padding-top: 2px;
+    margin-right: 15px;
+}
+
+.buttons-columnVisibility.active:before {
+    font-family: "Glyphicons Halflings", sans-serif;
+    content: "\e013";
+    font-size: 0.8em;
+    margin-top: 2px;
+    margin-right: 0px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.buttons-columnVisibility a {
+    width: 100%;
+}
+
+.buttons-columnVisibility.active a {
+    padding-left: 0px;
+}
+
+
+
 /* Fix tooltips
 -------------------------------------------------- */
 

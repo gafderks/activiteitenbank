@@ -88,13 +88,16 @@
 {{ parent() }}
 <script type="text/javascript" src="{{ componentsUrl }}/datatables.net/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="{{ componentsUrl }}/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="{{ componentsUrl }}/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="{{ componentsUrl }}/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+<script type="text/javascript" src="{{ componentsUrl }}/datatables.net-buttons/js/buttons.colVis.min.js"></script>
 <script type="text/javascript" src="{{ componentsUrl }}/bootstrap-slider/bootstrap-slider.js"></script>
 
 <script type="text/javascript">
 
     $(document).ready(function() {
         var act_table = $('#activity-table').DataTable( {
-            "dom": '<"table-top">t<"table-bottom"lip>',
+            "dom": '<"colvis"B><"table-top">t<"table-bottom"lip>',
             "order": [[ 0, "asc" ]],
             "columnDefs" : [
                 {% set key = 0 %}
@@ -107,6 +110,7 @@
                 },
                 {% endfor %}
             ],
+            "buttons": ['colvis'],
             "language": {
                 "sEmptyTable":     "{{ "No data available in table"|trans }}",
                 "sInfo":           "{{ "Showing _START_ to _END_ of _TOTAL_ entries"|trans }}",
@@ -128,6 +132,9 @@
                 "oAria": {
                     "sSortAscending":  ": {{ "activate to sort column ascending"|trans }}",
                     "sSortDescending": ": {{ "activate to sort column descending"|trans }}"
+                },
+                "buttons": {
+                    "colvis": "{{ "Change columns"|trans }}"
                 }
             }
         });
