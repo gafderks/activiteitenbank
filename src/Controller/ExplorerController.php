@@ -9,16 +9,16 @@ class ExplorerController extends Controller
 
     private $searchColumns = [
         //['Name', visible, searchable]
-        ['name' => 'Name', 'visible' => true, 'searchable' => true],
-        ['name' => 'Category', 'visible' => true, 'searchable' => true],
-        ['name' => 'Duration', 'visible' => true, 'searchable' => true],
-        ['name' => 'Budget', 'visible' => true, 'searchable' => true],
-        ['name' => 'Difficulty', 'visible' => false, 'searchable' => true],
-        ['name' => 'Guidance', 'visible' => false, 'searchable' => true],
-        ['name' => 'Motivation', 'visible' => false, 'searchable' => true],
-        ['name' => 'Activity areas', 'visible' => false, 'searchable' => true],
-        ['name' => 'Suitable groups', 'visible' => false, 'searchable' => true],
-        ['name' => 'Creator', 'visible' => false, 'searchable' => true],
+        ['name' => 'Name', 'visible' => true, 'searchable' => true, 'orderable' => true],
+        ['name' => 'Category', 'visible' => true, 'searchable' => true, 'orderable' => false],
+        ['name' => 'Duration', 'visible' => true, 'searchable' => true, 'orderable' => true],
+        ['name' => 'Budget', 'visible' => true, 'searchable' => true, 'orderable' => true],
+        ['name' => 'Difficulty', 'visible' => false, 'searchable' => true, 'orderable' => true],
+        ['name' => 'Guidance', 'visible' => false, 'searchable' => true, 'orderable' => true],
+        ['name' => 'Motivation', 'visible' => false, 'searchable' => true, 'orderable' => true],
+        ['name' => 'Activity areas', 'visible' => false, 'searchable' => true, 'orderable' => false],
+        ['name' => 'Suitable groups', 'visible' => false, 'searchable' => true, 'orderable' => false],
+        ['name' => 'Creator', 'visible' => false, 'searchable' => true, 'orderable' => true],
     ];
 
     public function indexAction() {

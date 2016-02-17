@@ -105,7 +105,8 @@
                 {
                     "targets": {{ key }},
                     "visible": {{ column.visible ? "true" : "false" }},
-                    "searchable": {{ column.searchable ? "true" : "false" }}
+                    "searchable": {{ column.searchable ? "true" : "false" }},
+                    "orderable": {{ column.orderable ? "true" : "false" }}
                     {% set key = key + 1 %}
                 },
                 {% endfor %}
