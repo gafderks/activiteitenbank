@@ -73,7 +73,7 @@
                         <td data-order="{{ activity.motivation.value }}">
                             {{ levels[activity.motivation.value]|trans }}
                         </td>
-                        <td>
+                        <td data-filter="{{ activity.activityAreasRaw|join(',') }}">
                             {% if activityArea.ChallengingScoutingTechniques in activity.activityAreasRaw %}
                                 <img src="{{ assetsUrl }}/img/activity-areas/challenging-scouting-techniques.png"
                                      class="badge-small" alt="{{ "Challenging Scouting Techniques"|trans }}"
@@ -110,7 +110,7 @@
                                      title="{{ "Safe and Healthy"|trans }}" />
                             {% endif %}
                         </td>
-                        <td>
+                        <td data-filter="{{ activity.suitableGroupsRaw|join(',') }}">
                             {% if groupType.Bevers in activity.suitableGroupsRaw %}
                                 <img src="{{ assetsUrl }}/img/scouting-groups/bevers.png"
                                      class="badge-small" alt="{{ "Bevers"|trans }}" title="{{ "Bevers"|trans }}" />
