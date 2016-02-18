@@ -1,7 +1,8 @@
 <div class=" pull-right">
     <ul class="nav navbar-nav navbar-right" id="account-menu">
         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="{{ assetsUrl }}/img/scouting-groups/{{ session.user.team.type.value }}.png"  class="account-image-bar" />
+            <img src="{{ assetsUrl }}/img/scouting-groups/{{ session.user.team.type.value }}.png"
+                 alt="{{ session.user.team.name }}" class="account-image-bar" />
             <div class="account-information">
                 <span class="account-name">{{ session.user.firstName }} {{ session.user.lastName }}</span><br/>
                 <span class="account-teamname">{{ session.user.team.name }}</span>
