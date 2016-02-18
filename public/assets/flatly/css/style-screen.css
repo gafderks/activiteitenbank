@@ -688,6 +688,11 @@ ul.list.list-timeable > li > input[data-list-field=name] {
     filter: alpha(opacity=30);
 }
 
+.badge-small {
+    width: 25px;
+    height: 25px;
+}
+
 /* Filter
 -------------------------------------------------- */
 
