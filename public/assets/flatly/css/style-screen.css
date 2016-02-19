@@ -780,11 +780,18 @@ ul.list.list-timeable > li > input[data-list-field=name] {
 }
 
 .slider-selection {
-    background: #18bc9c;
+    background-color: #18bc9c;
+    background-image: none;
+}
+
+.slider-track {
+    background-color: #ddd;
+    background-image: none;
 }
 
 .slider-handle {
-    background: #0f7864;
+    background-color: #0f7864;
+    background-image: none;
     opacity: 1;
 }
 
@@ -925,8 +932,6 @@ a.buttons-colvis {
 .buttons-columnVisibility.active a {
     padding-left: 0px;
 }
-
-
 
 /* Fix tooltips
 -------------------------------------------------- */

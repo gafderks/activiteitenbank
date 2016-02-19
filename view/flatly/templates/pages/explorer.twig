@@ -3,8 +3,10 @@
 {% block title %}{% trans "Explore" %}{% endblock title %}
 
 {% block stylesheets %}
-{{ parent() }}
-    <link href="{{ componentsUrl }}/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="{{ componentsUrl }}/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="{{ componentsUrl }}/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet" />
+
+    {{ parent() }}
 {% endblock stylesheets %}
 
 {% block content %}
@@ -157,7 +159,7 @@
 <script type="text/javascript" src="{{ componentsUrl }}/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="{{ componentsUrl }}/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
 <script type="text/javascript" src="{{ componentsUrl }}/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-<script type="text/javascript" src="{{ componentsUrl }}/bootstrap-slider/bootstrap-slider.js"></script>
+<script type="text/javascript" src="{{ componentsUrl }}/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
 
 <script type="text/javascript">
 
@@ -205,108 +207,140 @@
                 }
             }
         });
+
+        $('#filter-term').keyup( function() {
+            act_table.draw();
+        } );
+
+        $(".filter-title, .filter-bar-title").click(function() {
+            $(this).parent().toggleClass("active");
+        });
+
+        $(".slider.level").slider({
+            tooltip: "show",
+            selection: "left",
+            formatter: function(value) {
+                {% set levels = {0: 'Unspecified',
+                1: 'Very low',
+                2: 'Low',
+                3: 'Medium',
+                4: 'High',
+                5: 'Very high'} %} {# //TODO remove necessity for this #}
+                var levels = [
+                    "{{ levels[0]|trans }}",
+                    "{{ levels[1]|trans }}",
+                    "{{ levels[2]|trans }}",
+                    "{{ levels[3]|trans }}",
+                    "{{ levels[4]|trans }}",
+                    "{{ levels[5]|trans }}"
+                ];
+                if (Array.isArray(value)) {
+                    return String(levels[value[0]] + " - " + levels[value[1]]);
+                } else {
+                    return levels[value];
+                }
+
+            }
+        });
+
+        $(".slider.time").slider({
+            tooltip: "show",
+            selection: "left",
+            formatter: function(value) {
+                if (Array.isArray(value)) {
+                    var hours1   = Math.floor(value[0] / 60);
+                    var minutes1 = String("00" + (value[0] % 60)).slice(-2);
+                    var time1 = String(hours1 + ":" + minutes1);
+                    var hours2   = Math.floor(value[1] / 60);
+                    var minutes2 = String("00" + (value[1] % 60)).slice(-2);
+                    var time2 = String(hours2 + ":" + minutes2);
+                    return String(time1 + " - " + time2);
+                } else {
+                    var hours   = Math.floor(value / 60);
+                    var minutes = String("00" + (value % 60)).slice(-2);
+                    return String(hours + ":" + minutes);
+                }
+            }
+        });
+
+        $(".slider.budget").slider({
+            tooltip: "show",
+            selection: "left",
+            formatter: function(value) {
+                if (Array.isArray(value)) {
+                    var euros1   = Math.floor(value[0]);
+                    var budget1 = "€ " + euros1 + ".00";
+                    var euros2   = Math.floor(value[1]);
+                    var budget2 = "€ " + euros2 + ".00";
+                    return String(budget1 + " - " + budget2);
+                } else {
+                    var euros = Math.floor(value);
+                    return "€ " + euros + ".00";
+                }
+            }
+        });
+
     });
 
-    /* Custom filtering function which will search data in column four between two values */
+    /**
+     *  Filtering method.
+     *
+     *  This method is called for every activity in the list.
+     *  If this method returns false, the activity is hidden.
+     *  If this method returns true, the activity is shown.
+     */
     $.fn.dataTable.ext.search.push(
             function( settings, data, dataIndex ) {
 
                 var f_term = $('#filter-term').val();
-                var f_category = [];
-                $("[name=filter-category]:checked").each(function() {
-                    f_category.push($(this).data("filter-text"));
-                });
-                console.log(f_category);
-
+//                var f_category = [];
+//                $("[name=filter-category]:checked").each(function() {
+//                    f_category.push($(this).data("filter-text"));
+//                });
+//                console.log(f_category);
+//
                 var name = data[0];
-                var category = data[1];
-                var duration = data[2];
-                var budget = data[3];
-                var difficulty = data[4];
-                var guidance = data[5];
-                var motivation = data[6];
-                var state = data[7];
-                var activity_areas = data[8];
-                var suitable_groups = data[9];
-                var creator = data[10];
+//                var category = data[1];
+//                var duration = data[2];
+//                var budget = data[3];
+//                var difficulty = data[4];
+//                var guidance = data[5];
+//                var motivation = data[6];
+//                var state = data[7];
+//                var activity_areas = data[8];
+//                var suitable_groups = data[9];
+//                var creator = data[10];
 
 
-                // term filter
-                if (f_term.length > 0) {
-                    var patt = new RegExp(f_term, "i");
+                /** Filter on search term */
+                if (f_term.length > 0) { // if nothing is entered, don't filter
+                    var patt = new RegExp(f_term, "i"); // case-insensitive
                     var one = false;
-                    for(var i=0;i<data.length;i++) {
+                    // look for at least one column that matches the regular expression
+                    for (var i = 0; i < data.length; i++) {
                         if (patt.test(data[i])) {
-                            one = true;
+                            one = true; // column found
                         }
                     }
                     if (!one) {
-                        return false;
+                        return false; // regular expression was never matched
                     }
                 }
 
 
                 // category filter
-                if (f_category.length > 0) {
-                    if (f_category.indexOf(category)==-1) {
-                        return false;
-                    }
-                }
-
+//                if (f_category.length > 0) {
+//                    if (f_category.indexOf(category)==-1) {
+//                        return false;
+//                    }
+//                }
+//
                 return true;
             }
+
+
     );
 
-    $(".filter-title, .filter-bar-title").click(function() {
-        $(this).parent().toggleClass("active");
-    });
 
-    $(".slider.left:not(.time):not(.budget)").slider({
-        tooltip: "show",
-        selection: "left"
-    });
-
-    $(".slider.right:not(.time):not(.budget)").slider({
-        tooltip: "show",
-        selection: "right"
-    });
-
-    $(".slider.left.time").slider({
-        tooltip: "show",
-        selection: "left",
-        formater: function(value) {
-            var hours   = Math.floor(value/60);
-            var minutes = String("00"+(value%60)).slice(-2);
-            return hours+":"+minutes;
-        }
-    });
-
-    $(".slider.right.time").slider({
-        tooltip: "show",
-        selection: "right",
-        formater: function(value) {
-            var hours   = Math.floor(value/60);
-            var minutes = String("00"+(value%60)).slice(-2);
-            return hours+":"+minutes;
-        }
-    });
-
-    $(".slider.left.budget").slider({
-        tooltip: "show",
-        selection: "left",
-        formater: function(value) {
-            var euros = Math.floor(value);
-            return "€ "+euros+".00";
-        }
-    });
-
-    $(".slider.right.budget").slider({
-        tooltip: "show",
-        selection: "right",
-        formater: function(value) {
-            var euros = Math.floor(value);
-            return "€ "+euros+".00";
-        }
-    });
 </script>
 {% endblock javascripts %}
