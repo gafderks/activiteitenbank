@@ -119,8 +119,8 @@
                data-property-edit="#activity-prop-difficulty-edit">{% trans "Cancel" %}</a>
         </div>
         <p><span class="glyphicon glyphicon-eye-open"></span>{% trans "Guidance" %}:
-                            <span class="activity-property editable" id="activity-prop-guidance-label">
-                                {{ activity ? levels[activity.guidance.value]|trans : 'Unspecified'|trans }}</span>
+            <span class="activity-property editable" id="activity-prop-guidance-label">
+                {{ activity ? levels[activity.guidance.value]|trans : 'Unspecified'|trans }}</span>
             <a href="javascript:void(0);" id="activity-prop-guidance-edit"
                class="activity-property-edit" data-property-editor="#activity-prop-guidance-editor">
                 {% trans 'Edit' %}</a>
@@ -188,8 +188,8 @@
                data-property-editor="#activity-prop-guidance-editor"
                data-property-edit="#activity-prop-guidance-edit">{% trans "Cancel" %}</a></div>
         <p><span class="glyphicon glyphicon-heart"></span>{% trans "Motivation" %}:
-                            <span class="activity-property editable" id="activity-prop-motivation-label">
-                                {{ activity ? levels[activity.motivation.value]|trans : 'Unspecified'|trans }}</span>
+            <span class="activity-property editable" id="activity-prop-motivation-label">
+                {{ activity ? levels[activity.motivation.value]|trans : 'Unspecified'|trans }}</span>
             <a href="javascript:void(0);" id="activity-prop-motivation-edit"
                class="activity-property-edit" data-property-editor="#activity-prop-motivation-editor">
                 {% trans 'Edit' %}</a></p>
@@ -258,6 +258,86 @@
                 {% trans "Cancel" %}
             </a>
         </div>
+        <p><span class="glyphicon glyphicon-user"></span>{% trans "Group size" %}:
+            <span class="activity-property editable" id="activity-prop-groupsize-label">
+                {% if activity is defined %}
+                    {% if activity.groupSizeMin is null %}
+                        {{ "Unspecified"|trans }}
+                    {% else %}
+                        {% if activity.groupSizeMax is null %}
+                            {{ activity.groupSizeMin }} {{ "or more participants"|trans }}
+                        {% else %}
+                            {{ activity.groupSizeMin }} - {{ activity.groupSizeMax }}
+                            {{ "participants"|trans }}
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                    {{ "Unspecified"|trans }}
+                {% endif %}
+            </span>
+            <a href="javascript:void(0);" id="activity-prop-groupsize-edit"
+               class="activity-property-edit" data-property-editor="#activity-prop-groupsize-editor">
+                {% trans 'Edit' %}</a></p>
+        <div class="activity-property-editor" id="activity-prop-groupsize-editor">
+            <div>
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="groupsize-unknown"
+                        {{ activity ? (activity.groupSizeMin ? : "checked") : "checked" }} />
+                    {{ "Unspecified"|trans }}
+                </label>
+            </div>
+            <div class="row">
+                <label for="groupsize-minimum" class="col-xs-4 col-md-5">{{ "Minimum"|trans }}:</label>
+                <input type="number" min="1" id="groupsize-minimum" class="col-xs-4"
+                    value="{{ activity ? activity.groupSizeMin : "" }}"
+                    {{ activity ? (activity.groupSizeMin ? : "disabled") : "disabled" }} />
+            </div>
+            <div class="row">
+                <label for="groupsize-maximum" class="col-xs-4 col-md-5">{{ "Maximum"|trans }}:</label>
+                <input type="number" min="1" id="groupsize-maximum" class="col-xs-4"
+                    value="{{ activity ? activity.groupSizeMax : "" }}"
+                    {% if activity is not defined %}
+                        disabled
+                    {% else %}
+                        {% if activity.groupSizeMin is null %}
+                            disabled
+                        {% elseif activity.groupSizeMax is null %}
+                            disabled
+                        {% endif %}
+                    {% endif %}
+                />
+                <label class="checkbox-inline col-xs-7 pull-right">
+                    <input type="checkbox" id="groupsize-no-maximum"
+                        {% if activity is not defined %}
+                            disabled
+                        {% else %}
+                            {% if activity.groupSizeMin is null %}
+                                disabled
+                            {% elseif activity.groupSizeMax is null %}
+                                checked
+                            {% endif %}
+                        {% endif %}
+                    />
+                    {{ "No maximum"|trans }}
+                </label>
+            </div>
+            <input type="hidden" value="{{ activity ? activity.groupSizeMin }}"
+                   id="activity-prop-groupsize-min"/>
+            <input type="hidden" value="{{ activity ? activity.groupSizeMax }}"
+                   id="activity-prop-groupsize-max"/>
+            <button class="btn btn-default btn-sm activity-prop-ok-groupsize" data-property-type="radio"
+                    data-prop-editor="#activity-prop-groupsize-editor"
+                    data-prop-label="#activity-prop-groupsize-label"
+                    data-property-edit="#activity-prop-groupsize-edit">
+                {% trans "OK" %}
+            </button>
+            <a href="javascript:void(0);" class="activity-property-cancel"
+               data-property-edit="#activity-prop-groupsize-edit"
+               data-property-editor="#activity-prop-groupsize-editor">
+                {% trans "Cancel" %}
+            </a>
+        </div>
+
         <p><span class="glyphicon glyphicon-time"></span>{% trans "Duration" %}:
                             <span class="activity-property uneditable" id="activity-prop-duration-label"></span></p>
         <p><span class="glyphicon glyphicon-euro"></span>{% trans "Budget" %}:

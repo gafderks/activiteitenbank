@@ -187,11 +187,15 @@
                                     {% set activityCategories = [] %}
                                     <span class="glyphicon glyphicon-inbox"></span>{{ "Category"|trans }}:
                                     <span class="activity-property editable" id="activity-prop-category-label">
-                                        {% for category in activity.categories %}
-                                            {% set activityCategoriesNamed = activityCategoriesNamed|merge(category.name|e) %}
-                                            {% set activityCategories = activityCategories|merge(category.id) %}
-                                        {% endfor %}
-                                        {{ activityCategoriesNamed|join(', ') }}
+                                        {% if activity.categories|length > 0 %}
+                                            {% for category in activity.categories %}
+                                                {% set activityCategoriesNamed = activityCategoriesNamed|merge(category.name|e) %}
+                                                {% set activityCategories = activityCategories|merge(category.id) %}
+                                            {% endfor %}
+                                            {{ activityCategoriesNamed|join(', ') }}
+                                        {% else %}
+                                            {{ "No category"|trans }}
+                                        {% endif %}
                                     </span>
                                 </p>
                                 <p>
@@ -210,6 +214,21 @@
                                     <span class="glyphicon glyphicon-heart"></span>{{ "Motivation"|trans }}:
                                     <span class="activity-property editable" id="activity-prop-motivation-label">
                                         {{ levels[activity.motivation.value]|trans }}
+                                    </span>
+                                </p>
+                                <p>
+                                    <span class="glyphicon glyphicon-user"></span>{{ "Group size"|trans }}:
+                                    <span class="activity-property editable" id="activity-prop-motivation-label">
+                                        {% if activity.groupSizeMin is null %}
+                                            {{ "Unspecified"|trans }}
+                                        {% else %}
+                                            {% if activity.groupSizeMax is null %}
+                                                {{ activity.groupSizeMin }} {{ "or more participants"|trans }}
+                                            {% else %}
+                                                {{ activity.groupSizeMin }} - {{ activity.groupSizeMax }}
+                                                {{ "participants"|trans }}
+                                            {% endif %}
+                                        {% endif %}
                                     </span>
                                 </p>
                                 <p>

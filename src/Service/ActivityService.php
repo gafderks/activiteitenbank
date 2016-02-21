@@ -54,6 +54,8 @@ class ActivityService extends Service
         $activity->setDifficulty(new \Model\Enum\Level($input->difficulty));
         $activity->setGuidance(new \Model\Enum\Level($input->guidance));
         $activity->setMotivation(new \Model\Enum\Level($input->motivation));
+        $activity->setGroupSizeMin($input->groupSizeMin);
+        $activity->setGroupSizeMax($input->groupSizeMax);
         $activity->setActivityAreas($input->activityAreas);
         $activity->setSuitable_groups($input->groups);
 

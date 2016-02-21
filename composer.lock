@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9023e274fb223ef73b337dbf6eb8a886",
-    "content-hash": "606eab89ed27a98c9338c280f35d8edf",
+    "hash": "a797db06a13e6d7598d093b42967a732",
+    "content-hash": "fdd6dd4691fe9aadea44a8707d71b218",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -609,20 +609,20 @@
         },
         {
             "name": "respect/validation",
-            "version": "2.0.x-dev",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Respect/Validation.git",
-                "reference": "f746434b34995d4dc7d4381244e7f9eb6ec5142f"
+                "reference": "cd4654585524d9ede432a14f9d71fa78fa0c3265"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Respect/Validation/zipball/f746434b34995d4dc7d4381244e7f9eb6ec5142f",
-                "reference": "f746434b34995d4dc7d4381244e7f9eb6ec5142f",
+                "url": "https://api.github.com/repos/Respect/Validation/zipball/cd4654585524d9ede432a14f9d71fa78fa0c3265",
+                "reference": "cd4654585524d9ede432a14f9d71fa78fa0c3265",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0"
+                "php": ">=5.4"
             },
             "require-dev": {
                 "egulias/email-validator": "~1.2",
@@ -644,7 +644,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "1.0-dev"
                 }
             },
             "autoload": {
@@ -669,7 +669,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2015-08-13 07:41:01"
+            "time": "2015-10-24 03:32:07"
         },
         {
             "name": "samclarke/sbb-code-parser",
@@ -1821,9 +1821,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "respect/validation": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

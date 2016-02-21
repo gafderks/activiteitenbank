@@ -82,6 +82,17 @@
                 <span class="slider-right">{% trans "Very high" %}</span>
             </div>
         </div>
+        <div class="filter-item active">
+            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Group size" %}</h3>
+            <div class="filter-content">
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="filter-groupsize-ignore" class="" checked />{{ "Show all"|trans }}</label>
+                <input id="filter-groupsize" class="slider logarithmic" type="text" data-slider-min="1"
+                       data-slider-max="200" data-slider-value="1" />
+                <span class="slider-left">1</span>
+                <span class="slider-right">200</span>
+            </div>
+        </div>
         <div class="filter-item">
             <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Activity areas" %}</h3>
             <div class="filter-content">

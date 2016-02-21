@@ -85,6 +85,80 @@
         $($(this).data("property-edit")).show();
     });
 
+    $(".activity-prop-ok-groupsize").click(function() {
+
+        // set field
+        var minimum;
+        var maximum;
+        var proplabel;
+
+        if ($("#groupsize-unknown").is(":checked")) {
+            minimum = null;
+            maximum = null;
+            proplabel = "{{ "Unspecified"|trans }}";
+        } else {
+            var inputMinimum = $("#groupsize-minimum");
+            if (inputMinimum.val() > 0) {
+                minimum = inputMinimum.val();
+            } else { alert("{{ "Minimum group size needs to be at least 1"|trans }}"); return; }
+
+            if ($("#groupsize-no-maximum").is(":checked")) {
+                maximum = null;
+                proplabel = minimum + " {{ "or more participants"|trans }}";
+            } else {
+                var inputMaximum = $("#groupsize-maximum");
+                if (inputMaximum.val() > 0) {
+                    if (inputMaximum.val() >= inputMinimum.val()) {
+                        maximum = inputMaximum.val();
+                        proplabel = minimum + " - " + maximum + " {{ "participants"|trans }}";
+                    } else { alert("{{ "Maximum group size needs to larger than or equal to minimimum group size"|trans }}"); return; }
+                } else { alert("{{ "Maximum group size needs to be at least 1"|trans }}"); return; }
+            }
+        }
+        $("#activity-prop-groupsize-min").val(minimum);
+        $("#activity-prop-groupsize-max").val(maximum);
+
+        // set label
+        $($(this).data("prop-label")).text(proplabel);
+
+        // hide editor
+        $($(this).data("prop-editor")).removeClass("active");
+
+        $($(this).data("property-edit")).show();
+    });
+
+    // groupsize editor
+    $("#groupsize-unknown").change(function() {
+        var inputMinimum = $("#groupsize-minimum");
+        var inputMaximum = $("#groupsize-maximum");
+        var inputNoMaximum = $("#groupsize-no-maximum");
+        if ($(this).is(":checked")) {
+            inputMinimum.prop("disabled", true);
+            inputMaximum.prop("disabled", true);
+            inputNoMaximum.prop("disabled", true);
+            inputMinimum.val("");
+            inputMaximum.val("");
+            inputNoMaximum.prop("checked", false);
+        } else {
+            inputMinimum.prop("disabled", false);
+            inputMaximum.prop("disabled", false);
+            inputNoMaximum.prop("disabled", false);
+            inputMinimum.val("1");
+            inputMaximum.val("1");
+        }
+    });
+
+    $("#groupsize-no-maximum").change(function() {
+        var inputMaximum = $("#groupsize-maximum");
+        if ($(this).is(":checked")) {
+            inputMaximum.prop("disabled", true);
+            inputMaximum.val("");
+        } else {
+            inputMaximum.prop("disabled", false);
+            inputMaximum.val("1");
+        }
+    });
+
     $(document).ready(function() {
         if(window.location.hash) {
             if($(window.location.hash+".wizard-content").length > 0) {

@@ -80,6 +80,18 @@
                         <td data-order="{{ activity.motivation.value }}" data-filter="{{ activity.motivation.value }}">
                             {{ levels[activity.motivation.value]|trans }}
                         </td>
+                        <td data-filter="{{ activity.groupSizeMin is null ? "null" : activity.groupSizeMin }},{{ activity.groupSizeMax is null ? "null" : activity.groupSizeMax }}">
+                            {% if activity.groupSizeMin is null %}
+                                {{ "Unspecified"|trans }}
+                            {% else %}
+                                {% if activity.groupSizeMax is null %}
+                                    {{ activity.groupSizeMin }} {{ "or more participants"|trans }}
+                                {% else %}
+                                    {{ activity.groupSizeMin }} - {{ activity.groupSizeMax }}
+                                    {{ "participants"|trans }}
+                                {% endif %}
+                            {% endif %}
+                        </td>
                         <td data-filter="{{ activity.activityAreasRaw|join(',') }}">
                             {% if activityArea.ChallengingScoutingTechniques in activity.activityAreasRaw %}
                                 <img src="{{ assetsUrl }}/img/activity-areas/challenging-scouting-techniques.png"
@@ -220,7 +232,10 @@
 
         $(".slider").change(function() {
             activityTable.draw();
+        });
 
+        $("#filter-groupsize-ignore").change(function() {
+            activityTable.draw();
         });
 
         $(".filter-title, .filter-bar-title").click(function() {
@@ -252,6 +267,16 @@
                 }
 
             }
+        });
+
+        var logarithmicSliders = $(".slider.logarithmic");
+        logarithmicSliders.slider({
+            tooltip: "always",
+            scale: "logarithmic"
+        });
+
+        logarithmicSliders.change(function() {
+            $("#filter-groupsize-ignore").prop("checked", false);
         });
 
         $(".slider.time").slider({
@@ -315,6 +340,7 @@
                 var difficulty = data[4];
                 var guidance = data[5];
                 var motivation = data[6];
+                var groupsize = data[7];
 //                var state = data[7];
 //                var activity_areas = data[8];
 //                var suitable_groups = data[9];
@@ -377,6 +403,36 @@
                 var maxMotivation = filter.slider('getValue')[1];
                 if (motivation > maxMotivation || motivation < minMotivation) {
                     return false;
+                }
+
+                /** Filter on group size */
+                var ignoreGroupSize = $("#filter-groupsize-ignore").is(":checked");
+                filter = $("#filter-groupsize");
+                var minGroupSize = groupsize.split(",")[0];
+                if (minGroupSize === "null") {
+                    minGroupSize = null;
+                } else {
+                    minGroupSize = parseInt(minGroupSize);
+                }
+                var maxGroupSize = groupsize.split(",")[1];
+                if (maxGroupSize === "null") {
+                    maxGroupSize = null;
+                } else {
+                    maxGroupSize = parseInt(maxGroupSize);
+                }
+                var filteredSize = filter.slider('getValue');
+                if (!ignoreGroupSize) {
+                    if (minGroupSize === null) {
+                        return false; // do not show items with unknown groupsize
+                    }
+                    if (filteredSize < minGroupSize) {
+                        return false;
+                    }
+                    if (maxGroupSize !== null) {
+                        if (filteredSize > maxGroupSize) {
+                            return false;
+                        }
+                    }
                 }
 
 

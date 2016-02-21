@@ -23,31 +23,34 @@ class ValidatorService extends Service
 
         $activity = json_decode($app->request->getBody());
         $validator =
-            v::attribute('title', v::strType()->notEmpty())
+            v::attribute('title', v::stringType()->notEmpty())
                 ->attribute('difficulty', v::in(\Model\Enum\Level::toArray()))
                 ->attribute('guidance', v::in(\Model\Enum\Level::toArray()))
                 ->attribute('motivation', v::in(\Model\Enum\Level::toArray()))
-                ->attribute('elaboration', v::strType())
-                ->attribute('activityAreas', v::arrType()->each(
+                ->attribute('groupSizeMin', v::optional(v::intType()->min(1)))
+                ->attribute('groupSizeMax', v::optional(v::intType()->min(1)
+                    ->min((isset($activity->groupSizeMin) ? $activity->groupSizeMin : 1))))
+                ->attribute('elaboration', v::stringType())
+                ->attribute('activityAreas', v::arrayType()->each(
                     v::in(\Model\Enum\ActivityArea::toArray())
                 ))
-                ->attribute('groups', v::arrType()->each(
+                ->attribute('groups', v::arrayType()->each(
                     v::in(\Model\Enum\GroupType::toArray())
                 ))
-                ->attribute('planning', v::arrType()->each(
-                    v::attribute('duration', v::intVal()->min(0))
-                        ->attribute('description', v::strType())
+                ->attribute('planning', v::arrayType()->each(
+                    v::attribute('duration', v::intType()->min(0))
+                        ->attribute('description', v::stringType())
                 ))
-                ->attribute('checklist', v::arrType()->each(
-                    v::strType()
+                ->attribute('checklist', v::arrayType()->each(
+                    v::stringType()
                 ))
-                ->attribute('materials', v::arrType()->each(
-                    v::attribute('amount', v::intVal()->min(0))
-                        ->attribute('description', v::strType())
+                ->attribute('materials', v::arrayType()->each(
+                    v::attribute('amount', v::intType()->min(0))
+                        ->attribute('description', v::stringType())
                 ))
-                ->attribute('budget', v::arrType()->each(
-                    v::attribute('amount', v::intVal()->min(0))
-                        ->attribute('description', v::strType())
+                ->attribute('budget', v::arrayType()->each(
+                    v::attribute('amount', v::intType()->min(0))
+                        ->attribute('description', v::stringType())
                         ->attribute('cost', v::floatType())
                 ));
 

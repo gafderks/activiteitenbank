@@ -129,7 +129,25 @@ class Activity implements \JsonSerializable
      * @SWG\Property()
      */
     private $motivation;
-    
+
+    /**
+     * Minimal number of participants.
+     *
+     * @Column(type="integer", nullable=true)
+     * @var int
+     * @SWG\Property()
+     */
+    private $groupSizeMin;
+
+    /**
+     * Maximal number of participants.
+     *
+     * @Column(type="integer", nullable=true)
+     * @var int
+     * @SWG\Property()
+     */
+    private $groupSizeMax;
+
     /**
      * Elaboration for this activity.
      *
@@ -296,6 +314,34 @@ class Activity implements \JsonSerializable
      */
     public function setMotivation(\Model\Enum\Level $motivation) {
         $this->motivation = $motivation->value();
+    }
+
+    /**
+     * @return null|int
+     */
+    public function getGroupSizeMax() {
+        return $this->groupSizeMax;
+    }
+
+    /**
+     * @param null|int $groupSizeMax
+     */
+    public function setGroupSizeMax($groupSizeMax) {
+        $this->groupSizeMax = $groupSizeMax;
+    }
+
+    /**
+     * @return null|int
+     */
+    public function getGroupSizeMin() {
+        return $this->groupSizeMin;
+    }
+
+    /**
+     * @param null|int $groupSizeMin
+     */
+    public function setGroupSizeMin($groupSizeMin) {
+        $this->groupSizeMin = $groupSizeMin;
     }
 
     /**
@@ -477,6 +523,8 @@ class Activity implements \JsonSerializable
             'difficulty'     => $this->difficulty,
             'guidance'       => $this->guidance,
             'motivation'     => $this->motivation,
+            'groupSizeMin'   => $this->groupSizeMin,
+            'groupSizeMax'   => $this->groupSizeMax,
             'elaboration'    => $this->elaboration,
             'planning'       => $this->planning,
             'checklist'      => $this->checklist,

@@ -16,6 +16,7 @@ class ExplorerController extends Controller
         ['name' => 'Difficulty', 'visible' => false, 'searchable' => true, 'orderable' => true],
         ['name' => 'Guidance', 'visible' => false, 'searchable' => true, 'orderable' => true],
         ['name' => 'Motivation', 'visible' => false, 'searchable' => true, 'orderable' => true],
+        ['name' => 'Group size', 'visible' => false, 'searchable' => true, 'orderable' => false],
         ['name' => 'Activity areas', 'visible' => false, 'searchable' => true, 'orderable' => false],
         ['name' => 'Suitable groups', 'visible' => false, 'searchable' => true, 'orderable' => false],
         ['name' => 'Creator', 'visible' => false, 'searchable' => true, 'orderable' => true],

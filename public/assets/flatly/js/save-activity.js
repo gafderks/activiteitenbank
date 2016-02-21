@@ -20,6 +20,20 @@ function generateActivityObject() {
     // motivation
     actObj.motivation = parseInt($("#activity-prop-motivation").val());
 
+    // group size
+    var groupSizeMinimum = $("#activity-prop-groupsize-min").val();
+    var groupSizeMaximum = $("#activity-prop-groupsize-max").val();
+    if (groupSizeMinimum === "") {
+        actObj.groupSizeMin = null;
+    } else {
+        actObj.groupSizeMin = parseInt(groupSizeMinimum);
+    }
+    if (groupSizeMaximum === "") {
+        actObj.groupSizeMax = null;
+    } else {
+        actObj.groupSizeMax = parseInt(groupSizeMaximum);
+    }
+
     // visibility
     actObj.visibility = parseInt($("#activity-prop-visibility").val());
 
