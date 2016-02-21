@@ -50,7 +50,11 @@
                 {% set groupType = enum.groupType %}
                 {% for activity in activities %}
                     <tr>
-                        <td><a href="{{ urlFor('activity-view', {"id": activity.id, "slug": activity.slug}) }}">{{ activity.name }}</a></td>
+                        <td>
+                            <a href="{{ urlFor('activity-view', {"id": activity.id, "slug": activity.slug}) }}">
+                                {{ activity.name }}
+                            </a>
+                        </td>
                         {% set activityCategoriesNamed = [] %}
                         {% set activityCategories = [] %}
                         {% for category in activity.categories %}
@@ -60,19 +64,20 @@
                         <td data-order="{{ activityCategories.join(',') }}">
                             {{ activityCategoriesNamed|join(', ') }}
                         </td>
-                        <td data-order="{{ activity.planning.totalDuration }}">
+                        <td data-order="{{ activity.planning.totalDuration }}"
+                            data-filter="{{ activity.planning.totalDuration }}">
                             {{ activity.planning.totalDuration|int2time|raw }}
                         </td>
-                        <td data-order="{{ activity.budget.totalCost }}">
+                        <td data-order="{{ activity.budget.totalCost }}" data-filter="{{ activity.budget.totalCost }}">
                             {{ activity.budget.totalCost|float2euro|raw }}
                         </td>
-                        <td data-order="{{ activity.difficulty.value }}">
+                        <td data-order="{{ activity.difficulty.value }}" data-filter="{{ activity.difficulty.value }}">
                             {{ levels[activity.difficulty.value]|trans }}
                         </td>
-                        <td data-order="{{ activity.guidance.value }}">
+                        <td data-order="{{ activity.guidance.value }}" data-filter="{{ activity.guidance.value }}">
                             {{ levels[activity.guidance.value]|trans }}
                         </td>
-                        <td data-order="{{ activity.motivation.value }}">
+                        <td data-order="{{ activity.motivation.value }}" data-filter="{{ activity.motivation.value }}">
                             {{ levels[activity.motivation.value]|trans }}
                         </td>
                         <td data-filter="{{ activity.activityAreasRaw|join(',') }}">
@@ -164,7 +169,7 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-        var act_table = $('#activity-table').DataTable( {
+        var activityTable = $('#activity-table').DataTable( {
             "dom": '<"colvis"B><"table-top">t<"table-bottom"lip>',
             "order": [[ 0, "asc" ]],
             "columnDefs" : [
@@ -179,6 +184,7 @@
                 },
                 {% endfor %}
             ],
+            "pageLength": 25,
             "buttons": ['colvis'],
             "language": {
                 "sEmptyTable":     "{{ "No data available in table"|trans }}",
@@ -208,17 +214,22 @@
             }
         });
 
-        $('#filter-term').keyup( function() {
-            act_table.draw();
-        } );
+        $('#filter-term').keyup(function() {
+            activityTable.draw();
+        });
+
+        $(".slider").change(function() {
+            activityTable.draw();
+
+        });
 
         $(".filter-title, .filter-bar-title").click(function() {
             $(this).parent().toggleClass("active");
         });
 
         $(".slider.level").slider({
-            tooltip: "show",
-            selection: "left",
+            tooltip: "always",
+            tooltip_split: true,
             formatter: function(value) {
                 {% set levels = {0: 'Unspecified',
                 1: 'Very low',
@@ -244,8 +255,8 @@
         });
 
         $(".slider.time").slider({
-            tooltip: "show",
-            selection: "left",
+            tooltip: "always",
+            tooltip_split: true,
             formatter: function(value) {
                 if (Array.isArray(value)) {
                     var hours1   = Math.floor(value[0] / 60);
@@ -264,8 +275,8 @@
         });
 
         $(".slider.budget").slider({
-            tooltip: "show",
-            selection: "left",
+            tooltip: "always",
+            tooltip_split: true,
             formatter: function(value) {
                 if (Array.isArray(value)) {
                     var euros1   = Math.floor(value[0]);
@@ -280,19 +291,17 @@
             }
         });
 
-    });
-
-    /**
-     *  Filtering method.
-     *
-     *  This method is called for every activity in the list.
-     *  If this method returns false, the activity is hidden.
-     *  If this method returns true, the activity is shown.
-     */
-    $.fn.dataTable.ext.search.push(
+        /**
+         *  Filtering method.
+         *
+         *  This method is called for every activity in the list.
+         *  If this method returns false, the activity is hidden.
+         *  If this method returns true, the activity is shown.
+         */
+        $.fn.dataTable.ext.search.push(
             function( settings, data, dataIndex ) {
 
-                var f_term = $('#filter-term').val();
+
 //                var f_category = [];
 //                $("[name=filter-category]:checked").each(function() {
 //                    f_category.push($(this).data("filter-text"));
@@ -301,11 +310,11 @@
 //
                 var name = data[0];
 //                var category = data[1];
-//                var duration = data[2];
-//                var budget = data[3];
-//                var difficulty = data[4];
-//                var guidance = data[5];
-//                var motivation = data[6];
+                var duration = data[2];
+                var budget = data[3];
+                var difficulty = data[4];
+                var guidance = data[5];
+                var motivation = data[6];
 //                var state = data[7];
 //                var activity_areas = data[8];
 //                var suitable_groups = data[9];
@@ -313,18 +322,61 @@
 
 
                 /** Filter on search term */
-                if (f_term.length > 0) { // if nothing is entered, don't filter
-                    var patt = new RegExp(f_term, "i"); // case-insensitive
+                var filterTerm = $('#filter-term').val();
+                if (filterTerm.length > 0) { // if nothing is entered, don't filter
+                    var pattern = new RegExp(filterTerm, "i"); // case-insensitive
                     var one = false;
                     // look for at least one column that matches the regular expression
                     for (var i = 0; i < data.length; i++) {
-                        if (patt.test(data[i])) {
+                        if (pattern.test(data[i])) {
                             one = true; // column found
                         }
                     }
                     if (!one) {
                         return false; // regular expression was never matched
                     }
+                }
+
+                var filter;
+
+                /** Filter on duration */
+                filter = $("#filter-duration");
+                var minDuration = filter.slider('getValue')[0];
+                var maxDuration = filter.slider('getValue')[1];
+                if (duration > maxDuration || duration < minDuration) {
+                    return false;
+                }
+
+                /** Filter on budget */
+                filter = $("#filter-budget");
+                var minBudget = filter.slider('getValue')[0];
+                var maxBudget = filter.slider('getValue')[1];
+                if (budget > maxBudget || budget < minBudget) {
+                    return false;
+                }
+
+                /** Filter on difficulty */
+                filter = $("#filter-difficulty");
+                var minDifficulty = filter.slider('getValue')[0];
+                var maxDifficulty = filter.slider('getValue')[1];
+                if (difficulty > maxDifficulty || difficulty < minDifficulty) {
+                    return false;
+                }
+
+                /** Filter on guidance */
+                filter = $("#filter-guidance");
+                var minGuidance = filter.slider('getValue')[0];
+                var maxGuidance = filter.slider('getValue')[1];
+                if (guidance > maxGuidance || guidance < minGuidance) {
+                    return false;
+                }
+
+                /** Filter on motivation */
+                filter = $("#filter-motivation");
+                var minMotivation = filter.slider('getValue')[0];
+                var maxMotivation = filter.slider('getValue')[1];
+                if (motivation > maxMotivation || motivation < minMotivation) {
+                    return false;
                 }
 
 
@@ -337,9 +389,11 @@
 //
                 return true;
             }
+        );
+
+    });
 
 
-    );
 
 
 </script>

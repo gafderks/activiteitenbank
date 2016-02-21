@@ -4,7 +4,7 @@
         <div class="filter-item active">
             <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Keyword" %}</h3>
             <div class="filter-content">
-                <input id="filter-term" type="text" placeholder="{% trans "Narrow results" %}" />
+                <input id="filter-term" class="form-control" type="text" placeholder="{% trans "Narrow results" %}" />
             </div>
         </div>
         <div class="filter-item active">
@@ -20,14 +20,14 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="filter-item">
+        <div class="filter-item active">
             <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Duration" %}</h3>
             {% set durations = [] %}
             {% for activity in activities %}
                 {% set durations = durations|merge([activity.planning.totalDuration]) %}
             {% endfor %}
             <div class="filter-content">
-                <input class="slider time" type="text" data-slider-min="{{ min(durations) }}"
+                <input id="filter-duration" class="slider time" type="text" data-slider-min="{{ min(durations) }}"
                        data-slider-max="{{ max(durations) }}" data-slider-step="1"
                        data-slider-value="[{{ min(durations) }},{{ max(durations) }}]"/>
                 {#<input type="hidden" value="" />#}
@@ -35,45 +35,48 @@
                 <span class="slider-right">{{ max(durations)|int2time }}</span>
             </div>
         </div>
-        <div class="filter-item">
+        <div class="filter-item active">
             <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Budgetary" %}</h3>
             {% set budgets = [] %}
             {% for activity in activities %}
                 {% set budgets = budgets|merge([activity.budget.totalCost]) %}
             {% endfor %}
             <div class="filter-content">
-                <input class="slider budget" type="text" data-slider-min="{{ min(budgets) }}"
+                <input id="filter-budget" class="slider budget" type="text" data-slider-min="{{ min(budgets) }}"
                        data-slider-max="{{ max(budgets) }}" data-slider-step="1"
                        data-slider-value="[{{ min(budgets) }},{{ max(budgets) }}]" />
                 <span class="slider-left">{{ min(budgets)|float2euro|raw }}</span>
                 <span class="slider-right">{{ max(budgets)|float2euro|raw }}</span>
             </div>
         </div>
-        <div class="filter-item">
+        <div class="filter-item active">
             <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Difficulty" %}</h3>
             <div class="filter-content">
-                <input class="slider level" type="text" data-slider-min="{{ enum.level.Unspecified }}"
-                       data-slider-max="{{ enum.level.VeryHigh }}" data-slider-step="1"
+                <input id="filter-difficulty" class="slider level" type="text"
+                       data-slider-min="{{ enum.level.Unspecified }}" data-slider-max="{{ enum.level.VeryHigh }}"
+                       data-slider-step="1"
                        data-slider-value="[{{ enum.level.Unspecified }},{{ enum.level.VeryHigh }}]" />
                 <span class="slider-left">{% trans "Very low" %}</span>
                 <span class="slider-right">{% trans "Very high" %}</span>
             </div>
         </div>
-        <div class="filter-item">
+        <div class="filter-item active">
             <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Guidance" %}</h3>
             <div class="filter-content">
-                <input class="slider level" type="text" data-slider-min="{{ enum.level.Unspecified }}"
-                       data-slider-max="{{ enum.level.VeryHigh }}" data-slider-step="1"
+                <input id="filter-guidance" class="slider level" type="text"
+                       data-slider-min="{{ enum.level.Unspecified }}" data-slider-max="{{ enum.level.VeryHigh }}"
+                       data-slider-step="1"
                        data-slider-value="[{{ enum.level.Unspecified }},{{ enum.level.VeryHigh }}]" />
                 <span class="slider-left">{% trans "Very low" %}</span>
                 <span class="slider-right">{% trans "Very high" %}</span>
             </div>
         </div>
-        <div class="filter-item">
+        <div class="filter-item active">
             <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Motivation" %}</h3>
             <div class="filter-content">
-                <input class="slider level" type="text" data-slider-min="{{ enum.level.Unspecified }}"
-                       data-slider-max="{{ enum.level.VeryHigh }}" data-slider-step="1"
+                <input id="filter-motivation" class="slider level" type="text"
+                       data-slider-min="{{ enum.level.Unspecified }}" data-slider-max="{{ enum.level.VeryHigh }}"
+                       data-slider-step="1"
                        data-slider-value="[{{ enum.level.Unspecified }},{{ enum.level.VeryHigh }}]" />
                 <span class="slider-left">{% trans "Very low" %}</span>
                 <span class="slider-right">{% trans "Very high" %}</span>

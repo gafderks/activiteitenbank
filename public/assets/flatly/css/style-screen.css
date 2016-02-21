@@ -737,6 +737,10 @@ ul.list.list-timeable > li > input[data-list-field=name] {
     cursor: pointer;
 }
 
+.filter-item .radio {
+    padding-left: 0;
+}
+
 .filter-bar-title {
     margin-top: 0px;
     display: block;
@@ -775,9 +779,15 @@ ul.list.list-timeable > li > input[data-list-field=name] {
     width: 100%;
 }
 
+/* Sliders
+-------------------------------------------------- */
+
 .slider {
     width: 100% !important;
+    margin-top: 30px;
 }
+
+/* Slider colors */
 
 .slider-selection {
     background-color: #18bc9c;
@@ -795,6 +805,8 @@ ul.list.list-timeable > li > input[data-list-field=name] {
     opacity: 1;
 }
 
+/* Bottom labels */
+
 .slider-left {
     font-size: 12px;
     margin-top: -3px;
@@ -811,6 +823,33 @@ ul.list.list-timeable > li > input[data-list-field=name] {
     margin-right: 2%;
     width: 40%;
     text-align: right;
+}
+
+/* Tooltips */
+
+.slider .tooltip-inner {
+    background-color: transparent;
+    color: #0f7864;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.slider .tooltip-arrow {
+    display: none;
+}
+
+.slider .tooltip.top {
+    margin-top: 3px;
+}
+
+.slider .tooltip.bottom.tooltip-max {
+    margin-top: -10px;
+    top: -30px !important;
+}
+
+.slider .tooltip.tooltip-max {
+    margin-top: -10px;
 }
 
 /* View activity
