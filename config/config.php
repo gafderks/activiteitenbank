@@ -117,6 +117,15 @@ return [
                     'action' => 'delete',
                 ],
             ],
+            'api-attachment-post' => [
+                'type' => 'literal',
+                'method' => 'post',
+                'options' => [
+                    'route' => '/api/activity/:activityId/attachment',
+                    'controller' => 'AttachmentController',
+                    'action' => 'upload',
+                ],
+            ],
         ],
     ],
     'resources' => [

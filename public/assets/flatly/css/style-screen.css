@@ -563,6 +563,14 @@ ul.list.list-timeable > li > input[data-list-field=name] {
     background-color: #f8f8f8;
 }
 
+/* Dropzone override
+-------------------------------------------------- */
+
+form.dropzone {
+    border: dashed #0eac40 3px;
+    min-height: 250px;
+}
+
 /* Time Graph
 -------------------------------------------------- */
 

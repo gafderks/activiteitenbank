@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: activiteitenbank\n"
-"POT-Creation-Date: 2016-02-22 00:41+0100\n"
-"PO-Revision-Date: 2016-02-22 00:42+0100\n"
+"POT-Creation-Date: 2016-02-22 01:04+0100\n"
+"PO-Revision-Date: 2016-02-22 01:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -31,7 +31,7 @@ msgstr "Nieuwe activiteit"
 msgid "Name"
 msgstr "Naam"
 
-#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:183
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:187
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:143
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:156
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:168
@@ -49,39 +49,86 @@ msgstr "Naam"
 msgid "Unspecified"
 msgstr "Onbekend"
 
-#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:191
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:195
 msgid "Minimum group size needs to be at least 1"
 msgstr "Minimale groepsgrootte moet minstens 1"
 
-#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:198
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:202
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:638
 #: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:541
 #: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:255
 msgid "or more participants"
 msgstr "of meer deelnemers"
 
-#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:207
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:211
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:650
 #: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:553
 #: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:267
 msgid "participants"
 msgstr "deelnemers"
 
-#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:211
-msgid "Maximum group size needs to larger than or equal to minimimum group size"
-msgstr "Maximale groepsgrootte moet groter zijn of gelijk aan de minimale groepsgrootte"
-
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:215
+msgid ""
+"Maximum group size needs to larger than or equal to minimimum group size"
+msgstr ""
+"Maximale groepsgrootte moet groter zijn of gelijk aan de minimale "
+"groepsgrootte"
+
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:219
 msgid "Maximum group size needs to be at least 1"
 msgstr "Maximale groepsgrootte moet minstens 1 zijn"
 
 # short language string
-#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:332
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:336
 msgid "en"
 msgstr "nl"
 
-#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:366
-#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:402
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:343
+msgid "Drop files here to upload"
+msgstr "Sleep bestanden hierheen om te uploaden"
+
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:347
+msgid "Your browser does not support drag'n'drop file uploads."
+msgstr "Uw browser ondersteunt helaas geen drag en drop file upload"
+
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:351
+msgid ""
+"Please use the fallback form below to upload your files like in the olden "
+"days."
+msgstr "Gebruik het fallback formulier hieronder om je bestanden te uploaden."
+
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:355
+msgid "You can't upload files of this type."
+msgstr "Je kunt bestanden van dit type niet uploaden."
+
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:359
+msgid "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB."
+msgstr ""
+"Bestand is te groot ({{filesize}}MiB). Max bestandsgrootte: {{maxFilesize}}"
+"MiB."
+
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:363
+msgid "Server responded with {{statusCode}} code."
+msgstr "Server reageerde met {{statusCode}} code."
+
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:367
+msgid "Cancel upload"
+msgstr "Upload annuleren"
+
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:371
+msgid "Are you sure you want to cancel this upload?"
+msgstr "Weet je zeker dat je deze upload wilt annuleren?"
+
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:375
+msgid "Remove file"
+msgstr "Verwijder bestand"
+
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:379
+msgid "You can not upload any more files."
+msgstr "Je kunt geen nieuwe bestanden meer uploaden."
+
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:411
+#: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:447
 msgid "Saving failed... Are you still connected?"
 msgstr "Opslaan mislukt... Ben je nog verbonden met internet?"
 

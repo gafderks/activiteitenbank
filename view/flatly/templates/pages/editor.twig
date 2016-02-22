@@ -4,6 +4,8 @@
 
 {% block stylesheets %}
 {{ parent() }}
+    <link href="{{ componentsUrl }}/dropzone/dist/min/dropzone.min.css" rel="stylesheet" />
+    <link href="{{ componentsUrl }}/dropzone/dist/min/basic.min.css" rel="stylesheet" />
 
 {% endblock stylesheets %}
 
@@ -46,6 +48,7 @@
 {{ parent() }}
 
 <script src="{{ componentsUrl }}/ckeditor/ckeditor.js"></script>
+<script src="{{ componentsUrl }}/dropzone/dist/min/dropzone.min.js"></script>
 <script src="{{ assetsUrl }}/js/save-activity.js"></script>
 <script src="{{ assetsUrl }}/js/list.js"></script>
 
@@ -229,7 +232,20 @@
         language: '{{ "en"|trans }}'
     });
 
-
+    Dropzone.options.attachmentsDropzone = {
+        dictDefaultMessage: "{{ "Drop files here to upload"|trans }}",
+        dictFallbackMessage: "{{ "Your browser does not support drag'n'drop file uploads."|trans }}",
+        dictFallbackText: "{{ "Please use the fallback form below to upload your files like in the olden days."|trans }}",
+        dictInvalidFileType: "{{ "You can't upload files of this type."|trans }}",
+        dictFileTooBig: "{{ "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB."|trans }}",
+        dictResponseError: "{{ "Server responded with {{statusCode}} code."|trans }}",
+        dictCancelUpload: "{{ "Cancel upload"|trans }}",
+        dictCancelUploadConfirmation: "{{ "Are you sure you want to cancel this upload?"|trans }}",
+        dictRemoveFile: "{{ "Remove file"|trans }}",
+        dictMaxFilesExceeded: "{{ "You can not upload any more files."|trans }}",
+        addRemoveLinks: true,
+        paramName: "file",
+    };
 
 
 

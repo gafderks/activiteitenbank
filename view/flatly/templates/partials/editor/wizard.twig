@@ -120,13 +120,13 @@
     <div class="wizard-content" id="attachments">
         <div>
             <h3 class="wizard-title">{% trans "Attachments" %}</h3>
-            <?php if ($mode=='create') { ?>
             {% if activity is defined %}
-            <form action="{{ baseUrl }}/ajax/attachment-processor.php" id="attachmentsDropzone" class="dropzone">
-                <input type="hidden" name="activity_id" value="{{ activity.id }}" />
+            <form action="{{ urlFor('api-attachment-post', {"activityId": activity.id}) }}" id="attachmentsDropzone"
+                  class="dropzone">
+                <input type="hidden" name="activity-id" value="{{ activity.id }}" />
                 <input type="hidden" name="action" value="upload" />
                 <div class="fallback">
-                    <input name="file" type="file" multiple />
+                    <input name="file" id="attachmentsInput" type="file" multiple />
                 </div>
             </form>
             {% else %}
