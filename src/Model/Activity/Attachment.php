@@ -124,12 +124,15 @@ class Attachment implements \JsonSerializable
      * @return string
      */
     public function getPath() {
-        // TODO correct this
-        return ABSPATH . DIRECTORY_SEPARATOR . 'upload' . DIRECTORY_SEPARATOR . $this->getLocation();
+        return \Slim\Slim::getInstance()->config['uploadsDirectory'] . '/' . $this->getLocation();
     }
 
     public function getSlug() {
         return preg_replace('/[^\da-z\.]/i', '-', $this->getName());
+    }
+
+    public function getSize() {
+        return filesize($this->getPath());
     }
     
     /**

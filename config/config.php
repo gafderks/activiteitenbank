@@ -135,6 +135,15 @@ return [
                     'action' => 'download',
                 ],
             ],
+            'api-attachment-delete' => [
+                'type' => 'literal',
+                'method' => 'delete',
+                'options' => [
+                    'route' => '/api/activity/:activityId/attachment/:attachmentId(/:fileName)',
+                    'controller' => 'AttachmentController',
+                    'action' => 'delete',
+                ],
+            ],
         ],
     ],
     'resources' => [
