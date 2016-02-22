@@ -126,6 +126,15 @@ return [
                     'action' => 'upload',
                 ],
             ],
+            'api-attachment-get' => [
+                'type' => 'literal',
+                'method' => 'get',
+                'options' => [
+                    'route' => '/api/activity/:activityId/attachment/:attachmentId(/:fileName)',
+                    'controller' => 'AttachmentController',
+                    'action' => 'download',
+                ],
+            ],
         ],
     ],
     'resources' => [
@@ -141,6 +150,10 @@ return [
             'type' => 'service',
             'service' => 'ActivityService',
         ],
+        'service_attachment' => [
+            'type' => 'service',
+            'service' => 'AttachmentService',
+        ],
         'service_validator' => [
             'type' => 'service',
             'service' => 'ValidatorService',
@@ -152,6 +165,10 @@ return [
         'mapper_activity' => [
             'type' => 'mapper',
             'mapper' => 'Activity',
+        ],
+        'mapper_attachment' => [
+            'type' => 'mapper',
+            'mapper' => 'Attachment',
         ],
     ],
 ];

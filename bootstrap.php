@@ -70,7 +70,9 @@ $app->view->getInstance()->addFilter($bb2html);
 // register url config
 $app->config = ['baseUrl' => $config['baseUrl'],
                 'assetsUrl' => "{$config['baseUrl']}/public/assets/{$config['template']}",
-                'componentsUrl' => "{$config['baseUrl']}/public/assets/vendor"];
+                'componentsUrl' => "{$config['baseUrl']}/public/assets/vendor",
+                'uploadsDirectory' => $config['uploadsDirectory'],
+];
 
 // register default data that is supplied to the templates
 $app->hook('slim.before', function () use ($app, $config) {

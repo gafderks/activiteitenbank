@@ -207,6 +207,7 @@ class Activity implements \JsonSerializable
      */
     public function __construct() {
         $this->categories = new ArrayCollection();
+        $this->attachments = new ArrayCollection();
         $this->activityAreas = new \Zend\Stdlib\ArrayObject();
         $this->suitableGroups = new \Zend\Stdlib\ArrayObject();
     }
@@ -498,7 +499,7 @@ class Activity implements \JsonSerializable
      * @return null|\Model\Activity\Attachment[]
      */
     public function getAttachments() {
-        return $this->attachments;
+        return $this->attachments->toArray();
     }
 
     /**
@@ -530,7 +531,7 @@ class Activity implements \JsonSerializable
             'checklist'      => $this->checklist,
             'materials'      => $this->materials,
             'budget'         => $this->budget,
-            'attachments'    => $this->attachments,
+            'attachments'    => $this->attachments->toArray(),
         ];
     }
 }

@@ -95,13 +95,6 @@ class Attachment implements \JsonSerializable
     /**
      * @return string
      */
-    public function getURL() {
-        return RootURL() . "/upload/" . str_replace(" ", "%20", $this->getName()) . "?" . explode(".", $this->getLocation())[0];
-    }
-
-    /**
-     * @return string
-     */
     public function getName() {
         return $this->name;
     }
@@ -131,7 +124,12 @@ class Attachment implements \JsonSerializable
      * @return string
      */
     public function getPath() {
+        // TODO correct this
         return ABSPATH . DIRECTORY_SEPARATOR . 'upload' . DIRECTORY_SEPARATOR . $this->getLocation();
+    }
+
+    public function getSlug() {
+        return preg_replace('/[^\da-z\.]/i', '-', $this->getName());
     }
     
     /**
@@ -153,6 +151,6 @@ class Attachment implements \JsonSerializable
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'location' => $this->location,
+            //'location' => $this->location, // not necessary for api users
         ];
     }}

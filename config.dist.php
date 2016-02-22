@@ -21,5 +21,6 @@ return [
     ],
     'template' => 'flatly',
     'baseUrl' => 'put public root URL here',
-    'absolutePath' => dirname(__FILE__) . '/'
+    'absolutePath' => dirname(__FILE__),
+    'uploadsDirectory' => dirname(__FILE__) . '/upload',
 ];

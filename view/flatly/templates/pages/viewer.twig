@@ -127,9 +127,10 @@
                     </span>
                 </h3>
                 <ul class="list">
-                    {% for item in activity.attachments.attachments %}
+                    {% for item in activity.attachments %}
                         <li>
-                            <a href="{{ item.URL }}">{{ item.name }}</a>
+                            <a href="{{ urlFor('api-attachment-get', {"activityId": activity.id,
+                                "attachmentId": item.id, "fileName": item.slug}) }}">{{ item.name }}</a>
                         </li>
                     {% endfor %}
                 </ul>
