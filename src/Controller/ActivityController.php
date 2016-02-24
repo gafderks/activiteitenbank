@@ -2,6 +2,7 @@
 // /src/Controller/ActivityController.php
 
 namespace Controller;
+use Knp\Snappy\Pdf;
 
 /**
  * Class ActivityController
@@ -27,6 +28,36 @@ class ActivityController extends Controller
         $this->app->response->setStatus(200);
         $this->app->response->headers->set('Content-Type', 'application/json');
         $this->app->response->body(json_encode($activity));
+    }
+
+    public function generatePdfAction($id) {
+        $activity = $this->getActivityMapper()->findActivityById($id);
+
+        if (is_null($activity)) {
+            $this->app->halt(404, json_encode("Activity with the specified ID was not found"));
+        }
+
+        // generate the rendered html template
+        $params = [
+            'activity' => $activity,
+        ];
+        $renderedHtml = $this->app->view->fetch('pages/pdf.twig', $params);
+
+
+        $snappy = new Pdf($this->app->config['absolutePath'] . '/vendor/wemersonjanuario/wkhtmltopdf-windows/bin/32bit/wkhtmltopdf.exe');
+        $snappy->setOptions([
+            'page-size' => 'A4',
+            'title' => $activity->getName(),
+            'orientation' => 'Portrait'
+        ]);
+        $pdf = $snappy->getOutputFromHtml($renderedHtml);
+
+        // show response
+        $this->app->response->setStatus(200);
+        $this->app->response->headers->set('Content-Type', 'application/pdf');
+        $this->app->response->headers->set('Content-Disposition:', 'attachment; filename="'.$activity->getSlug().'.pdf"');
+        $this->app->response->body($pdf);
+
     }
 
     public function updateAction($id) {

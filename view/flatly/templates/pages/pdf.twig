@@ -1,0 +1,17 @@
+{% extends "pages/viewer.twig" %}
+
+{% block title %}{{ activity.name }}{% endblock title %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ assetsUrl }}/css/print.css" rel="stylesheet" />
+{% endblock stylesheets %}
+
+{% block content %}
+    {{ parent() }}
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+{% endblock javascripts %}

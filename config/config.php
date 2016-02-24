@@ -108,6 +108,15 @@ return [
                     'action' => 'get',
                 ],
             ],
+            'api-activity-get-pdf' => [
+                'type' => 'literal',
+                'method' => 'get',
+                'options' => [
+                    'route' => '/api/activity/:id/pdf',
+                    'controller' => 'ActivityController',
+                    'action' => 'generatePdf',
+                ],
+            ],
             'api-activity-delete' => [
                 'type' => 'literal',
                 'method' => 'delete',

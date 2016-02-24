@@ -1,0 +1,27 @@
+.hidden-print {
+    display: none;
+}
+
+#footer {
+    background-color: transparent;
+}
+
+.sidebar-item {
+    background-color: transparent;
+}
+
+.navbar-main {
+    background-color: transparent;
+}
+
+#logo {
+    color: black;
+}
+
+.navbar-toggle {
+    display: none;
+}
+
+h1 {
+    margin-top: 0;
+}

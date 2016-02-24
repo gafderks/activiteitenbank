@@ -19,7 +19,8 @@
                 <h3 class="activity-section">
                     {{ "Elaboration"|trans }}
                     <span>
-                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#elaboration">
+                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#elaboration"
+                           class="hidden-print">
                             {{ "Edit"|trans }}
                         </a>
                     </span>
@@ -30,7 +31,8 @@
                 <h3 class="activity-section">
                     {{ "Planning"|trans }}
                     <span>
-                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#planning">
+                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#planning"
+                           class="hidden-print">
                             {{ "Edit"|trans }}
                         </a>
                     </span>
@@ -61,7 +63,8 @@
                 <h3 class="activity-section">
                     {{ "Preparations"|trans }}
                     <span>
-                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#preparations">
+                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#preparations"
+                           class="hidden-print">
                             {{ "Edit"|trans }}
                         </a>
                     </span>
@@ -79,7 +82,8 @@
                 <h3 class="activity-section">
                     {{ "Materials"|trans }}
                     <span>
-                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#materials">
+                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#materials"
+                           class="hidden-print">
                             {{ "Edit"|trans }}
                         </a>
                     </span>
@@ -96,7 +100,8 @@
                 <h3 class="activity-section">
                     {{ "Budgetary"|trans }}
                     <span>
-                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#budgetary">
+                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#budgetary"
+                           class="hidden-print">
                             {{ "Edit"|trans }}
                         </a>
                     </span>
@@ -121,7 +126,8 @@
                 <h3 class="activity-section">
                     {{ "Attachments"|trans }}
                     <span>
-                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#attachments">
+                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#attachments"
+                           class="hidden-print">
                             {{ "Edit"|trans }}
                         </a>
                     </span>
@@ -140,7 +146,7 @@
             <div class="sidebar col-xs-12 col-md-4">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-12">
-                        <div class="sidebar-item">
+                        <div class="sidebar-item hidden-print">
                             <h3 class="sidebar-title">
                                 {{ "Actions"|trans }}
                             </h3>
@@ -159,7 +165,7 @@
                                     </a>
                                 </p>
                                 <p>
-                                    <a href="javascript:void(0);" style="color: #000; margin: 5px;">
+                                    <a href="{{ urlFor('api-activity-get-pdf', {"id": activity.id}) }}" style="color: #000; margin: 5px;">
                                         <span class="glyphicon glyphicon-download"></span>
                                         {{ "Download PDF"|trans }}
                                     </a>

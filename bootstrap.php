@@ -72,6 +72,7 @@ $app->config = ['baseUrl' => $config['baseUrl'],
                 'assetsUrl' => "{$config['baseUrl']}/public/assets/{$config['template']}",
                 'componentsUrl' => "{$config['baseUrl']}/public/assets/vendor",
                 'uploadsDirectory' => $config['uploadsDirectory'],
+                'absolutePath' => $config['absolutePath']
 ];
 
 // register default data that is supplied to the templates
