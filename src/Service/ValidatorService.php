@@ -51,7 +51,7 @@ class ValidatorService extends Service
                 ->attribute('budget', v::arrayType()->each(
                     v::attribute('amount', v::intType()->min(0))
                         ->attribute('description', v::stringType())
-                        ->attribute('cost', v::floatType())
+                        ->attribute('cost', v::floatVal())
                 ));
 
         try {
