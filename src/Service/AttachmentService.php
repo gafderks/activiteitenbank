@@ -13,22 +13,25 @@ class AttachmentService extends Service
 {
 
     private $storage;
-    private $allowedMimetypes = ['application/msword',
+    private $allowedMimetypes = [
+        'application/msword', // .doc, .dot
         'application/octet-stream',
-        'text/pdf',
-        'application/pdf',
-        'image/gif',
-        'image/jpg',
-        'image/png',
-        'image/jpeg',
-        'image/bmp',
-        'application/vnd.ms-excel',
-        'application/vnd.ms-powerpoint',
-        'plain/text',
-        'text/plain',
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        'text/pdf', // .pdf
+        'application/pdf', // .pdf
+        'image/gif', // .gif
+        'image/jpg', // .jpg
+        'image/png', // .png
+        'image/jpeg', // .jpg
+        'image/bmp', // .bmp
+        'application/vnd.ms-excel', // .xls, .xlt, .xla
+        'application/vnd.ms-powerpoint', // .ppt, .pot, .pps, .ppa
+        'plain/text', // .txt
+        'text/plain', // .txt
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation', // .pptx
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+        'application/zip', // .zip
+    ];
     private $permission = 0644;
     private $maxSize = '20M';
 
