@@ -74,7 +74,7 @@ class AttachmentController extends Controller
             $this->app->response->headers->set('Content-Disposition', 'attachment; filename="'.
                 $attachment->getName().'"');
             $this->app->response->headers->set('Content-Length', filesize($path));
-            
+
             echo readfile($path);
         }
     }
