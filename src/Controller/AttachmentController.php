@@ -65,10 +65,17 @@ class AttachmentController extends Controller
 
         $path = $attachment->getPath();
 
+        // determine mime type
+        $mimeType = mime_content_type($path);
+
         if (file_exists($path)) {
             $this->app->response->setStatus(200);
-            $this->app->response->headers->set('Content-Type', 'application/octet-stream');
-            $this->app->response->body(readfile($path));
+            $this->app->response->headers->set('Content-Type', $mimeType);
+            $this->app->response->headers->set('Content-Disposition', 'attachment; filename="'.
+                $attachment->getName().'"');
+            $this->app->response->headers->set('Content-Length', filesize($path));
+            
+            echo readfile($path);
         }
     }
 
@@ -81,7 +88,6 @@ class AttachmentController extends Controller
      */
     public function deleteAction($activityId, $attachmentId) {
         // TODO check if allowed to remove
-        // TODO also delete sub-entities
         $activity = $this->getActivityMapper()->findActivityById($activityId);
 
         if (is_null($activity)) {
