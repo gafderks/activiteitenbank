@@ -71,7 +71,7 @@ class ActivityController extends Controller
         // show response
         $this->app->response->setStatus(200);
         $this->app->response->headers->set('Content-Type', 'application/pdf');
-        $this->app->response->headers->set('Content-Disposition:', 'attachment; filename="'.$activity->getSlug().'.pdf"');
+        $this->app->response->headers->set('Content-Disposition', 'attachment; filename="'.$activity->getSlug().'.pdf"');
         $this->app->response->body($pdf);
 
     }
