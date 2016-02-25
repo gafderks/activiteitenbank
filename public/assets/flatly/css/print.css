@@ -43,3 +43,14 @@ body {
 li span.list-name {
     width: 55% !important;
 }
+
+.sidebar .sidebar-item {
+    margin-top: 0;
+    margin-bottom: 18px;
+    border-bottom: #888 solid 1px;
+    border-left: 0px transparent;
+    border-right: 0px transparent;
+    border-top: 0px transparent;
+    border-radius: 0;
+    padding-top: 0;
+}

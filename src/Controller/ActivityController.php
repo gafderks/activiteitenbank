@@ -45,6 +45,7 @@ class ActivityController extends Controller
 
         $partials = $this->getPdfService()->renderTemplatesToUrls([
             'header' => ['pdf/partials/header.twig', []],
+            'footer' => ['pdf/partials/footer.twig', []],
         ]);
 
         $snappy = new Pdf($this->app->config['absolutePath'] .
@@ -55,11 +56,12 @@ class ActivityController extends Controller
             'orientation' => 'Portrait',
             'header-spacing' => 0,
             'margin-top' => '10mm',
-            'margin-bottom' => '10mm',
+            'margin-bottom' => '20mm',
             'margin-left' => '10mm',
             'margin-right' => '10mm',
-            'footer-spacing' => 5,
+            'footer-spacing' => 0,
             //'header-html' => $partials['header'], // really need to use a file here
+            'footer-html' => $partials['footer'],
         ]);
         $pdf = $snappy->getOutputFromHtml($renderedHtml);
 

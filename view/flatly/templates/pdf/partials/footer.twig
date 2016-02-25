@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <script>
+        function subst() {
+            var vars = {};
+            var x = window.location.search.substring(1).split('&');
+            var i;
+            for (i in x) {
+                var z = x[i].split('=', 2);
+                vars[z[0]] = decodeURI(z[1]);
+            }
+            x = ['frompage', 'topage', 'page', 'webpage', 'section', 'subsection', 'subsubsection'];
+            for (i in x) {
+                var y = document.getElementsByClassName(x[i]);
+                for (var j = 0; j < y.length; ++j) y[j].textContent = vars[x[i]];
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            border: 0;
+            margin: 0;
+            color: #888;
+        }
+
+        table {
+            border-bottom: 1px solid #888;
+            width: 100%;
+        }
+
+        td.right {
+            text-align: right;
+        }
+    </style>
+</head>
+<body onload="subst()">
+<table>
+    <tr>
+        <td></td>
+        <td class="right">
+            {{ "page"|trans }} <span class="page"></span>&nbsp;{{ "of"|trans }}&nbsp;<span class="topage"></span>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
