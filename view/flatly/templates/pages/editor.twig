@@ -245,6 +245,34 @@
         dictMaxFilesExceeded: "{{ "You can not upload any more files."|trans }}",
         addRemoveLinks: true,
         paramName: "file",
+        init: function() {
+            // add existing files
+            {% set count = 0 %}
+            {% for item in activity.attachments %}
+                var file{{ count }} = { name: "{{ item.name }}", size: {{ item.size }},
+                    url: "{{ urlFor('api-attachment-get', {"activityId": activity.id,
+                        "attachmentId": item.id, "fileName": item.slug}) }}", id: {{ item.id }} };
+                this.emit("addedfile", file{{ count }});
+                {% set count = count + 1 %}
+            {% endfor %}
+
+            this.on("success", function(file, responseText) {
+                {#var downloadButton = Dropzone.createElement("<button onclick=\"window.location.href=\'"+#}
+                        {#"{{ baseUrl }}/api/activity/{{ activity.id }}/attachment/"+responseText.id+#}
+                        {#"\'\" class='dz-download-button'>Download</button></a>");#}
+                {#file.previewElement.appendChild(downloadButton);#}
+                file.id = responseText.id;
+            });
+
+            this.on("removedfile", function(file) {
+                console.log(file);
+                $.ajax({
+                    url: '{{ baseUrl }}/api/activity/{{ activity.id }}/attachment/'+file.id,
+                    type: 'DELETE'
+                });
+            });
+        }
+
     };
 
 
