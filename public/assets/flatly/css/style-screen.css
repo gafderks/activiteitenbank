@@ -571,6 +571,10 @@ form.dropzone {
     min-height: 250px;
 }
 
+span[data-dz-errormessage] {
+    color: white;
+}
+
 /* Time Graph
 -------------------------------------------------- */
 
