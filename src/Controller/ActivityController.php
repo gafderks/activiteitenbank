@@ -41,16 +41,30 @@ class ActivityController extends Controller
         $params = [
             'activity' => $activity,
         ];
-        $renderedHtml = $this->app->view->fetch('pages/pdf.twig', $params);
+        $renderedHtml = $this->app->view->fetch('pdf/activity.twig', $params);
 
+        $partials = $this->getPdfService()->renderTemplatesToUrls([
+            'header' => ['pdf/partials/header.twig', []],
+        ]);
 
-        $snappy = new Pdf($this->app->config['absolutePath'] . '/vendor/wemersonjanuario/wkhtmltopdf-windows/bin/32bit/wkhtmltopdf.exe');
+        $snappy = new Pdf($this->app->config['absolutePath'] .
+            '/vendor/wemersonjanuario/wkhtmltopdf-windows/bin/32bit/wkhtmltopdf.exe');
         $snappy->setOptions([
             'page-size' => 'A4',
             'title' => $activity->getName(),
-            'orientation' => 'Portrait'
+            'orientation' => 'Portrait',
+            'header-spacing' => 0,
+            'margin-top' => '10mm',
+            'margin-bottom' => '10mm',
+            'margin-left' => '10mm',
+            'margin-right' => '10mm',
+            'footer-spacing' => 5,
+            //'header-html' => $partials['header'], // really need to use a file here
         ]);
         $pdf = $snappy->getOutputFromHtml($renderedHtml);
+
+        // clean up temporary files
+        $this->getPdfService()->garbageCollectRenders($partials);
 
         // show response
         $this->app->response->setStatus(200);
@@ -156,6 +170,16 @@ class ActivityController extends Controller
     protected function getActivityService()
     {
         return $this->app->service_activity;
+    }
+
+    /**
+     * Get the PDF service.
+     *
+     * @return \Service\PdfService
+     */
+    protected function getPdfService()
+    {
+        return $this->app->service_pdf;
     }
 
     /**

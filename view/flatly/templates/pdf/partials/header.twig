@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <script>
+        function subst() {
+            var vars = {};
+            var x = window.location.search.substring(1).split('&');
+            var i;
+            for (i in x) {
+                var z = x[i].split('=', 2);
+                vars[z[0]] = decodeURI(z[1]);
+            }
+            x = ['frompage', 'topage', 'page', 'webpage', 'section', 'subsection', 'subsubsection'];
+            for (i in x) {
+                var y = document.getElementsByClassName(x[i]);
+                for (var j = 0; j < y.length; ++j) y[j].textContent = vars[x[i]];
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body style="border: 0; margin: 0;" onload="subst()">
+<table style="border-bottom: 1px solid black; width: 100%">
+    <tr>
+        <td>Activities | <span class="section"></span></td>
+        <td style="text-align:right">
+            {{ "Page"|trans }} <span class="page"></span>&nbsp;{{ "of"|trans }}&nbsp;<span class="topage"></span>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -72,6 +72,7 @@ $app->config = ['baseUrl' => $config['baseUrl'],
                 'assetsUrl' => "{$config['baseUrl']}/public/assets/{$config['template']}",
                 'componentsUrl' => "{$config['baseUrl']}/public/assets/vendor",
                 'uploadsDirectory' => $config['uploadsDirectory'],
+                'tempDirectory' => $config['tempDirectory'],
                 'absolutePath' => $config['absolutePath']
 ];
 

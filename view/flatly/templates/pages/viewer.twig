@@ -262,7 +262,7 @@
 
                             <div class="sidebar-content">
                                 {% set groupType = enum.groupType %}
-                                <ul class="badge-selectors line-3">
+                                <ul class="badge-selectors">
                                     {% if groupType.Bevers in activity.suitableGroupsRaw %}
                                         <li class="active"><label><input type="checkbox" name="activity-badge-selectors" checked /><img src="{{ assetsUrl }}/img/scouting-groups/bevers.png" class="badge-selectors-img" />{{ "Bevers"|trans }}</label></li>
                                     {% endif %}

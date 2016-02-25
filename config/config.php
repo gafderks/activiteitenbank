@@ -176,6 +176,10 @@ return [
             'type' => 'service',
             'service' => 'ValidatorService',
         ],
+        'service_pdf' => [
+            'type' => 'service',
+            'service' => 'PdfService',
+        ],
         'mapper_user' => [
             'type' => 'mapper',
             'mapper' => 'User',
