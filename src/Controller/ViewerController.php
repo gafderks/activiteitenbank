@@ -11,6 +11,11 @@ namespace Controller;
 class ViewerController extends Controller
 {
 
+    /**
+     * Shows the viewer for the specified activity.
+     *
+     * @param $id integer id of the activity to view
+     */
     public function viewAction($id) {
         $activity = $this->getActivityMapper()->findActivityById($id);
 

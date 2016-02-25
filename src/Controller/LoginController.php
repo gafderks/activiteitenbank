@@ -11,6 +11,10 @@ namespace Controller;
 class LoginController extends Controller
 {
 
+    /**
+     * Shows the login form.
+     * If a session already exists, a redirect is done to the index page.
+     */
     public function indexAction() {
         // check if a user is already logged in
         if (null !== $this->getLoginService()->getLoggedInUser()) {
@@ -21,6 +25,12 @@ class LoginController extends Controller
         $this->app->render('pages/login.twig', $params);
     }
 
+    /**
+     * Tries to log in the user with the credentials in the request.
+     * Redirects to the index page on success. Outputs login form on failure.
+     *
+     * @throws \Exception when a user is already logged in
+     */
     public function postAction() {
 
         // collect errors during login process
@@ -55,7 +65,7 @@ class LoginController extends Controller
             }
         }
 
-
+        // render form
         $params = [
             'login' => [
                 'username' => $this->app->request->post('username'),
@@ -65,6 +75,9 @@ class LoginController extends Controller
         $this->app->render('pages/login.twig', $params);
     }
 
+    /**
+     * Logs out a user.
+     */
     public function logoutAction() {
         // logout user
         $this->getLoginService()->logoutUser();

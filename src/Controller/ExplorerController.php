@@ -3,7 +3,11 @@
 
 namespace Controller;
 
-
+/**
+ * Class ExplorerController
+ *
+ * @package Controller
+ */
 class ExplorerController extends Controller
 {
 
@@ -22,6 +26,9 @@ class ExplorerController extends Controller
         ['name' => 'Creator', 'visible' => false, 'searchable' => true, 'orderable' => true],
     ];
 
+    /**
+     * Shows the explorer.
+     */
     public function indexAction() {
         $params = [
             'searchColumns' => $this->searchColumns,

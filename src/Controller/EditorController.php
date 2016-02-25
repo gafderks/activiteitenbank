@@ -11,18 +11,22 @@ namespace Controller;
 class EditorController extends Controller
 {
 
+    /**
+     * Shows the editor for a new activity.
+     */
     public function newAction() {
-        // if no user is logged in, redirect to login page
-        if (null === $this->getLoginService()->getLoggedInUser()) {
-            $this->app->redirect($this->app->urlFor('login-form'));
-        }
-
         $params = [
 
         ];
         $this->app->render('pages/editor.twig', $params);
     }
 
+    /**
+     * Shows the editor for the specified activity.
+     * Outputs a 404 status if the activity with the specified id was not found.
+     *
+     * @param $id integer id of the activity to edit
+     */
     public function editAction($id) {
         $activity = $this->getActivityMapper()->findActivityById($id);
 

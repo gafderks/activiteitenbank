@@ -1,9 +1,12 @@
 <?php
 
-
 namespace Service;
 
-
+/**
+ * Class UserService
+ *
+ * @package Service
+ */
 class UserService extends Service
 {
 

@@ -16,7 +16,7 @@ class ActivityController extends Controller
      * Looks up the details of an activity and returns them if found.
      * Outputs a 404 status if the activity with the specified id was not found.
      *
-     * @param $id
+     * @param $id integer id of the activity to return
      */
     public function getAction($id) {
         $activity = $this->getActivityMapper()->findActivityById($id);
@@ -30,6 +30,12 @@ class ActivityController extends Controller
         $this->app->response->body(json_encode($activity));
     }
 
+    /**
+     * Generates a PDF file from the specified activity.
+     * Outputs a 404 status if the activity with the specified id was not found.
+     *
+     * @param $id integer
+     */
     public function generatePdfAction($id) {
         $activity = $this->getActivityMapper()->findActivityById($id);
 
@@ -43,11 +49,13 @@ class ActivityController extends Controller
         ];
         $renderedHtml = $this->app->view->fetch('pdf/activity.twig', $params);
 
+        // generate files for header and footer
         $partials = $this->getPdfService()->renderTemplatesToUrls([
             'header' => ['pdf/partials/header.twig', []],
             'footer' => ['pdf/partials/footer.twig', []],
         ]);
 
+        // initialize Snappy
         $snappy = new Pdf($this->app->config['absolutePath'] .
             '/vendor/wemersonjanuario/wkhtmltopdf-windows/bin/32bit/wkhtmltopdf.exe');
         $snappy->setOptions([
@@ -63,6 +71,8 @@ class ActivityController extends Controller
             //'header-html' => $partials['header'], // really need to use a file here
             'footer-html' => $partials['footer'],
         ]);
+
+        // render PDF file
         $pdf = $snappy->getOutputFromHtml($renderedHtml);
 
         // clean up temporary files
@@ -71,11 +81,19 @@ class ActivityController extends Controller
         // show response
         $this->app->response->setStatus(200);
         $this->app->response->headers->set('Content-Type', 'application/pdf');
-        $this->app->response->headers->set('Content-Disposition', 'attachment; filename="'.$activity->getSlug().'.pdf"');
+        $this->app->response->headers->set('Content-Disposition',
+            'attachment; filename="'.$activity->getSlug().'.pdf"');
         $this->app->response->body($pdf);
 
     }
 
+    /**
+     * Updates the specified activity according to the specified definition.
+     * This method does NOT do input validation, so it is important to setup the ValidatorService as middleware.
+     * Outputs a 404 status if the activity with the specified id was not found.
+     *
+     * @param $id integer id of the activity to update
+     */
     public function updateAction($id) {
         // TODO check if allowed to update
         $activity = $this->getActivityMapper()->findActivityById($id);
@@ -132,7 +150,6 @@ class ActivityController extends Controller
     /**
      * Creates a new activity according to the JSON object that is in the request body.
      * This method does NOT do input validation, so it is important to setup the ValidatorService as middleware.
-     *
      */
     public function createAction() {
         // load input
