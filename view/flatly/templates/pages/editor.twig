@@ -101,7 +101,7 @@
             proplabel = "{{ "Unspecified"|trans }}";
         } else {
             var inputMinimum = $("#groupsize-minimum");
-            if (inputMinimum.val() > 0) {
+            if (parseInt(inputMinimum.val()) > 0) {
                 minimum = inputMinimum.val();
             } else { alert("{{ "Minimum group size needs to be at least 1"|trans }}"); return; }
 
@@ -110,8 +110,8 @@
                 proplabel = minimum + " {{ "or more participants"|trans }}";
             } else {
                 var inputMaximum = $("#groupsize-maximum");
-                if (inputMaximum.val() > 0) {
-                    if (inputMaximum.val() >= inputMinimum.val()) {
+                if (parseInt(inputMaximum.val()) > 0) {
+                    if (parseInt(inputMaximum.val()) >= parseInt(inputMinimum.val())) {
                         maximum = inputMaximum.val();
                         proplabel = minimum + " - " + maximum + " {{ "participants"|trans }}";
                     } else { alert("{{ "Maximum group size needs to larger than or equal to minimimum group size"|trans }}"); return; }
