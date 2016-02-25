@@ -69,8 +69,8 @@ $app->view->getInstance()->addFilter($float2euro);
 $app->view->getInstance()->addFilter($bb2html);
 // register url config
 $app->config = ['baseUrl' => $config['baseUrl'],
-                'assetsUrl' => "{$config['baseUrl']}/public/assets/{$config['template']}",
-                'componentsUrl' => "{$config['baseUrl']}/public/assets/vendor",
+                'assetsUrl' => "{$config['baseUrl']}/assets/{$config['template']}",
+                'componentsUrl' => "{$config['baseUrl']}/assets/vendor",
                 'uploadsDirectory' => $config['uploadsDirectory'],
                 'tempDirectory' => $config['tempDirectory'],
                 'absolutePath' => $config['absolutePath']
