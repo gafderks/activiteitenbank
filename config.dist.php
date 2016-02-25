@@ -23,4 +23,5 @@ return [
     'baseUrl' => 'put public root URL here',
     'absolutePath' => dirname(__FILE__),
     'uploadsDirectory' => dirname(__FILE__) . '/upload',
+    'tempDirectory' => dirname(__FILE__) . '/temp',
 ];
