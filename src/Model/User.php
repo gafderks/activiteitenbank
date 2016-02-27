@@ -48,7 +48,7 @@ class User implements \JsonSerializable
      * Username that is used for login.
      * Primary key for the user.
      *
-     * @Column(type="string")
+     * @Column(type="string", nullable=true)
      * @var string
      */
     private $username;

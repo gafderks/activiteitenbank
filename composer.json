@@ -13,7 +13,8 @@
         "knplabs/knp-snappy": "^0.4.3",
         "h4cc/wkhtmltopdf-i386": "0.12.x",
         "h4cc/wkhtmltoimage-i386": "0.12.x",
-        "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3"
+        "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3",
+        "facebook/php-sdk-v4": "^5.1"
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "*"

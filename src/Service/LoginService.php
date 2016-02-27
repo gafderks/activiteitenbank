@@ -1,6 +1,7 @@
 <?php
 
 namespace Service;
+use Facebook\Facebook;
 
 /**
  * Class LoginService
@@ -15,7 +16,7 @@ class LoginService extends Service
     /**
      * @var string Index in the session variable where the Id of the currently logged in user is stored.
      */
-    private $userIdSessionIndex = 'userId';
+    protected $userIdSessionIndex = 'userId';
 
     /**
      * Tries to log in a user. Returns whether login was successful.
@@ -27,7 +28,7 @@ class LoginService extends Service
      */
     public function loginUser(\Model\User $user, $password) {
         // check if valid credentials were given
-        if (true === $this->verifyLogin($user, $password)) {
+        if ($this->verifyLogin($user, $password) === true) {
             // check if there is already a user logged in
             if (null !== $this->getLoggedInUser()) {
                 throw new \Exception('A user is already logged in');
@@ -70,12 +71,53 @@ class LoginService extends Service
     }
 
     /**
+     * Registers a new user with the specified attributes.
+     * Assigns a random password to the user.
+     *
+     * @param string $email
+     * @param string $firstName
+     * @param string $lastName
+     * @param \Model\Enum\UserRole $userRole
+     * @return \Model\User|null newly created user
+     * @throws \Exception if a user with the email already exists.
+     */
+    public function registerUser($email, $firstName, $lastName, $userRole) {
+        $user = $this->getUserService()->findUserByEmail($email);
+        if ($user !== null) {
+            throw new \Exception("User with this email address already exists.");
+        }
+
+        // assign values to new user
+        $user = new \Model\User();
+        $user->setEmail($email);
+        $user->setFirstName($firstName);
+        $user->setLastName($lastName);
+        $user->setRole($userRole);
+        $user->setPassword(password_hash(mt_rand().uniqid(null, true), PASSWORD_DEFAULT)); // set random password
+
+        // store user
+        $this->getUserMapper()->persist($user);
+        $this->getUserMapper()->flush();
+
+        return $user;
+    }
+
+    /**
      * Get the user mapper.
      *
      * @return \Mapper\User
      */
     protected function getUserMapper() {
         return $this->app->mapper_user;
+    }
+
+    /**
+     * Get the User service.
+     *
+     * @return \Service\UserService
+     */
+    protected function getUserService() {
+        return $this->app->service_user;
     }
 
     /**

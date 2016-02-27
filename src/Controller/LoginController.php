@@ -21,7 +21,16 @@ class LoginController extends Controller
             $this->app->redirect($this->app->urlFor('index'));
         }
 
-        $params = [];
+        $params = [
+
+        ];
+
+        if ($this->app->config['facebook']['enableLogin']) {
+            $params = array_merge($params, [
+                'facebookLoginUrl' => $this->getFacebookService()->getFacebookLoginUrl(),
+            ]);
+        }
+
         $this->app->render('pages/login.twig', $params);
     }
 
@@ -41,27 +50,32 @@ class LoginController extends Controller
         $password = $this->app->request->post('password');
         $referrer = $this->app->request->post('referrer');
 
-        // retrieve user with username $username or with email $username
-        $user = $this->getUserService()->findUserByUsername($username);
-        if (null === $user) {
-            $user = $this->getUserService()->findUserByEmail($username);
-        }
+        if (empty($username)) {
+            array_push($errors, ['message' => 'You need to supply an email address or a username']);
+        } else {
 
-        // check if user exists
-        if (null === $user) {
-            array_push($errors, ['message' => 'Wrong username or password']);
-        }
+            // retrieve user with username $username or with email $username
+            $user = $this->getUserService()->findUserByUsername($username);
+            if ($user === null) {
+                $user = $this->getUserService()->findUserByEmail($username);
+            }
 
-        // attempt to login user
-        if (null !== $user) {
-            if ($this->getLoginService()->loginUser($user, $password)) {
-                if (!empty($referrer)) {
-                    $this->app->redirect($referrer);
-                } else {
-                    $this->app->redirect($this->app->urlFor('index'));
-                }
-            } else {
+            // check if user exists
+            if ($user === null) {
                 array_push($errors, ['message' => 'Wrong username or password']);
+            }
+
+            // attempt to login user
+            if ($user !== null) {
+                if ($this->getLoginService()->loginUser($user, $password)) {
+                    if (!empty($referrer)) {
+                        $this->app->redirect($referrer);
+                    } else {
+                        $this->app->redirect($this->app->urlFor('index'));
+                    }
+                } else {
+                    array_push($errors, ['message' => 'Wrong username or password']);
+                }
             }
         }
 
@@ -72,6 +86,11 @@ class LoginController extends Controller
                 'errors' => $errors
             ],
         ];
+        if ($this->app->config['facebook']['enableLogin']) {
+            $params = array_merge($params, [
+                'facebookLoginUrl' => $this->getFacebookService()->getFacebookLoginUrl(),
+            ]);
+        }
         $this->app->render('pages/login.twig', $params);
     }
 
@@ -85,14 +104,55 @@ class LoginController extends Controller
         $this->app->redirect($this->app->urlFor('index'));
     }
 
+    public function facebookCallbackAction() {
+        // collect errors during login process
+        $errors = [];
+
+        // attempt to login user
+        try {
+            $loginSucceeded = $this->getFacebookService()->loginUser();
+            if ($loginSucceeded) {
+                $this->app->redirect($this->app->urlFor('index'));
+            } else {
+                array_push($errors, ['message' => 'Facebook login failed']);
+            }
+        } catch (\Exception $e) {
+            array_push($errors, ['message' => $e->getMessage()]);
+        }
+
+        // render form
+        $params = [
+            'login' => [
+                'errors' => $errors,
+            ],
+        ];
+        if ($this->app->config['facebook']['enableLogin']) {
+            $params = array_merge($params, [
+                'facebookLoginUrl' => $this->getFacebookService()->getFacebookLoginUrl(),
+            ]);
+        }
+        $this->app->render('pages/login.twig', $params);
+
+
+
+    }
+
     /**
      * Get the Login service.
      *
      * @return \Service\LoginService
      */
-    protected function getLoginService()
-    {
+    protected function getLoginService() {
         return $this->app->service_login;
+    }
+
+    /**
+     * Get the Facebook service.
+     *
+     * @return \Service\FacebookService
+     */
+    protected function getFacebookService() {
+        return $this->app->service_facebook;
     }
 
     /**
@@ -100,8 +160,7 @@ class LoginController extends Controller
      *
      * @return \Service\UserService
      */
-    protected function getUserService()
-    {
+    protected function getUserService() {
         return $this->app->service_user;
     }
 

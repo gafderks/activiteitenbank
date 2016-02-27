@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: activiteitenbank\n"
-"POT-Creation-Date: 2016-02-25 21:35+0100\n"
-"PO-Revision-Date: 2016-02-25 21:36+0100\n"
+"POT-Creation-Date: 2016-02-28 00:39+0100\n"
+"PO-Revision-Date: 2016-02-28 00:39+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -266,6 +266,35 @@ msgstr "Bekijken"
 #: 34/34b4c664b8644f1a88918ff1cb0fbd86f61fbd6c7bbbe26fbdb3b2f376a4745e.php:147
 msgid "Update"
 msgstr "Bijwerken"
+
+#: 41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:33
+#: ae/ae3ae8814dfcdc446e874d64a1564f0ae0fca1d847416cad8f39ea5039a703ed.php:83
+msgid "Login"
+msgstr "Aanmelden"
+
+#: 41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:144
+msgid "Sign In"
+msgstr "Aanmelden"
+
+#: 41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:173
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: 41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:181
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: 41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:191
+msgid "I forgot my password"
+msgstr "Wachtwoord vergeten"
+
+#: 41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:198
+msgid "Sign me in"
+msgstr "Aanmelden"
+
+#: 41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:210
+msgid "Log in with Facebook"
+msgstr "Aanmelden met Facebook"
 
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:23
 #: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:436
@@ -627,10 +656,6 @@ msgstr "Home"
 #: ae/ae3ae8814dfcdc446e874d64a1564f0ae0fca1d847416cad8f39ea5039a703ed.php:59
 msgid "Create"
 msgstr "Nieuw"
-
-#: ae/ae3ae8814dfcdc446e874d64a1564f0ae0fca1d847416cad8f39ea5039a703ed.php:83
-msgid "Login"
-msgstr "Login"
 
 #: d1/d1aab9e2e66ee1d39844addc4066e708437bc6d65d36aef4e1f912ce0686dd37.php:22
 #: e9/e9ca4e416a5bc8cddc35152bca90d7e86fd1caa08a1b389512844b45275605b7.php:22

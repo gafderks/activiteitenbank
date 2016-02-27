@@ -20,8 +20,15 @@ return [
         // for details)
     ],
     'template' => 'flatly',
+    'domain' => 'put domain URL here',
     'baseUrl' => 'put public root URL here',
     'absolutePath' => dirname(__FILE__),
     'uploadsDirectory' => dirname(__FILE__) . '/upload',
     'tempDirectory' => dirname(__FILE__) . '/temp',
+    'facebook' => [
+        'enableLogin' => true,
+        'app_id' => '{app-id}',
+        'app_secret' => '{app-secret}',
+        'default_graph_version' => 'v2.5',
+    ],
 ];

@@ -1,6 +1,6 @@
 {% extends "layout.twig" %}
 
-{% block title %}Login{% endblock title %}
+{% block title %}{{ "Login"|trans }}{% endblock title %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -99,7 +99,7 @@
 
 {% block content %}
 <div class="form-box" id="login-box">
-    <div class="header">Sign In</div>
+    <div class="header">{{ "Sign In"|trans }}</div>
     <form action="" method="post">
         <div class="body">
             {% if login.errors is defined %}
@@ -109,21 +109,27 @@
             {% endif %}
 
             <div class="form-group">
-                <input type="text" id="username" name="username" class="form-control" placeholder="Username" value="{{ login.username|e }}" />
+                <input type="text" id="username" name="username" class="form-control" placeholder="{{ "Username"|trans }}" value="{{ login.username|e }}" />
             </div>
             <div class="form-group">
-                <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
+                <input type="password" id="password" name="password" class="form-control" placeholder="{{ "Password"|trans }}"/>
             </div>
             <!--
                                 <div class="form-group">
                                     <input type="checkbox" name="remember_me"/> Remember me
                                 </div>
             -->
+            <p><a href="#">{{ "I forgot my password"|trans }}</a></p>
+
         </div>
         <div class="footer">
-            <button type="submit" class="btn btn-primary btn-block" onclick="formhash(this.form, this.form.password)">Sign me in</button>
+            <button type="submit" class="btn btn-primary btn-block">{{ "Sign me in"|trans }}</button>
+            {% if facebookLoginUrl is defined %}
+            <a href="{{ facebookLoginUrl }}"><button type="button" class="btn btn-block"
+                style="color: white; background-color: #3b5998;">
+                    <span style="padding-right: 10px;" class="fa fa-facebook-official"></span>{{ "Log in with Facebook"|trans }}</button></a>
+            {% endif %}
 
-            <p><a href="#">I forgot my password</a></p>
         </div>
     </form>
 </div>

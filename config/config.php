@@ -153,12 +153,25 @@ return [
                     'action' => 'delete',
                 ],
             ],
+            'facebook-login-callback' => [
+                'type' => 'literal',
+                'method' => 'get',
+                'options' => [
+                    'route' => '/login/facebook/callback',
+                    'controller' => 'LoginController',
+                    'action' => 'facebookCallback',
+                ],
+            ],
         ],
     ],
     'resources' => [
         'service_login' => [
             'type' => 'service',
             'service' => 'LoginService',
+        ],
+        'service_facebook' => [
+            'type' => 'service',
+            'service' => 'FacebookService',
         ],
         'service_user' => [
             'type' => 'service',
