@@ -68,13 +68,10 @@ $app->view->getInstance()->addFilter($int2time);
 $app->view->getInstance()->addFilter($float2euro);
 $app->view->getInstance()->addFilter($bb2html);
 // register url config
-$app->config = ['baseUrl' => $config['baseUrl'],
-                'assetsUrl' => "{$config['baseUrl']}/assets/{$config['template']}",
-                'componentsUrl' => "{$config['baseUrl']}/assets/vendor",
-                'uploadsDirectory' => $config['uploadsDirectory'],
-                'tempDirectory' => $config['tempDirectory'],
-                'absolutePath' => $config['absolutePath']
-];
+$app->config = array_merge($config, [
+    'assetsUrl' => "{$config['baseUrl']}/assets/{$config['template']}",
+    'componentsUrl' => "{$config['baseUrl']}/assets/vendor",
+]);
 
 // register default data that is supplied to the templates
 $app->hook('slim.before', function () use ($app, $config) {
