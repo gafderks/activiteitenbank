@@ -190,6 +190,11 @@
 
                             <div class="sidebar-content">
                                 <p>
+                                    <span class="glyphicon glyphicon-asterisk"></span>{{ "Creator"|trans }}:
+                                    <span class="activity-property editable">{{ activity.creator.firstName }}
+                                        {{ activity.creator.lastName }}</span>
+                                </p>
+                                <p>
                                     {% set activityCategoriesNamed = [] %}
                                     {% set activityCategories = [] %}
                                     <span class="glyphicon glyphicon-inbox"></span>{{ "Category"|trans }}:

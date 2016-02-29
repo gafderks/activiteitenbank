@@ -58,6 +58,7 @@ class ActivityService extends Service
         $activity->setGroupSizeMax($input->groupSizeMax);
         $activity->setActivityAreas($input->activityAreas);
         $activity->setSuitable_groups($input->groups);
+        $activity->setCreator($this->getLoginService()->getLoggedInUser());
 
         // set planning
         $planning = new \Model\Activity\Planning\Planning();
@@ -230,5 +231,14 @@ class ActivityService extends Service
      */
     protected function getActivityMapper() {
         return $this->container->mapper_activity;
+    }
+
+    /**
+     * Get the login service.
+     *
+     * @return \Service\LoginService
+     */
+    protected function getLoginService() {
+        return $this->app->service_login;
     }
 }

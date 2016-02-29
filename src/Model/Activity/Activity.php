@@ -49,6 +49,7 @@ class Activity implements \JsonSerializable
      * Creator of the activity.
      *
      * @ManyToOne(targetEntity="\Model\User", inversedBy="activities")
+     * @JoinColumn(nullable=false)
      * @var \Model\User
      * @SWG\Property()
      */
