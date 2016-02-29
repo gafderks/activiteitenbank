@@ -7,7 +7,7 @@ return [
                 'type' => 'literal',
                 'method' => 'get',
                 'options' => [
-                    'route' => '/explore',
+                    'route' => '/',
                     'controller' => 'ExplorerController',
                     'action' => 'index',
                 ],
