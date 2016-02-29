@@ -125,6 +125,105 @@ class ActivityService extends Service
     }
 
     /**
+     * Returns whether the specified user is allowed to download the specified activity.
+     *
+     * @param \Model\User              $user
+     * @param \Model\Activity\Activity $activity
+     * @return bool allowed
+     */
+    public function userMayDownload(\Model\Activity\Activity $activity, \Model\User $user = null) {
+        return $this->userMay($activity, 'download', $user);
+    }
+
+    /**
+     * Returns whether the specified user is allowed to download the specified activity.
+     *
+     * @param \Model\User              $user
+     * @param \Model\Activity\Activity $activity
+     * @return bool allowed
+     */
+    public function userMayDelete(\Model\Activity\Activity $activity, \Model\User $user = null) {
+        return $this->userMay($activity, 'delete', $user);
+    }
+
+    /**
+     * Returns whether the specified user is allowed to download the specified activity.
+     *
+     * @param \Model\User              $user
+     * @param \Model\Activity\Activity $activity
+     * @return bool allowed
+     */
+    public function userMayView(\Model\Activity\Activity $activity, \Model\User $user = null) {
+        return $this->userMay($activity, 'view', $user);
+    }
+
+    /**
+     * Returns whether the specified user is allowed to download the specified activity.
+     *
+     * @param \Model\User              $user
+     * @param \Model\Activity\Activity $activity
+     * @return bool allowed
+     */
+    public function userMayEdit(\Model\Activity\Activity $activity, \Model\User $user =  null) {
+        return $this->userMay($activity, 'edit', $user);
+    }
+
+    /**
+     * Returns whether the specified user is allowed to perform the specified operation on the specified activity.
+     *
+     * @param \Model\User              $user
+     * @param \Model\Activity\Activity $activity
+     * @param                          $operation
+     * @return bool allowed
+     */
+    private function userMay(\Model\Activity\Activity $activity, $operation, \Model\User $user = null) {
+        if ($user === null) {
+            // no user is defined
+            $role = new \Model\Enum\UserRole(\Model\Enum\UserRole::Guest);
+            if (!$this->app->acl->isAllowed($role->value(),
+                'activity', $operation)) {
+                return false;
+            }
+        } elseif ($activity->getCreator()->getId() === $user->getId()) {
+            // check if user is allowed to perform the operation on its own activity
+            if (!$this->app->acl->isAllowed($user->getRole()->value(),
+                'ownActivity', $operation)) {
+                return false;
+            }
+        } else {
+            // check if user is allowed to perform the operation on an activity that is not its own
+            if (!$this->app->acl->isAllowed($user->getRole()->value(),
+                'activity', $operation)) {
+                return false;
+            }
+        }
+        return true; // user is allowed to perform operation
+    }
+
+    /**
+     * Returns whether the specified user is allowed to create a new activity.
+     *
+     * @param \Model\User              $user
+     * @return bool allowed
+     */
+    public function userMayCreate(\Model\User $user = null) {
+        // check if user is allowed to create a new activity
+        if ($user === null) {
+            // no user is defined
+            $role = new \Model\Enum\UserRole(\Model\Enum\UserRole::Guest);
+            if (!$this->app->acl->isAllowed($role->value(),
+                'activity', 'create')) {
+                return false;
+            }
+        }
+        if (!$this->app->acl->isAllowed($user->getRole()->value(),
+            'activity', 'create')) {
+            return false;
+        }
+        return true; // user is allowed to edit
+    }
+
+    /**
      * Get the activity mapper.
      *
      * @return \Mapper\Activity
@@ -132,5 +231,4 @@ class ActivityService extends Service
     protected function getActivityMapper() {
         return $this->container->mapper_activity;
     }
-
 }

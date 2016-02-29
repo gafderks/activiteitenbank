@@ -134,6 +134,21 @@ class LoginService extends Service
     }
 
     /**
+     * Returns the role of the user that is currently logged in.
+     * This is primarily used for ACL.
+     *
+     * @return \Model\Enum\UserRole role of the logged in user
+     */
+    public function getLoggedInUserRole() {
+        $user = $this->getLoggedInUser();
+        if ($user === null) {
+            return new \Model\Enum\UserRole(\Model\Enum\UserRole::Guest);
+        } else {
+            return $user->getRole();
+        }
+    }
+
+    /**
      * Destroys the current session.
      */
     public function logoutUser() {

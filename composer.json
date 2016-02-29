@@ -14,7 +14,8 @@
         "h4cc/wkhtmltoimage-i386": "0.12.x",
         "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3",
         "facebook/php-sdk-v4": "^5.1",
-        "slim/twig-view": "^2.0"
+        "slim/twig-view": "^2.0",
+        "jeremykendall/slim-auth": "^1.0"
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "*"

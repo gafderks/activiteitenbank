@@ -90,7 +90,7 @@ class User implements \JsonSerializable
      * Role of the user.
      * The role concerns the special permissions for the user.
      *
-     * @Column(type="integer")
+     * @Column(type="string")
      * @var \Model\Enum\UserRole
      */
     private $role;

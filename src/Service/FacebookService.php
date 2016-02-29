@@ -55,7 +55,7 @@ class FacebookService extends LoginService
             $user = $this->getUserService()->findUserByEmail($email);
             if ($user === null) {
                 $user = $this->registerUser($email, $firstName, $lastName,
-                    new \Model\Enum\UserRole(\Model\Enum\UserRole::Plain));
+                    new \Model\Enum\UserRole(\Model\Enum\UserRole::Member));
             }
 
             // store userId in session

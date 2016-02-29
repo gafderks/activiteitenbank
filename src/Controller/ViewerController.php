@@ -26,8 +26,22 @@ class ViewerController extends Controller
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['id']);
 
+            // if user is not allowed to view this activity, forward to login form
+            if (!$this->getActivityService()->userMayView($activity, $this->getLoginService()->getLoggedInUser())) {
+                return $this->getRedirectResponse($response, 'login');
+            }
+
             $params = [
                 'activity' => $activity,
+                'userMayDelete' => $this->getActivityService()->userMayDelete($activity,
+                    $this->getLoginService()->getLoggedInUser()),
+                'userMayDownload' => $this->getActivityService()->userMayDownload($activity,
+                    $this->getLoginService()->getLoggedInUser()),
+                'userMayView' => $this->getActivityService()->userMayView($activity,
+                    $this->getLoginService()->getLoggedInUser()),
+                'userMayEdit' => $this->getActivityService()->userMayEdit($activity,
+                    $this->getLoginService()->getLoggedInUser()),
+                'userMayCreate' => $this->getActivityService()->userMayCreate($this->getLoginService()->getLoggedInUser()),
             ];
             $this->container->view->render($response, 'pages/viewer.twig', $params);
             return $response;
@@ -44,6 +58,15 @@ class ViewerController extends Controller
     protected function getLoginService()
     {
         return $this->container->service_login;
+    }
+
+    /**
+     * Get the Activity service.
+     *
+     * @return \Service\ActivityService
+     */
+    protected function getActivityService() {
+        return $this->container->service_activity;
     }
 
     /**

@@ -10,7 +10,9 @@ namespace Model\Enum;
  */
 class UserRole extends Enum {
 
-    const Plain = '0';
-    const Admin = '1';
+    const Guest = 'guest';
+    const Member = 'member';
+    const Moderator = 'mod';
+    const Admin = 'admin';
 
 }
