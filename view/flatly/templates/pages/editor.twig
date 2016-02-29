@@ -250,7 +250,7 @@
             {% set count = 0 %}
             {% for item in activity.attachments %}
                 var file{{ count }} = { name: "{{ item.name }}", size: {{ item.size }},
-                    url: "{{ urlFor('api-attachment-get', {"activityId": activity.id,
+                    url: "{{ path_for('api-attachment-get', {"activityId": activity.id,
                         "attachmentId": item.id, "fileName": item.slug}) }}", id: {{ item.id }} };
                 this.emit("addedfile", file{{ count }});
                 {% set count = count + 1 %}
@@ -282,7 +282,7 @@
         $("#status-saving").show();
         $.ajax({
             type: "POST",
-            url: "{{ urlFor('api-activity-post') }}",
+            url: "{{ path_for('api-activity-post') }}",
             data: JSON.stringify(generateActivityObject())
         })
         .done(function(msg, textStatus, xhr) {
@@ -306,7 +306,7 @@
         $("#status-saving").show();
         $.ajax({
             type: "PUT",
-            url: "{{ urlFor('api-activity-put', {"id": activity.id}) }}",
+            url: "{{ path_for('api-activity-put', {"id": activity.id}) }}",
             data: JSON.stringify(generateActivityObject())
         })
         .done(function(msg, textStatus, xhr) {

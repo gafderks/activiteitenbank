@@ -8,16 +8,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand logo-nav" id="logo" href="{{ urlFor('index') }}">
+            <a class="navbar-brand logo-nav" id="logo" href="{{ path_for('index') }}">
                 Activities
             </a>
         </div>
         <div class="collapse navbar-collapse">
 
             <ul class="nav navbar-nav">
-                <li class=""><a href="{{ urlFor('index') }}"><span class="glyphicon glyphicon-home"></span>{% trans "Home" %}</a></li>
-                <li class=""><a href="{{ urlFor('activity-explore') }}"><span class="glyphicon glyphicon-th-list"></span>{% trans "Explore" %}</a></li>
-                <li class=""><a href="{{ urlFor('activity-create') }}"><span class="glyphicon glyphicon-plus"></span>{% trans "Create" %}</a></li>
+                <li class=""><a href="{{ path_for('index') }}"><span class="glyphicon glyphicon-home"></span>{% trans "Home" %}</a></li>
+                <li class=""><a href="{{ path_for('activity-explore') }}"><span class="glyphicon glyphicon-th-list"></span>{% trans "Explore" %}</a></li>
+                <li class=""><a href="{{ path_for('activity-create') }}"><span class="glyphicon glyphicon-plus"></span>{% trans "Create" %}</a></li>
             </ul>
 
             {% if session.user is not empty %}
@@ -28,7 +28,7 @@
 
             {% if session.user is empty %}
                 <ul class="nav navbar-nav navbar-right">
-                    <li class=""><a href="{{ urlFor('login-form') }}">{% trans "Login" %}</a></li>
+                    <li class=""><a href="{{ path_for('login-form') }}">{% trans "Login" %}</a></li>
                 </ul>
             {% endif %}
         </div><!-- /.nav-collapse -->

@@ -51,7 +51,7 @@
                 {% for activity in activities %}
                     <tr>
                         <td>
-                            <a href="{{ urlFor('activity-view', {"id": activity.id, "slug": activity.slug}) }}">
+                            <a href="{{ path_for('activity-view', {"id": activity.id, "slug": activity.slug}) }}">
                                 {{ activity.name }}
                             </a>
                         </td>
