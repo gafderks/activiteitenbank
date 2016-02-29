@@ -52,7 +52,7 @@ return [
                 'type' => 'literal',
                 'method' => 'get',
                 'options' => [
-                    'route' => '/view/:id(/:slug)',
+                    'route' => '/view/{id}({slug})',
                     'controller' => 'ViewerController',
                     'action' => 'view',
                 ],
@@ -70,7 +70,7 @@ return [
                 'type' => 'literal',
                 'method' => 'get',
                 'options' => [
-                    'route' => '/edit/:id(/:slug)',
+                    'route' => '/edit/{id}(/{slug})',
                     'controller' => 'EditorController',
                     'action' => 'edit',
                 ],
@@ -91,7 +91,7 @@ return [
                 'type' => 'literal',
                 'method' => 'put',
                 'options' => [
-                    'route' => '/api/activity/:id',
+                    'route' => '/api/activity/{id}',
                     'controller' => 'ActivityController',
                     'action' => 'update',
                     'middleware' => [
@@ -103,7 +103,7 @@ return [
                 'type' => 'literal',
                 'method' => 'get',
                 'options' => [
-                    'route' => '/api/activity/:id',
+                    'route' => '/api/activity/{id}',
                     'controller' => 'ActivityController',
                     'action' => 'get',
                 ],
@@ -112,7 +112,7 @@ return [
                 'type' => 'literal',
                 'method' => 'get',
                 'options' => [
-                    'route' => '/api/activity/:id/pdf',
+                    'route' => '/api/activity/{id}/pdf',
                     'controller' => 'ActivityController',
                     'action' => 'generatePdf',
                 ],
@@ -121,7 +121,7 @@ return [
                 'type' => 'literal',
                 'method' => 'delete',
                 'options' => [
-                    'route' => '/api/activity/:id',
+                    'route' => '/api/activity/{id}',
                     'controller' => 'ActivityController',
                     'action' => 'delete',
                 ],
@@ -130,7 +130,7 @@ return [
                 'type' => 'literal',
                 'method' => 'post',
                 'options' => [
-                    'route' => '/api/activity/:activityId/attachment',
+                    'route' => '/api/activity/{activityId}/attachment',
                     'controller' => 'AttachmentController',
                     'action' => 'upload',
                 ],
@@ -139,7 +139,7 @@ return [
                 'type' => 'literal',
                 'method' => 'get',
                 'options' => [
-                    'route' => '/api/activity/:activityId/attachment/:attachmentId(/:fileName)',
+                    'route' => '/api/activity/{activityId}/attachment/{attachmentId}(/{fileName})',
                     'controller' => 'AttachmentController',
                     'action' => 'download',
                 ],
@@ -148,7 +148,7 @@ return [
                 'type' => 'literal',
                 'method' => 'delete',
                 'options' => [
-                    'route' => '/api/activity/:activityId/attachment/:attachmentId(/:fileName)',
+                    'route' => '/api/activity/{activityId}/attachment/{attachmentId}(/{fileName})',
                     'controller' => 'AttachmentController',
                     'action' => 'delete',
                 ],
