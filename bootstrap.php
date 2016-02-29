@@ -196,15 +196,15 @@ foreach ($applicationConfig['resources'] as $name => $resource) {
     switch($resource['type']) {
         case 'service':
             $class = '\Service\\'.$resource['service'];
-            $app->container->singleton($name, function() use ($class) {
+            $container[$name] = function($c) use ($class) {
               return new $class();
-            });
+            };
             break;
         case 'mapper':
             $class = '\Mapper\\'.$resource['mapper'];
-            $app->container->singleton($name, function() use ($class, $entityManager) {
+            $container[$name] = function($c) use ($class, $entityManager) {
                 return new $class($entityManager);
-            });
+            };
             break;
     }
 }
