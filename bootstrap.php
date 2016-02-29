@@ -141,30 +141,46 @@ foreach($applicationConfig['router']['routes'] as $name => $route) {
                 case 'get':
                     $app->get(
                         $route['options']['route'],
-                        $middlewareDelegate($route),
                         "\\Controller\\{$controller}:{$action}Action"
-                    )->name($name);
+                    )->setName($name)
+                    ->add(function($request, $response, $next) use ($route, $middlewareDelegate) {
+                        $middlewareDelegate($route);
+                        $response = $next($request, $response);
+                        return $response;
+                    });
                     break;
                 case 'post':
                     $app->post(
                         $route['options']['route'],
-                        $middlewareDelegate($route),
                         "\\Controller\\{$controller}:{$action}Action"
-                    )->name($name);
+                    )->setName($name)
+                    ->add(function($request, $response, $next) use ($route, $middlewareDelegate) {
+                        $middlewareDelegate($route);
+                        $response = $next($request, $response);
+                        return $response;
+                    });
                     break;
                 case 'put':
                     $app->put(
                         $route['options']['route'],
-                        $middlewareDelegate($route),
                         "\\Controller\\{$controller}:{$action}Action"
-                    )->name($name);
+                    )->setName($name)
+                    ->add(function($request, $response, $next) use ($route, $middlewareDelegate) {
+                        $middlewareDelegate($route);
+                        $response = $next($request, $response);
+                        return $response;
+                    });
                     break;
                 case 'delete':
                     $app->delete(
                         $route['options']['route'],
-                        $middlewareDelegate($route),
                         "\\Controller\\{$controller}:{$action}Action"
-                    )->name($name);
+                    )->setName($name)
+                    ->add(function($request, $response, $next) use ($route, $middlewareDelegate) {
+                        $middlewareDelegate($route);
+                        $response = $next($request, $response);
+                        return $response;
+                    });
                     break;
             }
             break;
