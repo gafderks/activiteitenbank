@@ -13,9 +13,13 @@ class FormatTwigExtension extends \Twig_Extension
 
     private $container;
 
+    /**
+     * FormatTwigExtension constructor.
+     *
+     * @param $container
+     */
     public function __construct($container){
         $this->container = $container;
-        echo 'hallo';
     }
 
     /**
@@ -82,10 +86,16 @@ class FormatTwigExtension extends \Twig_Extension
         return $html;
     }
 
+    /**
+     * @return string
+     */
     public function getName() {
         return 'format';
     }
 
+    /**
+     * @return array
+     */
     public function getFilters() {
         return [
             new \Twig_SimpleFilter('bb2html', [$this, 'bb2Html']),
