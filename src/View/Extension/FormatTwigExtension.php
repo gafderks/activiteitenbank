@@ -1,6 +1,6 @@
 <?php
 
-namespace View;
+namespace View\Extension;
 
 /**
  * Class Format
@@ -8,8 +8,15 @@ namespace View;
  *
  * @package View
  */
-class Format
+class FormatTwigExtension extends \Twig_Extension
 {
+
+    private $container;
+
+    public function __construct($container){
+        $this->container = $container;
+        echo 'hallo';
+    }
 
     /**
      * Converts a float to a formatted euro value.
@@ -47,10 +54,10 @@ class Format
     public function bb2Html($bbcode) {
         $parser = new \SBBCodeParser\Node_Container_Document();
 
-        $app = \Slim\Slim::getInstance();
+        $container = $this->container;
 
         // locate smileys folder
-        $sF = $app->config['componentsUrl'].'/ckeditor/plugins/smiley/images/';
+        $sF = $container->config['componentsUrl'].'/ckeditor/plugins/smiley/images/';
 
         $parser->add_emoticons([
             ':D' => $sF.'teeth_smile.png',
@@ -73,6 +80,18 @@ class Format
             ->detect_emoticons()
             ->get_html();
         return $html;
+    }
+
+    public function getName() {
+        return 'format';
+    }
+
+    public function getFilters() {
+        return [
+            new \Twig_SimpleFilter('bb2html', [$this, 'bb2Html']),
+            new \Twig_SimpleFilter('int2time', [$this, 'int2Time']),
+            new \Twig_SimpleFilter('float2euro', [$this, 'float2Euro']),
+        ];
     }
 
 }

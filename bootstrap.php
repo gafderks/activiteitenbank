@@ -76,13 +76,7 @@ $container['view'] = function($container) use ($config) {
     ));
     $view->addExtension(new \Twig_Extension_Debug());
     $view->addExtension(new \Twig_Extensions_Extension_I18n());
-    // register custom filters
-    $int2time = new Twig_SimpleFilter('int2time', ['\View\Format', 'int2Time']);
-    $float2euro = new Twig_SimpleFilter('float2euro', ['\View\Format', 'float2Euro']);
-    $bb2html = new Twig_SimpleFilter('bb2Html', ['\View\Format', 'bb2Html']);
-    $view->getEnvironment()->addFilter($int2time);
-    $view->getEnvironment()->addFilter($float2euro);
-    $view->getEnvironment()->addFilter($bb2html);
+    $view->addExtension(new \View\Extension\FormatTwigExtension($container));
 
     // register default data that is supplied to the templates
     $predefinedData = array_merge($container['config'], [
