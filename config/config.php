@@ -83,7 +83,7 @@ return [
                     'controller' => 'ActivityController',
                     'action' => 'create',
                     'middleware' => [
-                        '\Service\ValidatorService::validateApiActivity',
+                        '\Middleware\apiActivityValidator',
                     ],
                 ],
             ],
@@ -95,7 +95,7 @@ return [
                     'controller' => 'ActivityController',
                     'action' => 'update',
                     'middleware' => [
-                        '\Service\ValidatorService::validateApiActivity',
+                        '\Middleware\apiActivityValidator',
                     ],
                 ],
             ],
@@ -184,10 +184,6 @@ return [
         'service_attachment' => [
             'type' => 'service',
             'service' => 'AttachmentService',
-        ],
-        'service_validator' => [
-            'type' => 'service',
-            'service' => 'ValidatorService',
         ],
         'service_pdf' => [
             'type' => 'service',

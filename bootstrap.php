@@ -128,17 +128,6 @@ textdomain('messages');
 // load application configuration
 $applicationConfig = include("config/config.php");
 
-// load middleware delegate
-$middlewareDelegate = function ($routeConfig) {
-    return function () use ($routeConfig) {
-        if (isset($routeConfig['options']['middleware'])) {
-            foreach($routeConfig['options']['middleware'] as $middleware) {
-                call_user_func($middleware);
-            }
-        }
-    };
-};
-
 // load routes
 foreach($applicationConfig['router']['routes'] as $name => $route) {
     switch($route['type']) {
@@ -148,50 +137,38 @@ foreach($applicationConfig['router']['routes'] as $name => $route) {
 
             switch($route['method']) {
                 case 'get':
-                    $app->get(
+                    $subject = $app->get(
                         $route['options']['route'],
                         "\\Controller\\{$controller}:{$action}Action"
-                    )->setName($name)
-                    ->add(function($request, $response, $next) use ($route, $middlewareDelegate) {
-                        $middlewareDelegate($route);
-                        $response = $next($request, $response);
-                        return $response;
-                    });
+                    )->setName($name);
                     break;
                 case 'post':
-                    $app->post(
+                    $subject = $app->post(
                         $route['options']['route'],
                         "\\Controller\\{$controller}:{$action}Action"
-                    )->setName($name)
-                    ->add(function($request, $response, $next) use ($route, $middlewareDelegate) {
-                        $middlewareDelegate($route);
-                        $response = $next($request, $response);
-                        return $response;
-                    });
+                    )->setName($name);
                     break;
                 case 'put':
-                    $app->put(
+                    $subject = $app->put(
                         $route['options']['route'],
                         "\\Controller\\{$controller}:{$action}Action"
-                    )->setName($name)
-                    ->add(function($request, $response, $next) use ($route, $middlewareDelegate) {
-                        $middlewareDelegate($route);
-                        $response = $next($request, $response);
-                        return $response;
-                    });
+                    )->setName($name);
                     break;
                 case 'delete':
-                    $app->delete(
+                    $subject = $app->delete(
                         $route['options']['route'],
                         "\\Controller\\{$controller}:{$action}Action"
-                    )->setName($name)
-                    ->add(function($request, $response, $next) use ($route, $middlewareDelegate) {
-                        $middlewareDelegate($route);
-                        $response = $next($request, $response);
-                        return $response;
-                    });
+                    )->setName($name);
                     break;
             }
+
+            // register middleware
+            if (isset($route['options']['middleware'])) {
+                foreach($route['options']['middleware'] as $middleware) {
+                    $subject->add(new $middleware());
+                }
+            }
+
             break;
     }
 }
