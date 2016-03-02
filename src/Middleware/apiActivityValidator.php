@@ -19,7 +19,7 @@ class apiActivityValidator
 
     /**
      * Validates the request body against a definition for an activity.
-     * If the validation fails, 400 status is outputted.
+     * If the validation fails, 400 status is output.
      *
      * @param Request  $request
      * @param Response $response

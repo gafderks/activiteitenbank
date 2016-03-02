@@ -30,7 +30,7 @@ class LoginService extends Service
         // check if valid credentials were given
         if ($this->verifyLogin($user, $password) === true) {
             // check if there is already a user logged in
-            if (null !== $this->getLoggedInUser()) {
+            if ($this->getLoggedInUser() !== null) {
                 throw new \Exception('A user is already logged in');
             }
 

@@ -16,7 +16,7 @@ class FacebookService extends LoginService
     /**
      * Tries to log in a user. Returns whether login was successful.
      *
-     * @return bool
+     * @return bool whether login was successful
      * @throws \Exception when some user is already logged in
      */
     public function loginUser() {
@@ -36,7 +36,7 @@ class FacebookService extends LoginService
         if (isset($accessToken)) {
             $_SESSION['facebook_access_token'] = (string) $accessToken;
 
-            if (null !== $this->getLoggedInUser()) {
+            if ($this->getLoggedInUser() !== null) {
                 throw new \Exception('A user is already logged in');
             }
 
@@ -73,6 +73,8 @@ class FacebookService extends LoginService
     }
 
     /**
+     * Returns a URL that can be used to login with Facebook.
+     *
      * @return string
      */
     public function getFacebookLoginUrl() {
@@ -87,6 +89,8 @@ class FacebookService extends LoginService
     }
 
     /**
+     * Returns a Facebook SDK object.
+     *
      * @return Facebook
      */
     public function getFacebookObject() {

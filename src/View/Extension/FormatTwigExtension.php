@@ -2,6 +2,8 @@
 
 namespace View\Extension;
 
+use Interop\Container\ContainerInterface;
+
 /**
  * Class Format
  * Used as a view helper.
@@ -16,9 +18,9 @@ class FormatTwigExtension extends \Twig_Extension
     /**
      * FormatTwigExtension constructor.
      *
-     * @param $container
+     * @param ContainerInterface $container
      */
-    public function __construct($container){
+    public function __construct(ContainerInterface $container){
         $this->container = $container;
     }
 
@@ -30,9 +32,9 @@ class FormatTwigExtension extends \Twig_Extension
      */
     public function float2Euro($float) {
         $euros = floor($float);
-        $cents = str_pad(($float-$euros)*100, 2, '0', STR_PAD_LEFT);
+        $cents = str_pad(($float - $euros) * 100, 2, '0', STR_PAD_LEFT);
 
-        return "&euro;&nbsp;".$euros.".".$cents;
+        return "&euro;&nbsp;" . $euros . "." . $cents;
     }
 
     /**
@@ -42,10 +44,10 @@ class FormatTwigExtension extends \Twig_Extension
      * @return string formatted hours and minutes
      */
     public function int2Time($int) {
-        $hours   = floor($int/60);
-        $minutes = str_pad($int%60, 2, '0', STR_PAD_LEFT);
+        $hours   = floor($int / 60);
+        $minutes = str_pad($int % 60, 2, '0', STR_PAD_LEFT);
 
-        return $hours.":".$minutes;
+        return $hours . ":" . $minutes;
     }
 
     /**
@@ -87,6 +89,8 @@ class FormatTwigExtension extends \Twig_Extension
     }
 
     /**
+     * Returns the name of the extension.
+     *
      * @return string
      */
     public function getName() {
@@ -94,9 +98,12 @@ class FormatTwigExtension extends \Twig_Extension
     }
 
     /**
+     * Returns the filters that are defined in this extension.
+     *
      * @return array
      */
     public function getFilters() {
+        parent::getFilters();
         return [
             new \Twig_SimpleFilter('bb2html', [$this, 'bb2Html']),
             new \Twig_SimpleFilter('int2time', [$this, 'int2Time']),

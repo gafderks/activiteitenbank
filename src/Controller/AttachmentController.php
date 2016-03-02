@@ -18,7 +18,10 @@ class AttachmentController extends Controller
      * Uploads the file that is set at request parameter 'file' as attachment.
      * Outputs 201 on success. Outputs 400 on failure.
      *
-     * @param $activityId integer id of the activity to add the assignment to.
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function uploadAction(Request $request, Response $response, $args = []) {
         try {
@@ -40,8 +43,10 @@ class AttachmentController extends Controller
      * Returns the file that is located at the activity with the specified id and the attachment with the specified id.
      * Outputs 200 on success. Outputs 400 on failure.
      *
-     * @param $activityId integer
-     * @param $attachmentId integer
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function downloadAction(Request $request, Response $response, $args = []) {
         try {
@@ -53,7 +58,7 @@ class AttachmentController extends Controller
             }
 
             // obtain file path
-            $path = $attachment->getPath($this->container);
+            $path = $attachment->getPath();
 
             // determine mime type
             $mimeType = mime_content_type($path);
@@ -79,8 +84,10 @@ class AttachmentController extends Controller
      * Removes the attachment with the specified ID and activity ID
      * Outputs a 404 status if the attachment was not found.
      *
-     * @param $activityId integer
-     * @param $attachmentId integer
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function deleteAction(Request $request, Response $response, $args = []) {
         // TODO check if allowed to remove
@@ -93,7 +100,7 @@ class AttachmentController extends Controller
             }
 
             // remove attachment file
-            unlink($attachment->getPath($this->container));
+            unlink($attachment->getPath());
 
             // remove attachment from database
             $this->getAttachmentMapper()->remove($attachment);

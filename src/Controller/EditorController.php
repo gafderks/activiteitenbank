@@ -16,6 +16,11 @@ class EditorController extends Controller
 
     /**
      * Shows the editor for a new activity.
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function newAction(Request $request, Response $response, $args = []) {
         $params = [
@@ -29,7 +34,10 @@ class EditorController extends Controller
      * Shows the editor for the specified activity.
      * Outputs a 404 status if the activity with the specified id was not found.
      *
-     * @param $id integer id of the activity to edit
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function editAction(Request $request, Response $response, $args = []) {
         try {

@@ -20,7 +20,10 @@ class ActivityController extends Controller
      * Looks up the details of an activity and returns them if found.
      * Outputs a 404 status if the activity with the specified id was not found.
      *
-     * @param $id integer id of the activity to return
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function getAction(Request $request, Response $response, $args = []) {
         try {
@@ -35,7 +38,10 @@ class ActivityController extends Controller
      * Generates a PDF file from the specified activity.
      * Outputs a 404 status if the activity with the specified id was not found.
      *
-     * @param $id integer
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function generatePdfAction(Request $request, Response $response, $args = []) {
         try {
@@ -94,7 +100,10 @@ class ActivityController extends Controller
      * This method does NOT do input validation, so it is important to setup the ValidatorService as middleware.
      * Outputs a 404 status if the activity with the specified id was not found.
      *
-     * @param $id integer id of the activity to update
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function updateAction(Request $request, Response $response, $args = []) {
         // TODO check if allowed to update
@@ -131,7 +140,10 @@ class ActivityController extends Controller
      * Removes the activity with the specified ID
      * Outputs a 404 status if the activity with the specified id was not found.
      *
-     * @param $id
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function deleteAction(Request $request, Response $response, $args = []) {
         // TODO check if allowed to remove
@@ -154,6 +166,11 @@ class ActivityController extends Controller
     /**
      * Creates a new activity according to the JSON object that is in the request body.
      * This method does NOT do input validation, so it is important to setup the ValidatorService as middleware.
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function createAction(Request $request, Response $response, $args = []) {
         // load input

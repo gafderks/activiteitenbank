@@ -3,6 +3,8 @@
 
 namespace Service;
 
+use \Interop\Container\ContainerInterface;
+
 /**
  * Class Service
  * Abstract class for services.
@@ -15,8 +17,10 @@ abstract class Service
 
     /**
      * Service constructor.
+     *
+     * @param ContainerInterface $container
      */
-    function __construct($container) {
+    function __construct(ContainerInterface $container) {
         $this->container = $container;
     }
 

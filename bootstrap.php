@@ -69,6 +69,7 @@ $container['view'] = function($container) use ($config) {
         'debug' => true,
         'auto_reload' => true,
     ]);
+
     // twig extensions
     $view->addExtension(new \Slim\Views\TwigExtension(
         $container['router'],

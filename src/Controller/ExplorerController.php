@@ -31,6 +31,11 @@ class ExplorerController extends Controller
 
     /**
      * Shows the explorer.
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function indexAction(Request $request, Response $response, $args = []) {
         $params = [

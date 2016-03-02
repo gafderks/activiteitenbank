@@ -4,6 +4,7 @@
 namespace Controller;
 
 use Psr\Http\Message\ResponseInterface as Response;
+use Interop\Container\ContainerInterface;
 
 /**
  * Class Controller
@@ -17,8 +18,10 @@ abstract class Controller
 
     /**
      * Controller constructor.
+     *
+     * @param ContainerInterface $container
      */
-    public function __construct($container) {
+    public function __construct(ContainerInterface $container) {
         $this->container = $container;
     }
 

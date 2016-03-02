@@ -60,9 +60,8 @@ class AttachmentService extends Service
      * Tries to upload the file specified with the key and creates an attachment object if successful.
      *
      * @param string                   $key key from the request that the file is located in
-     * @param \Model\Activity\Activity $activity activity to associate the attachment with
      * @return \Model\Activity\Attachment attachment object for the uploaded attachment
-     * @throws \Exception
+     * @throws \Exception if an error occurs during uploading
      */
     public function uploadAttachment($key) {
         $file = new \Upload\File($key, $this->storage);
@@ -76,13 +75,6 @@ class AttachmentService extends Service
             new \Upload\Validation\Mimetype($this->allowedMimetypes),
             new \Upload\Validation\Size($this->maxSize)
         ]);
-
-        $data = [
-            'name'       => $file->getNameWithExtension(),
-            'extension'  => $file->getExtension(),
-            'mime'       => $file->getMimetype(),
-            'size'       => $file->getSize(),
-        ];
 
         try {
             $file->upload();

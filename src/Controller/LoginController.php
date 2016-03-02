@@ -17,6 +17,11 @@ class LoginController extends Controller
     /**
      * Shows the login form.
      * If a session already exists, a redirect is done to the index page.
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function indexAction(Request $request, Response $response, $args = []) {
         // check if a user is already logged in
@@ -42,6 +47,10 @@ class LoginController extends Controller
      * Tries to log in the user with the credentials in the request.
      * Redirects to the index page on success. Outputs login form on failure.
      *
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      * @throws \Exception when a user is already logged in
      */
     public function postAction(Request $request, Response $response, $args = []) {
@@ -101,6 +110,11 @@ class LoginController extends Controller
 
     /**
      * Logs out a user.
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function logoutAction(Request $request, Response $response, $args = []) {
         // logout user
@@ -109,6 +123,14 @@ class LoginController extends Controller
         return $this->getRedirectResponse($response, 'index');
     }
 
+    /**
+     * Handles Facebook login.
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
+     */
     public function facebookCallbackAction(Request $request, Response $response, $args = []) {
         // collect errors during login process
         $errors = [];

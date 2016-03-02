@@ -17,7 +17,10 @@ class ViewerController extends Controller
     /**
      * Shows the viewer for the specified activity.
      *
-     * @param $id integer id of the activity to view
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function viewAction(Request $request, Response $response, $args = []) {
         try {
