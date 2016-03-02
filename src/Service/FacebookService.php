@@ -97,7 +97,7 @@ class FacebookService extends LoginService
         return new \Facebook\Facebook([
             'app_id' => $this->container->config['facebook']['app_id'],
             'app_secret' => $this->container->config['facebook']['app_secret'],
-            'default_graph_version' => $this->container->config['facebook']['default_graph_version'],
+            'default_graph_version' => 'v2.5',
         ]);
     }
 
