@@ -181,19 +181,19 @@ class ActivityService extends Service
         if ($user === null) {
             // no user is defined
             $role = new \Model\Enum\UserRole(\Model\Enum\UserRole::Guest);
-            if (!$this->app->acl->isAllowed($role->value(),
+            if (!$this->container->acl->isAllowed($role->value(),
                 'activity', $operation)) {
                 return false;
             }
         } elseif ($activity->getCreator()->getId() === $user->getId()) {
             // check if user is allowed to perform the operation on its own activity
-            if (!$this->app->acl->isAllowed($user->getRole()->value(),
+            if (!$this->container->acl->isAllowed($user->getRole()->value(),
                 'ownActivity', $operation)) {
                 return false;
             }
         } else {
             // check if user is allowed to perform the operation on an activity that is not its own
-            if (!$this->app->acl->isAllowed($user->getRole()->value(),
+            if (!$this->container->acl->isAllowed($user->getRole()->value(),
                 'activity', $operation)) {
                 return false;
             }
@@ -212,12 +212,12 @@ class ActivityService extends Service
         if ($user === null) {
             // no user is defined
             $role = new \Model\Enum\UserRole(\Model\Enum\UserRole::Guest);
-            if (!$this->app->acl->isAllowed($role->value(),
+            if (!$this->container->acl->isAllowed($role->value(),
                 'activity', 'create')) {
                 return false;
             }
         }
-        if (!$this->app->acl->isAllowed($user->getRole()->value(),
+        if (!$this->container->acl->isAllowed($user->getRole()->value(),
             'activity', 'create')) {
             return false;
         }
@@ -239,6 +239,6 @@ class ActivityService extends Service
      * @return \Service\LoginService
      */
     protected function getLoginService() {
-        return $this->app->service_login;
+        return $this->container->service_login;
     }
 }
