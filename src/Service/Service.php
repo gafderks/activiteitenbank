@@ -11,13 +11,13 @@ namespace Service;
  */
 abstract class Service
 {
-    protected $app;
+    protected $container;
 
     /**
      * Service constructor.
      */
-    function __construct() {
-        $this->app = \Slim\Slim::getInstance();
+    function __construct($container) {
+        $this->container = $container;
     }
 
 }

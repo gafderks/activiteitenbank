@@ -3,6 +3,9 @@
 
 namespace Controller;
 
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+
 /**
  * Class LoginController
  *
@@ -15,23 +18,24 @@ class LoginController extends Controller
      * Shows the login form.
      * If a session already exists, a redirect is done to the index page.
      */
-    public function indexAction() {
+    public function indexAction(Request $request, Response $response, $args = []) {
         // check if a user is already logged in
-        if (null !== $this->getLoginService()->getLoggedInUser()) {
-            $this->app->redirect($this->app->urlFor('index'));
+        if ($this->getLoginService()->getLoggedInUser() !== null) {
+            return $this->getRedirectResponse($response, 'index');
         }
 
         $params = [
 
         ];
 
-        if ($this->app->config['facebook']['enableLogin']) {
+        if ($this->container->config['facebook']['enableLogin']) {
             $params = array_merge($params, [
                 'facebookLoginUrl' => $this->getFacebookService()->getFacebookLoginUrl(),
             ]);
         }
 
-        $this->app->render('pages/login.twig', $params);
+        $this->container->view->render($response, 'pages/login.twig', $params);
+        return $response;
     }
 
     /**
@@ -40,15 +44,15 @@ class LoginController extends Controller
      *
      * @throws \Exception when a user is already logged in
      */
-    public function postAction() {
+    public function postAction(Request $request, Response $response, $args = []) {
 
         // collect errors during login process
         $errors = [];
 
         // load credentials that were given
-        $username = $this->app->request->post('username');
-        $password = $this->app->request->post('password');
-        $referrer = $this->app->request->post('referrer');
+        $username = $request->getParsedBody()['username'];
+        $password = $request->getParsedBody()['password'];
+        $referrer = $request->getParsedBody()['referrer'];
 
         if (empty($username)) {
             array_push($errors, ['message' => 'You need to supply an email address or a username']);
@@ -69,9 +73,9 @@ class LoginController extends Controller
             if ($user !== null) {
                 if ($this->getLoginService()->loginUser($user, $password)) {
                     if (!empty($referrer)) {
-                        $this->app->redirect($referrer);
+                        return $response->withStatus(301)->withHeader('Location', $referrer);
                     } else {
-                        $this->app->redirect($this->app->urlFor('index'));
+                        return $this->getRedirectResponse($response, 'index');
                     }
                 } else {
                     array_push($errors, ['message' => 'Wrong username or password']);
@@ -82,29 +86,30 @@ class LoginController extends Controller
         // render form
         $params = [
             'login' => [
-                'username' => $this->app->request->post('username'),
+                'username' => $request->getParsedBody()['username'],
                 'errors' => $errors
             ],
         ];
-        if ($this->app->config['facebook']['enableLogin']) {
+        if ($this->container->config['facebook']['enableLogin']) {
             $params = array_merge($params, [
                 'facebookLoginUrl' => $this->getFacebookService()->getFacebookLoginUrl(),
             ]);
         }
-        $this->app->render('pages/login.twig', $params);
+        $this->container->view->render($response, 'pages/login.twig', $params);
+        return $response;
     }
 
     /**
      * Logs out a user.
      */
-    public function logoutAction() {
+    public function logoutAction(Request $request, Response $response, $args = []) {
         // logout user
         $this->getLoginService()->logoutUser();
         // redirect user
-        $this->app->redirect($this->app->urlFor('index'));
+        return $this->getRedirectResponse($response, 'index');
     }
 
-    public function facebookCallbackAction() {
+    public function facebookCallbackAction(Request $request, Response $response, $args = []) {
         // collect errors during login process
         $errors = [];
 
@@ -112,7 +117,7 @@ class LoginController extends Controller
         try {
             $loginSucceeded = $this->getFacebookService()->loginUser();
             if ($loginSucceeded) {
-                $this->app->redirect($this->app->urlFor('index'));
+                return $this->getRedirectResponse($response, 'index');
             } else {
                 array_push($errors, ['message' => 'Facebook login failed']);
             }
@@ -126,15 +131,13 @@ class LoginController extends Controller
                 'errors' => $errors,
             ],
         ];
-        if ($this->app->config['facebook']['enableLogin']) {
+        if ($this->container->config['facebook']['enableLogin']) {
             $params = array_merge($params, [
                 'facebookLoginUrl' => $this->getFacebookService()->getFacebookLoginUrl(),
             ]);
         }
-        $this->app->render('pages/login.twig', $params);
-
-
-
+        $this->container->view->render($response, 'pages/login.twig', $params);
+        return $response;
     }
 
     /**
@@ -143,7 +146,7 @@ class LoginController extends Controller
      * @return \Service\LoginService
      */
     protected function getLoginService() {
-        return $this->app->service_login;
+        return $this->container->service_login;
     }
 
     /**
@@ -152,7 +155,7 @@ class LoginController extends Controller
      * @return \Service\FacebookService
      */
     protected function getFacebookService() {
-        return $this->app->service_facebook;
+        return $this->container->service_facebook;
     }
 
     /**
@@ -161,7 +164,7 @@ class LoginController extends Controller
      * @return \Service\UserService
      */
     protected function getUserService() {
-        return $this->app->service_user;
+        return $this->container->service_user;
     }
 
 }

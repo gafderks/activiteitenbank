@@ -124,7 +124,8 @@ class Attachment implements \JsonSerializable
      * @return string
      */
     public function getPath() {
-        return \Slim\Slim::getInstance()->config['uploadsDirectory'] . '/' . $this->getLocation();
+        $config = include(__DIR__.'/../../../config.php'); // TODO find more elegant approach for this
+        return $config['uploadsDirectory'] . '/' . $this->getLocation();
     }
 
     public function getSlug() {

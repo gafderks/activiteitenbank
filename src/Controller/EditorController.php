@@ -3,6 +3,9 @@
 
 namespace Controller;
 
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+
 /**
  * Class EditorController
  *
@@ -14,11 +17,12 @@ class EditorController extends Controller
     /**
      * Shows the editor for a new activity.
      */
-    public function newAction() {
+    public function newAction(Request $request, Response $response, $args = []) {
         $params = [
 
         ];
-        $this->app->render('pages/editor.twig', $params);
+        $this->container->view->render($response, 'pages/editor.twig', $params);
+        return $response;
     }
 
     /**
@@ -27,17 +31,19 @@ class EditorController extends Controller
      *
      * @param $id integer id of the activity to edit
      */
-    public function editAction($id) {
-        $activity = $this->getActivityMapper()->findActivityById($id);
+    public function editAction(Request $request, Response $response, $args = []) {
+        try {
+            $activity = $this->getActivityMapper()->findActivityById($args['id']);
 
-        if (is_null($activity)) {
-            $this->app->halt(404, json_encode("Activity with the specified ID was not found"));
+            $params = [
+                'activity' => $activity,
+            ];
+            $this->container->view->render($response, 'pages/editor.twig', $params);
+
+            return $response;
+        } catch(\Exception $exception) {
+            return $this->getExceptionResponse($response, $exception, 404);
         }
-
-        $params = [
-            'activity' => $activity,
-        ];
-        $this->app->render('pages/editor.twig', $params);
     }
 
     /**
@@ -47,7 +53,7 @@ class EditorController extends Controller
      */
     protected function getLoginService()
     {
-        return $this->app->service_login;
+        return $this->container->service_login;
     }
 
     /**
@@ -56,7 +62,7 @@ class EditorController extends Controller
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->app->mapper_activity;
+        return $this->container->mapper_activity;
     }
 
 }

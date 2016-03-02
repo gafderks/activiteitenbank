@@ -38,9 +38,9 @@ class AttachmentService extends Service
     /**
      * AttachmentService constructor.
      */
-    public function __construct() {
-        parent::__construct();
-        $this->storage = new \Upload\Storage\FileSystem($this->app->config['uploadsDirectory']);
+    public function __construct($container) {
+        parent::__construct($container);
+        $this->storage = new \Upload\Storage\FileSystem($this->container->config['uploadsDirectory']);
     }
 
     /**
@@ -91,7 +91,7 @@ class AttachmentService extends Service
         }
 
         // set file permissions
-        chmod($this->app->config['uploadsDirectory'] . '/' . $file->getNameWithExtension(), $this->permission);
+        chmod($this->container->config['uploadsDirectory'] . '/' . $file->getNameWithExtension(), $this->permission);
 
         // create attachment object
         $attachment = new \Model\Activity\Attachment();
@@ -107,7 +107,7 @@ class AttachmentService extends Service
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->app->mapper_activity;
+        return $this->container->mapper_activity;
     }
 
 }

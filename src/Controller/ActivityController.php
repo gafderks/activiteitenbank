@@ -2,7 +2,11 @@
 // /src/Controller/ActivityController.php
 
 namespace Controller;
+
 use Knp\Snappy\Pdf;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+use Respect\Validation\Exceptions\NullTypeException;
 
 /**
  * Class ActivityController
@@ -18,16 +22,13 @@ class ActivityController extends Controller
      *
      * @param $id integer id of the activity to return
      */
-    public function getAction($id) {
-        $activity = $this->getActivityMapper()->findActivityById($id);
-
-        if (is_null($activity)) {
-            $this->app->halt(404, json_encode("Activity with the specified ID was not found"));
+    public function getAction(Request $request, Response $response, $args = []) {
+        try {
+            $activity = $this->getActivityMapper()->findActivityById($args['id']);
+            return $this->getJsonResponse($response, $activity, 200);
+        } catch(\Exception $exception) {
+            return $this->getExceptionResponse($response, $exception, 404);
         }
-
-        $this->app->response->setStatus(200);
-        $this->app->response->headers->set('Content-Type', 'application/json');
-        $this->app->response->body(json_encode($activity));
     }
 
     /**
@@ -36,55 +37,56 @@ class ActivityController extends Controller
      *
      * @param $id integer
      */
-    public function generatePdfAction($id) {
-        $activity = $this->getActivityMapper()->findActivityById($id);
+    public function generatePdfAction(Request $request, Response $response, $args = []) {
+        try {
+            $activity = $this->getActivityMapper()->findActivityById($args['id']);
 
-        if (is_null($activity)) {
-            $this->app->halt(404, json_encode("Activity with the specified ID was not found"));
+            // generate the rendered html template
+            $params = [
+                'activity' => $activity,
+            ];
+            $renderedHtml = $this->container->view->fetch('pdf/activity.twig', $params);
+
+            // generate files for header and footer
+            $partials = $this->getPdfService()->renderTemplatesToUrls([
+                'header' => ['pdf/partials/header.twig', []],
+                'footer' => ['pdf/partials/footer.twig', []],
+            ]);
+
+            // initialize Snappy
+            $snappy = new Pdf($this->container->config['absolutePath'] .
+                '/vendor/wemersonjanuario/wkhtmltopdf-windows/bin/32bit/wkhtmltopdf.exe');
+            $snappy->setOptions([
+                'page-size' => 'A4',
+                'title' => $activity->getName(),
+                'orientation' => 'Portrait',
+                'header-spacing' => 0,
+                'margin-top' => '10mm',
+                'margin-bottom' => '20mm',
+                'margin-left' => '10mm',
+                'margin-right' => '10mm',
+                'footer-spacing' => 0,
+                //'header-html' => $partials['header'], // really need to use a file here
+                'footer-html' => $partials['footer'],
+            ]);
+
+            // render PDF file
+            $pdf = $snappy->getOutputFromHtml($renderedHtml);
+
+            // clean up temporary files
+            $this->getPdfService()->garbageCollectRenders($partials);
+
+            // show response
+            $response = $response
+                ->withStatus(200)
+                ->withHeader('Content-Type', 'application/pdf')
+                ->withHeader('Content-Disposition',
+                    'attachment; filename="'.$activity->getSlug().'.pdf"')
+                ->write($pdf);
+            return $response;
+        } catch(\Exception $exception) {
+            return $this->getExceptionResponse($response, $exception, 404);
         }
-
-        // generate the rendered html template
-        $params = [
-            'activity' => $activity,
-        ];
-        $renderedHtml = $this->app->view->fetch('pdf/activity.twig', $params);
-
-        // generate files for header and footer
-        $partials = $this->getPdfService()->renderTemplatesToUrls([
-            'header' => ['pdf/partials/header.twig', []],
-            'footer' => ['pdf/partials/footer.twig', []],
-        ]);
-
-        // initialize Snappy
-        $snappy = new Pdf($this->app->config['absolutePath'] .
-            '/vendor/wemersonjanuario/wkhtmltopdf-windows/bin/32bit/wkhtmltopdf.exe');
-        $snappy->setOptions([
-            'page-size' => 'A4',
-            'title' => $activity->getName(),
-            'orientation' => 'Portrait',
-            'header-spacing' => 0,
-            'margin-top' => '10mm',
-            'margin-bottom' => '20mm',
-            'margin-left' => '10mm',
-            'margin-right' => '10mm',
-            'footer-spacing' => 0,
-            //'header-html' => $partials['header'], // really need to use a file here
-            'footer-html' => $partials['footer'],
-        ]);
-
-        // render PDF file
-        $pdf = $snappy->getOutputFromHtml($renderedHtml);
-
-        // clean up temporary files
-        $this->getPdfService()->garbageCollectRenders($partials);
-
-        // show response
-        $this->app->response->setStatus(200);
-        $this->app->response->headers->set('Content-Type', 'application/pdf');
-        $this->app->response->headers->set('Content-Disposition',
-            'attachment; filename="'.$activity->getSlug().'.pdf"');
-        $this->app->response->body($pdf);
-
     }
 
     /**
@@ -94,37 +96,35 @@ class ActivityController extends Controller
      *
      * @param $id integer id of the activity to update
      */
-    public function updateAction($id) {
+    public function updateAction(Request $request, Response $response, $args = []) {
         // TODO check if allowed to update
-        $activity = $this->getActivityMapper()->findActivityById($id);
+        try {
+            $activity = $this->getActivityMapper()->findActivityById($args['id']);
 
-        if (is_null($activity)) {
-            $this->app->halt(404, json_encode("Activity with the specified ID was not found"));
+            // load input
+            $input = json_decode($request->getBody());
+
+            // set up meta data
+            $now = new \DateTime('now');
+            $activity->setModified($now);
+
+            // set the properties of the activity
+            $activity = $this->getActivityService()->setActivityFromObject($activity, $input);
+
+            // save the activity
+            $this->getActivityMapper()->persist($activity);
+
+            // apply all modifications
+            $this->getActivityMapper()->flush();
+            // forces the entity manager to reload the activity in the next line
+            $this->getActivityMapper()->clear();
+            $newActivity = $this->getActivityMapper()->findActivityById($activity->getId());
+
+            // show response
+            return $this->getJsonResponse($response, $newActivity, 202);
+        } catch(\Exception $exception) {
+            return $this->getExceptionResponse($response, $exception, 404);
         }
-
-        // load input
-        $input = json_decode($this->app->request->getBody());
-
-        // set up meta data
-        $now = new \DateTime('now');
-        $activity->setModified($now);
-
-        // set the properties of the activity
-        $activity = $this->getActivityService()->setActivityFromObject($activity, $input);
-
-        // save the activity
-        $this->getActivityMapper()->persist($activity);
-
-        // apply all modifications
-        $this->getActivityMapper()->flush();
-        // forces the entity manager to reload the activity in the next line
-        $this->getActivityMapper()->clear();
-        $newActivity = $this->getActivityMapper()->findActivityById($activity->getId());
-
-        // show response
-        $this->app->response->setStatus(202);
-        $this->app->response->headers->set('Content-Type', 'application/json');
-        $this->app->response->body(json_encode($newActivity));
     }
 
     /**
@@ -133,27 +133,31 @@ class ActivityController extends Controller
      *
      * @param $id
      */
-    public function deleteAction($id) {
+    public function deleteAction(Request $request, Response $response, $args = []) {
         // TODO check if allowed to remove
         // TODO also delete sub-entities
-        $activity = $this->getActivityMapper()->findActivityById($id);
+        try {
+            $activity = $this->getActivityMapper()->findActivityById($args['id']);
 
-        if (is_null($activity)) {
-            $this->app->halt(404, json_encode("Activity with the specified ID was not found"));
+            // actually remove activity
+            $this->getActivityMapper()->remove($activity);
+            $this->getActivityMapper()->flush();
+
+            $response = $response
+                ->withStatus(204);
+            return $response;
+        } catch(\Exception $exception) {
+            return $this->getExceptionResponse($response, $exception, 404);
         }
-
-        $this->getActivityMapper()->remove($activity);
-        $this->getActivityMapper()->flush();
-        $this->app->response->setStatus(204);
     }
 
     /**
      * Creates a new activity according to the JSON object that is in the request body.
      * This method does NOT do input validation, so it is important to setup the ValidatorService as middleware.
      */
-    public function createAction() {
+    public function createAction(Request $request, Response $response, $args = []) {
         // load input
-        $input = json_decode($this->app->request->getBody());
+        $input = json_decode($request->getBody());
 
         // create new activity object
         $activity = new \Model\Activity\Activity();
@@ -176,9 +180,7 @@ class ActivityController extends Controller
         $newActivity = $this->getActivityMapper()->findActivityById($activity->getId());
 
         // show response
-        $this->app->response->setStatus(201);
-        $this->app->response->headers->set('Content-Type', 'application/json');
-        $this->app->response->body(json_encode($newActivity));
+        return $this->getJsonResponse($response, $newActivity, 201);
     }
 
     /**
@@ -186,9 +188,8 @@ class ActivityController extends Controller
      *
      * @return \Service\ActivityService
      */
-    protected function getActivityService()
-    {
-        return $this->app->service_activity;
+    protected function getActivityService() {
+        return $this->container->service_activity;
     }
 
     /**
@@ -196,9 +197,8 @@ class ActivityController extends Controller
      *
      * @return \Service\PdfService
      */
-    protected function getPdfService()
-    {
-        return $this->app->service_pdf;
+    protected function getPdfService() {
+        return $this->container->service_pdf;
     }
 
     /**
@@ -207,7 +207,7 @@ class ActivityController extends Controller
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->app->mapper_activity;
+        return $this->container->mapper_activity;
     }
 
 }

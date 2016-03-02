@@ -3,6 +3,9 @@
 
 namespace Controller;
 
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+
 /**
  * Class AttachmentController
  *
@@ -17,25 +20,19 @@ class AttachmentController extends Controller
      *
      * @param $activityId integer id of the activity to add the assignment to.
      */
-    public function uploadAction($activityId) {
-        $activity = $this->getActivityMapper()->findActivityById($activityId);
-
-        if (is_null($activity)) {
-            $this->app->halt(404, json_encode("Activity with the specified ID was not found"));
-        }
-
+    public function uploadAction(Request $request, Response $response, $args = []) {
         try {
+            $activity = $this->getActivityMapper()->findActivityById($args['activityId']);
+
             $attachment = $this->getAttachmentService()->uploadAttachment('file');
             $attachment->setActivity($activity);
             // store attachment in database
             $this->getActivityMapper()->persist($attachment);
             $this->getActivityMapper()->flush();
 
-            $this->app->response->setStatus(201);
-            $this->app->response->headers->set('Content-Type', 'application/json');
-            $this->app->response->body(json_encode($attachment));
-        } catch (\Exception $ex) {
-            $this->app->halt(400, json_encode($ex->getMessage()));
+            return $this->getJsonResponse($response, $attachment, 201);
+        } catch (\Exception $exception) {
+            return $this->getExceptionResponse($response, $exception, 404);
         }
     }
 
@@ -46,36 +43,35 @@ class AttachmentController extends Controller
      * @param $activityId integer
      * @param $attachmentId integer
      */
-    public function downloadAction($activityId, $attachmentId) {
-        $activity = $this->getActivityMapper()->findActivityById($activityId);
+    public function downloadAction(Request $request, Response $response, $args = []) {
+        try {
+            $activity = $this->getActivityMapper()->findActivityById($args['activityId']);
+            $attachment = $this->getAttachmentMapper()->findAttachmentById($args['attachmentId']);
 
-        if (is_null($activity)) {
-            $this->app->halt(404, json_encode("Activity with the specified ID was not found"));
-        }
+            if ($activity->getId() !== $attachment->getActivity()->getId()) {
+                throw new \Exception('Attachment ID and activity ID do not match');
+            }
 
-        $attachment = $this->getAttachmentMapper()->findAttachmentById($attachmentId);
+            // obtain file path
+            $path = $attachment->getPath($this->container);
 
-        if (is_null($attachment)) {
-            $this->app->halt(404, json_encode("Attachment with the specified ID was not found"));
-        }
+            // determine mime type
+            $mimeType = mime_content_type($path);
 
-        if ($activity->getId() !== $attachment->getActivity()->getId()) {
-            $this->app->halt(400, json_encode("Attachment ID and activity ID do not match"));
-        }
-
-        $path = $attachment->getPath();
-
-        // determine mime type
-        $mimeType = mime_content_type($path);
-
-        if (file_exists($path)) {
-            $this->app->response->setStatus(200);
-            $this->app->response->headers->set('Content-Type', $mimeType);
-            $this->app->response->headers->set('Content-Disposition', 'attachment; filename="'.
-                $attachment->getName().'"');
-            $this->app->response->headers->set('Content-Length', filesize($path));
-
-            echo readfile($path);
+            if (file_exists($path)) {
+                $response = $response
+                    ->withStatus(200)
+                    ->withHeader('Content-Type', $mimeType)
+                    ->withHeader('Content-Disposition', 'attachment; filename="'.
+                        $attachment->getName().'"')
+                    ->withHeader('Content-Length', filesize($path));
+                readfile($path);
+                return $response;
+            } else {
+                throw new \Exception('File does not exist');
+            }
+        } catch (\Exception $exception) {
+            return $this->getExceptionResponse($response, $exception, 404);
         }
     }
 
@@ -86,32 +82,27 @@ class AttachmentController extends Controller
      * @param $activityId integer
      * @param $attachmentId integer
      */
-    public function deleteAction($activityId, $attachmentId) {
+    public function deleteAction(Request $request, Response $response, $args = []) {
         // TODO check if allowed to remove
-        $activity = $this->getActivityMapper()->findActivityById($activityId);
+        try {
+            $activity = $this->getActivityMapper()->findActivityById($args['activityId']);
+            $attachment = $this->getAttachmentMapper()->findAttachmentById($args['attachmentId']);
 
-        if (is_null($activity)) {
-            $this->app->halt(404, json_encode("Activity with the specified ID was not found"));
+            if ($activity->getId() !== $attachment->getActivity()->getId()) {
+                throw new \Exception('Attachment ID and activity ID do not match');
+            }
+
+            // remove attachment file
+            unlink($attachment->getPath($this->container));
+
+            // remove attachment from database
+            $this->getAttachmentMapper()->remove($attachment);
+            $this->getAttachmentMapper()->flush();
+
+            return $response->withStatus(204);
+        } catch (\Exception $exception) {
+            return $this->getExceptionResponse($response, $exception, 404);
         }
-
-        $attachment = $this->getAttachmentMapper()->findAttachmentById($attachmentId);
-
-        if (is_null($attachment)) {
-            $this->app->halt(404, json_encode("Attachment with the specified ID was not found"));
-        }
-
-        if ($activity->getId() !== $attachment->getActivity()->getId()) {
-            $this->app->halt(400, json_encode("Attachment ID and activity ID do not match"));
-        }
-
-        // remove attachment file
-        unlink($attachment->getPath());
-
-        // remove attachment from database
-        $this->getAttachmentMapper()->remove($attachment);
-        $this->getAttachmentMapper()->flush();
-
-        $this->app->response->setStatus(204);
     }
 
     /**
@@ -120,7 +111,7 @@ class AttachmentController extends Controller
      * @return \Service\AttachmentService
      */
     protected function getAttachmentService() {
-        return $this->app->service_attachment;
+        return $this->container->service_attachment;
     }
 
     /**
@@ -129,7 +120,7 @@ class AttachmentController extends Controller
      * @return \Service\ActivityService
      */
     protected function getActivityService() {
-        return $this->app->service_activity;
+        return $this->container->service_activity;
     }
 
     /**
@@ -138,7 +129,7 @@ class AttachmentController extends Controller
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->app->mapper_activity;
+        return $this->container->mapper_activity;
     }
 
     /**
@@ -147,7 +138,7 @@ class AttachmentController extends Controller
      * @return \Mapper\Attachment
      */
     protected function getAttachmentMapper() {
-        return $this->app->mapper_attachment;
+        return $this->container->mapper_attachment;
     }
 
 }

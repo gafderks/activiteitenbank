@@ -3,6 +3,8 @@
 
 namespace Controller;
 
+use Psr\Http\Message\ResponseInterface as Response;
+
 /**
  * Class Controller
  * Abstract class for controllers.
@@ -11,13 +13,55 @@ namespace Controller;
  */
 abstract class Controller
 {
-    protected $app;
+    protected $container;
 
     /**
      * Controller constructor.
      */
-    function __construct() {
-        $this->app = \Slim\Slim::getInstance();
+    public function __construct($container) {
+        $this->container = $container;
+    }
+
+    /**
+     * Creates a Response for returning an exception.
+     *
+     * @param Response   $response
+     * @param \Exception $exception
+     * @param int        $status HTTP output status
+     * @return Response  response object with the specified status and the message from the exception
+     */
+    protected function getExceptionResponse(Response $response, \Exception $exception, $status = 400) {
+        $response = $response->withStatus($status);
+        $response->getBody()->write($exception->getMessage());
+        return $response;
+    }
+
+    /**
+     * Creates a Response for returning an Object in JSON format.
+     *
+     * @param Response $response
+     * @param          $object
+     * @param int      $status HTTP output status
+     * @return \Psr\Http\Message\MessageInterface|Response
+     */
+    protected function getJsonResponse(Response $response, $object, $status = 200) {
+        $response = $response
+            ->withStatus($status)
+            ->withHeader('Content-Type', 'application/json');
+        $response->getBody()->write(json_encode($object));
+        return $response;
+    }
+
+    /**
+     * Creates a Response for redirecting to a named route.
+     *
+     * @param Response $response
+     * @param          $routeName
+     * @param int      $status HTTP output status
+     * @return \Psr\Http\Message\MessageInterface
+     */
+    protected function getRedirectResponse(Response $response, $routeName, $status = 301) {
+        return $response->withStatus($status)->withHeader('Location', $this->container->router->pathFor($routeName));
     }
 
 }

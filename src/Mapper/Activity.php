@@ -2,6 +2,8 @@
 // /src/Mapper/Activity.php
 
 namespace Mapper;
+use Exception\ActivityNotFoundException;
+use Respect\Validation\Exceptions\NullTypeException;
 
 /**
  * Mappers for Activities.
@@ -15,9 +17,14 @@ class Activity extends \Mapper\Mapper
      *
      * @param $id integer id of the activity to return
      * @return null|\Model\Activity\Activity
+     * @throws ActivityNotFoundException if the activity with he specified id does not exist
      */
     public function findActivityById($id) {
-        return $this->getRepository()->find($id);
+        $activity =  $this->getRepository()->find($id);
+        if (is_null($activity)) {
+            throw new \Exception\ActivityNotFoundException("Activity with the ID $id was not found");
+        }
+        return $activity;
     }
 
     /**
