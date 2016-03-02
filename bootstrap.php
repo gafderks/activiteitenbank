@@ -44,47 +44,57 @@ session_start();
  *******************************************************************************/
 
 // start Slim
-$app = new \Slim\Slim([
-    'debug' => true,
+$app = new \Slim\App([
+    'settings' => [
+        // Slim Settings
+        'determineRouteBeforeAppMiddleware' => false,
+        'displayErrorDetails' => true,
+    ],
 ]);
-// define the engine used for the view @see http://twig.sensiolabs.org
-$app->view = new \Slim\Views\Twig();
-$app->view->setTemplatesDirectory("view/{$config['template']}/templates");
+
+$container = $app->getContainer();
+
+// register url config
+$container['config'] = function ($container) use ($config) {
+    return array_merge($config, [
+        'assetsUrl' => "{$config['baseUrl']}/assets/{$config['template']}",
+        'componentsUrl' => "{$config['baseUrl']}/assets/vendor",
+    ]);
+};
 
 // Twig configuration
-$view = $app->view();
-$view->parserOptions = ['debug' => true];
-// twig extensions
-$view->parserExtensions = [
-    new \Slim\Views\TwigExtension(),
-    new \Twig_Extension_Debug(),
-    new \Twig_Extensions_Extension_I18n(),
-];
-// register custom filters
-$int2time = new Twig_SimpleFilter('int2time', ['\View\Format', 'int2Time']);
-$float2euro = new Twig_SimpleFilter('float2euro', ['\View\Format', 'float2Euro']);
-$bb2html = new Twig_SimpleFilter('bb2Html', ['\View\Format', 'bb2Html']);
-$app->view->getInstance()->addFilter($int2time);
-$app->view->getInstance()->addFilter($float2euro);
-$app->view->getInstance()->addFilter($bb2html);
-// register url config
-$app->config = array_merge($config, [
-    'assetsUrl' => "{$config['baseUrl']}/assets/{$config['template']}",
-    'componentsUrl' => "{$config['baseUrl']}/assets/vendor",
-]);
+$container['view'] = function($container) use ($config) {
+    $view = new \Slim\Views\Twig("view/{$config['template']}/templates", [
+        'cache' => "view/{$config['template']}/cache",
+        'debug' => true,
+        'auto_reload' => true,
+    ]);
 
-// register default data that is supplied to the templates
-$app->hook('slim.before', function () use ($app, $config) {
-    $app->view()->appendData(array_merge($app->config, [
-        'session' => ['user' => $app->service_login->getLoggedInUser()],
+    // twig extensions
+    $view->addExtension(new \Slim\Views\TwigExtension(
+        $container['router'],
+        $container['request']->getUri()
+    ));
+    $view->addExtension(new \Twig_Extension_Debug());
+    $view->addExtension(new \Twig_Extensions_Extension_I18n());
+    $view->addExtension(new \View\Extension\FormatTwigExtension($container));
+
+    // register default data that is supplied to the templates
+    $predefinedData = array_merge($container['config'], [
+        'session' => ['user' => $container->service_login->getLoggedInUser()],
         'enum' => [
             'activityArea' => \Model\Enum\ActivityArea::toArray(),
             'groupType' => \Model\Enum\GroupType::toArray(),
             'level' => \Model\Enum\Level::toArray(),
             'userRole' => \Model\Enum\UserRole::toArray(),
         ],
-    ]));
-});
+    ]);
+    foreach($predefinedData as $key => $value) {
+        $view->offsetSet($key, $value);
+    }
+
+    return $view;
+};
 
 /********************************************************************************
  * Set up I18n
@@ -119,17 +129,6 @@ textdomain('messages');
 // load application configuration
 $applicationConfig = include("config/config.php");
 
-// load middleware delegate
-$middlewareDelegate = function ($routeConfig) {
-    return function () use ($routeConfig) {
-        if (isset($routeConfig['options']['middleware'])) {
-            foreach($routeConfig['options']['middleware'] as $middleware) {
-                call_user_func($middleware);
-            }
-        }
-    };
-};
-
 // load routes
 foreach($applicationConfig['router']['routes'] as $name => $route) {
     switch($route['type']) {
@@ -139,34 +138,38 @@ foreach($applicationConfig['router']['routes'] as $name => $route) {
 
             switch($route['method']) {
                 case 'get':
-                    $app->get(
+                    $subject = $app->get(
                         $route['options']['route'],
-                        $middlewareDelegate($route),
                         "\\Controller\\{$controller}:{$action}Action"
-                    )->name($name);
+                    )->setName($name);
                     break;
                 case 'post':
-                    $app->post(
+                    $subject = $app->post(
                         $route['options']['route'],
-                        $middlewareDelegate($route),
                         "\\Controller\\{$controller}:{$action}Action"
-                    )->name($name);
+                    )->setName($name);
                     break;
                 case 'put':
-                    $app->put(
+                    $subject = $app->put(
                         $route['options']['route'],
-                        $middlewareDelegate($route),
                         "\\Controller\\{$controller}:{$action}Action"
-                    )->name($name);
+                    )->setName($name);
                     break;
                 case 'delete':
-                    $app->delete(
+                    $subject = $app->delete(
                         $route['options']['route'],
-                        $middlewareDelegate($route),
                         "\\Controller\\{$controller}:{$action}Action"
-                    )->name($name);
+                    )->setName($name);
                     break;
             }
+
+            // register middleware
+            if (isset($route['options']['middleware'])) {
+                foreach($route['options']['middleware'] as $middleware) {
+                    $subject->add(new $middleware());
+                }
+            }
+
             break;
     }
 }
@@ -180,15 +183,15 @@ foreach ($applicationConfig['resources'] as $name => $resource) {
     switch($resource['type']) {
         case 'service':
             $class = '\Service\\'.$resource['service'];
-            $app->container->singleton($name, function() use ($class) {
-              return new $class();
-            });
+            $container[$name] = function($container) use ($class) {
+              return new $class($container);
+            };
             break;
         case 'mapper':
             $class = '\Mapper\\'.$resource['mapper'];
-            $app->container->singleton($name, function() use ($class, $entityManager) {
-                return new $class($entityManager);
-            });
+            $container[$name] = function($container) use ($class, $entityManager) {
+                return new $class($container, $entityManager);
+            };
             break;
     }
 }

@@ -16,16 +16,17 @@ abstract class Mapper
      */
     protected $em;
 
-    protected $app;
+    protected $container;
 
     /**
      * Constructor
      *
      * @param EntityManager $em
+     * @param TODO $container
      */
-    public function __construct(EntityManager $em) {
+    public function __construct($container, EntityManager $em) {
         $this->em = $em;
-        $this->app = \Slim\Slim::getInstance();
+        $this->container = $container;
     }
 
     /**

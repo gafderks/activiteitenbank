@@ -1,6 +1,8 @@
 <?php
 
-namespace View;
+namespace View\Extension;
+
+use Interop\Container\ContainerInterface;
 
 /**
  * Class Format
@@ -8,8 +10,19 @@ namespace View;
  *
  * @package View
  */
-class Format
+class FormatTwigExtension extends \Twig_Extension
 {
+
+    private $container;
+
+    /**
+     * FormatTwigExtension constructor.
+     *
+     * @param ContainerInterface $container
+     */
+    public function __construct(ContainerInterface $container){
+        $this->container = $container;
+    }
 
     /**
      * Converts a float to a formatted euro value.
@@ -19,9 +32,9 @@ class Format
      */
     public function float2Euro($float) {
         $euros = floor($float);
-        $cents = str_pad(($float-$euros)*100, 2, '0', STR_PAD_LEFT);
+        $cents = str_pad(($float - $euros) * 100, 2, '0', STR_PAD_LEFT);
 
-        return "&euro;&nbsp;".$euros.".".$cents;
+        return "&euro;&nbsp;" . $euros . "." . $cents;
     }
 
     /**
@@ -31,10 +44,10 @@ class Format
      * @return string formatted hours and minutes
      */
     public function int2Time($int) {
-        $hours   = floor($int/60);
-        $minutes = str_pad($int%60, 2, '0', STR_PAD_LEFT);
+        $hours   = floor($int / 60);
+        $minutes = str_pad($int % 60, 2, '0', STR_PAD_LEFT);
 
-        return $hours.":".$minutes;
+        return $hours . ":" . $minutes;
     }
 
     /**
@@ -47,10 +60,10 @@ class Format
     public function bb2Html($bbcode) {
         $parser = new \SBBCodeParser\Node_Container_Document();
 
-        $app = \Slim\Slim::getInstance();
+        $container = $this->container;
 
         // locate smileys folder
-        $sF = $app->config['componentsUrl'].'/ckeditor/plugins/smiley/images/';
+        $sF = $container->config['componentsUrl'].'/ckeditor/plugins/smiley/images/';
 
         $parser->add_emoticons([
             ':D' => $sF.'teeth_smile.png',
@@ -73,6 +86,29 @@ class Format
             ->detect_emoticons()
             ->get_html();
         return $html;
+    }
+
+    /**
+     * Returns the name of the extension.
+     *
+     * @return string
+     */
+    public function getName() {
+        return 'format';
+    }
+
+    /**
+     * Returns the filters that are defined in this extension.
+     *
+     * @return array
+     */
+    public function getFilters() {
+        parent::getFilters();
+        return [
+            new \Twig_SimpleFilter('bb2html', [$this, 'bb2Html']),
+            new \Twig_SimpleFilter('int2time', [$this, 'int2Time']),
+            new \Twig_SimpleFilter('float2euro', [$this, 'float2Euro']),
+        ];
     }
 
 }

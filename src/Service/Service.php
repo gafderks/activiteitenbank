@@ -3,6 +3,8 @@
 
 namespace Service;
 
+use \Interop\Container\ContainerInterface;
+
 /**
  * Class Service
  * Abstract class for services.
@@ -11,13 +13,15 @@ namespace Service;
  */
 abstract class Service
 {
-    protected $app;
+    protected $container;
 
     /**
      * Service constructor.
+     *
+     * @param ContainerInterface $container
      */
-    function __construct() {
-        $this->app = \Slim\Slim::getInstance();
+    function __construct(ContainerInterface $container) {
+        $this->container = $container;
     }
 
 }

@@ -130,7 +130,7 @@ class ActivityService extends Service
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->app->mapper_activity;
+        return $this->container->mapper_activity;
     }
 
 }

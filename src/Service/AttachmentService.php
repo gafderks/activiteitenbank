@@ -38,9 +38,9 @@ class AttachmentService extends Service
     /**
      * AttachmentService constructor.
      */
-    public function __construct() {
-        parent::__construct();
-        $this->storage = new \Upload\Storage\FileSystem($this->app->config['uploadsDirectory']);
+    public function __construct($container) {
+        parent::__construct($container);
+        $this->storage = new \Upload\Storage\FileSystem($this->container->config['uploadsDirectory']);
     }
 
     /**
@@ -60,9 +60,8 @@ class AttachmentService extends Service
      * Tries to upload the file specified with the key and creates an attachment object if successful.
      *
      * @param string                   $key key from the request that the file is located in
-     * @param \Model\Activity\Activity $activity activity to associate the attachment with
      * @return \Model\Activity\Attachment attachment object for the uploaded attachment
-     * @throws \Exception
+     * @throws \Exception if an error occurs during uploading
      */
     public function uploadAttachment($key) {
         $file = new \Upload\File($key, $this->storage);
@@ -77,13 +76,6 @@ class AttachmentService extends Service
             new \Upload\Validation\Size($this->maxSize)
         ]);
 
-        $data = [
-            'name'       => $file->getNameWithExtension(),
-            'extension'  => $file->getExtension(),
-            'mime'       => $file->getMimetype(),
-            'size'       => $file->getSize(),
-        ];
-
         try {
             $file->upload();
         } catch (\Exception $e) {
@@ -91,7 +83,7 @@ class AttachmentService extends Service
         }
 
         // set file permissions
-        chmod($this->app->config['uploadsDirectory'] . '/' . $file->getNameWithExtension(), $this->permission);
+        chmod($this->container->config['uploadsDirectory'] . '/' . $file->getNameWithExtension(), $this->permission);
 
         // create attachment object
         $attachment = new \Model\Activity\Attachment();
@@ -107,7 +99,7 @@ class AttachmentService extends Service
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->app->mapper_activity;
+        return $this->container->mapper_activity;
     }
 
 }

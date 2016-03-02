@@ -18,7 +18,11 @@ class Attachment extends \Mapper\Mapper
      * @return null|\Model\Activity\Attachment
      */
     public function findAttachmentById($id) {
-        return $this->getRepository()->find($id);
+        $activity =  $this->getRepository()->find($id);
+        if (is_null($activity)) {
+            throw new \Exception\AttachmentNotFoundException("Attachment with the ID $id was not found");
+        }
+        return $activity;
     }
 
     /**

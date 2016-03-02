@@ -19,19 +19,19 @@
                 <h3 class="activity-section">
                     {{ "Elaboration"|trans }}
                     <span>
-                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#elaboration"
+                        <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#elaboration"
                            class="hidden-print">
                             {{ "Edit"|trans }}
                         </a>
                     </span>
                 </h3>
-                {{ activity.elaboration|bb2Html|raw }}
+                {{ activity.elaboration|bb2html|raw }}
 
 
                 <h3 class="activity-section">
                     {{ "Planning"|trans }}
                     <span>
-                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#planning"
+                        <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#planning"
                            class="hidden-print">
                             {{ "Edit"|trans }}
                         </a>
@@ -63,7 +63,7 @@
                 <h3 class="activity-section">
                     {{ "Preparations"|trans }}
                     <span>
-                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#preparations"
+                        <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#preparations"
                            class="hidden-print">
                             {{ "Edit"|trans }}
                         </a>
@@ -82,7 +82,7 @@
                 <h3 class="activity-section">
                     {{ "Materials"|trans }}
                     <span>
-                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#materials"
+                        <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#materials"
                            class="hidden-print">
                             {{ "Edit"|trans }}
                         </a>
@@ -100,7 +100,7 @@
                 <h3 class="activity-section">
                     {{ "Budgetary"|trans }}
                     <span>
-                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#budgetary"
+                        <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#budgetary"
                            class="hidden-print">
                             {{ "Edit"|trans }}
                         </a>
@@ -126,7 +126,7 @@
                 <h3 class="activity-section">
                     {{ "Attachments"|trans }}
                     <span>
-                        <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#attachments"
+                        <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#attachments"
                            class="hidden-print">
                             {{ "Edit"|trans }}
                         </a>
@@ -135,7 +135,7 @@
                 <ul class="list">
                     {% for item in activity.attachments %}
                         <li>
-                            <a href="{{ urlFor('api-attachment-get', {"activityId": activity.id,
+                            <a href="{{ path_for('api-attachment-get', {"activityId": activity.id,
                                 "attachmentId": item.id, "fileName": item.slug}) }}">{{ item.name }}</a>
                         </li>
                     {% endfor %}
@@ -152,7 +152,7 @@
                             </h3>
                             <div class="sidebar-content">
                                 <p>
-                                    <a href="{{ urlFor('activity-edit', {"id": activity.id, "slug": activity.slug}) }}"
+                                    <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}"
                                        style="color: #000; margin: 5px;">
                                         <span class="glyphicon glyphicon-edit"></span>
                                         <strong>{{ "Edit activity"|trans }}</strong>
@@ -165,7 +165,7 @@
                                     </a>
                                 </p>
                                 <p>
-                                    <a href="{{ urlFor('api-activity-get-pdf', {"id": activity.id}) }}" style="color: #000; margin: 5px;">
+                                    <a href="{{ path_for('api-activity-get-pdf', {"id": activity.id}) }}" style="color: #000; margin: 5px;">
                                         <span class="glyphicon glyphicon-download"></span>
                                         {{ "Download PDF"|trans }}
                                     </a>

@@ -3,6 +3,9 @@
 
 namespace Controller;
 
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+
 /**
  * Class ViewerController
  *
@@ -14,19 +17,23 @@ class ViewerController extends Controller
     /**
      * Shows the viewer for the specified activity.
      *
-     * @param $id integer id of the activity to view
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
-    public function viewAction($id) {
-        $activity = $this->getActivityMapper()->findActivityById($id);
+    public function viewAction(Request $request, Response $response, $args = []) {
+        try {
+            $activity = $this->getActivityMapper()->findActivityById($args['id']);
 
-        if (is_null($activity)) {
-            $this->app->halt(404, json_encode("Activity with the specified ID was not found"));
+            $params = [
+                'activity' => $activity,
+            ];
+            $this->container->view->render($response, 'pages/viewer.twig', $params);
+            return $response;
+        } catch(\Exception $exception) {
+            return $this->getExceptionResponse($response, $exception, 404);
         }
-
-        $params = [
-            'activity' => $activity,
-        ];
-        $this->app->render('pages/viewer.twig', $params);
     }
 
     /**
@@ -36,7 +43,7 @@ class ViewerController extends Controller
      */
     protected function getLoginService()
     {
-        return $this->app->service_login;
+        return $this->container->service_login;
     }
 
     /**
@@ -45,7 +52,7 @@ class ViewerController extends Controller
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->app->mapper_activity;
+        return $this->container->mapper_activity;
     }
 
 }

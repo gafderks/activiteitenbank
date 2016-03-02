@@ -16,7 +16,7 @@ class FacebookService extends LoginService
     /**
      * Tries to log in a user. Returns whether login was successful.
      *
-     * @return bool
+     * @return bool whether login was successful
      * @throws \Exception when some user is already logged in
      */
     public function loginUser() {
@@ -36,7 +36,7 @@ class FacebookService extends LoginService
         if (isset($accessToken)) {
             $_SESSION['facebook_access_token'] = (string) $accessToken;
 
-            if (null !== $this->getLoggedInUser()) {
+            if ($this->getLoggedInUser() !== null) {
                 throw new \Exception('A user is already logged in');
             }
 
@@ -73,6 +73,8 @@ class FacebookService extends LoginService
     }
 
     /**
+     * Returns a URL that can be used to login with Facebook.
+     *
      * @return string
      */
     public function getFacebookLoginUrl() {
@@ -80,19 +82,22 @@ class FacebookService extends LoginService
 
         $helper = $fb->getRedirectLoginHelper();
         $permissions = ['email', 'public_profile'];
-        $loginUrl = $helper->getLoginUrl($this->app->config['domain'] . $this->app->urlFor('facebook-login-callback'),
+        $loginUrl = $helper->getLoginUrl($this->container->config['domain'] .
+            $this->container->router->pathFor('facebook-login-callback'),
             $permissions);
         return $loginUrl;
     }
 
     /**
+     * Returns a Facebook SDK object.
+     *
      * @return Facebook
      */
     public function getFacebookObject() {
         return new \Facebook\Facebook([
-            'app_id' => $this->app->config['facebook']['app_id'],
-            'app_secret' => $this->app->config['facebook']['app_secret'],
-            'default_graph_version' => $this->app->config['facebook']['default_graph_version'],
+            'app_id' => $this->container->config['facebook']['app_id'],
+            'app_secret' => $this->container->config['facebook']['app_secret'],
+            'default_graph_version' => $this->container->config['facebook']['default_graph_version'],
         ]);
     }
 

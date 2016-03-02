@@ -121,7 +121,7 @@
         <div>
             <h3 class="wizard-title">{% trans "Attachments" %}</h3>
             {% if activity is defined %}
-            <form action="{{ urlFor('api-attachment-post', {"activityId": activity.id}) }}" id="attachmentsDropzone"
+            <form action="{{ path_for('api-attachment-post', {"activityId": activity.id}) }}" id="attachmentsDropzone"
                   class="dropzone">
                 <input type="hidden" name="activity-id" value="{{ activity.id }}" />
                 <input type="hidden" name="action" value="upload" />

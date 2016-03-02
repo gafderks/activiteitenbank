@@ -30,7 +30,7 @@ class LoginService extends Service
         // check if valid credentials were given
         if ($this->verifyLogin($user, $password) === true) {
             // check if there is already a user logged in
-            if (null !== $this->getLoggedInUser()) {
+            if ($this->getLoggedInUser() !== null) {
                 throw new \Exception('A user is already logged in');
             }
 
@@ -108,7 +108,7 @@ class LoginService extends Service
      * @return \Mapper\User
      */
     protected function getUserMapper() {
-        return $this->app->mapper_user;
+        return $this->container->mapper_user;
     }
 
     /**
@@ -117,7 +117,7 @@ class LoginService extends Service
      * @return \Service\UserService
      */
     protected function getUserService() {
-        return $this->app->service_user;
+        return $this->container->service_user;
     }
 
     /**

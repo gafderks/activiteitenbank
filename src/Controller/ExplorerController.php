@@ -3,6 +3,9 @@
 
 namespace Controller;
 
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+
 /**
  * Class ExplorerController
  *
@@ -28,13 +31,19 @@ class ExplorerController extends Controller
 
     /**
      * Shows the explorer.
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
      */
-    public function indexAction() {
+    public function indexAction(Request $request, Response $response, $args = []) {
         $params = [
             'searchColumns' => $this->searchColumns,
             'activities' => $this->getActivityMapper()->findAll()
         ];
-        $this->app->render('pages/explorer.twig', $params);
+        $this->container->view->render($response, 'pages/explorer.twig', $params);
+        return $response;
     }
 
     /**
@@ -43,7 +52,7 @@ class ExplorerController extends Controller
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->app->mapper_activity;
+        return $this->container->mapper_activity;
     }
 
 }
