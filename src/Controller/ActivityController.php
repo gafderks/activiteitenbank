@@ -28,6 +28,13 @@ class ActivityController extends Controller
     public function getAction(Request $request, Response $response, $args = []) {
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['id']);
+
+            // if token is not allowed to view this activity, output 401
+            if (!$this->getActivityService()->tokenMayView($activity, $this->container['jwt'])) {
+                return $this->getExceptionResponse($response,
+                    new \Exception("You are not allowed to perform this action"), 401);
+            }
+
             return $this->getJsonResponse($response, $activity, 200);
         } catch(\Exception $exception) {
             return $this->getExceptionResponse($response, $exception, 404);
@@ -46,6 +53,12 @@ class ActivityController extends Controller
     public function generatePdfAction(Request $request, Response $response, $args = []) {
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['id']);
+
+            // if token is not allowed to download this activity, output 401
+            if (!$this->getActivityService()->tokenMayDownload($activity, $this->container['jwt'])) {
+                return $this->getExceptionResponse($response,
+                    new \Exception("You are not allowed to perform this action"), 401);
+            }
 
             // generate the rendered html template
             $params = [
@@ -106,9 +119,14 @@ class ActivityController extends Controller
      * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function updateAction(Request $request, Response $response, $args = []) {
-        // TODO check if allowed to update
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['id']);
+
+            // if token is not allowed to update this activity, output 401
+            if (!$this->getActivityService()->tokenMayEdit($activity, $this->container['jwt'])) {
+                return $this->getExceptionResponse($response,
+                    new \Exception("You are not allowed to perform this action"), 401);
+            }
 
             // load input
             $input = json_decode($request->getBody());
@@ -146,10 +164,15 @@ class ActivityController extends Controller
      * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function deleteAction(Request $request, Response $response, $args = []) {
-        // TODO check if allowed to remove
         // TODO also delete sub-entities
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['id']);
+
+            // if token is not allowed to delete this activity, output 401
+            if (!$this->getActivityService()->tokenMayDelete($activity, $this->container['jwt'])) {
+                return $this->getExceptionResponse($response,
+                    new \Exception("You are not allowed to perform this action"), 401);
+            }
 
             // actually remove activity
             $this->getActivityMapper()->remove($activity);
@@ -173,6 +196,12 @@ class ActivityController extends Controller
      * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function createAction(Request $request, Response $response, $args = []) {
+        // if token is not allowed to create a new activity, output 401
+        if (!$this->getActivityService()->tokenMayCreate($this->container['jwt'])) {
+            return $this->getExceptionResponse($response,
+                new \Exception("You are not allowed to perform this action"), 401);
+        }
+
         // load input
         $input = json_decode($request->getBody());
 
