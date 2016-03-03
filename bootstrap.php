@@ -81,7 +81,7 @@ $container['view'] = function($container) use ($config) {
 
     // register default data that is supplied to the templates
     $predefinedData = array_merge($container['config'], [
-        'session' => ['user' => $container->service_login->getLoggedInUser()],
+        'session' => ['user' => $container['service_login']->getLoggedInUser()],
         'enum' => [
             'activityArea' => \Model\Enum\ActivityArea::toArray(),
             'groupType' => \Model\Enum\GroupType::toArray(),
@@ -102,7 +102,7 @@ $container['view'] = function($container) use ($config) {
 
 // register ACL service as a singleton
 $container['acl'] = function() {
-    return new \Service\AclService();
+    return new \Acl\Acl();
 };
 
 /********************************************************************************
