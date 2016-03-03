@@ -33,13 +33,13 @@ class LoginController extends Controller
 
         ];
 
-        if ($this->container->config['facebook']['enableLogin']) {
+        if ($this->container['config']['facebook']['enableLogin']) {
             $params = array_merge($params, [
                 'facebookLoginUrl' => $this->getFacebookService()->getFacebookLoginUrl(),
             ]);
         }
 
-        $this->container->view->render($response, 'pages/login.twig', $params);
+        $this->container['view']->render($response, 'pages/login.twig', $params);
         return $response;
     }
 
@@ -99,12 +99,12 @@ class LoginController extends Controller
                 'errors' => $errors
             ],
         ];
-        if ($this->container->config['facebook']['enableLogin']) {
+        if ($this->container['config']['facebook']['enableLogin']) {
             $params = array_merge($params, [
                 'facebookLoginUrl' => $this->getFacebookService()->getFacebookLoginUrl(),
             ]);
         }
-        $this->container->view->render($response, 'pages/login.twig', $params);
+        $this->container['view']->render($response, 'pages/login.twig', $params);
         return $response;
     }
 
@@ -153,12 +153,12 @@ class LoginController extends Controller
                 'errors' => $errors,
             ],
         ];
-        if ($this->container->config['facebook']['enableLogin']) {
+        if ($this->container['config']['facebook']['enableLogin']) {
             $params = array_merge($params, [
                 'facebookLoginUrl' => $this->getFacebookService()->getFacebookLoginUrl(),
             ]);
         }
-        $this->container->view->render($response, 'pages/login.twig', $params);
+        $this->container['view']->render($response, 'pages/login.twig', $params);
         return $response;
     }
 
@@ -168,7 +168,7 @@ class LoginController extends Controller
      * @return \Service\LoginService
      */
     protected function getLoginService() {
-        return $this->container->service_login;
+        return $this->container['service_login'];
     }
 
     /**
@@ -177,7 +177,7 @@ class LoginController extends Controller
      * @return \Service\FacebookService
      */
     protected function getFacebookService() {
-        return $this->container->service_facebook;
+        return $this->container['service_facebook'];
     }
 
     /**
@@ -186,7 +186,7 @@ class LoginController extends Controller
      * @return \Service\UserService
      */
     protected function getUserService() {
-        return $this->container->service_user;
+        return $this->container['service_user'];
     }
 
 }

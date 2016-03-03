@@ -64,7 +64,7 @@ abstract class Controller
      * @return \Psr\Http\Message\MessageInterface
      */
     protected function getRedirectResponse(Response $response, $routeName, $status = 301) {
-        return $response->withStatus($status)->withHeader('Location', $this->container->router->pathFor($routeName));
+        return $response->withStatus($status)->withHeader('Location', $this->container['router']->pathFor($routeName));
     }
 
 }

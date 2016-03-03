@@ -43,7 +43,7 @@ class ViewerController extends Controller
                     $this->getLoginService()->getLoggedInUser()),
                 'userMayCreate' => $this->getActivityService()->userMayCreate($this->getLoginService()->getLoggedInUser()),
             ];
-            $this->container->view->render($response, 'pages/viewer.twig', $params);
+            $this->container['view']->render($response, 'pages/viewer.twig', $params);
             return $response;
         } catch(\Exception $exception) {
             return $this->getExceptionResponse($response, $exception, 404);
@@ -57,7 +57,7 @@ class ViewerController extends Controller
      */
     protected function getLoginService()
     {
-        return $this->container->service_login;
+        return $this->container['service_login'];
     }
 
     /**
@@ -66,7 +66,7 @@ class ViewerController extends Controller
      * @return \Service\ActivityService
      */
     protected function getActivityService() {
-        return $this->container->service_activity;
+        return $this->container['service_activity'];
     }
 
     /**
@@ -75,7 +75,7 @@ class ViewerController extends Controller
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->container->mapper_activity;
+        return $this->container['mapper_activity'];
     }
 
 }

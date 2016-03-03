@@ -42,7 +42,7 @@ class ExplorerController extends Controller
             'searchColumns' => $this->searchColumns,
             'activities' => $this->getActivityMapper()->findAll()
         ];
-        $this->container->view->render($response, 'pages/explorer.twig', $params);
+        $this->container['view']->render($response, 'pages/explorer.twig', $params);
         return $response;
     }
 
@@ -52,7 +52,7 @@ class ExplorerController extends Controller
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->container->mapper_activity;
+        return $this->container['mapper_activity'];
     }
 
 }

@@ -31,7 +31,7 @@ class EditorController extends Controller
         $params = [
 
         ];
-        $this->container->view->render($response, 'pages/editor.twig', $params);
+        $this->container['view']->render($response, 'pages/editor.twig', $params);
         return $response;
     }
 
@@ -65,7 +65,7 @@ class EditorController extends Controller
                     $this->getLoginService()->getLoggedInUser()),
                 'userMayCreate' => $this->getActivityService()->userMayCreate($this->getLoginService()->getLoggedInUser()),
             ];
-            $this->container->view->render($response, 'pages/editor.twig', $params);
+            $this->container['view']->render($response, 'pages/editor.twig', $params);
             return $response;
         } catch(\Exception $exception) {
             return $this->getExceptionResponse($response, $exception, 404);
@@ -78,7 +78,7 @@ class EditorController extends Controller
      * @return \Service\LoginService
      */
     protected function getLoginService() {
-        return $this->container->service_login;
+        return $this->container['service_login'];
     }
 
     /**
@@ -87,7 +87,7 @@ class EditorController extends Controller
      * @return \Service\ActivityService
      */
     protected function getActivityService() {
-        return $this->container->service_activity;
+        return $this->container['service_activity'];
     }
 
     /**
@@ -96,7 +96,7 @@ class EditorController extends Controller
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->container->mapper_activity;
+        return $this->container['mapper_activity'];
     }
 
 }

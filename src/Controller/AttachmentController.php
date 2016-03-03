@@ -118,7 +118,7 @@ class AttachmentController extends Controller
      * @return \Service\AttachmentService
      */
     protected function getAttachmentService() {
-        return $this->container->service_attachment;
+        return $this->container['service_attachment'];
     }
 
     /**
@@ -127,7 +127,7 @@ class AttachmentController extends Controller
      * @return \Service\ActivityService
      */
     protected function getActivityService() {
-        return $this->container->service_activity;
+        return $this->container['service_activity'];
     }
 
     /**
@@ -136,7 +136,7 @@ class AttachmentController extends Controller
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->container->mapper_activity;
+        return $this->container['mapper_activity'];
     }
 
     /**
@@ -145,7 +145,7 @@ class AttachmentController extends Controller
      * @return \Mapper\Attachment
      */
     protected function getAttachmentMapper() {
-        return $this->container->mapper_attachment;
+        return $this->container['mapper_attachment'];
     }
 
 }

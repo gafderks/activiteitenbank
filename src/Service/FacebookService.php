@@ -82,8 +82,8 @@ class FacebookService extends LoginService
 
         $helper = $fb->getRedirectLoginHelper();
         $permissions = ['email', 'public_profile'];
-        $loginUrl = $helper->getLoginUrl($this->container->config['domain'] .
-            $this->container->router->pathFor('facebook-login-callback'),
+        $loginUrl = $helper->getLoginUrl($this->container['config']['domain'] .
+            $this->container['router']->pathFor('facebook-login-callback'),
             $permissions);
         return $loginUrl;
     }
@@ -95,8 +95,8 @@ class FacebookService extends LoginService
      */
     public function getFacebookObject() {
         return new \Facebook\Facebook([
-            'app_id' => $this->container->config['facebook']['app_id'],
-            'app_secret' => $this->container->config['facebook']['app_secret'],
+            'app_id' => $this->container['config']['facebook']['app_id'],
+            'app_secret' => $this->container['config']['facebook']['app_secret'],
             'default_graph_version' => 'v2.5',
         ]);
     }

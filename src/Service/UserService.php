@@ -46,7 +46,7 @@ class UserService extends Service
      * @return \Mapper\User
      */
     protected function getUserMapper() {
-        return $this->container->mapper_user;
+        return $this->container['mapper_user'];
     }
 
 }

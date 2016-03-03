@@ -51,7 +51,7 @@ class ActivityController extends Controller
             $params = [
                 'activity' => $activity,
             ];
-            $renderedHtml = $this->container->view->fetch('pdf/activity.twig', $params);
+            $renderedHtml = $this->container['view']->fetch('pdf/activity.twig', $params);
 
             // generate files for header and footer
             $partials = $this->getPdfService()->renderTemplatesToUrls([
@@ -60,7 +60,7 @@ class ActivityController extends Controller
             ]);
 
             // initialize Snappy
-            $snappy = new Pdf($this->container->config['absolutePath'] .
+            $snappy = new Pdf($this->container['config']['absolutePath'] .
                 '/vendor/wemersonjanuario/wkhtmltopdf-windows/bin/32bit/wkhtmltopdf.exe');
             $snappy->setOptions([
                 'page-size' => 'A4',
@@ -206,7 +206,7 @@ class ActivityController extends Controller
      * @return \Service\ActivityService
      */
     protected function getActivityService() {
-        return $this->container->service_activity;
+        return $this->container['service_activity'];
     }
 
     /**
@@ -215,7 +215,7 @@ class ActivityController extends Controller
      * @return \Service\PdfService
      */
     protected function getPdfService() {
-        return $this->container->service_pdf;
+        return $this->container['service_pdf'];
     }
 
     /**
@@ -224,7 +224,7 @@ class ActivityController extends Controller
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->container->mapper_activity;
+        return $this->container['mapper_activity'];
     }
 
 }

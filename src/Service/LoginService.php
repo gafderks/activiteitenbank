@@ -108,7 +108,7 @@ class LoginService extends Service
      * @return \Mapper\User
      */
     protected function getUserMapper() {
-        return $this->container->mapper_user;
+        return $this->container['mapper_user'];
     }
 
     /**
@@ -117,7 +117,7 @@ class LoginService extends Service
      * @return \Service\UserService
      */
     protected function getUserService() {
-        return $this->container->service_user;
+        return $this->container['service_user'];
     }
 
     /**
