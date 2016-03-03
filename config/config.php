@@ -189,6 +189,10 @@ return [
             'type' => 'service',
             'service' => 'PdfService',
         ],
+        'service_jwt' => [
+            'type' => 'service',
+            'service' => 'JwtService',
+        ],
         'mapper_user' => [
             'type' => 'mapper',
             'mapper' => 'User',

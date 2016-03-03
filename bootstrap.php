@@ -105,6 +105,18 @@ $container['acl'] = function() {
     return new \Acl\Acl();
 };
 
+$app->add(new \Slim\Middleware\JwtAuthentication([
+    'path' => '/api',
+    'secret' => $config['apiSecret'],
+    'callback' => function($request, $response, $arguments) use ($container) {
+        // store jwt for later use
+        $container['jwt'] = $arguments['decoded'];
+        // check if user is also allowed these privileges with the current role
+        $jwtService = new \Service\JwtService($container);
+        return $jwtService->authorizeToken($arguments['decoded']);
+    }
+]));
+
 /********************************************************************************
  * Set up I18n
  *******************************************************************************/

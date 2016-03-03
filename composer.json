@@ -16,7 +16,8 @@
         "facebook/php-sdk-v4": "^5.1",
         "slim/twig-view": "^2.0",
         "jeremykendall/slim-auth": "^1.0",
-        "firebase/php-jwt": "^3.0"
+        "firebase/php-jwt": "^3.0",
+        "tuupola/slim-jwt-auth": "^2.0"
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "*"

@@ -5,11 +5,11 @@ namespace Acl;
 use Zend\Permissions\Acl\Acl as ZendAcl;
 
 /**
- * Class AclService
+ * Class Acl
  *
  * Handles the Access Control List.
  *
- * @package Service
+ * @package Acl
  */
 class Acl extends ZendAcl
 {
