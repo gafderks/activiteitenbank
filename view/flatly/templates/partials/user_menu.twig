@@ -35,7 +35,9 @@
                                     <a href="#" class="btn btn-default btn-sm">{% trans "Settings" %}</a>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
-                                    <a href="{{ path_for('logout') }}" class="btn btn-default btn-sm pull-right">{% trans "Sign out" %}</a>
+                                    <form action="{{ path_for('logout') }}" method="post">
+                                        <input type="submit" class="btn btn-default btn-sm pull-right" value="{% trans "Sign out" %}" />
+                                    </form>
                                 </div>
                             </div>
                         </div>
