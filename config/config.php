@@ -32,7 +32,7 @@ return [
             ],
             'logout' => [
                 'type' => 'literal',
-                'method' => 'get',
+                'method' => 'post',
                 'options' => [
                     'route' => '/logout',
                     'controller' => 'LoginController',

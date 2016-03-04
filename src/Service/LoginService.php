@@ -137,6 +137,7 @@ class LoginService extends Service
      * Destroys the current session.
      */
     public function logoutUser() {
+        unset($_SESSION);
         session_destroy();
     }
 
