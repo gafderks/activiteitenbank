@@ -27,10 +27,12 @@ class AttachmentController extends Controller
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['activityId']);
 
-            // if token is not allowed to update this activity, output 401
-            if (!$this->getActivityService()->tokenMayEdit($activity, $this->container['jwt'])) {
-                return $this->getExceptionResponse($response,
-                    new \Exception("You are not allowed to perform this action"), 401);
+            if (!$this->container['acl']->isAllowed('guest', 'activity', 'edit')) {
+                // if token is not allowed to update this activity, output 401
+                if (!$this->getActivityService()->tokenMayEdit($activity, $this->container['jwt'])) {
+                    return $this->getExceptionResponse($response,
+                        new \Exception("You are not allowed to perform this action"), 401);
+                }
             }
 
             $attachment = $this->getAttachmentService()->uploadAttachment('file');
@@ -59,10 +61,12 @@ class AttachmentController extends Controller
             $activity = $this->getActivityMapper()->findActivityById($args['activityId']);
             $attachment = $this->getAttachmentMapper()->findAttachmentById($args['attachmentId']);
 
-            // if token is not allowed to view this activity, output 401
-            if (!$this->getActivityService()->tokenMayView($activity, $this->container['jwt'])) {
-                return $this->getExceptionResponse($response,
-                    new \Exception("You are not allowed to perform this action"), 401);
+            if (!$this->container['acl']->isAllowed('guest', 'activity', 'view')) {
+                // if token is not allowed to view this activity, output 401
+                if (!$this->getActivityService()->tokenMayView($activity, $this->container['jwt'])) {
+                    return $this->getExceptionResponse($response,
+                        new \Exception("You are not allowed to perform this action"), 401);
+                }
             }
 
             if ($activity->getId() !== $attachment->getActivity()->getId()) {
@@ -106,10 +110,12 @@ class AttachmentController extends Controller
             $activity = $this->getActivityMapper()->findActivityById($args['activityId']);
             $attachment = $this->getAttachmentMapper()->findAttachmentById($args['attachmentId']);
 
-            // if token is not allowed to update this activity, output 401
-            if (!$this->getActivityService()->tokenMayEdit($activity, $this->container['jwt'])) {
-                return $this->getExceptionResponse($response,
-                    new \Exception("You are not allowed to perform this action"), 401);
+            if (!$this->container['acl']->isAllowed('guest', 'activity', 'edit')) {
+                // if token is not allowed to update this activity, output 401
+                if (!$this->getActivityService()->tokenMayEdit($activity, $this->container['jwt'])) {
+                    return $this->getExceptionResponse($response,
+                        new \Exception("You are not allowed to perform this action"), 401);
+                }
             }
 
             if ($activity->getId() !== $attachment->getActivity()->getId()) {

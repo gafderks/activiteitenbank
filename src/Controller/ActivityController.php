@@ -29,10 +29,12 @@ class ActivityController extends Controller
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['id']);
 
-            // if token is not allowed to view this activity, output 401
-            if (!$this->getActivityService()->tokenMayView($activity, $this->container['jwt'])) {
-                return $this->getExceptionResponse($response,
-                    new \Exception("You are not allowed to perform this action"), 401);
+            if (!$this->container['acl']->isAllowed('guest', 'activity', 'view')) {
+                // if token is not allowed to view this activity, output 401
+                if (!$this->getActivityService()->tokenMayView($activity, $this->container['jwt'])) {
+                    return $this->getExceptionResponse($response,
+                        new \Exception("You are not allowed to perform this action"), 401);
+                }
             }
 
             return $this->getJsonResponse($response, $activity, 200);
@@ -54,10 +56,12 @@ class ActivityController extends Controller
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['id']);
 
-            // if token is not allowed to download this activity, output 401
-            if (!$this->getActivityService()->tokenMayDownload($activity, $this->container['jwt'])) {
-                return $this->getExceptionResponse($response,
-                    new \Exception("You are not allowed to perform this action"), 401);
+            if (!$this->container['acl']->isAllowed('guest', 'activity', 'download')) {
+                // if token is not allowed to download this activity, output 401
+                if (!$this->getActivityService()->tokenMayDownload($activity, $this->container['jwt'])) {
+                    return $this->getExceptionResponse($response,
+                        new \Exception("You are not allowed to perform this action"), 401);
+                }
             }
 
             // generate the rendered html template
@@ -122,10 +126,12 @@ class ActivityController extends Controller
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['id']);
 
-            // if token is not allowed to update this activity, output 401
-            if (!$this->getActivityService()->tokenMayEdit($activity, $this->container['jwt'])) {
-                return $this->getExceptionResponse($response,
-                    new \Exception("You are not allowed to perform this action"), 401);
+            if (!$this->container['acl']->isAllowed('guest', 'activity', 'edit')) {
+                // if token is not allowed to update this activity, output 401
+                if (!$this->getActivityService()->tokenMayEdit($activity, $this->container['jwt'])) {
+                    return $this->getExceptionResponse($response,
+                        new \Exception("You are not allowed to perform this action"), 401);
+                }
             }
 
             // load input
@@ -168,10 +174,12 @@ class ActivityController extends Controller
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['id']);
 
-            // if token is not allowed to delete this activity, output 401
-            if (!$this->getActivityService()->tokenMayDelete($activity, $this->container['jwt'])) {
-                return $this->getExceptionResponse($response,
-                    new \Exception("You are not allowed to perform this action"), 401);
+            if (!$this->container['acl']->isAllowed('guest', 'activity', 'delete')) {
+                // if token is not allowed to delete this activity, output 401
+                if (!$this->getActivityService()->tokenMayDelete($activity, $this->container['jwt'])) {
+                    return $this->getExceptionResponse($response,
+                        new \Exception("You are not allowed to perform this action"), 401);
+                }
             }
 
             // actually remove activity
@@ -196,10 +204,12 @@ class ActivityController extends Controller
      * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function createAction(Request $request, Response $response, $args = []) {
-        // if token is not allowed to create a new activity, output 401
-        if (!$this->getActivityService()->tokenMayCreate($this->container['jwt'])) {
-            return $this->getExceptionResponse($response,
-                new \Exception("You are not allowed to perform this action"), 401);
+        if (!$this->container['acl']->isAllowed('guest', 'activity', 'create')) {
+            // if token is not allowed to create a new activity, output 401
+            if (!$this->getActivityService()->tokenMayCreate($this->container['jwt'])) {
+                return $this->getExceptionResponse($response,
+                    new \Exception("You are not allowed to perform this action"), 401);
+            }
         }
 
         // load input
