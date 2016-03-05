@@ -5,6 +5,8 @@ namespace Acl;
 /**
  * Class Scope
  *
+ * ADT for JWT scopes.
+ *
  * @package Acl
  */
 class Scope
