@@ -28,9 +28,20 @@ class EditorController extends Controller
             return $this->getRedirectResponse($response, 'login');
         }
 
+        $loggedInUser = $this->getLoginService()->getLoggedInUser();
         $params = [
 
         ];
+        // add jwt token to parameters
+        if ($loggedInUser !== null) {
+            $params = array_merge($params, [
+                'authToken' => $this->getJwtService()->generateToken($loggedInUser,
+                    new \Acl\Scope([
+                        'activity' => ['create']
+                    ])
+                ),
+            ]);
+        }
         $this->container['view']->render($response, 'pages/editor.twig', $params);
         return $response;
     }
@@ -53,6 +64,7 @@ class EditorController extends Controller
                 return $this->getRedirectResponse($response, 'login');
             }
 
+            $loggedInUser = $this->getLoginService()->getLoggedInUser();
             $params = [
                 'activity' => $activity,
                 'userMayDelete' => $this->getActivityService()->userMayDelete($activity,
@@ -65,6 +77,16 @@ class EditorController extends Controller
                     $this->getLoginService()->getLoggedInUser()),
                 'userMayCreate' => $this->getActivityService()->userMayCreate($this->getLoginService()->getLoggedInUser()),
             ];
+            // add jwt token to parameters
+            if ($loggedInUser !== null) {
+                $params = array_merge($params, [
+                    'authToken' => $this->getJwtService()->generateToken($loggedInUser,
+                        new \Acl\Scope([
+                            'activity' => ['edit', 'delete']
+                        ])
+                    ),
+                ]);
+            }
             $this->container['view']->render($response, 'pages/editor.twig', $params);
             return $response;
         } catch(\Exception $exception) {
@@ -88,6 +110,15 @@ class EditorController extends Controller
      */
     protected function getActivityService() {
         return $this->container['service_activity'];
+    }
+
+    /**
+     * Get the JWT service.
+     *
+     * @return \Service\JwtService
+     */
+    protected function getJwtService() {
+        return $this->container['service_jwt'];
     }
 
     /**
