@@ -17,3 +17,29 @@ In the main directory of the project, there is a `generate-cache.php` script. If
 command line, all strings which are translated by the translated will be put in the cache folder
 `/view/{template}/cache`. With an editor like POEdit, these files can be put into a catalog and translation strings can
 be extracted.
+
+## API
+This application provides an API that uses [JSON Web Tokens (JWT)](http://jwt.io/). These tokens need to be supplied
+ using the Authorization header. For this applications, JWTs have the following layout:
+```json
+ {
+   "iss": "{{domain}}",
+   "iat": 1457141623,
+   "exp": 1457228023,
+   "sub": 1,
+   "scopes": {
+     "activity": {
+       "actions": [
+         "edit",
+         "delete"
+       ]
+     }
+   }
+ }
+```
+Tokens are signed and base 64 encoded. An example of a header is:
+```
+Authentication: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ7e2RvbWFpbn19IiwiaWF0IjoxNDU3MTQxNjIzLCJleHAiOjE0NTcyMjgwMjMsInN1YiI6MSwic2NvcGVzIjp7ImFjdGl2aXR5Ijp7ImFjdGlvbnMiOlsiZWRpdCIsImRlbGV0ZSJdfX19.2lSXvVWWE5bgYcCY95eooRN11GSP4EQTHvX_AWMJaO4
+```
+The scope is added to the token to be able to limit the capabilities of it. Be aware that also the permissions for the
+subject of the token are checked, meaning that a token can never grant permissions that the subject does not have.
