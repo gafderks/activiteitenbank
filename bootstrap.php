@@ -8,6 +8,7 @@ use Doctrine\ORM\Tools\Setup;
  *******************************************************************************/
 
 $config = include("config.php");
+$applicationConfig = include("config/config.php");
 
 /********************************************************************************
  * Set up autoloader
@@ -114,7 +115,12 @@ $app->add(new \Slim\Middleware\JwtAuthentication([
         // check if user is also allowed these privileges with the current role
         $jwtService = new \Service\JwtService($container);
         return $jwtService->authorizeToken($arguments['decoded']);
-    }
+    },
+    'rules' => [ // disable authentication on public routes
+        new \Acl\AuthenticationRule([
+            'appConfiguration' => $applicationConfig
+        ]),
+    ],
 ]));
 
 /********************************************************************************
@@ -147,13 +153,10 @@ textdomain('messages');
  * Load routes from configuration
  *******************************************************************************/
 
-// load application configuration
-$applicationConfig = include("config/config.php");
-
 // load routes
 foreach($applicationConfig['router']['routes'] as $name => $route) {
     switch($route['type']) {
-        case 'literal':
+        case 'literal' || 'api':
             $controller = $route['options']['controller'];
             $action = $route['options']['action'];
 

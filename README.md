@@ -19,8 +19,10 @@ command line, all strings which are translated by the translated will be put in 
 be extracted.
 
 ## API
-This application provides an API that uses [JSON Web Tokens (JWT)](http://jwt.io/). These tokens need to be supplied
- using the Authorization header. For this applications, JWTs have the following layout:
+This application provides an API that uses [JSON Web Tokens (JWT)](http://jwt.io/) for authentication.
+For all API-routes that are non-public a token need to be supplied using the Authorization header.
+
+For this application, JWTs have the following layout:
 ```json
  {
    "iss": "{{domain}}",
@@ -37,7 +39,7 @@ This application provides an API that uses [JSON Web Tokens (JWT)](http://jwt.io
    }
  }
 ```
-Tokens are signed and base 64 encoded. An example of a header is:
+Tokens are signed and base-64 encoded. An example of a header is:
 ```
 Authentication: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ7e2RvbWFpbn19IiwiaWF0IjoxNDU3MTQxNjIzLCJleHAiOjE0NTcyMjgwMjMsInN1YiI6MSwic2NvcGVzIjp7ImFjdGl2aXR5Ijp7ImFjdGlvbnMiOlsiZWRpdCIsImRlbGV0ZSJdfX19.2lSXvVWWE5bgYcCY95eooRN11GSP4EQTHvX_AWMJaO4
 ```
