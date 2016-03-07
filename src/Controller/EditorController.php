@@ -88,8 +88,7 @@ class EditorController extends Controller
             if ($acl->isAllowed($loggedInUser->getRole()->value(), 'activity', 'delete')) {
                 array_push($permissionActivity, 'delete');
             }
-            array_merge($scope, ['activity' => $permissionActivity]);
-            var_dump($scope);
+            $scope = array_merge($scope, ['activity' => $permissionActivity]);
             // add jwt token to parameters
             if ($loggedInUser !== null) {
                 $params = array_merge($params, [
