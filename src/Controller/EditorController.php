@@ -77,13 +77,24 @@ class EditorController extends Controller
                     $this->getLoginService()->getLoggedInUser()),
                 'userMayCreate' => $this->getActivityService()->userMayCreate($this->getLoginService()->getLoggedInUser()),
             ];
+            $acl = new \Acl\Acl();
+            $scope = [
+                'ownActivity' => ['edit', 'delete']
+            ];
+            $permissionActivity = [];
+            if ($acl->isAllowed($loggedInUser->getRole()->value(), 'activity', 'edit')) {
+                array_push($permissionActivity, 'edit');
+            }
+            if ($acl->isAllowed($loggedInUser->getRole()->value(), 'activity', 'delete')) {
+                array_push($permissionActivity, 'delete');
+            }
+            array_merge($scope, ['activity' => $permissionActivity]);
+            var_dump($scope);
             // add jwt token to parameters
             if ($loggedInUser !== null) {
                 $params = array_merge($params, [
                     'authToken' => $this->getJwtService()->generateToken($loggedInUser,
-                        new \Acl\Scope([
-                            'activity' => ['edit', 'delete']
-                        ])
+                        new \Acl\Scope($scope)
                     ),
                 ]);
             }

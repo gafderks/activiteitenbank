@@ -245,6 +245,7 @@
         dictMaxFilesExceeded: "{{ "You can not upload any more files."|trans }}",
         addRemoveLinks: true,
         paramName: "file",
+        headers: {"Authorization": "Bearer {{ authToken }}"},
         init: function() {
             // add existing files
             {% set count = 0 %}
@@ -268,7 +269,10 @@
                 console.log(file);
                 $.ajax({
                     url: '{{ baseUrl }}/api/activity/{{ activity.id }}/attachment/'+file.id,
-                    type: 'DELETE'
+                    type: 'DELETE',
+                    beforeSend: function(xhr, settings) {
+                        xhr.setRequestHeader('Authorization', 'Bearer {{ authToken }}');
+                    }
                 });
             });
         }
