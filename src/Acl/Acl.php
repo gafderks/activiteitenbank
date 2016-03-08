@@ -24,6 +24,8 @@ class Acl extends ZendAcl
          the guest role permissions by default */
         $this->addRole('member', 'guest');
         $this->addRole('moderator', 'member');
+        // the administrator is a role on its own that does not extend another role
+
         $this->addRole('admin');
 
         // Application resources
@@ -36,7 +38,7 @@ class Acl extends ZendAcl
 
         // Application permissions
         /* Now we allow or deny a role's access to resources. The third
-        argument is 'privilege'. We are using HTTP method as 'privilege'. */
+        argument is 'privilege'. */
         $this->allow('guest', 'login');
         $this->allow('guest', 'explorer');
         $this->allow('guest', 'activity', ['view', 'download']);
