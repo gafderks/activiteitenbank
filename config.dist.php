@@ -27,14 +27,18 @@ return [
     'template' => 'flatly',
 
     /**
-     * Domain that the application will run on.
+     * Domain (root URI) that the application will run on.
      * Without trailing slash.
+     *
+     * Example: 'http://example.com'
      */
     'domain' => 'put domain URL here',
 
     /**
      * Public URL of the /public folder.
      * Without trailing slash.
+     *
+     * Example: 'http://example.com/folder/folder/public'
      */
     'baseUrl' => 'put public root URL here',
 
