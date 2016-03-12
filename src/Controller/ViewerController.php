@@ -26,10 +26,31 @@ class ViewerController extends Controller
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['id']);
 
+            // if user is not allowed to view this activity, forward to login form
+            if (!$this->getActivityService()->userMayView($activity, $this->getLoginService()->getLoggedInUser())) {
+                return $this->getRedirectResponse($response, 'login');
+            }
+
+            $loggedInUser = $this->getLoginService()->getLoggedInUser();
             $params = [
                 'activity' => $activity,
+                'userMayDelete' => $this->getActivityService()->userMayDelete($activity, $loggedInUser),
+                'userMayDownload' => $this->getActivityService()->userMayDownload($activity, $loggedInUser),
+                'userMayView' => $this->getActivityService()->userMayView($activity, $loggedInUser),
+                'userMayEdit' => $this->getActivityService()->userMayEdit($activity, $loggedInUser),
+                'userMayCreate' => $this->getActivityService()->userMayCreate($loggedInUser),
             ];
-            $this->container->view->render($response, 'pages/viewer.twig', $params);
+            // add jwt token to parameters
+            if ($loggedInUser !== null) {
+                $params = array_merge($params, [
+                    'authToken' => $this->getJwtService()->generateToken($loggedInUser,
+                        new \Acl\Scope([
+                            'activity' => ['view', 'download'],
+                            'ownActivity' => ['view', 'download']
+                        ])),
+                ]);
+            }
+            $this->container['view']->render($response, 'pages/viewer.twig', $params);
             return $response;
         } catch(\Exception $exception) {
             return $this->getExceptionResponse($response, $exception, 404);
@@ -43,7 +64,16 @@ class ViewerController extends Controller
      */
     protected function getLoginService()
     {
-        return $this->container->service_login;
+        return $this->container['service_login'];
+    }
+
+    /**
+     * Get the Activity service.
+     *
+     * @return \Service\ActivityService
+     */
+    protected function getActivityService() {
+        return $this->container['service_activity'];
     }
 
     /**
@@ -52,7 +82,16 @@ class ViewerController extends Controller
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->container->mapper_activity;
+        return $this->container['mapper_activity'];
+    }
+
+    /**
+     * Get the Jwt service.
+     *
+     * @return \Service\JwtService
+     */
+    protected function getJwtService() {
+        return $this->container['service_jwt'];
     }
 
 }

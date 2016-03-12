@@ -27,6 +27,14 @@ class AttachmentController extends Controller
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['activityId']);
 
+            if (!$this->container['acl']->isAllowed('guest', 'activity', 'edit')) {
+                // if token is not allowed to update this activity, output 401
+                if (!$this->getActivityService()->tokenMayEdit($activity, $this->container['jwt'])) {
+                    return $this->getExceptionResponse($response,
+                        new \Exception("You are not allowed to perform this action"), 401);
+                }
+            }
+
             $attachment = $this->getAttachmentService()->uploadAttachment('file');
             $attachment->setActivity($activity);
             // store attachment in database
@@ -52,6 +60,14 @@ class AttachmentController extends Controller
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['activityId']);
             $attachment = $this->getAttachmentMapper()->findAttachmentById($args['attachmentId']);
+
+            if (!$this->container['acl']->isAllowed('guest', 'activity', 'view')) {
+                // if token is not allowed to view this activity, output 401
+                if (!$this->getActivityService()->tokenMayView($activity, $this->container['jwt'])) {
+                    return $this->getExceptionResponse($response,
+                        new \Exception("You are not allowed to perform this action"), 401);
+                }
+            }
 
             if ($activity->getId() !== $attachment->getActivity()->getId()) {
                 throw new \Exception('Attachment ID and activity ID do not match');
@@ -90,10 +106,17 @@ class AttachmentController extends Controller
      * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function deleteAction(Request $request, Response $response, $args = []) {
-        // TODO check if allowed to remove
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['activityId']);
             $attachment = $this->getAttachmentMapper()->findAttachmentById($args['attachmentId']);
+
+            if (!$this->container['acl']->isAllowed('guest', 'activity', 'edit')) {
+                // if token is not allowed to update this activity, output 401
+                if (!$this->getActivityService()->tokenMayEdit($activity, $this->container['jwt'])) {
+                    return $this->getExceptionResponse($response,
+                        new \Exception("You are not allowed to perform this action"), 401);
+                }
+            }
 
             if ($activity->getId() !== $attachment->getActivity()->getId()) {
                 throw new \Exception('Attachment ID and activity ID do not match');
@@ -118,7 +141,7 @@ class AttachmentController extends Controller
      * @return \Service\AttachmentService
      */
     protected function getAttachmentService() {
-        return $this->container->service_attachment;
+        return $this->container['service_attachment'];
     }
 
     /**
@@ -127,7 +150,7 @@ class AttachmentController extends Controller
      * @return \Service\ActivityService
      */
     protected function getActivityService() {
-        return $this->container->service_activity;
+        return $this->container['service_activity'];
     }
 
     /**
@@ -136,7 +159,7 @@ class AttachmentController extends Controller
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->container->mapper_activity;
+        return $this->container['mapper_activity'];
     }
 
     /**
@@ -145,7 +168,7 @@ class AttachmentController extends Controller
      * @return \Mapper\Attachment
      */
     protected function getAttachmentMapper() {
-        return $this->container->mapper_attachment;
+        return $this->container['mapper_attachment'];
     }
 
 }

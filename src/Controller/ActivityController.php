@@ -28,6 +28,15 @@ class ActivityController extends Controller
     public function getAction(Request $request, Response $response, $args = []) {
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['id']);
+
+            if (!$this->container['acl']->isAllowed('guest', 'activity', 'view')) {
+                // if token is not allowed to view this activity, output 401
+                if (!$this->getActivityService()->tokenMayView($activity, $this->container['jwt'])) {
+                    return $this->getExceptionResponse($response,
+                        new \Exception("You are not allowed to perform this action"), 401);
+                }
+            }
+
             return $this->getJsonResponse($response, $activity, 200);
         } catch(\Exception $exception) {
             return $this->getExceptionResponse($response, $exception, 404);
@@ -47,11 +56,19 @@ class ActivityController extends Controller
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['id']);
 
+            if (!$this->container['acl']->isAllowed('guest', 'activity', 'download')) {
+                // if token is not allowed to download this activity, output 401
+                if (!$this->getActivityService()->tokenMayDownload($activity, $this->container['jwt'])) {
+                    return $this->getExceptionResponse($response,
+                        new \Exception("You are not allowed to perform this action"), 401);
+                }
+            }
+
             // generate the rendered html template
             $params = [
                 'activity' => $activity,
             ];
-            $renderedHtml = $this->container->view->fetch('pdf/activity.twig', $params);
+            $renderedHtml = $this->container['view']->fetch('pdf/activity.twig', $params);
 
             // generate files for header and footer
             $partials = $this->getPdfService()->renderTemplatesToUrls([
@@ -60,7 +77,7 @@ class ActivityController extends Controller
             ]);
 
             // initialize Snappy
-            $snappy = new Pdf($this->container->config['absolutePath'] .
+            $snappy = new Pdf($this->container['config']['absolutePath'] .
                 '/vendor/wemersonjanuario/wkhtmltopdf-windows/bin/32bit/wkhtmltopdf.exe');
             $snappy->setOptions([
                 'page-size' => 'A4',
@@ -106,9 +123,16 @@ class ActivityController extends Controller
      * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function updateAction(Request $request, Response $response, $args = []) {
-        // TODO check if allowed to update
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['id']);
+
+            if (!$this->container['acl']->isAllowed('guest', 'activity', 'edit')) {
+                // if token is not allowed to update this activity, output 401
+                if (!$this->getActivityService()->tokenMayEdit($activity, $this->container['jwt'])) {
+                    return $this->getExceptionResponse($response,
+                        new \Exception("You are not allowed to perform this action"), 401);
+                }
+            }
 
             // load input
             $input = json_decode($request->getBody());
@@ -146,10 +170,17 @@ class ActivityController extends Controller
      * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function deleteAction(Request $request, Response $response, $args = []) {
-        // TODO check if allowed to remove
         // TODO also delete sub-entities
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['id']);
+
+            if (!$this->container['acl']->isAllowed('guest', 'activity', 'delete')) {
+                // if token is not allowed to delete this activity, output 401
+                if (!$this->getActivityService()->tokenMayDelete($activity, $this->container['jwt'])) {
+                    return $this->getExceptionResponse($response,
+                        new \Exception("You are not allowed to perform this action"), 401);
+                }
+            }
 
             // actually remove activity
             $this->getActivityMapper()->remove($activity);
@@ -173,6 +204,14 @@ class ActivityController extends Controller
      * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function createAction(Request $request, Response $response, $args = []) {
+        if (!$this->container['acl']->isAllowed('guest', 'activity', 'create')) {
+            // if token is not allowed to create a new activity, output 401
+            if (!$this->getActivityService()->tokenMayCreate($this->container['jwt'])) {
+                return $this->getExceptionResponse($response,
+                    new \Exception("You are not allowed to perform this action"), 401);
+            }
+        }
+
         // load input
         $input = json_decode($request->getBody());
 
@@ -206,7 +245,7 @@ class ActivityController extends Controller
      * @return \Service\ActivityService
      */
     protected function getActivityService() {
-        return $this->container->service_activity;
+        return $this->container['service_activity'];
     }
 
     /**
@@ -215,7 +254,7 @@ class ActivityController extends Controller
      * @return \Service\PdfService
      */
     protected function getPdfService() {
-        return $this->container->service_pdf;
+        return $this->container['service_pdf'];
     }
 
     /**
@@ -224,7 +263,7 @@ class ActivityController extends Controller
      * @return \Mapper\Activity
      */
     protected function getActivityMapper() {
-        return $this->container->mapper_activity;
+        return $this->container['mapper_activity'];
     }
 
 }

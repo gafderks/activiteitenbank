@@ -18,24 +18,28 @@
 
                 <h3 class="activity-section">
                     {{ "Elaboration"|trans }}
-                    <span>
-                        <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#elaboration"
-                           class="hidden-print">
-                            {{ "Edit"|trans }}
-                        </a>
-                    </span>
+                    {% if userMayEdit %}
+                        <span>
+                            <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#elaboration"
+                               class="hidden-print">
+                                {{ "Edit"|trans }}
+                            </a>
+                        </span>
+                    {% endif %}
                 </h3>
                 {{ activity.elaboration|bb2html|raw }}
 
 
                 <h3 class="activity-section">
                     {{ "Planning"|trans }}
-                    <span>
-                        <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#planning"
-                           class="hidden-print">
-                            {{ "Edit"|trans }}
-                        </a>
-                    </span>
+                    {% if userMayEdit %}
+                        <span>
+                            <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#planning"
+                               class="hidden-print">
+                                {{ "Edit"|trans }}
+                            </a>
+                        </span>
+                    {% endif %}
                 </h3>
                 <ul class="list">
                     {% set planningTimeCumulative = 0 %}
@@ -62,12 +66,14 @@
 
                 <h3 class="activity-section">
                     {{ "Preparations"|trans }}
-                    <span>
-                        <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#preparations"
-                           class="hidden-print">
-                            {{ "Edit"|trans }}
-                        </a>
-                    </span>
+                    {% if userMayEdit %}
+                        <span>
+                            <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#preparations"
+                               class="hidden-print">
+                                {{ "Edit"|trans }}
+                            </a>
+                        </span>
+                    {% endif %}
                 </h3>
                 <ul class="list">
                     {% for item in activity.checklist.items %}
@@ -81,12 +87,14 @@
 
                 <h3 class="activity-section">
                     {{ "Materials"|trans }}
-                    <span>
-                        <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#materials"
-                           class="hidden-print">
-                            {{ "Edit"|trans }}
-                        </a>
-                    </span>
+                    {% if userMayEdit %}
+                        <span>
+                            <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#materials"
+                               class="hidden-print">
+                                {{ "Edit"|trans }}
+                            </a>
+                        </span>
+                    {%  endif %}
                 </h3>
                 <ul class="list">
                     {% for material in activity.materials.materials %}
@@ -99,12 +107,14 @@
 
                 <h3 class="activity-section">
                     {{ "Budgetary"|trans }}
-                    <span>
-                        <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#budgetary"
-                           class="hidden-print">
-                            {{ "Edit"|trans }}
-                        </a>
-                    </span>
+                    {% if userMayEdit %}
+                        <span>
+                            <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#budgetary"
+                               class="hidden-print">
+                                {{ "Edit"|trans }}
+                            </a>
+                        </span>
+                    {% endif %}
                 </h3>
                 <ul class="list">
                     {% set budgetTotal = 0 %}
@@ -125,18 +135,21 @@
 
                 <h3 class="activity-section">
                     {{ "Attachments"|trans }}
-                    <span>
-                        <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#attachments"
-                           class="hidden-print">
-                            {{ "Edit"|trans }}
-                        </a>
-                    </span>
+                    {% if userMayEdit %}
+                        <span>
+                            <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}#attachments"
+                               class="hidden-print">
+                                {{ "Edit"|trans }}
+                            </a>
+                        </span>
+                    {% endif %}
                 </h3>
                 <ul class="list">
                     {% for item in activity.attachments %}
                         <li>
                             <a href="{{ path_for('api-attachment-get', {"activityId": activity.id,
-                                "attachmentId": item.id, "fileName": item.slug}) }}">{{ item.name }}</a>
+                                "attachmentId": item.id, "fileName": item.slug}) }}" data-token="{{ authToken }}">
+                                {{ item.name }}</a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -151,27 +164,30 @@
                                 {{ "Actions"|trans }}
                             </h3>
                             <div class="sidebar-content">
-                                <p>
-                                    <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}"
-                                       style="color: #000; margin: 5px;">
-                                        <span class="glyphicon glyphicon-edit"></span>
-                                        <strong>{{ "Edit activity"|trans }}</strong>
-                                    </a>
-                                </p>
+                                {% if userMayEdit %}
+                                    <p>
+                                        <a href="{{ path_for('activity-edit', {"id": activity.id, "slug": activity.slug}) }}"
+                                           style="color: #000; margin: 5px;">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                            <strong>{{ "Edit activity"|trans }}</strong>
+                                        </a>
+                                    </p>
+                                {% endif %}
                                 <p>
                                     <a href="javascript:window.print(); " style="color: #000; margin: 5px;">
                                         <span class="glyphicon glyphicon-print"></span>
                                         {{ "Print activity"|trans }}
                                     </a>
                                 </p>
-                                <p>
-                                    <a href="{{ path_for('api-activity-get-pdf', {"id": activity.id}) }}" style="color: #000; margin: 5px;">
-                                        <span class="glyphicon glyphicon-download"></span>
-                                        {{ "Download PDF"|trans }}
-                                    </a>
-                                </p>
-                                <hr />
-                                <a href="javascript:void(0);" style="color: #f00; margin: 5px;"><span class="glyphicon glyphicon-trash"></span>{{ "Delete activity"|trans }}</a>
+                                {% if userMayDownload %}
+                                    <p>
+                                        <a href="{{ path_for('api-activity-get-pdf', {"id": activity.id}) }}" style="color: #000; margin: 5px;"
+                                        data-token="{{ authToken }}">
+                                            <span class="glyphicon glyphicon-download"></span>
+                                            {{ "Download PDF"|trans }}
+                                        </a>
+                                    </p>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -189,6 +205,11 @@
                             5: 'Very high'} %}
 
                             <div class="sidebar-content">
+                                <p>
+                                    <span class="glyphicon glyphicon-asterisk"></span>{{ "Creator"|trans }}:
+                                    <span class="activity-property editable">{{ activity.creator.firstName }}
+                                        {{ activity.creator.lastName }}</span>
+                                </p>
                                 <p>
                                     {% set activityCategoriesNamed = [] %}
                                     {% set activityCategories = [] %}

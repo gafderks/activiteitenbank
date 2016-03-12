@@ -76,7 +76,7 @@ return [
                 ],
             ],
             'api-activity-post' => [
-                'type' => 'literal',
+                'type' => 'api',
                 'method' => 'post',
                 'options' => [
                     'route' => '/api/activity',
@@ -86,9 +86,14 @@ return [
                         '\Middleware\apiActivityValidator',
                     ],
                 ],
+                'acl' => [
+                    'resource' => 'activity',
+                    'privilege' => 'create',
+                    'pattern' => '/api/activity/\d+',
+                ],
             ],
             'api-activity-put' => [
-                'type' => 'literal',
+                'type' => 'api',
                 'method' => 'put',
                 'options' => [
                     'route' => '/api/activity/{id}',
@@ -98,59 +103,94 @@ return [
                         '\Middleware\apiActivityValidator',
                     ],
                 ],
+                'acl' => [
+                    'resource' => 'activity',
+                    'privilege' => 'edit',
+                    'pattern' => '/api/activity/\d+',
+                ],
             ],
             'api-activity-get' => [
-                'type' => 'literal',
+                'type' => 'api',
                 'method' => 'get',
                 'options' => [
                     'route' => '/api/activity/{id}',
                     'controller' => 'ActivityController',
                     'action' => 'get',
                 ],
+                'acl' => [
+                    'resource' => 'activity',
+                    'privilege' => 'view',
+                    'pattern' => '/api/activity/\d+',
+                ],
             ],
             'api-activity-get-pdf' => [
-                'type' => 'literal',
+                'type' => 'api',
                 'method' => 'get',
                 'options' => [
                     'route' => '/api/activity/{id}/pdf',
                     'controller' => 'ActivityController',
                     'action' => 'generatePdf',
                 ],
+                'acl' => [
+                    'resource' => 'activity',
+                    'privilege' => 'view',
+                    'pattern' => '/api/activity/\d+/pdf',
+                ],
             ],
             'api-activity-delete' => [
-                'type' => 'literal',
+                'type' => 'api',
                 'method' => 'delete',
                 'options' => [
                     'route' => '/api/activity/{id}',
                     'controller' => 'ActivityController',
                     'action' => 'delete',
                 ],
+                'acl' => [
+                    'resource' => 'activity',
+                    'privilege' => 'delete',
+                    'pattern' => '/api/activity/\d+',
+                ],
             ],
             'api-attachment-post' => [
-                'type' => 'literal',
+                'type' => 'api',
                 'method' => 'post',
                 'options' => [
                     'route' => '/api/activity/{activityId}/attachment',
                     'controller' => 'AttachmentController',
                     'action' => 'upload',
                 ],
+                'acl' => [
+                    'resource' => 'activity',
+                    'privilege' => 'edit',
+                    'pattern' => '/api/activity/\d+/attachment',
+                ],
             ],
             'api-attachment-get' => [
-                'type' => 'literal',
+                'type' => 'api',
                 'method' => 'get',
                 'options' => [
                     'route' => '/api/activity/{activityId}/attachment/{attachmentId}[/{fileName}]',
                     'controller' => 'AttachmentController',
                     'action' => 'download',
                 ],
+                'acl' => [
+                    'resource' => 'activity',
+                    'privilege' => 'view',
+                    'pattern' => '/api/activity/\d+/attachment/\d+/?.*',
+                ],
             ],
             'api-attachment-delete' => [
-                'type' => 'literal',
+                'type' => 'api',
                 'method' => 'delete',
                 'options' => [
                     'route' => '/api/activity/{activityId}/attachment/{attachmentId}[/{fileName}]',
                     'controller' => 'AttachmentController',
                     'action' => 'delete',
+                ],
+                'acl' => [
+                    'resource' => 'activity',
+                    'privilege' => 'edit',
+                    'pattern' => '/api/activity/\d+/attachment/\d+/?.*',
                 ],
             ],
             'facebook-login-callback' => [
@@ -188,6 +228,10 @@ return [
         'service_pdf' => [
             'type' => 'service',
             'service' => 'PdfService',
+        ],
+        'service_jwt' => [
+            'type' => 'service',
+            'service' => 'JwtService',
         ],
         'mapper_user' => [
             'type' => 'mapper',

@@ -108,7 +108,7 @@ class LoginService extends Service
      * @return \Mapper\User
      */
     protected function getUserMapper() {
-        return $this->container->mapper_user;
+        return $this->container['mapper_user'];
     }
 
     /**
@@ -117,7 +117,7 @@ class LoginService extends Service
      * @return \Service\UserService
      */
     protected function getUserService() {
-        return $this->container->service_user;
+        return $this->container['service_user'];
     }
 
     /**
@@ -130,6 +130,21 @@ class LoginService extends Service
             return null;
         } else {
             return $this->getUserMapper()->findUserById($_SESSION[$this->userIdSessionIndex]);
+        }
+    }
+
+    /**
+     * Returns the role of the user that is currently logged in.
+     * This is primarily used for ACL.
+     *
+     * @return \Model\Enum\UserRole role of the logged in user
+     */
+    public function getLoggedInUserRole() {
+        $user = $this->getLoggedInUser();
+        if ($user === null) {
+            return new \Model\Enum\UserRole(\Model\Enum\UserRole::Guest);
+        } else {
+            return $user->getRole();
         }
     }
 

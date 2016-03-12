@@ -55,7 +55,7 @@ class FacebookService extends LoginService
             $user = $this->getUserService()->findUserByEmail($email);
             if ($user === null) {
                 $user = $this->registerUser($email, $firstName, $lastName,
-                    new \Model\Enum\UserRole(\Model\Enum\UserRole::Plain));
+                    new \Model\Enum\UserRole(\Model\Enum\UserRole::Member));
             }
 
             // store userId in session
@@ -82,8 +82,8 @@ class FacebookService extends LoginService
 
         $helper = $fb->getRedirectLoginHelper();
         $permissions = ['email', 'public_profile'];
-        $loginUrl = $helper->getLoginUrl($this->container->config['domain'] .
-            $this->container->router->pathFor('facebook-login-callback'),
+        $loginUrl = $helper->getLoginUrl($this->container['config']['domain'] .
+            $this->container['router']->pathFor('facebook-login-callback'),
             $permissions);
         return $loginUrl;
     }
@@ -95,9 +95,9 @@ class FacebookService extends LoginService
      */
     public function getFacebookObject() {
         return new \Facebook\Facebook([
-            'app_id' => $this->container->config['facebook']['app_id'],
-            'app_secret' => $this->container->config['facebook']['app_secret'],
-            'default_graph_version' => $this->container->config['facebook']['default_graph_version'],
+            'app_id' => $this->container['config']['facebook']['app_id'],
+            'app_secret' => $this->container['config']['facebook']['app_secret'],
+            'default_graph_version' => 'v2.5',
         ]);
     }
 

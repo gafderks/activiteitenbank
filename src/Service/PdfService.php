@@ -22,12 +22,12 @@ class PdfService extends Service
     public function renderTemplatesToUrls(array $templates) {
         foreach($templates as $key => &$template) {
             // fetch the render of the template with the specified parameters
-            $htmlString = $this->container->view->fetch($template[0], $template[1]);
+            $htmlString = $this->container['view']->fetch($template[0], $template[1]);
 
             // generate a random filename with a html extension
             $htmlFilePath = null;
             while (true) {
-                $htmlFilePath = $this->container->config['tempDirectory'] . '/' . uniqid("pdf", true) . '.html';
+                $htmlFilePath = $this->container['config']['tempDirectory'] . '/' . uniqid("pdf", true) . '.html';
                 if (!file_exists($htmlFilePath)) break;
             }
 

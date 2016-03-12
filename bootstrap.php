@@ -8,6 +8,7 @@ use Doctrine\ORM\Tools\Setup;
  *******************************************************************************/
 
 $config = include("config.php");
+$applicationConfig = include("config/config.php");
 
 /********************************************************************************
  * Set up autoloader
@@ -81,7 +82,7 @@ $container['view'] = function($container) use ($config) {
 
     // register default data that is supplied to the templates
     $predefinedData = array_merge($container['config'], [
-        'session' => ['user' => $container->service_login->getLoggedInUser()],
+        'session' => ['user' => $container['service_login']->getLoggedInUser()],
         'enum' => [
             'activityArea' => \Model\Enum\ActivityArea::toArray(),
             'groupType' => \Model\Enum\GroupType::toArray(),
@@ -95,6 +96,32 @@ $container['view'] = function($container) use ($config) {
 
     return $view;
 };
+
+/********************************************************************************
+ * Initialize ACL
+ *******************************************************************************/
+
+// register ACL service as a singleton
+$container['acl'] = function() {
+    return new \Acl\Acl();
+};
+
+$app->add(new \Slim\Middleware\JwtAuthentication([
+    'path' => '/api',
+    'secret' => $config['apiSecret'],
+    'callback' => function($request, $response, $arguments) use ($container) {
+        // store jwt for later use
+        $container['jwt'] = $arguments['decoded'];
+        // check if user is also allowed these privileges with the current role
+        $jwtService = new \Service\JwtService($container);
+        return $jwtService->authorizeToken($arguments['decoded']);
+    },
+    'rules' => [ // disable authentication on public routes
+        new \Acl\AuthenticationRule([
+            'appConfiguration' => $applicationConfig
+        ]),
+    ],
+]));
 
 /********************************************************************************
  * Set up I18n
@@ -126,13 +153,10 @@ textdomain('messages');
  * Load routes from configuration
  *******************************************************************************/
 
-// load application configuration
-$applicationConfig = include("config/config.php");
-
 // load routes
 foreach($applicationConfig['router']['routes'] as $name => $route) {
     switch($route['type']) {
-        case 'literal':
+        case 'literal' || 'api':
             $controller = $route['options']['controller'];
             $action = $route['options']['action'];
 

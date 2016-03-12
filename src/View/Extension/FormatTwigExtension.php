@@ -63,7 +63,7 @@ class FormatTwigExtension extends \Twig_Extension
         $container = $this->container;
 
         // locate smileys folder
-        $sF = $container->config['componentsUrl'].'/ckeditor/plugins/smiley/images/';
+        $sF = $container['config']['componentsUrl'].'/ckeditor/plugins/smiley/images/';
 
         $parser->add_emoticons([
             ':D' => $sF.'teeth_smile.png',
