@@ -536,7 +536,7 @@ class Activity implements \JsonSerializable
             'id'             => $this->id,
             'slug'           => $this->slug,
             'name'           => $this->name,
-            //'creator' => $this->creator,
+            'creator'        => $this->creator->getId(),
             'created'        => $this->created,
             'modified'       => $this->modified,
             'activityAreas'  => $this->activityAreas,
