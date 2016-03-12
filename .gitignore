@@ -6,6 +6,9 @@ upload/
 !*.htaccess
 temp/
 
+## Covers Vagrant
+.vagrant/
+
 ## Covers Composer
 composer.phar
 vendor/
