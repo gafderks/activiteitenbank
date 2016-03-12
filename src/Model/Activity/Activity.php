@@ -204,11 +204,31 @@ class Activity implements \JsonSerializable
     private $attachments;
 
     /**
+     * Ratings for this activity.
+     *
+     * @OneToMany(targetEntity="\Model\Activity\Rating", mappedBy="activity")
+     * @var null|\Model\Activity\Rating[]
+     * @SWG\Property()
+     */
+    private $ratings;
+
+    /**
+     * Comments for this activity.
+     *
+     * @OneToMany(targetEntity="\Model\Activity\Comment", mappedBy="activity")
+     * @var null|\Model\Activity\Comment[]
+     * @SWG\Property()
+     */
+    private $comments;
+
+    /**
      * Activity constructor.
      */
     public function __construct() {
         $this->categories = new ArrayCollection();
         $this->attachments = new ArrayCollection();
+        $this->ratings = new ArrayCollection();
+        $this->comments = new ArrayCollection();
         $this->activityAreas = new \Zend\Stdlib\ArrayObject();
         $this->suitableGroups = new \Zend\Stdlib\ArrayObject();
     }
@@ -533,6 +553,8 @@ class Activity implements \JsonSerializable
             'materials'      => $this->materials,
             'budget'         => $this->budget,
             'attachments'    => $this->attachments->toArray(),
+            'ratings'        => $this->ratings->toArray(),
+            'comments'       => $this->comments->toArray(),
         ];
     }
 }
