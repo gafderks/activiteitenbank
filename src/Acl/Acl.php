@@ -26,7 +26,6 @@ class Acl extends ZendAcl
         $this->addRole(Role::Member, Role::Guest);
         $this->addRole(Role::Moderator, Role::Member);
         // the administrator is a role on its own that does not extend another role
-
         $this->addRole(Role::Admin);
 
         // Application resources
@@ -38,8 +37,8 @@ class Acl extends ZendAcl
         $this->addResource('token');
         $this->addResource('activity');
         $this->addResource('ownActivity');
-
-
+        $this->addResource('comment');
+        $this->addResource('rating');
 
         // Application permissions
         /* Now we allow or deny a role's access to resources. The third
@@ -50,11 +49,14 @@ class Acl extends ZendAcl
 
         $this->allow(Role::Member, 'activity', ['create']);
         $this->allow(Role::Member, 'ownActivity'); // members have full control over their own activities
+        $this->allow(Role::Member, 'rating'); // ratings can only be updated
+        $this->allow(Role::Member, 'comment', ['create']);
+        
         $this->allow(Role::Member, 'settings');
         $this->allow(Role::Member, 'token');
 
         $this->allow(Role::Moderator, 'activity', ['edit', 'delete']);
-
+        $this->allow(Role::Moderator, 'comment', ['edit', 'delete']);
 
         // This allows admin access to everything
         $this->allow(Role::Admin);
