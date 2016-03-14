@@ -39,6 +39,15 @@ return [
                     'action' => 'logout',
                 ],
             ],
+            'settings' => [
+                'type' => 'literal',
+                'method' => 'get',
+                'options' => [
+                    'route' => '/settings',
+                    'controller' => 'SettingsController',
+                    'action' => 'index',
+                ],
+            ],
             'activity-explore' => [
                 'type' => 'literal',
                 'method' => 'get',
