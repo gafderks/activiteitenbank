@@ -219,6 +219,23 @@ return [
                     'pattern' => '/api/activity/\d+/attachment/\d+/?.*',
                 ],
             ],
+            'api-rating-put' => [
+                'type' => 'api',
+                'method' => 'put',
+                'options' => [
+                    'route' => '/api/activity/{activityId}/rating',
+                    'controller' => 'RatingController',
+                    'action' => 'update',
+                    'middleware' => [
+                        '\Middleware\apiRatingValidator',
+                    ],
+                ],
+                'acl' => [
+                    'resource' => 'rating',
+                    'privilege' => 'update',
+                    'pattern' => '/api/activity/\d+/rating',
+                ],
+            ],
             'facebook-login-callback' => [
                 'type' => 'literal',
                 'method' => 'get',
@@ -270,6 +287,10 @@ return [
         'mapper_attachment' => [
             'type' => 'mapper',
             'mapper' => 'Attachment',
+        ],
+        'mapper_rating' => [
+            'type' => 'mapper',
+            'mapper' => 'Rating',
         ],
     ],
 ];

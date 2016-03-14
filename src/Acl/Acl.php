@@ -46,10 +46,10 @@ class Acl extends ZendAcl
         $this->allow(Role::Guest, 'login');
         $this->allow(Role::Guest, 'explorer');
         $this->allow(Role::Guest, 'activity', ['view', 'download']);
-
+            
         $this->allow(Role::Member, 'activity', ['create']);
         $this->allow(Role::Member, 'ownActivity'); // members have full control over their own activities
-        $this->allow(Role::Member, 'rating'); // ratings can only be updated
+        $this->allow(Role::Member, 'rating'); // ratings can only be updated and viewed
         $this->allow(Role::Member, 'comment', ['create']);
         
         $this->allow(Role::Member, 'settings');
