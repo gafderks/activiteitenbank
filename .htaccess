@@ -1,0 +1,3 @@
+# Only the /public folder needs to be reachable.
+# It is best to set that folder as the webroot
+Deny from all
