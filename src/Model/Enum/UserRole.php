@@ -12,7 +12,7 @@ class UserRole extends Enum {
 
     const Guest = 'guest';
     const Member = 'member';
-    const Moderator = 'mod';
+    const Moderator = 'moderator';
     const Admin = 'admin';
 
 }

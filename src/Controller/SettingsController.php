@@ -23,35 +23,48 @@ class SettingsController extends Controller
      * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function indexAction(Request $request, Response $response, $args = []) {
-//            $activity = $this->getActivityMapper()->findActivityById($args['id']);
-//
-//            // if user is not allowed to view this activity, forward to login form
-//            if (!$this->getActivityService()->userMayView($activity, $this->getLoginService()->getLoggedInUser())) {
-//                return $this->getRedirectResponse($response, 'login');
-//            }
-//
-//            $loggedInUser = $this->getLoginService()->getLoggedInUser();
-//            $params = [
-//                'activity' => $activity,
-//                'userMayDelete' => $this->getActivityService()->userMayDelete($activity, $loggedInUser),
-//                'userMayDownload' => $this->getActivityService()->userMayDownload($activity, $loggedInUser),
-//                'userMayView' => $this->getActivityService()->userMayView($activity, $loggedInUser),
-//                'userMayEdit' => $this->getActivityService()->userMayEdit($activity, $loggedInUser),
-//                'userMayCreate' => $this->getActivityService()->userMayCreate($loggedInUser),
-//            ];
-//            // add jwt token to parameters
-//            if ($loggedInUser !== null) {
-//                $params = array_merge($params, [
-//                    'authToken' => $this->getJwtService()->generateToken($loggedInUser,
-//                        new \Acl\Scope([
-//                            'activity' => ['view', 'download'],
-//                            'ownActivity' => ['view', 'download']
-//                        ])),
-//                ]);
-//            }
-        $params = [
+        // if user is not allowed see the settings page
+        if (!$this->container['acl']->isAllowed($this->getLoginService()->getLoggedInUserRole()->value(), 'settings')) {
+            return $this->getRedirectResponse($response, 'login');
+        }
 
+        $aclPrivileges = [
+            'activity' => [
+                'view', 'create', 'download', 'edit', 'delete',
+            ],
+            'ownActivity' => [
+                'view', 'create', 'download', 'edit', 'delete',
+            ],
         ];
+
+        $acl = $this->container['acl'];
+        $scope = [];
+        foreach ($aclPrivileges as $resourceKey => $resource) {
+            $allowedPrivileges = [];
+            foreach ($resource as $privilege) {
+                if ($acl->isAllowed($this->getLoginService()->getLoggedInUserRole()->value(),
+                    $resourceKey, $privilege)) {
+                    array_push($allowedPrivileges, $privilege);
+                }
+            }
+            if (count($allowedPrivileges) > 0) {
+                $scope[$resourceKey] = $allowedPrivileges;
+            }
+        }
+
+        $params = [
+            'tokenScope' => $scope,
+            'authToken' => $this->getJwtService()->generateToken($this->getLoginService()->getLoggedInUser(),
+                new \Acl\Scope([
+                    'token' => null,
+                ]),
+                [
+                    'exp' => time() + (10 * 60) // token will be valid for 10 minutes
+                ]
+            ),
+        ];
+
+
         $this->container['view']->render($response, 'pages/settings.twig', $params);
         return $response;
     }

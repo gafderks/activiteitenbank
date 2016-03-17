@@ -47,9 +47,15 @@ class JwtService extends Service
         $role = $user->getRole()->value();
         foreach ($token->scopes as $resource => $options) {
             foreach ($options as $option => $actions) {
-                foreach ($actions as $action => $privilege) {
-                    if (!$acl->isAllowed($role, $resource, $privilege)) {
+                if ($actions === null) {
+                    if (!$acl->isAllowed($role, $resource)) {
                         return false;
+                    }
+                } else {
+                    foreach ($actions as $action => $privilege) {
+                        if (!$acl->isAllowed($role, $resource, $privilege)) {
+                            return false;
+                        }
                     }
                 }
             }
