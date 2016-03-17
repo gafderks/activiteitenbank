@@ -62,16 +62,16 @@
         {% if activity is not defined %}
 
         <span style="margin-right: 10px; display:none;" id="status-saving">{% trans "Saving" %}...</span>
-        <button class="btn  btn-primary right" style="padding-left: 30px; padding-right: 30px;" id="save-button">{% trans "Save new activity" %}</button>
+        <button class="btn btn-primary right" style="padding-left: 30px; padding-right: 30px;" id="save-button">{% trans "Save new activity" %}</button>
         {% else %}
         <span style="margin-right: 10px; display:none;" id="status-saving">{% trans "Saving" %}...</span>
         <span style="margin-right: 10px; display: none;" id="status-saved"><span class="glyphicon glyphicon-ok"></span>{% trans "Saved" %}</span>
         <a href="{{ path_for('activity-view', {"id": activity.id, "slug": activity.slug}) }}">
-        <button class="btn  btn-default" style="margin-right: 5px;">{% trans "View" %}</button>
+        <button class="btn btn-default" style="margin-right: 5px;">{% trans "View" %}</button>
         </a>
 
 
-        <button class="btn  btn-primary right" style="padding-left: 30px; padding-right: 30px;" id="update-button">{% trans "Update" %}</button>
+        <button class="btn btn-primary right" style="padding-left: 30px; padding-right: 30px;" id="update-button">{% trans "Update" %}</button>
 
         {% endif %}
     </div>
