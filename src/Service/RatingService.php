@@ -52,24 +52,6 @@ class RatingService extends Service
     }
 
     /**
-     * Returns the average rating for an array of ratings.
-     *
-     * @param \Model\Activity\Rating[] $ratings ratings to obtain the average of
-     * @return float average of the ratings
-     */
-    public function averageRating(array $ratings) {
-        $i = 0;
-        foreach($ratings as $rating) {
-            $i += $rating->getRate();
-        }
-        if (count($ratings) > 0) {
-            return $i / count($ratings);
-        } else {
-            return 0;
-        }
-    }
-
-    /**
      * Get the JWT service.
      *
      * @return \Service\JwtService

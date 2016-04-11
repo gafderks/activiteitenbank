@@ -531,6 +531,24 @@ class Activity implements \JsonSerializable
     }
 
     /**
+     * Returns the average rating for an array of ratings.
+     *
+     * @param \Model\Activity\Rating[] $ratings ratings to obtain the average of
+     * @return float average of the ratings
+     */
+    public function getAverageRating() {
+        $i = 0;
+        foreach($this->getRatings() as $rating) {
+            $i += $rating->getRate();
+        }
+        if (count($this->getRatings()) > 0) {
+            return $i / count($this->getRatings());
+        } else {
+            return 0;
+        }
+    }
+
+    /**
      * Specify data which should be serialized to JSON
      *
      * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
@@ -564,4 +582,5 @@ class Activity implements \JsonSerializable
             'comments'       => $this->comments->toArray(),
         ];
     }
+
 }

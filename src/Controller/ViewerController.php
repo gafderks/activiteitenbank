@@ -43,7 +43,7 @@ class ViewerController extends Controller
                 'userMayRate' => $this->getRatingService()->userMayRate($loggedInUser),
                 'ratings' => [
                     'amount' => count($activity->getRatings()),
-                    'average' => $this->getRatingService()->averageRating($activity->getRatings()),
+                    'average' => $activity->getAverageRating(),
                 ]
             ];
             try {
