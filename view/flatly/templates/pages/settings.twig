@@ -1,0 +1,206 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Settings"|trans }}{% endblock title %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet"
+          href="{{ componentsUrl }}/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container content">
+
+        <h1>{{ "Settings"|trans }}</h1>
+
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active">
+                <a href="#account" aria-controls="account" role="tab" data-toggle="tab">
+                    {{ "Account settings"|trans }}
+                </a>
+            </li>
+            <li role="presentation">
+                <a href="#api" aria-controls="api" role="tab" data-toggle="tab">
+                    {{ "API tokens"|trans }}
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="account">
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="api">
+                <div class="alert alert-warning" role="alert">
+                    <strong>{{ "Warning"|trans }}:</strong>
+                    {{ "API tokens are like passwords, so treat them as such."|trans }}
+                    <br/>
+                    <strong>{{ "API tokens cannot be revoked!"|trans }}</strong>
+                </div>
+                <h3>{{ "New token"|trans }}</h3>
+                {% trans %}
+                    Using this form, you can generate API tokens. It is important to note that API tokens cannot be revoked.
+                {% endtrans %}
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        <h4>{{ "Expiry"|trans }}</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>
+                                    {{ "Valid from"|trans }}
+                                    <div class="input-group date" id="valid-from">
+                                        <input type="text" class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-12">
+                                <label>
+                                    {{ "Valid to"|trans }}
+                                    <div class="input-group date" id="valid-to">
+                                        <input type="text" class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                        <h4>{{ "Scope"|trans }}</h4>
+                        <div class="row">
+                            {% for key, resource in tokenScope %}
+                                <div class="col-md-3 scope-selector">
+                                    <label>
+                                        <input type="checkbox" data-parent="{{ key }}" />
+                                        {{ key|trans }}
+                                    </label>
+                                    <ul>
+                                        {% for privilege in resource %}
+                                            <li>
+                                                <label>
+                                                    <input type="checkbox" data-child="{{ key }}"
+                                                           data-privilege="{{ key }}:{{ privilege }}" />
+                                                    {{ privilege|trans }}
+                                                </label>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="api-token-generate">{{ "Generate token"|trans }}</button>
+                <label id="api-token-container" style="margin-left: 2em; display: none;">
+                    {{ "API token"|trans }}
+                    <input type="text" style="margin-left: 0.8em;" class="monospace" id="generated-token" />
+                </label>
+                <h3>{{ "How to use API tokens"|trans }}</h3>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ componentsUrl }}/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="{{ componentsUrl }}/moment/min/moment-with-locales.min.js"></script>
+    <script type="text/javascript"
+            src="{{ componentsUrl }}/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js">
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.input-group.date').datetimepicker({
+                locale: '{{ "en"|trans }}'
+            });
+        });
+
+        $("input[type=checkbox][data-parent]").change(function() {
+            var state = $(this).is(":checked");
+            var key = $(this).data('parent');
+            $("input[type=checkbox][data-child="+key+"]").prop('checked', state);
+        });
+
+        $("input[type=checkbox][data-child]").change(function() {
+            var state = $(this).is(":checked");
+            var key = $(this).data('child');
+            var checkedAmt = $("input[type=checkbox][data-child=" + key + "]:checked").length;
+            if ($("input[type=checkbox][data-child=" + key + "]").length ==
+                    checkedAmt) {
+                $("input[type=checkbox][data-parent=" + key + "]").prop('checked', true).prop('indeterminate', false);
+            } else if (checkedAmt === 0) {
+                $("input[type=checkbox][data-parent="+key+"]").prop('checked', false).prop('indeterminate', false);
+            } else {
+                $("input[type=checkbox][data-parent=" + key + "]").prop('indeterminate', true);
+            }
+        });
+
+        $("#generated-token").click(function() {
+            $(this).select();
+        });
+
+        $("#api-token-generate").click(function() {
+            // validate dates
+            try {
+                $("#valid-from").data("DateTimePicker").date().unix();
+                $("#valid-to").data("DateTimePicker").date().unix();
+            } catch (err) {
+                alert("{{ "You need to fill in the date fields"|trans }}");
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url: "{{ path_for('api-token-get') }}",
+                data: JSON.stringify(generateTokenRequest()),
+                beforeSend: function(xhr, settings) {
+                    xhr.setRequestHeader('Authorization', 'Bearer {{ authToken }}');
+                }
+            })
+            .done(function(msg, textStatus, xhr) {
+                if (xhr.status == 200) {
+                    $("#generated-token").val(msg);
+                    $("#api-token-container").css("display", "inline");
+                } else {
+                    alert("{{ "Your session has expired. Try reloading the page."|trans }}");
+                }
+            })
+            .fail(function (a, b) {
+                console.log("No luck..." + b);
+                alert("{{ "Your session has expired. Try reloading the page."|trans }}");
+            });
+        });
+
+        function generateTokenRequest() {
+            var request = {};
+            // title
+            request.iat = $("#valid-from").data("DateTimePicker").date().unix();
+            request.exp = $("#valid-to").data("DateTimePicker").date().unix();
+
+            request.scopes = {};
+            $("input[data-privilege]").each(function() {
+                if ($(this).is(":checked")) {
+                    var resource = $(this).data("privilege").split(":")[0];
+                    var privilege = $(this).data("privilege").split(":")[1];
+                    if (request.scopes[resource] == undefined) {
+                        request.scopes[resource] = [];
+                    }
+                    request.scopes[resource].push(privilege);
+                }
+            });
+
+            return request;
+        }
+    </script>
+
+{% endblock javascripts %}

@@ -56,6 +56,22 @@ abstract class Controller
     }
 
     /**
+     * Creates a Response for returning a string.
+     *
+     * @param Response $response
+     * @param          $object
+     * @param int      $status HTTP output status
+     * @return \Psr\Http\Message\MessageInterface|Response
+     */
+    protected function getPlainResponse(Response $response, $string, $status = 200) {
+        $response = $response
+            ->withStatus($status)
+            ->withHeader('Content-Type', 'text/plain');
+        $response->getBody()->write($string);
+        return $response;
+    }
+
+    /**
      * Creates a Response for redirecting to a named route.
      *
      * @param Response $response

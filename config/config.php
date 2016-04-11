@@ -39,6 +39,15 @@ return [
                     'action' => 'logout',
                 ],
             ],
+            'settings' => [
+                'type' => 'literal',
+                'method' => 'get',
+                'options' => [
+                    'route' => '/settings',
+                    'controller' => 'SettingsController',
+                    'action' => 'index',
+                ],
+            ],
             'activity-explore' => [
                 'type' => 'literal',
                 'method' => 'get',
@@ -73,6 +82,23 @@ return [
                     'route' => '/edit/{id}[/{slug}]',
                     'controller' => 'EditorController',
                     'action' => 'edit',
+                ],
+            ],
+            'api-token-get' => [
+                'type' => 'api',
+                'method' => 'post',
+                'options' => [
+                    'route' => '/api/token',
+                    'controller' => 'TokenController',
+                    'action' => 'generate',
+                    'middleware' => [
+                        '\Middleware\apiTokenValidator',
+                    ],
+                ],
+                'acl' => [
+                    'resource' => 'token',
+                    'privilege' => null,
+                    'pattern' => '/api/token',
                 ],
             ],
             'api-activity-post' => [

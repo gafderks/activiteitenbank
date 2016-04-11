@@ -791,6 +791,13 @@ span[data-dz-errormessage] {
     width: 100%;
 }
 
+/* Tabs
+-------------------------------------------------- */
+
+.tab-content {
+    padding: 5px;
+}
+
 /* Sliders
 -------------------------------------------------- */
 
@@ -1010,4 +1017,21 @@ html {
     /* Set the fixed height of the footer here */
     height: 60px;
     background-color: #f5f5f5;
+}
+
+/* Settings
+-------------------------------------------------- */
+
+div.scope-selector {
+
+}
+
+div.scope-selector ul {
+    list-style: none;
+    padding-left: 2em;
+}
+
+input.monospace {
+    font-family: monospace;
+    font-weight: normal;
 }

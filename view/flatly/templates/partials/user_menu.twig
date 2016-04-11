@@ -32,7 +32,7 @@
                         <div class="navbar-footer-content">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
-                                    <a href="#" class="btn btn-default btn-sm">{% trans "Settings" %}</a>
+                                    <a href="{{ path_for('settings') }}" class="btn btn-default btn-sm">{% trans "Settings" %}</a>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <form action="{{ path_for('logout') }}" method="post">
