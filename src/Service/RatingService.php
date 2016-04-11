@@ -23,13 +23,13 @@ class RatingService extends Service
             // no user is defined
             $role = new \Model\Enum\UserRole(\Model\Enum\UserRole::Guest);
             if (!$this->container['acl']->isAllowed($role->value(),
-                'rating')) {
+                'activity', 'rate')) {
                 return false;
             }
         } else {
             // check if user is allowed to perform the operation on an activity that is not its own
             if (!$this->container['acl']->isAllowed($user->getRole()->value(),
-                'rating')) {
+                'activity', 'rate')) {
                 return false;
             }
         }
@@ -45,10 +45,28 @@ class RatingService extends Service
     public function tokenMayRate($token) {
         $user = $this->getJwtService()->getUser($token);
         // check if allowed according to the scope of the token
-        if (!$this->getJwtService()->tokenIsAllowed($token, 'rating')) {
+        if (!$this->getJwtService()->tokenIsAllowed($token, 'activity', 'rate')) {
             return false;
         }
         return true; // user is allowed to perform operation
+    }
+
+    /**
+     * Returns the average rating for an array of ratings.
+     *
+     * @param \Model\Activity\Rating[] $ratings ratings to obtain the average of
+     * @return float average of the ratings
+     */
+    public function averageRating(array $ratings) {
+        $i = 0;
+        foreach($ratings as $rating) {
+            $i += $rating->getRate();
+        }
+        if (count($ratings) > 0) {
+            return $i / count($ratings);
+        } else {
+            return 0;
+        }
     }
 
     /**

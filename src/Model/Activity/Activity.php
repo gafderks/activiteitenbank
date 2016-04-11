@@ -524,6 +524,13 @@ class Activity implements \JsonSerializable
     }
 
     /**
+     * @return null|\Model\Activity\Rating[]
+     */
+    public function getRatings() {
+        return $this->ratings->toArray();
+    }
+
+    /**
      * Specify data which should be serialized to JSON
      *
      * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php

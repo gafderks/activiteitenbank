@@ -30,7 +30,7 @@ class SettingsController extends Controller
 
         $aclPrivileges = [
             'activity' => [
-                'view', 'create', 'download', 'edit', 'delete',
+                'view', 'create', 'download', 'edit', 'delete', 'rate'
             ],
             'ownActivity' => [
                 'view', 'create', 'download', 'edit', 'delete',

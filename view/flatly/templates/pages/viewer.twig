@@ -5,6 +5,8 @@
 {% block stylesheets %}
     {{ parent() }}
 
+    <link href="{{ componentsUrl }}/bootstrap-rating/bootstrap-rating.css" media="all" rel="stylesheet">
+
 {% endblock stylesheets %}
 
 {% block content %}
@@ -194,6 +196,30 @@
                     <div class="col-xs-12 col-sm-6 col-md-12">
                         <div class="sidebar-item">
                             <h3 class="sidebar-title">
+                                {{ "Rating"|trans }}
+                            </h3>
+                            <div class="sidebar-content">
+                                <p>
+                                    <i style="width: 9em; display:inline-block">{{ "Community rating"|trans }}</i>
+                                    <span class="rating-stars disabled" title="{{ ratings.average }}">
+                                        <input type="hidden" class="rating" value="{{ ratings.average }}" data-readonly data-fractions="4" />
+                                    </span>
+                                    <span title="{{ "Number of ratings"|trans }}">({{ ratings.amount }})</span>
+                                </p>
+                                {% if userMayRate %}
+                                    <p>
+                                        <i style="width: 9em; display:inline-block">{{ "My rating"|trans }}</i>
+                                        <span class="rating-stars">
+                                            <input type="hidden" value="{{ ratings.ownRating }}" id="my-rating" class="rating" />
+                                        </span>
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-12">
+                        <div class="sidebar-item">
+                            <h3 class="sidebar-title">
                                 {{ "Properties"|trans }}
                             </h3>
 
@@ -357,5 +383,30 @@
 
 {% block javascripts %}
     {{ parent() }}
+
+    <script type="application/javascript" src="{{ componentsUrl }}/bootstrap-rating/bootstrap-rating.min.js"></script>
+
+    <script type="application/javascript">
+        $("#my-rating").on('change', function() {
+            $.ajax({
+                type: "PUT",
+                url: "{{ path_for('api-rating-put', {"activityId": activity.id}) }}",
+                data: JSON.stringify({rate: parseInt($("#my-rating").rating('rate'))}),
+                beforeSend: function(xhr, settings) {
+                    xhr.setRequestHeader('Authorization', 'Bearer {{ authToken }}');
+                }
+            })
+            .done(function(msg, textStatus, xhr) {
+                console.log(msg);
+                if (xhr.status != 201) {
+                    alert("{{ "Unable to save rating..."|trans }}");
+                }
+            })
+            .fail(function (a, b) {
+                console.log("No luck..." + b);
+                alert("{{ "Unable to save rating..."|trans }}");
+            });
+        });
+    </script>
 
 {% endblock javascripts %}

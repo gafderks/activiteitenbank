@@ -1035,3 +1035,15 @@ input.monospace {
     font-family: monospace;
     font-weight: normal;
 }
+
+/* Rating stars
+-------------------------------------------------- */
+
+.rating-stars {
+    font-size: 1.2em;
+    color: #18bc9c;
+}
+
+.rating-stars.disabled {
+    color: inherit;
+}

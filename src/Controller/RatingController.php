@@ -3,8 +3,10 @@
 
 namespace Controller;
 
+use Model\Activity\Rating;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use \Exception\RatingNotFoundException;
 
 /**
  * Class RatingController
@@ -24,10 +26,6 @@ class RatingController extends Controller
      */
     public function updateAction(Request $request, Response $response, $args = []) {
         try {
-            $rating = $this->getRatingMapper()->findRatingByUserForActivity(
-                $this->getActivityMapper()->findActivityById($args['activityId']),
-                $this->getJwtService()->getUser($this->container['jwt'])
-            );
 
             // if token is not allowed to update this rating, output 401
             if (!$this->getRatingService()->tokenMayRate($this->container['jwt'])) {
@@ -35,17 +33,24 @@ class RatingController extends Controller
                     new \Exception("You are not allowed to perform this action"), 401);
             }
 
-            // load input
-            $input = json_decode($request->getBody());
-
-            // create new rating object if no rating does exist for this user and activity combination
-            if (is_null($rating)) {
+            try {
+                // get current rating
+                $rating = $this->getRatingMapper()->findRatingByUserForActivity(
+                    $this->getActivityMapper()->findActivityById($args['activityId']),
+                    $this->getJwtService()->getUser($this->container['jwt'])
+                );
+            } catch (RatingNotFoundException $exception) {
+                // rating does not exist yet, hence create it
                 $rating = new \Model\Activity\Rating();
+                $rating->setActivity($this->getActivityMapper()->findActivityById($args['activityId']));
                 $rating->setRater($this->getJwtService()->getUser($this->container['jwt']));
             }
 
+            // load input
+            $input = json_decode($request->getBody());
+
             // set the properties of the rating
-            $rating->setRate($input['rate']);
+            $rating->setRate($input->rate);
 
             // save the rating
             $this->getRatingMapper()->persist($rating);

@@ -5,6 +5,7 @@ namespace Controller;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use \Exception\RatingNotFoundException;
 
 /**
  * Class ViewerController
@@ -39,13 +40,25 @@ class ViewerController extends Controller
                 'userMayView' => $this->getActivityService()->userMayView($activity, $loggedInUser),
                 'userMayEdit' => $this->getActivityService()->userMayEdit($activity, $loggedInUser),
                 'userMayCreate' => $this->getActivityService()->userMayCreate($loggedInUser),
+                'userMayRate' => $this->getRatingService()->userMayRate($loggedInUser),
+                'ratings' => [
+                    'amount' => count($activity->getRatings()),
+                    'average' => $this->getRatingService()->averageRating($activity->getRatings()),
+                ]
             ];
+            try {
+                $rating = $this->getRatingMapper()->findRatingByUserForActivity($activity, $loggedInUser);
+                $params['ratings']['ownRating'] = $rating->getRate();
+            } catch (RatingNotFoundException $e) {
+                $params['ratings']['ownRating'] = 0;
+            }
+
             // add jwt token to parameters
             if ($loggedInUser !== null) {
                 $params = array_merge($params, [
                     'authToken' => $this->getJwtService()->generateToken($loggedInUser,
                         new \Acl\Scope([
-                            'activity' => ['view', 'download'],
+                            'activity' => ['view', 'download', 'rate'],
                             'ownActivity' => ['view', 'download']
                         ])),
                 ]);
@@ -74,6 +87,24 @@ class ViewerController extends Controller
      */
     protected function getActivityService() {
         return $this->container['service_activity'];
+    }
+
+    /**
+     * Get the Rating service.
+     *
+     * @return \Service\RatingService
+     */
+    protected function getRatingService() {
+        return $this->container['service_rating'];
+    }
+
+    /**
+     * Get the Rating mapper.
+     *
+     * @return \Mapper\Rating
+     */
+    protected function getRatingMapper() {
+        return $this->container['mapper_rating'];
     }
 
     /**

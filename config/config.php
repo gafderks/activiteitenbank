@@ -231,8 +231,8 @@ return [
                     ],
                 ],
                 'acl' => [
-                    'resource' => 'rating',
-                    'privilege' => 'update',
+                    'resource' => 'activity',
+                    'privilege' => 'rate',
                     'pattern' => '/api/activity/\d+/rating',
                 ],
             ],
@@ -275,6 +275,10 @@ return [
         'service_jwt' => [
             'type' => 'service',
             'service' => 'JwtService',
+        ],
+        'service_rating' => [
+            'type' => 'service',
+            'service' => 'RatingService',
         ],
         'mapper_user' => [
             'type' => 'mapper',
