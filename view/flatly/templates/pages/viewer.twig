@@ -386,27 +386,29 @@
 
     <script type="application/javascript" src="{{ componentsUrl }}/bootstrap-rating/bootstrap-rating.min.js"></script>
 
-    <script type="application/javascript">
-        $("#my-rating").on('change', function() {
-            $.ajax({
-                type: "PUT",
-                url: "{{ path_for('api-rating-put', {"activityId": activity.id}) }}",
-                data: JSON.stringify({rate: parseInt($("#my-rating").rating('rate'))}),
-                beforeSend: function(xhr, settings) {
-                    xhr.setRequestHeader('Authorization', 'Bearer {{ authToken }}');
-                }
-            })
-            .done(function(msg, textStatus, xhr) {
-                console.log(msg);
-                if (xhr.status != 201) {
+    {% if userMayRate %}
+        <script type="application/javascript">
+            $("#my-rating").on('change', function() {
+                $.ajax({
+                    type: "PUT",
+                    url: "{{ path_for('api-rating-put', {"activityId": activity.id}) }}",
+                    data: JSON.stringify({rate: parseInt($("#my-rating").rating('rate'))}),
+                    beforeSend: function(xhr, settings) {
+                        xhr.setRequestHeader('Authorization', 'Bearer {{ authToken }}');
+                    }
+                })
+                .done(function(msg, textStatus, xhr) {
+                    console.log(msg);
+                    if (xhr.status != 201) {
+                        alert("{{ "Unable to save rating..."|trans }}");
+                    }
+                })
+                .fail(function (a, b) {
+                    console.log("No luck..." + b);
                     alert("{{ "Unable to save rating..."|trans }}");
-                }
-            })
-            .fail(function (a, b) {
-                console.log("No luck..." + b);
-                alert("{{ "Unable to save rating..."|trans }}");
+                });
             });
-        });
-    </script>
+        </script>
+    {% endif %}
 
 {% endblock javascripts %}

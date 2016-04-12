@@ -46,11 +46,13 @@ class ViewerController extends Controller
                     'average' => $activity->getAverageRating(),
                 ]
             ];
-            try {
-                $rating = $this->getRatingMapper()->findRatingByUserForActivity($activity, $loggedInUser);
-                $params['ratings']['ownRating'] = $rating->getRate();
-            } catch (RatingNotFoundException $e) {
-                $params['ratings']['ownRating'] = 0;
+            if ($params['userMayRate']) {
+                try {
+                    $rating = $this->getRatingMapper()->findRatingByUserForActivity($activity, $loggedInUser);
+                    $params['ratings']['ownRating'] = $rating->getRate();
+                } catch (RatingNotFoundException $e) {
+                    $params['ratings']['ownRating'] = 0;
+                }
             }
 
             // add jwt token to parameters
