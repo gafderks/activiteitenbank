@@ -41,6 +41,9 @@ class CommentController extends Controller
             // set the properties of the comment
             $comment->setComment($input->comment);
             $comment->setDidIt($input->didIt);
+            $now = new \DateTime('now');
+            $comment->setDate($now);
+
 
             // save the comment
             $this->getCommentMapper()->persist($comment);
