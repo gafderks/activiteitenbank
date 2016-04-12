@@ -60,6 +60,28 @@ class Comment implements \JsonSerializable
     private $didIt;
 
     /**
+     * Date of the comment.
+     *
+     * @Column(type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+     * @var \DateTime
+     */
+    private $date;
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate() {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate($date) {
+        $this->date = $date;
+    }
+
+    /**
      * @return int
      */
     public function getId() {
@@ -137,6 +159,7 @@ class Comment implements \JsonSerializable
             'commenter' => $this->commenter->getId(),
             'activity' => $this->activity->getId(),
             'didIt' => $this->didIt,
+            'date' => $this->date,
         ];
     }
 }
