@@ -6,7 +6,7 @@ Database management system for Scouting Activities.
 * Install dependencies using composer: `php composer.phar install`
 * Create a new MySQL database.
 * Copy `config.dist.php` to `config.php` and configure the database settings in it.
-* Run `./vendor/bin/doctrine-module orm:schema-tool:create` to populate the database.
+* Run `./vendor/bin/doctrine orm:schema-tool:create` to populate the database.
 * Install dependencies using bower: `bower install`
 
 ## Translation
@@ -41,7 +41,7 @@ For this application, JWTs have the following layout:
 ```
 Tokens are signed and base-64 encoded. An example of a header is:
 ```
-Authentication: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ7e2RvbWFpbn19IiwiaWF0IjoxNDU3MTQxNjIzLCJleHAiOjE0NTcyMjgwMjMsInN1YiI6MSwic2NvcGVzIjp7ImFjdGl2aXR5Ijp7ImFjdGlvbnMiOlsiZWRpdCIsImRlbGV0ZSJdfX19.2lSXvVWWE5bgYcCY95eooRN11GSP4EQTHvX_AWMJaO4
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ7e2RvbWFpbn19IiwiaWF0IjoxNDU3MTQxNjIzLCJleHAiOjE0NTcyMjgwMjMsInN1YiI6MSwic2NvcGVzIjp7ImFjdGl2aXR5Ijp7ImFjdGlvbnMiOlsiZWRpdCIsImRlbGV0ZSJdfX19.2lSXvVWWE5bgYcCY95eooRN11GSP4EQTHvX_AWMJaO4
 ```
 The scope is added to the token to be able to limit the capabilities of it. Be aware that also the permissions for the
 subject of the token are checked, meaning that a token can never grant permissions that the subject does not have.
