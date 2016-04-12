@@ -5,6 +5,7 @@
 {% block stylesheets %}
     <link href="{{ componentsUrl }}/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet" />
     <link href="{{ componentsUrl }}/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet" />
+    <link href="{{ componentsUrl }}/bootstrap-rating/bootstrap-rating.css" media="all" rel="stylesheet">
 
     {{ parent() }}
 {% endblock stylesheets %}
@@ -158,7 +159,12 @@
                                      title="{{ "Plusscouts"|trans }}" />
                             {% endif %}
                         </td>
-                        <td>{{ activity.averageRating }}</td>
+                        <td data-order="{{ activity.averageRating }}">
+                            <span class="rating-stars disabled" title="{{ activity.averageRating }}">
+                                <input type="hidden" class="rating" value="{{ activity.averageRating }}" data-readonly
+                                       data-fractions="4" />
+                            </span>
+                        </td>
                         <td>{{ activity.creator.firstName }} {{ activity.creator.lastName }}</td>
                     </tr>
                 {% endfor %}
@@ -178,6 +184,7 @@
 <script type="text/javascript" src="{{ componentsUrl }}/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
 <script type="text/javascript" src="{{ componentsUrl }}/datatables.net-buttons/js/buttons.colVis.min.js"></script>
 <script type="text/javascript" src="{{ componentsUrl }}/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+<script type="application/javascript" src="{{ componentsUrl }}/bootstrap-rating/bootstrap-rating.min.js"></script>
 
 <script type="text/javascript">
 
