@@ -6,7 +6,7 @@ use Exception\ActivityNotFoundException;
 use Respect\Validation\Exceptions\NullTypeException;
 
 /**
- * Mappers for Activities.
+ * Mappers for Ratings.
  *
  * @package Mapper
  */

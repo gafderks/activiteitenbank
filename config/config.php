@@ -236,6 +236,23 @@ return [
                     'pattern' => '/api/activity/\d+/rating',
                 ],
             ],
+            'api-comment-create' => [
+                'type' => 'api',
+                'method' => 'post',
+                'options' => [
+                    'route' => '/api/activity/{activityId}/comment',
+                    'controller' => 'CommentController',
+                    'action' => 'create',
+                    'middleware' => [
+                        '\Middleware\apiCommentValidator',
+                    ],
+                ],
+                'acl' => [
+                    'resource' => 'comment',
+                    'privilege' => 'create',
+                    'pattern' => '/api/activity/\d+/comment',
+                ],
+            ],
             'facebook-login-callback' => [
                 'type' => 'literal',
                 'method' => 'get',
@@ -280,6 +297,10 @@ return [
             'type' => 'service',
             'service' => 'RatingService',
         ],
+        'service_comment' => [
+            'type' => 'service',
+            'service' => 'CommentService',
+        ],
         'mapper_user' => [
             'type' => 'mapper',
             'mapper' => 'User',
@@ -295,6 +316,10 @@ return [
         'mapper_rating' => [
             'type' => 'mapper',
             'mapper' => 'Rating',
+        ],
+        'mapper_comment' => [
+            'type' => 'mapper',
+            'mapper' => 'Comment',
         ],
     ],
 ];

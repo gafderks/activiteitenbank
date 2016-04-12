@@ -35,6 +35,9 @@ class SettingsController extends Controller
             'ownActivity' => [
                 'view', 'create', 'download', 'edit', 'delete',
             ],
+            'comment' => [
+                'create', 'edit', 'delete',
+            ]
         ];
 
         $acl = $this->container['acl'];
