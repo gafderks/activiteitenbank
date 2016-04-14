@@ -41,6 +41,7 @@ class ViewerController extends Controller
                 'userMayEdit' => $this->getActivityService()->userMayEdit($activity, $loggedInUser),
                 'userMayCreate' => $this->getActivityService()->userMayCreate($loggedInUser),
                 'userMayRate' => $this->getRatingService()->userMayRate($loggedInUser),
+                'userMayComment' => $this->getCommentService()->userMayComment($loggedInUser),
                 'ratings' => [
                     'amount' => count($activity->getRatings()),
                     'average' => $activity->getAverageRating(),
@@ -61,7 +62,8 @@ class ViewerController extends Controller
                     'authToken' => $this->getJwtService()->generateToken($loggedInUser,
                         new \Acl\Scope([
                             'activity' => ['view', 'download', 'rate'],
-                            'ownActivity' => ['view', 'download']
+                            'ownActivity' => ['view', 'download'],
+                            'comment' => ['create'],
                         ])),
                 ]);
             }
@@ -98,6 +100,15 @@ class ViewerController extends Controller
      */
     protected function getRatingService() {
         return $this->container['service_rating'];
+    }
+
+    /**
+     * Get the Comment service.
+     *
+     * @return \Service\CommentService
+     */
+    protected function getCommentService() {
+        return $this->container['service_comment'];
     }
 
     /**

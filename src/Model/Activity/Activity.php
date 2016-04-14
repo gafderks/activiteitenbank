@@ -216,6 +216,7 @@ class Activity implements \JsonSerializable
      * Comments for this activity.
      *
      * @OneToMany(targetEntity="\Model\Activity\Comment", mappedBy="activity")
+     * @OrderBy({"date" = "ASC"})
      * @var null|\Model\Activity\Comment[]
      * @SWG\Property()
      */
@@ -546,6 +547,13 @@ class Activity implements \JsonSerializable
         } else {
             return 0;
         }
+    }
+
+    /**
+     * @return null|\Model\Activity\Comment[]
+     */
+    public function getComments() {
+        return $this->comments->toArray();
     }
 
     /**

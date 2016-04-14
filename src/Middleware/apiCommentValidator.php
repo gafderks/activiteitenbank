@@ -29,7 +29,7 @@ class apiCommentValidator
     public function __invoke(Request $request, Response $response, $next) {
         $comment = json_decode($request->getBody());
         $validator =
-            v::attribute('comment', v::stringType())
+            v::attribute('comment', v::stringType()->length(1, null, true))
                 ->attribute('didIt', v::boolType());
         try {
             $validator->assert($comment);

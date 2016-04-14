@@ -1,0 +1,123 @@
+<tr>
+    <td>
+        <a href="{{ path_for('activity-view', {"id": activity.id, "slug": activity.slug}) }}">
+            {{ activity.name }}
+        </a>
+        <span class="grid-badges">
+            <span class="glyphicon glyphicon-star" title="{{ "Rating"|trans }}"></span>
+            <span title="{{ "Rating"|trans }}">{{ activity.averageRating|round(1) }}</span>
+            <span class="glyphicon glyphicon-comment" title="{{ "Comments"|trans }}"></span>
+            <span title="{{ "Comments"|trans }}">{{ activity.comments|length }}</span>
+        </span>
+    </td>
+    {% set activityCategoriesNamed = [] %}
+    {% set activityCategories = [] %}
+    {% for category in activity.categories %}
+        {% set activityCategoriesNamed = activityCategoriesNamed|merge(category.name|e) %}
+        {% set activityCategories = activityCategories|merge(category.id) %}
+    {% endfor %}
+    <td data-order="{{ activityCategories.join(',') }}">
+        {{ activityCategoriesNamed|join(', ') }}
+    </td>
+    <td data-order="{{ activity.planning.totalDuration }}"
+        data-filter="{{ activity.planning.totalDuration }}">
+        {{ activity.planning.totalDuration|int2time|raw }}
+    </td>
+    <td data-order="{{ activity.budget.totalCost }}" data-filter="{{ activity.budget.totalCost }}">
+        {{ activity.budget.totalCost|float2euro|raw }}
+    </td>
+    <td data-order="{{ activity.difficulty.value }}" data-filter="{{ activity.difficulty.value }}">
+        {{ levels[activity.difficulty.value]|trans }}
+    </td>
+    <td data-order="{{ activity.guidance.value }}" data-filter="{{ activity.guidance.value }}">
+        {{ levels[activity.guidance.value]|trans }}
+    </td>
+    <td data-order="{{ activity.motivation.value }}" data-filter="{{ activity.motivation.value }}">
+        {{ levels[activity.motivation.value]|trans }}
+    </td>
+    <td data-filter="{{ activity.groupSizeMin is null ? "null" : activity.groupSizeMin }},{{ activity.groupSizeMax is null ? "null" : activity.groupSizeMax }}">
+        {% if activity.groupSizeMin is null %}
+            {{ "Unspecified"|trans }}
+        {% else %}
+            {% if activity.groupSizeMax is null %}
+                {{ activity.groupSizeMin }} {{ "or more participants"|trans }}
+            {% else %}
+                {{ activity.groupSizeMin }} - {{ activity.groupSizeMax }}
+                {{ "participants"|trans }}
+            {% endif %}
+        {% endif %}
+    </td>
+    <td data-filter="{{ activity.activityAreasRaw|join(',') }}">
+        {% if activityArea.ChallengingScoutingTechniques in activity.activityAreasRaw %}
+            <img src="{{ assetsUrl }}/img/activity-areas/challenging-scouting-techniques.png"
+                 class="badge-small" alt="{{ "Challenging Scouting Techniques"|trans }}"
+                 title="{{ "Challenging Scouting Techniques"|trans }}" />
+        {% endif %}
+        {% if activityArea.Expression in activity.activityAreasRaw %}
+            <img src="{{ assetsUrl }}/img/activity-areas/expression.png"
+                 class="badge-small" alt="{{ "Expression"|trans }}" title="{{ "Expression"|trans }}" />
+        {% endif %}
+        {% if activityArea.SportsAndGames in activity.activityAreasRaw %}
+            <img src="{{ assetsUrl }}/img/activity-areas/sports-and-games.png"
+                 class="badge-small" alt="{{ "Sports and Games"|trans }}"
+                 title="{{ "Sports and Games"|trans }}" />
+        {% endif %}
+        {% if activityArea.OutdoorLife in activity.activityAreasRaw %}
+            <img src="{{ assetsUrl }}/img/activity-areas/outdoor-life.png"
+                 class="badge-small" alt="{{ "Outdoor life"|trans }}" title="{{ "Outdoor life"|trans }}" />
+        {% endif %}
+        {% if activityArea.Identity in activity.activityAreasRaw %}
+            <img src="{{ assetsUrl }}/img/activity-areas/identity.png"
+                 class="badge-small" alt="{{ "Identity"|trans }}" title="{{ "Identity"|trans }}" />
+        {% endif %}
+        {% if activityArea.International in activity.activityAreasRaw %}
+            <img src="{{ assetsUrl }}/img/activity-areas/international.png"
+                 class="badge-small" alt="{{ "International"|trans }}" title="{{ "International"|trans }}" />
+        {% endif %}
+        {% if activityArea.Society in activity.activityAreasRaw %}
+            <img src="{{ assetsUrl }}/img/activity-areas/society.png"
+                 class="badge-small" alt="{{ "Society"|trans }}" title="{{ "Society"|trans }}" />
+        {% endif %}
+        {% if activityArea.SafeAndHealthy in activity.activityAreasRaw %}
+            <img src="{{ assetsUrl }}/img/activity-areas/safe-and-healthy.png"
+                 class="badge-small" alt="{{ "Safe and Healthy"|trans }}"
+                 title="{{ "Safe and Healthy"|trans }}" />
+        {% endif %}
+    </td>
+    <td data-filter="{{ activity.suitableGroupsRaw|join(',') }}">
+        {% if groupType.Bevers in activity.suitableGroupsRaw %}
+            <img src="{{ assetsUrl }}/img/scouting-groups/bevers.png"
+                 class="badge-small" alt="{{ "Bevers"|trans }}" title="{{ "Bevers"|trans }}" />
+        {% endif %}
+        {% if groupType.Welpen in activity.suitableGroupsRaw %}
+            <img src="{{ assetsUrl }}/img/scouting-groups/welpen.png"
+                 class="badge-small" alt="{{ "Welpen"|trans }}" title="{{ "Welpen"|trans }}" />
+        {% endif %}
+        {% if groupType.Scouts in activity.suitableGroupsRaw %}
+            <img src="{{ assetsUrl }}/img/scouting-groups/scouts.png"
+                 class="badge-small" alt="{{ "Scouts"|trans }}" title="{{ "Scouts"|trans }}" />
+        {% endif %}
+        {% if groupType.Explorers in activity.suitableGroupsRaw %}
+            <img src="{{ assetsUrl }}/img/scouting-groups/explorers.png"
+                 class="badge-small" alt="{{ "Explorers"|trans }}"
+                 title="{{ "Explorers"|trans }}" />
+        {% endif %}
+        {% if groupType.Roverscouts in activity.suitableGroupsRaw %}
+            <img src="{{ assetsUrl }}/img/scouting-groups/roverscouts.png"
+                 class="badge-small" alt="{{ "Roverscouts"|trans }}"
+                 title="{{ "Roverscouts"|trans }}" />
+        {% endif %}
+        {% if groupType.Plusscouts in activity.suitableGroupsRaw %}
+            <img src="{{ assetsUrl }}/img/scouting-groups/plusscouts.png"
+                 class="badge-small" alt="{{ "Plusscouts"|trans }}"
+                 title="{{ "Plusscouts"|trans }}" />
+        {% endif %}
+    </td>
+    <td data-order="{{ activity.averageRating }}">
+                            <span class="rating-stars disabled" title="{{ activity.averageRating|round(1) }}">
+                                <input type="hidden" class="rating" value="{{ activity.averageRating }}" data-readonly
+                                       data-fractions="4" />
+                            </span>
+    </td>
+    <td>{{ activity.creator.firstName }} {{ activity.creator.lastName }}</td>
+</tr>

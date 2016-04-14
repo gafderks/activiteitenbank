@@ -156,6 +156,17 @@
                     {% endfor %}
                 </ul>
 
+                <h3 class="activity-section">{{ "Comments"|trans }}
+                    <span class="label label-default">{{ activity.comments|length }} {{ "comments"|trans }}</span>
+                </h3>
+                {% if userMayComment %}
+                    {% include "partials/viewer/comment-editor.twig" %}
+                    <hr class="hidden-print"/>
+                {% endif %}
+                {% for comment in activity.comments %}
+                    {% include "partials/viewer/comment.twig" %}
+                {% endfor %}
+
             </div>
 
             <div class="sidebar col-xs-12 col-md-4">
@@ -200,15 +211,15 @@
                             </h3>
                             <div class="sidebar-content">
                                 <p>
-                                    <i style="width: 9em; display:inline-block">{{ "Community rating"|trans }}</i>
-                                    <span class="rating-stars disabled" title="{{ ratings.average }}">
+                                    <i style="width: 40%; display:inline-block">{{ "Community rating"|trans }}</i>
+                                    <span class="rating-stars disabled" title="{{ ratings.average|round(1) }}">
                                         <input type="hidden" class="rating" value="{{ ratings.average }}" data-readonly data-fractions="4" />
                                     </span>
                                     <span title="{{ "Number of ratings"|trans }}">({{ ratings.amount }})</span>
                                 </p>
                                 {% if userMayRate %}
                                     <p>
-                                        <i style="width: 9em; display:inline-block">{{ "My rating"|trans }}</i>
+                                        <i style="width: 40%; display:inline-block">{{ "My rating"|trans }}</i>
                                         <span class="rating-stars">
                                             <input type="hidden" value="{{ ratings.ownRating }}" id="my-rating" class="rating" />
                                         </span>
@@ -407,6 +418,38 @@
                     console.log("No luck..." + b);
                     alert("{{ "Unable to save rating..."|trans }}");
                 });
+            });
+        </script>
+    {% endif %}
+
+    {% if userMayComment %}
+        <script type="application/javascript">
+            $("#comment-submit").on('click', function() {
+                if ($("#comment-body").val().length < 1) {
+                    alert("{{ "You need to supply a message"|trans }}");
+                } else {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path_for('api-comment-create', {"activityId": activity.id}) }}",
+                    data: JSON.stringify({comment: $("#comment-body").val(), didIt: $("#comment-didit").is(":checked")}),
+                    beforeSend: function(xhr, settings) {
+                        xhr.setRequestHeader('Authorization', 'Bearer {{ authToken }}');
+                    }
+                })
+                .done(function(msg, textStatus, xhr) {
+                    console.log(msg);
+                    if (xhr.status != 201) {
+                        alert("{{ "Unable to save comment..."|trans }}");
+                    } else {
+                        $("#comment-body").val(""); // clear the comment box
+                        location.reload(true);
+                    }
+                })
+                .fail(function (a, b) {
+                    console.log("No luck..." + b);
+                    alert("{{ "Unable to save comment..."|trans }}");
+                });
+                }
             });
         </script>
     {% endif %}

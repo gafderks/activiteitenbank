@@ -991,6 +991,19 @@ a.buttons-colvis {
     padding-left: 0px;
 }
 
+/* Grid badges
+-------------------------------------------------- */
+
+span.grid-badges {
+    font-size: 0.8em;
+    color: #777;
+}
+
+span.grid-badges span.glyphicon {
+    padding-left: 0.8em;
+    margin-right: 0.2em;
+}
+
 /* Fix tooltips
 -------------------------------------------------- */
 
@@ -1046,4 +1059,40 @@ input.monospace {
 
 .rating-stars.disabled {
     color: inherit;
+}
+
+/* Comments
+-------------------------------------------------- */
+
+.comment {
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+.comment-body {
+    border: 1px #ccc solid;
+    padding: 1em;
+    width: 100%;
+}
+
+.comment-header div {
+    display: inline-block;
+}
+
+.comment-user {
+    font-weight: bold;
+}
+
+.comment-didit {
+    color: #999;
+    margin-left: 2em;
+}
+
+.comment-didit span {
+    padding-right: 0;
+}
+
+.comment-date {
+    float: right;
+    color: #999;
 }
