@@ -222,6 +222,7 @@ class ActivityController extends Controller
         $now = new \DateTime('now');
         $activity->setCreated($now);
         $activity->setModified($now);
+        $activity->setCreator($this->getJwtService()->getUser($this->container['jwt']));
 
         // set the properties of the activity
         $activity = $this->getActivityService()->setActivityFromObject($activity, $input);
@@ -264,6 +265,15 @@ class ActivityController extends Controller
      */
     protected function getActivityMapper() {
         return $this->container['mapper_activity'];
+    }
+
+    /**
+     * Get the JWT service.
+     *
+     * @return \Service\JwtService
+     */
+    protected function getJwtService() {
+        return $this->container['service_jwt'];
     }
 
 }

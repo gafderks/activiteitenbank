@@ -1,0 +1,18 @@
+<div class="comment" id="comment-{{ comment.id }}">
+    <div class="comment-header">
+        <div class="comment-user">
+            {{ comment.commenter.firstName }} {{ comment.commenter.lastName }}
+        </div>
+        <div class="comment-didit">
+            {% if comment.didIt %}
+                <span class="glyphicon glyphicon-ok"></span> {{ "We did this"|trans }}
+            {% endif %}
+        </div>
+        <div class="comment-date">
+            <span title="{{ comment.date|date|localizeddate('full', 'medium', null) }}">{{ comment.date|time_diff }}</span>
+        </div>
+    </div>
+    <div class="comment-body">
+        {{ comment.comment|bb2html|raw }}
+    </div>
+</div>

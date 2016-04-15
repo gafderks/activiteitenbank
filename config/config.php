@@ -219,6 +219,40 @@ return [
                     'pattern' => '/api/activity/\d+/attachment/\d+/?.*',
                 ],
             ],
+            'api-rating-put' => [
+                'type' => 'api',
+                'method' => 'put',
+                'options' => [
+                    'route' => '/api/activity/{activityId}/rating',
+                    'controller' => 'RatingController',
+                    'action' => 'update',
+                    'middleware' => [
+                        '\Middleware\apiRatingValidator',
+                    ],
+                ],
+                'acl' => [
+                    'resource' => 'activity',
+                    'privilege' => 'rate',
+                    'pattern' => '/api/activity/\d+/rating',
+                ],
+            ],
+            'api-comment-create' => [
+                'type' => 'api',
+                'method' => 'post',
+                'options' => [
+                    'route' => '/api/activity/{activityId}/comment',
+                    'controller' => 'CommentController',
+                    'action' => 'create',
+                    'middleware' => [
+                        '\Middleware\apiCommentValidator',
+                    ],
+                ],
+                'acl' => [
+                    'resource' => 'comment',
+                    'privilege' => 'create',
+                    'pattern' => '/api/activity/\d+/comment',
+                ],
+            ],
             'facebook-login-callback' => [
                 'type' => 'literal',
                 'method' => 'get',
@@ -259,6 +293,14 @@ return [
             'type' => 'service',
             'service' => 'JwtService',
         ],
+        'service_rating' => [
+            'type' => 'service',
+            'service' => 'RatingService',
+        ],
+        'service_comment' => [
+            'type' => 'service',
+            'service' => 'CommentService',
+        ],
         'mapper_user' => [
             'type' => 'mapper',
             'mapper' => 'User',
@@ -270,6 +312,14 @@ return [
         'mapper_attachment' => [
             'type' => 'mapper',
             'mapper' => 'Attachment',
+        ],
+        'mapper_rating' => [
+            'type' => 'mapper',
+            'mapper' => 'Rating',
+        ],
+        'mapper_comment' => [
+            'type' => 'mapper',
+            'mapper' => 'Comment',
         ],
     ],
 ];

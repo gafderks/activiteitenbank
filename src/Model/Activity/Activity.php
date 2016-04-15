@@ -204,11 +204,32 @@ class Activity implements \JsonSerializable
     private $attachments;
 
     /**
+     * Ratings for this activity.
+     *
+     * @OneToMany(targetEntity="\Model\Activity\Rating", mappedBy="activity")
+     * @var null|\Model\Activity\Rating[]
+     * @SWG\Property()
+     */
+    private $ratings;
+
+    /**
+     * Comments for this activity.
+     *
+     * @OneToMany(targetEntity="\Model\Activity\Comment", mappedBy="activity")
+     * @OrderBy({"date" = "ASC"})
+     * @var null|\Model\Activity\Comment[]
+     * @SWG\Property()
+     */
+    private $comments;
+
+    /**
      * Activity constructor.
      */
     public function __construct() {
         $this->categories = new ArrayCollection();
         $this->attachments = new ArrayCollection();
+        $this->ratings = new ArrayCollection();
+        $this->comments = new ArrayCollection();
         $this->activityAreas = new \Zend\Stdlib\ArrayObject();
         $this->suitableGroups = new \Zend\Stdlib\ArrayObject();
     }
@@ -504,6 +525,38 @@ class Activity implements \JsonSerializable
     }
 
     /**
+     * @return null|\Model\Activity\Rating[]
+     */
+    public function getRatings() {
+        return $this->ratings->toArray();
+    }
+
+    /**
+     * Returns the average rating for an array of ratings.
+     *
+     * @param \Model\Activity\Rating[] $ratings ratings to obtain the average of
+     * @return float average of the ratings
+     */
+    public function getAverageRating() {
+        $i = 0;
+        foreach($this->getRatings() as $rating) {
+            $i += $rating->getRate();
+        }
+        if (count($this->getRatings()) > 0) {
+            return $i / count($this->getRatings());
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * @return null|\Model\Activity\Comment[]
+     */
+    public function getComments() {
+        return $this->comments->toArray();
+    }
+
+    /**
      * Specify data which should be serialized to JSON
      *
      * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
@@ -516,7 +569,7 @@ class Activity implements \JsonSerializable
             'id'             => $this->id,
             'slug'           => $this->slug,
             'name'           => $this->name,
-            //'creator' => $this->creator,
+            'creator'        => $this->creator->getId(),
             'created'        => $this->created,
             'modified'       => $this->modified,
             'activityAreas'  => $this->activityAreas,
@@ -533,6 +586,9 @@ class Activity implements \JsonSerializable
             'materials'      => $this->materials,
             'budget'         => $this->budget,
             'attachments'    => $this->attachments->toArray(),
+            'ratings'        => $this->ratings->toArray(),
+            'comments'       => $this->comments->toArray(),
         ];
     }
+
 }

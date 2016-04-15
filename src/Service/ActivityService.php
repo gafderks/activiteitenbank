@@ -58,7 +58,6 @@ class ActivityService extends Service
         $activity->setGroupSizeMax($input->groupSizeMax);
         $activity->setActivityAreas($input->activityAreas);
         $activity->setSuitable_groups($input->groups);
-        $activity->setCreator($this->getLoginService()->getLoggedInUser());
 
         // set planning
         $planning = new \Model\Activity\Planning\Planning();

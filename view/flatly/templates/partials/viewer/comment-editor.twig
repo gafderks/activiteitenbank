@@ -1,0 +1,14 @@
+<div class="comment hidden-print">
+    <div class="comment-header">
+        <div class="comment-user" title="{{ "The name that is displayed along with your comment"|trans }}">
+            {{ session.user.firstName }} {{ session.user.lastName }}
+        </div>
+        <div class="comment-didit">
+            <label title="{{ "You did this activity and hence are an expert"|trans }}">
+                <input id="comment-didit" type="checkbox" /> {{ "We did this"|trans }}</label>
+        </div>
+    </div>
+    <textarea id="comment-body" title="{{ "Your comment"|trans }}" class="comment-body"
+              placeholder="{{ "Leave a message..."|trans }}"></textarea>
+    <input type="button" id="comment-submit" class="btn btn-primary btn-sm" value="{{ "Submit comment"|trans }}" />
+</div>

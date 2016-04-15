@@ -72,10 +72,13 @@ class JwtService extends Service
      * @param string $privilege
      * @return bool token is allowed to perform the specified privilege on the specified resource
      */
-    public function tokenIsAllowed($token, $resource, $privilege) {
+    public function tokenIsAllowed($token, $resource, $privilege = null) {
         // search for the combination of resource and privilege
         if (!isset($token->scopes->$resource)) {
             return false; // resource is not present in token
+        }
+        if (is_null($privilege)) {
+            return true; // token is allowed control over resource
         }
         if (!in_array($privilege, $token->scopes->$resource->actions)) {
             return false;
