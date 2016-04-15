@@ -2,13 +2,21 @@
     <h3 class="filter-bar-title"><span class="glyphicon chevron"></span>{% trans "Filters" %}</h3>
     <div class="filter-bar-content">
         <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Keyword" %}</h3>
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-filter"></span>
+                {% trans "Keyword" %}
+            </h3>
             <div class="filter-content">
                 <input id="filter-term" class="form-control" type="text" placeholder="{% trans "Narrow results" %}" />
             </div>
         </div>
         <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Category" %}</h3>
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-inbox"></span>
+                {% trans "Category" %}
+            </h3>
             <div class="filter-content">
                 {% for category in session.user.team.organization.categories %}
                     <div class="radio">
@@ -20,8 +28,66 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon chevron"></span><span class="glyphicon glyphicon-time"></span>{% trans "Duration" %}</h3>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-user"></span>
+                {% trans "Suitable groups" %}
+            </h3>
+            <div class="filter-content">
+                <input type="checkbox" id="filter-group-relation" data-toggle="toggle" data-size="small"
+                       data-on="{{ "AND"|trans }}" data-off="{{ "OR"|trans }}">
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" id="filter-group-unspecified" checked="checked" name="filter-group"
+                               value="-" >
+                        {{ "Unspecified"|trans }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-group" value="bevers" >
+                        Bevers
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-group" value="welpen" >
+                        Welpen
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-group" value="scouts" >
+                        Scouts
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-group" value="explorers" >
+                        Explorers
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-group" value="roverscouts" >
+                        Roverscouts
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-group" value="plusscouts" >
+                        Plusscouts
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-time"></span>
+                {% trans "Duration" %}
+            </h3>
             {% set durations = [] %}
             {% for activity in activities %}
                 {% set durations = durations|merge([activity.planning.totalDuration]) %}
@@ -35,8 +101,12 @@
                 <span class="slider-right">{{ max(durations)|int2time }}</span>
             </div>
         </div>
-        <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Budgetary" %}</h3>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-euro"></span>
+                {% trans "Budgetary" %}
+            </h3>
             {% set budgets = [] %}
             {% for activity in activities %}
                 {% set budgets = budgets|merge([activity.budget.totalCost]) %}
@@ -49,8 +119,12 @@
                 <span class="slider-right">{{ max(budgets)|float2euro|raw }}</span>
             </div>
         </div>
-        <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Difficulty" %}</h3>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-flash"></span>
+                {% trans "Difficulty" %}
+            </h3>
             <div class="filter-content">
                 <input id="filter-difficulty" class="slider level" type="text"
                        data-slider-min="{{ enum.level.Unspecified }}" data-slider-max="{{ enum.level.VeryHigh }}"
@@ -60,8 +134,12 @@
                 <span class="slider-right">{% trans "Very high" %}</span>
             </div>
         </div>
-        <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Guidance" %}</h3>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                {% trans "Guidance" %}
+            </h3>
             <div class="filter-content">
                 <input id="filter-guidance" class="slider level" type="text"
                        data-slider-min="{{ enum.level.Unspecified }}" data-slider-max="{{ enum.level.VeryHigh }}"
@@ -71,8 +149,12 @@
                 <span class="slider-right">{% trans "Very high" %}</span>
             </div>
         </div>
-        <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Motivation" %}</h3>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-heart"></span>
+                {% trans "Motivation" %}
+            </h3>
             <div class="filter-content">
                 <input id="filter-motivation" class="slider level" type="text"
                        data-slider-min="{{ enum.level.Unspecified }}" data-slider-max="{{ enum.level.VeryHigh }}"
@@ -82,8 +164,11 @@
                 <span class="slider-right">{% trans "Very high" %}</span>
             </div>
         </div>
-        <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Group size" %}</h3>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-user"></span>
+                {% trans "Group size" %}</h3>
             <div class="filter-content">
                 <label class="checkbox-inline">
                     <input type="checkbox" id="filter-groupsize-ignore" class="" checked />{{ "Show all"|trans }}</label>
@@ -99,46 +184,6 @@
 
             </div>
         </div>
-        <div class="filter-item">
-            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Suitable groups" %}</h3>
-            <div class="filter-content">
-                <div class="radio">
-                    <label>
-                        <input type="checkbox" name="activity-prop-category-radio" data-prop-text="Forest game" value="1" >
-                        Bevers
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="checkbox" name="activity-prop-category-radio" data-prop-text="Indoors" value="2" >
-                        Welpen
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="checkbox" name="activity-prop-category-radio" data-prop-text="Technique" value="3" >
-                        Scouts
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="checkbox" name="activity-prop-category-radio" data-prop-text="Game" value="4" >
-                        Explorers
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="checkbox" name="activity-prop-category-radio" data-prop-text="Extraordinary" value="5" >
-                        Roverscouts
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="checkbox" name="activity-prop-category-radio" data-prop-text="Special occasion" value="6" >
-                        Plusscouts
-                    </label>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>

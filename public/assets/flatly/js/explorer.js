@@ -20,6 +20,11 @@ Explorer = {
             $("#filter-groupsize-ignore").prop("checked", false);
         });
 
+        $("#filter-group-relation").change(function () {
+            $("#filter-group-unspecified").prop('disabled', $("#filter-group-relation").is(":checked"));
+            $("#filter-group-unspecified").prop('checked', !$("#filter-group-relation").is(":checked"));
+        });
+
         $(".slider.time").slider({
             tooltip: "always",
             tooltip_split: true,
@@ -86,9 +91,8 @@ Explorer = {
         var guidance = data[5];
         var motivation = data[6];
         var groupsize = data[7];
-//                var state = data[7];
 //                var activity_areas = data[8];
-//                var suitable_groups = data[9];
+        var suitable_groups = data[9].split(",");
 //                var creator = data[10];
 
 
@@ -178,6 +182,32 @@ Explorer = {
                     return false;
                 }
             }
+        }
+
+        /** Filter on suitable group */
+        var and = $("#filter-group-relation").is(":checked");
+        var orFound = false;
+        var filterGroup = document.getElementsByName("filter-group");
+        for(var j = 0; j < filterGroup.length; j++) {
+            var groupValue = filterGroup[j].value;
+            if (filterGroup[j].checked) {
+                if (and && suitable_groups.indexOf(groupValue) === -1 && groupValue !== '-') {
+                    // not present in and
+                    return false;
+                }
+                if (suitable_groups.indexOf(groupValue) !== -1) {
+                    // present in or
+                    orFound = true;
+                }
+                if (suitable_groups[0] === '' && groupValue === '-') {
+                    // unspecified for an empty set
+                    orFound = true;
+                }
+            }
+        }
+        if (!and && !orFound) {
+            // none present in or
+            return false;
         }
 
 

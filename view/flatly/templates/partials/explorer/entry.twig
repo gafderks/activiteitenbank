@@ -3,7 +3,7 @@
         <a href="{{ path_for('activity-view', {"id": activity.id, "slug": activity.slug}) }}">
             {{ activity.name }}
         </a>
-        <span class="grid-badges">
+        <span class="grid-badges hidden-xs">
             <span class="glyphicon glyphicon-star" title="{{ "Rating"|trans }}"></span>
             <span title="{{ "Rating"|trans }}">{{ activity.averageRating|round(1) }}</span>
             <span class="glyphicon glyphicon-comment" title="{{ "Comments"|trans }}"></span>
@@ -113,7 +113,7 @@
                  title="{{ "Plusscouts"|trans }}" />
         {% endif %}
     </td>
-    <td data-order="{{ activity.averageRating }}">
+    <td data-order="{{ activity.averageRating }}" data-filter="{{ activity.averageRating }}">
                             <span class="rating-stars disabled" title="{{ activity.averageRating|round(1) }}">
                                 <input type="hidden" class="rating" value="{{ activity.averageRating }}" data-readonly
                                        data-fractions="4" />
