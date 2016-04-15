@@ -997,11 +997,18 @@ a.buttons-colvis {
 span.grid-badges {
     font-size: 0.8em;
     color: #777;
+    float: right;
+    width: 8em;
 }
 
 span.grid-badges span.glyphicon {
     padding-left: 0.8em;
     margin-right: 0.2em;
+}
+
+span.grid-badges span:not(.glyphicon) {
+    width: 1.5em;
+    display: inline-block;
 }
 
 /* Fix tooltips
