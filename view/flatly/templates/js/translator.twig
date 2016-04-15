@@ -1,0 +1,69 @@
+{% set dictionary = [
+    "You need to supply a message",
+    "Unable to save comment...",
+    "Unable to save rating...",
+    "Unspecified",
+    "Minimum group size needs to be at least 1",
+    "or more participants",
+    "participants",
+    "Maximum group size needs to larger than or equal to minimum group size",
+    "Maximum group size needs to be at least 1",
+    "en",
+    "Drop files here to upload",
+    "Your browser does not support drag'n'drop file uploads.",
+    "Please use the fallback form below to upload your files like in the olden days.",
+    "You can't upload files of this type.",
+    "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.",
+    "Server responded with {{statusCode}} code.",
+    "Cancel upload",
+    "Are you sure you want to cancel this upload?",
+    "Remove file",
+    "You can not upload any more files.",
+    "Saving failed... Are you still connected?",
+    "Saving failed...",
+    "No data available in table",
+    "Showing _START_ to _END_ of _TOTAL_ entries",
+    "Showing 0 to 0 of 0 entries",
+    "(filtered from _MAX_ total entries)",
+    "Show _MENU_ entries",
+    "Loading...",
+    "Processing...",
+    "Search",
+    "No matching records found",
+    "First",
+    "Last",
+    "Next",
+    "Previous",
+    "activate to sort column ascending",
+    "activate to sort column descending",
+    "Change columns"
+  ] %}
+/*global baseUrl*/
+
+/**
+ * This script handles the translation of strings for other scripts.
+ * To add a string for translation, add it to the array in /view/{template}/templates/js/translator.twig
+ *
+ * Depends: jquery
+ */
+Translator = {
+
+    dictionary: {{ '{' }}{% spaceless %}
+        {% for entry in dictionary %}"{{ entry|raw }}":"{{ entry|trans|raw }}"{% if loop.last == false %},{% endif %}{% endfor %}
+    {% endspaceless %}{{ '}' }},
+
+    /**
+     * Looks up the source in the dictionary.
+     *
+     * @param source
+     * @returns {*}
+     */
+    translate: function(source) {
+        "use strict";
+        if (Translator.dictionary[source] !== undefined) {
+            return Translator.dictionary[source];
+        } else {
+            return source;
+        }
+    }
+};
