@@ -18,10 +18,16 @@
                 {% trans "Category" %}
             </h3>
             <div class="filter-content">
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-category" value="-">
+                        {{ "No category"|trans }}
+                    </label>
+                </div>
                 {% for category in session.user.team.organization.categories %}
                     <div class="radio">
                         <label>
-                            <input type="checkbox" name="filter-category" data-filter-text="{{ category.name }}">
+                            <input type="checkbox" checked="checked" name="filter-category" value="{{ category.id }}">
                             {{ category.name }}
                         </label>
                     </div>

@@ -77,14 +77,9 @@ Explorer = {
      */
     filter: function (settings, data, dataIndex) {
         "use strict";
-//                var f_category = [];
-//                $("[name=filter-category]:checked").each(function() {
-//                    f_category.push($(this).data("filter-text"));
-//                });
-//                console.log(f_category);
-//
+
         var name = data[0];
-//                var category = data[1];
+        var category = data[1].split(",");
         var duration = data[2];
         var budget = data[3];
         var difficulty = data[4];
@@ -184,6 +179,27 @@ Explorer = {
             }
         }
 
+        /** Filter on category */
+        var orFound = false;
+        var filterCategory = document.getElementsByName("filter-category");
+        for(var k = 0; k < filterCategory.length; k++) {
+            var categoryValue = filterCategory[k].value;
+            if (filterCategory[k].checked) {
+                if (category.indexOf(categoryValue) !== -1) {
+                    // present in or
+                    orFound = true;
+                }
+                if (category[0] === '' && categoryValue === '-') {
+                    // unspecified for an empty set
+                    orFound = true;
+                }
+            }
+        }
+        if (!and && !orFound) {
+            // none present in or
+            return false;
+        }
+
         /** Filter on suitable group */
         var and = $("#filter-group-relation").is(":checked");
         var orFound = false;
@@ -210,14 +226,6 @@ Explorer = {
             return false;
         }
 
-
-        // category filter
-//                if (f_category.length > 0) {
-//                    if (f_category.indexOf(category)==-1) {
-//                        return false;
-//                    }
-//                }
-//
         return true;
     }
 };

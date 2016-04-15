@@ -13,10 +13,10 @@
     {% set activityCategoriesNamed = [] %}
     {% set activityCategories = [] %}
     {% for category in activity.categories %}
-        {% set activityCategoriesNamed = activityCategoriesNamed|merge(category.name|e) %}
-        {% set activityCategories = activityCategories|merge(category.id) %}
+        {% set activityCategoriesNamed = activityCategoriesNamed|merge([category.name|e]) %}
+        {% set activityCategories = activityCategories|merge([category.id]) %}
     {% endfor %}
-    <td data-order="{{ activityCategories.join(',') }}">
+    <td data-filter="{{ activityCategories|join(',') }}">
         {{ activityCategoriesNamed|join(', ') }}
     </td>
     <td data-order="{{ activity.planning.totalDuration }}"
