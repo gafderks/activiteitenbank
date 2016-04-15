@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: activiteitenbank\n"
-"POT-Creation-Date: 2016-04-14 15:26+0200\n"
-"PO-Revision-Date: 2016-04-14 15:27+0200\n"
+"POT-Creation-Date: 2016-04-15 16:41+0200\n"
+"PO-Revision-Date: 2016-04-15 16:42+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -12,6 +12,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-Basepath: ../../../cache\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: dummyTranslate\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: 07/07ad14ca993ea56b231d0ea698f5127714a738329debbab2d0b312586092185b.php:28
@@ -333,7 +334,6 @@ msgstr "Naam"
 #: 4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:684
 #: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:554
 #: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:244
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:195
 #: 82/82e300b6c8baf8de059db63e268768cc6c09a19314496424722e59dc865d8d0c.php:143
 #: 82/82e300b6c8baf8de059db63e268768cc6c09a19314496424722e59dc865d8d0c.php:156
 #: 82/82e300b6c8baf8de059db63e268768cc6c09a19314496424722e59dc865d8d0c.php:168
@@ -349,6 +349,7 @@ msgstr "Naam"
 #: 89/89a16f0ada5979fde2633af458397ad44bf1ca073961de25badcb44b8eaf2c44.php:153
 #: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:244
 #: a6/a61a2eaa838a3567df46dcc8b7c6a0800c7f8b6a985bbc24e06a1abd113250b7.php:540
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: ca/ca96538da28de13859f9afca438d04fd8cd83f47ae9f4941ccffc4f72476a789.php:719
 #: ce/ce239b69ba6ff2e40aa1108c4fd54a6a9d9ce22c10780af1696ebe19b1d702e4.php:153
 #: de/deba112d48ff3ef2f11811f5378fba8855b41502a2d49e2e732f5aef98c3c547.php:719
@@ -357,7 +358,7 @@ msgid "Unspecified"
 msgstr "Onbekend"
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:203
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:203
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:203
 msgid "Minimum group size needs to be at least 1"
 msgstr "Minimale groepsgrootte moet minstens 1"
@@ -368,11 +369,11 @@ msgstr "Minimale groepsgrootte moet minstens 1"
 #: 4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:638
 #: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:565
 #: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:255
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:210
 #: 82/82e300b6c8baf8de059db63e268768cc6c09a19314496424722e59dc865d8d0c.php:638
 #: 89/89a16f0ada5979fde2633af458397ad44bf1ca073961de25badcb44b8eaf2c44.php:164
 #: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:255
 #: a6/a61a2eaa838a3567df46dcc8b7c6a0800c7f8b6a985bbc24e06a1abd113250b7.php:551
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: ca/ca96538da28de13859f9afca438d04fd8cd83f47ae9f4941ccffc4f72476a789.php:730
 #: ce/ce239b69ba6ff2e40aa1108c4fd54a6a9d9ce22c10780af1696ebe19b1d702e4.php:164
 #: de/deba112d48ff3ef2f11811f5378fba8855b41502a2d49e2e732f5aef98c3c547.php:730
@@ -386,11 +387,11 @@ msgstr "of meer deelnemers"
 #: 4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:650
 #: 63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:577
 #: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:267
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:219
 #: 82/82e300b6c8baf8de059db63e268768cc6c09a19314496424722e59dc865d8d0c.php:650
 #: 89/89a16f0ada5979fde2633af458397ad44bf1ca073961de25badcb44b8eaf2c44.php:176
 #: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:267
 #: a6/a61a2eaa838a3567df46dcc8b7c6a0800c7f8b6a985bbc24e06a1abd113250b7.php:563
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: ca/ca96538da28de13859f9afca438d04fd8cd83f47ae9f4941ccffc4f72476a789.php:742
 #: ce/ce239b69ba6ff2e40aa1108c4fd54a6a9d9ce22c10780af1696ebe19b1d702e4.php:176
 #: de/deba112d48ff3ef2f11811f5378fba8855b41502a2d49e2e732f5aef98c3c547.php:742
@@ -399,7 +400,6 @@ msgid "participants"
 msgstr "deelnemers"
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:223
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:223
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:223
 msgid ""
 "Maximum group size needs to larger than or equal to minimimum group size"
@@ -408,33 +408,35 @@ msgstr ""
 "groepsgrootte"
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:227
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:227
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:227
 msgid "Maximum group size needs to be at least 1"
 msgstr "Maximale groepsgrootte moet minstens 1 zijn"
 
 # short language string
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:344
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:344
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:265
+#: 6b/6b7802ac4cf51384cbd7bc1a5c6d3f9eb4cab08575c594a2141bd1d73a433784.php:161
 #: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:265
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:344
 msgid "en"
 msgstr "nl"
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:351
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:351
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:351
 msgid "Drop files here to upload"
 msgstr "Sleep bestanden hierheen om te uploaden"
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:355
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:355
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:355
 msgid "Your browser does not support drag'n'drop file uploads."
 msgstr "Uw browser ondersteunt helaas geen drag en drop file upload"
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:359
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:359
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:359
 msgid ""
 "Please use the fallback form below to upload your files like in the olden "
@@ -442,13 +444,13 @@ msgid ""
 msgstr "Gebruik het fallback formulier hieronder om je bestanden te uploaden."
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:363
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:363
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:363
 msgid "You can't upload files of this type."
 msgstr "Je kunt bestanden van dit type niet uploaden."
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:367
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:367
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:367
 msgid "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB."
 msgstr ""
@@ -456,45 +458,45 @@ msgstr ""
 "MiB."
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:371
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:371
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:371
 msgid "Server responded with {{statusCode}} code."
 msgstr "Server reageerde met {{statusCode}} code."
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:375
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:375
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:375
 msgid "Cancel upload"
 msgstr "Upload annuleren"
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:379
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:379
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:379
 msgid "Are you sure you want to cancel this upload?"
 msgstr "Weet je zeker dat je deze upload wilt annuleren?"
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:383
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:383
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:383
 msgid "Remove file"
 msgstr "Verwijder bestand"
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:387
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:387
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:387
 msgid "You can not upload any more files."
 msgstr "Je kunt geen nieuwe bestanden meer uploaden."
 
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:487
 #: 1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:523
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:503
-#: 7d/7d18ded4e6d88b399d928f51885ea4b759630dd89819b260263a22a607490e6f.php:545
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:503
 #: e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:545
 msgid "Saving failed... Are you still connected?"
 msgstr "Opslaan mislukt... Ben je nog verbonden met internet?"
 
 #: 1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:33
+#: 23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:33
 #: 33/33202fac983fb06e67baab9dee29bdfd6b8c96125d2093055355dc1df0f01ac0.php:83
 #: 41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:33
 #: 73/73600f8d30cca54ed395f99cf3e161d80a7cfe978dd488ab01b5651566087cb1.php:83
@@ -505,31 +507,37 @@ msgid "Login"
 msgstr "Aanmelden"
 
 #: 1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:144
+#: 23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:144
 #: 41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:144
 msgid "Sign In"
 msgstr "Aanmelden"
 
 #: 1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:173
+#: 23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:173
 #: 41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:173
 msgid "Username"
 msgstr "Gebruikersnaam"
 
 #: 1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:181
+#: 23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:181
 #: 41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:181
 msgid "Password"
 msgstr "Wachtwoord"
 
 #: 1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:191
+#: 23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:191
 #: 41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:191
 msgid "I forgot my password"
 msgstr "Wachtwoord vergeten"
 
 #: 1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:198
+#: 23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:198
 #: 41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:198
 msgid "Sign me in"
 msgstr "Aanmelden"
 
 #: 1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:210
+#: 23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:210
 #: 41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:210
 msgid "Log in with Facebook"
 msgstr "Aanmelden met Facebook"
@@ -1052,24 +1060,6 @@ msgstr "Samenleving"
 msgid "Safe and Healthy"
 msgstr "Veilig en Gezond"
 
-#: 2b/2bbf44ed9d2c23c2b0905ee93c10ea254609615647e212219e27ac53abcced99.php:1034
-#: 2b/2bbf44ed9d2c23c2b0905ee93c10ea254609615647e212219e27ac53abcced99.php:1042
-#: ca/ca96538da28de13859f9afca438d04fd8cd83f47ae9f4941ccffc4f72476a789.php:1025
-#: ca/ca96538da28de13859f9afca438d04fd8cd83f47ae9f4941ccffc4f72476a789.php:1033
-#: de/deba112d48ff3ef2f11811f5378fba8855b41502a2d49e2e732f5aef98c3c547.php:1025
-#: de/deba112d48ff3ef2f11811f5378fba8855b41502a2d49e2e732f5aef98c3c547.php:1033
-msgid "Unable to save rating..."
-msgstr "Kan de beoordeling niet bewaren..."
-
-#: 2b/2bbf44ed9d2c23c2b0905ee93c10ea254609615647e212219e27ac53abcced99.php:1060
-msgid "You need to supply a message"
-msgstr "Je moet een reactie invullen"
-
-#: 2b/2bbf44ed9d2c23c2b0905ee93c10ea254609615647e212219e27ac53abcced99.php:1082
-#: 2b/2bbf44ed9d2c23c2b0905ee93c10ea254609615647e212219e27ac53abcced99.php:1092
-msgid "Unable to save comment..."
-msgstr "Kan de reactie niet bewaren..."
-
 #: 2d/2d50ef1c394a61f653e59cb0738792d7d09e9c9475d156b7f298fe33be7d60ef.php:82
 #: 49/49f2de6dde19cbb5f96ccdb1ff58130bef802f78cad8d3b3563813e12ca102cf.php:82
 #: 5d/5d35573680d328c7f3b4618a63f2fa2a05b0aa1f48ea2aa2e430bea379ed058d.php:82
@@ -1079,6 +1069,8 @@ msgid "View profile"
 msgstr "Profiel bekijken"
 
 #: 2d/2d50ef1c394a61f653e59cb0738792d7d09e9c9475d156b7f298fe33be7d60ef.php:95
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:33
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:62
 #: 49/49f2de6dde19cbb5f96ccdb1ff58130bef802f78cad8d3b3563813e12ca102cf.php:95
 #: 5d/5d35573680d328c7f3b4618a63f2fa2a05b0aa1f48ea2aa2e430bea379ed058d.php:93
 #: 5e/5ecab957dbaf99054a333b52739382dcdfcb5e63ebda5ed786072ac5e8104ff1.php:95
@@ -1112,125 +1104,13 @@ msgstr "Uitloggen"
 msgid "Explore"
 msgstr "Verkennen"
 
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:270
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:623
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:621
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:270
-msgid "No data available in table"
-msgstr "Geen resultaten aanwezig in de tabel"
-
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:274
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:627
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:625
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:274
-msgid "Showing _START_ to _END_ of _TOTAL_ entries"
-msgstr "_START_ tot _END_ van _TOTAL_ resultaten"
-
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:278
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:631
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:629
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:278
-msgid "Showing 0 to 0 of 0 entries"
-msgstr "Weergave van 0 tot 0 van 0 items"
-
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:282
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:635
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:633
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:282
-msgid "(filtered from _MAX_ total entries)"
-msgstr "(gefilterd uit _MAX_ items)"
-
 # Thousand separator
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:288
+#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:280
 #: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:641
 #: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:639
 #: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:288
 msgid ","
 msgstr "."
-
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:292
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:645
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:643
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:292
-msgid "Show _MENU_ entries"
-msgstr "_MENU_ resultaten weergeven"
-
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:296
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:649
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:647
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:296
-msgid "Loading..."
-msgstr "Bezig..."
-
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:300
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:653
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:651
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:300
-msgid "Processing..."
-msgstr "Verwerken..."
-
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:304
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:657
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:655
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:304
-msgid "Search"
-msgstr "Zoeken"
-
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:308
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:661
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:659
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:308
-msgid "No matching records found"
-msgstr "Geen resultaten om weer te geven"
-
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:313
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:666
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:664
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:313
-msgid "First"
-msgstr "Eerste"
-
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:317
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:670
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:668
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:317
-msgid "Last"
-msgstr "Laatste"
-
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:321
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:674
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:672
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:321
-msgid "Next"
-msgstr "Volgende"
-
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:325
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:678
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:676
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:325
-msgid "Previous"
-msgstr "Vorige"
-
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:331
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:684
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:682
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:331
-msgid "activate to sort column ascending"
-msgstr "activeer om de kolom oplopend te sorteren"
-
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:335
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:688
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:686
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:335
-msgid "activate to sort column descending"
-msgstr "activeer om de kolom afnemend te sorteren"
-
-#: 2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:341
-#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:694
-#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:692
-#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:341
-msgid "Change columns"
-msgstr "Kolommen aanpassen"
 
 #: 2f/2ff3349e17f82b5e59edbceee9df0e4949b0dbf07601ef9004b900685e0a50fe.php:23
 msgid "The name that is displayed along with your comment"
@@ -1418,6 +1298,92 @@ msgstr "Je moet deze activiteit opslaan voordat je een bijlage kunt toevoegen."
 msgid "By"
 msgstr "Door"
 
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:70
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:70
+msgid "Account settings"
+msgstr "Accountinstellingen"
+
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:78
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:78
+msgid "API tokens"
+msgstr "API tokens"
+
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:92
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:92
+msgid "Warning"
+msgstr "Waarschuwing"
+
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:96
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:96
+msgid "API tokens are like passwords, so treat them as such."
+msgstr "API tokens zijn als wachtwoorden, behandel ze dus als zodanig."
+
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:101
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:101
+msgid "API tokens cannot be revoked!"
+msgstr "API tokens kunnen niet worden ingetrokken!"
+
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:106
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:106
+msgid "New token"
+msgstr "Nieuwe token"
+
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:110
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:110
+msgid ""
+"Using this form, you can generate API tokens. It is important to note that "
+"API tokens cannot be revoked."
+msgstr ""
+"Met dit formulier kun je API tokens genereren. Het is belangrijk om te "
+"beseffen dat API tokens niet kunnen worden ingetrokken."
+
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:116
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:116
+msgid "Expiry"
+msgstr "Vervaldatum"
+
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:123
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:123
+msgid "Valid from"
+msgstr "Geldig vanaf"
+
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:137
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:137
+msgid "Valid to"
+msgstr "Geldig tot"
+
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:152
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:152
+msgid "Scope"
+msgstr "Rechten"
+
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:216
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:216
+msgid "Generate token"
+msgstr "Token genereren"
+
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:221
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:221
+msgid "API token"
+msgstr "API token"
+
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:227
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:227
+msgid "How to use API tokens"
+msgstr "Hoe gebruik ik een API token?"
+
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:302
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:302
+msgid "You need to fill in the date fields"
+msgstr "Je moet de datumvelden invullen"
+
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:327
+#: 45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:335
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:327
+#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:335
+msgid "Your session has expired. Try reloading the page."
+msgstr "Je sessie is verlopen. Herlaad de pagina."
+
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:196
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:208
 #: 47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:355
@@ -1499,80 +1465,150 @@ msgstr "Maximum"
 msgid "No maximum"
 msgstr "Geen maximum"
 
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:623
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:621
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:270
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "No data available in table"
+msgstr "Geen resultaten aanwezig in de tabel"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:627
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:625
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:274
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr "_START_ tot _END_ van _TOTAL_ resultaten"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:631
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:629
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:278
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Showing 0 to 0 of 0 entries"
+msgstr "Weergave van 0 tot 0 van 0 items"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:635
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:633
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:282
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "(filtered from _MAX_ total entries)"
+msgstr "(gefilterd uit _MAX_ items)"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:645
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:643
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:292
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Show _MENU_ entries"
+msgstr "_MENU_ resultaten weergeven"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:649
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:647
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:296
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Loading..."
+msgstr "Bezig..."
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:653
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:651
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:300
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Processing..."
+msgstr "Verwerken..."
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:657
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:655
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:304
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Search"
+msgstr "Zoeken"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:661
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:659
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:308
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "No matching records found"
+msgstr "Geen resultaten om weer te geven"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:666
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:664
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:313
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "First"
+msgstr "Eerste"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:670
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:668
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:317
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Last"
+msgstr "Laatste"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:674
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:672
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:321
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Next"
+msgstr "Volgende"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:678
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:676
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:325
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Previous"
+msgstr "Vorige"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:684
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:682
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:331
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "activate to sort column ascending"
+msgstr "activeer om de kolom oplopend te sorteren"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:688
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:686
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:335
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "activate to sort column descending"
+msgstr "activeer om de kolom afnemend te sorteren"
+
+#: 79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:694
+#: 8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:692
+#: a5/a5fce2d6ba9ac11ba0417c372968db99d8d5194733f2d332902a9dffd2c2c857.php:341
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Change columns"
+msgstr "Kolommen aanpassen"
+
 #: 9c/9c59434b2a01836f20c6c79e211ca48d135c68f133cde91eec9ff48914feb6f9.php:63
 #: ac/ac45fcdff67bcf875fac9beee25c011312f11027bc98ae98c1f8d8c97ec6c49f.php:63
 #: af/af414b9b975d7cdf8c26f1990c4895c2a867558856b4305144c5a79c410e391a.php:63
 msgid "page"
 msgstr "pagina"
 
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:70
-msgid "Account settings"
-msgstr "Accountinstellingen"
+#: bd/bdc06756d89a90b08ba3732ce8d6b42f61e4b9d9a949afb2ab89d0a67a430204.php:19
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Saving failed..."
+msgstr "Bewaren is mislukt..."
 
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:78
-msgid "API tokens"
-msgstr "API tokens"
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "You need to supply a message"
+msgstr "Je moet een reactie invullen"
 
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:92
-msgid "Warning"
-msgstr "Waarschuwing"
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Unable to save comment..."
+msgstr "Kan de reactie niet bewaren..."
 
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:96
-msgid "API tokens are like passwords, so treat them as such."
-msgstr "API tokens zijn als wachtwoorden, behandel ze dus als zodanig."
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+#: ca/ca96538da28de13859f9afca438d04fd8cd83f47ae9f4941ccffc4f72476a789.php:1025
+#: ca/ca96538da28de13859f9afca438d04fd8cd83f47ae9f4941ccffc4f72476a789.php:1033
+#: de/deba112d48ff3ef2f11811f5378fba8855b41502a2d49e2e732f5aef98c3c547.php:1025
+#: de/deba112d48ff3ef2f11811f5378fba8855b41502a2d49e2e732f5aef98c3c547.php:1033
+msgid "Unable to save rating..."
+msgstr "Kan de beoordeling niet bewaren..."
 
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:101
-msgid "API tokens cannot be revoked!"
-msgstr "API tokens kunnen niet worden ingetrokken!"
-
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:106
-msgid "New token"
-msgstr "Nieuwe token"
-
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:110
-msgid ""
-"Using this form, you can generate API tokens. It is important to note that "
-"API tokens cannot be revoked."
+#: ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Maximum group size needs to larger than or equal to minimum group size"
 msgstr ""
-"Met dit formulier kun je API tokens genereren. Het is belangrijk om te "
-"beseffen dat API tokens niet kunnen worden ingetrokken."
-
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:116
-msgid "Expiry"
-msgstr "Vervaldatum"
-
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:123
-msgid "Valid from"
-msgstr "Geldig vanaf"
-
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:137
-msgid "Valid to"
-msgstr "Geldig tot"
-
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:152
-msgid "Scope"
-msgstr "Rechten"
-
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:216
-msgid "Generate token"
-msgstr "Token genereren"
-
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:221
-msgid "API token"
-msgstr "API token"
-
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:227
-msgid "How to use API tokens"
-msgstr "Hoe gebruik ik een API token?"
-
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:302
-msgid "You need to fill in the date fields"
-msgstr "Je moet de datumvelden invullen"
-
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:327
-#: a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:335
-msgid "Your session has expired. Try reloading the page."
-msgstr "Je sessie is verlopen. Herlaad de pagina."
+"Maximale groepsgrootte moet groter zijn of gelijk aan de minimale "
+"groepsgrootte"
 
 #~ msgid "Plan"
 #~ msgstr "Plannen"

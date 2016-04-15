@@ -31,6 +31,15 @@
     {% block javascripts %}
         <script src="{{ componentsUrl }}/jquery/dist/jquery.min.js"></script>
         <script src="{{ componentsUrl }}/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <script type="application/javascript">
+            var assetsUrl = "{{ assetsUrl }}";
+            var componentsUrl = "{{ componentsUrl }}";
+            var baseUrl = "{{ baseUrl }}";
+            var authToken = "{{ authToken }}";
+        </script>
+
+        <script src="{{ baseUrl }}/js/translator.js?locale={{ "en"|trans }}"></script>
     {% endblock %}
 </body>
 </html>

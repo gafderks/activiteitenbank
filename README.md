@@ -18,6 +18,12 @@ command line, all strings which are translated by the translated will be put in 
 `/view/{template}/cache`. With an editor like POEdit, these files can be put into a catalog and translation strings can
 be extracted.
 
+### JavaScript Translator
+For obtaining translated strings inside of JavaScript files, a Translator object is used. The Translator object is
+created dynamically using Twig. The object contains a dictionary of strings that are translated using `gettext`. To
+use translated strings in JavaScript, you need to add the original string to `/view/{template}/js/translator.twig` and
+then use `Translator.translate("Original string")` in the JavaScript.
+
 ## API
 This application provides an API that uses [JSON Web Tokens (JWT)](http://jwt.io/) for authentication.
 For all API-routes that are non-public a token need to be supplied using the Authorization header.

@@ -262,6 +262,15 @@ return [
                     'action' => 'facebookCallback',
                 ],
             ],
+            'js-translate-helper' => [
+                'type' => 'literal',
+                'method' => 'get',
+                'options' => [
+                    'route' => '/js/translator.js',
+                    'controller' => 'ApplicationController',
+                    'action' => 'Translator'
+                ],
+            ],
         ],
     ],
     'resources' => [

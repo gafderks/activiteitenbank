@@ -80,6 +80,7 @@ $container['view'] = function($container) use ($config) {
     $view->addExtension(new \Twig_Extensions_Extension_I18n());
     $view->addExtension(new \Twig_Extensions_Extension_Intl());
     $view->addExtension(new \View\Extension\FormatTwigExtension($container));
+    $view->addExtension(new \View\Extension\TranslateDummyTwigExtension($container));
     $view->addExtension(new \Twig_Extensions_Extension_Date());
 
     // register default data that is supplied to the templates

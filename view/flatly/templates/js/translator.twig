@@ -1,0 +1,70 @@
+{# The |dt filter is defined in \View\Extension\TranslateDummyTwigExtension #}
+{% set dictionary = [
+    "You need to supply a message"|dt,
+    "Unable to save comment..."|dt,
+    "Unable to save rating..."|dt,
+    "Unspecified"|dt,
+    "Minimum group size needs to be at least 1"|dt,
+    "or more participants"|dt,
+    "participants"|dt,
+    "Maximum group size needs to larger than or equal to minimum group size"|dt,
+    "Maximum group size needs to be at least 1"|dt,
+    "en"|dt,
+    "Drop files here to upload"|dt,
+    "Your browser does not support drag'n'drop file uploads."|dt,
+    "Please use the fallback form below to upload your files like in the olden days."|dt,
+    "You can't upload files of this type."|dt,
+    "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB."|dt,
+    "Server responded with {{statusCode}} code."|dt,
+    "Cancel upload"|dt,
+    "Are you sure you want to cancel this upload?"|dt,
+    "Remove file"|dt,
+    "You can not upload any more files."|dt,
+    "Saving failed... Are you still connected?"|dt,
+    "Saving failed..."|dt,
+    "No data available in table"|dt,
+    "Showing _START_ to _END_ of _TOTAL_ entries"|dt,
+    "Showing 0 to 0 of 0 entries"|dt,
+    "(filtered from _MAX_ total entries)"|dt,
+    "Show _MENU_ entries"|dt,
+    "Loading..."|dt,
+    "Processing..."|dt,
+    "Search"|dt,
+    "No matching records found"|dt,
+    "First"|dt,
+    "Last"|dt,
+    "Next"|dt,
+    "Previous"|dt,
+    "activate to sort column ascending"|dt,
+    "activate to sort column descending"|dt,
+    "Change columns"|dt
+  ] %}
+/*global baseUrl*/
+
+/**
+ * This script handles the translation of strings for other scripts.
+ * To add a string for translation, add it to the array in /view/{template}/templates/js/translator.twig
+ *
+ * Depends: jquery
+ */
+Translator = {
+
+    dictionary: {{ '{' }}{% spaceless %}
+        {% for entry in dictionary %}"{{ entry|raw }}":"{{ entry|trans|raw }}"{% if loop.last == false %},{% endif %}{% endfor %}
+    {% endspaceless %}{{ '}' }},
+
+    /**
+     * Looks up the source in the dictionary.
+     *
+     * @param source
+     * @returns {*}
+     */
+    translate: function(source) {
+        "use strict";
+        if (Translator.dictionary[source] !== undefined) {
+            return Translator.dictionary[source];
+        } else {
+            return source;
+        }
+    }
+};
