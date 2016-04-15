@@ -86,7 +86,7 @@ Explorer = {
         var guidance = data[5];
         var motivation = data[6];
         var groupsize = data[7];
-//                var activity_areas = data[8];
+        var activity_areas = data[8].split(",");
         var suitable_groups = data[9].split(",");
 //                var creator = data[10];
 
@@ -195,7 +195,7 @@ Explorer = {
                 }
             }
         }
-        if (!and && !orFound) {
+        if (!orFound) {
             // none present in or
             return false;
         }
@@ -222,6 +222,27 @@ Explorer = {
             }
         }
         if (!and && !orFound) {
+            // none present in or
+            return false;
+        }
+
+        /** Filter on activity area */
+        var orFound = false;
+        var filterArea = document.getElementsByName("filter-activityarea");
+        for(var l = 0; l < filterArea.length; l++) {
+            var areaValue = filterArea[l].value;
+            if (filterArea[l].checked) {
+                if (activity_areas.indexOf(areaValue) !== -1) {
+                    // present in or
+                    orFound = true;
+                }
+                if (activity_areas[0] === '' && areaValue === '-') {
+                    // unspecified for an empty set
+                    orFound = true;
+                }
+            }
+        }
+        if (!orFound) {
             // none present in or
             return false;
         }
