@@ -3,6 +3,8 @@
 
 namespace Model\Activity;
 
+use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
+
 /**
  * Model for Activity Category.
  *
@@ -38,6 +40,35 @@ class Category implements \JsonSerializable
      * @var \Model\Organization
      */
     private $organization;
+
+    /**
+     * Activities that belong to this category.
+     *
+     * @ManyToMany(targetEntity="Activity", mappedBy="categories")
+     * @var \Model\Activity\Activity[]
+     */
+    private $activities;
+
+    /**
+     * Category constructor.
+     */
+    public function __construct() {
+        $this->activities = new ArrayCollection();
+    }
+
+    /**
+     * @return Activity[]
+     */
+    public function getActivities() {
+        return $this->activities;
+    }
+
+    /**
+     * @param Activity[] $activities
+     */
+    public function setActivities(ArrayCollection $activities) {
+        $this->activities = $activities;
+    }
 
     /**
      * @return int
