@@ -49,118 +49,47 @@
 
 <script src="{{ componentsUrl }}/ckeditor/ckeditor.js"></script>
 <script src="{{ componentsUrl }}/dropzone/dist/min/dropzone.min.js"></script>
-<script src="{{ assetsUrl }}/js/save-activity.js"></script>
 <script src="{{ assetsUrl }}/js/list.js"></script>
+<script src="{{ assetsUrl }}/js/editor.js"></script>
 
 <script type="text/javascript">
 
-    $(".activity-property-edit").click(function() {
-        $($(this).data("property-editor")).addClass("active");
-        $(this).hide();
-    });
+    dropzoneInit = function() {
+        // add existing files
+        {% set count = 0 %}
+        {% for item in activity.attachments %}
+        var file{{ count }} = { name: "{{ item.name }}", size: {{ item.size }},
+            url: "{{ path_for('api-attachment-get', {"activityId": activity.id,
+                "attachmentId": item.id, "fileName": item.slug}) }}", id: {{ item.id }} };
+        this.emit("addedfile", file{{ count }});
+        {% set count = count + 1 %}
+        {% endfor %}
 
-    $(".activity-property-cancel").click(function() {
-        $($(this).data("property-editor")).removeClass("active");
-        $($(this).data("property-edit")).show();
-    });
-
-
-    $(".activity-prop-ok").click(function() {
-
-        // set field
-        var values = [];
-        var checkedInputs = $('input[name='+$(this).data("prop-radio")+']:checked');
-        checkedInputs.each(function(index) {
-            values.push($(this).val());
+        this.on("success", function(file, responseText) {
+            {#var downloadButton = Dropzone.createElement("<button onclick=\"window.location.href=\'"+#}
+            {#"{{ baseUrl }}/api/activity/{{ activity.id }}/attachment/"+responseText.id+#}
+            {#"\'\" class='dz-download-button'>Download</button></a>");#}
+            {#file.previewElement.appendChild(downloadButton);#}
+            file.id = responseText.id;
         });
-        $($(this).data("prop-field")).val(values.join(","));
 
-        // set label
-        var labels = [];
-        checkedInputs.each(function(index) {
-            labels.push($(this).data("prop-text"));
+        this.on("removedfile", function(file) {
+            console.log(file);
+            $.ajax({
+                url: baseUrl + '/api/activity/{{ activity.id }}/attachment/'+file.id,
+                type: 'DELETE',
+                beforeSend: function(xhr, settings) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + authToken);
+                }
+            });
         });
-        $($(this).data("prop-label")).text(labels.join(", "));
+    };
 
-        // hide editor
-        $($(this).data("prop-editor")).removeClass("active");
+    Editor.init();
 
-        $($(this).data("property-edit")).show();
-    });
 
-    $(".activity-prop-ok-groupsize").click(function() {
 
-        // set field
-        var minimum;
-        var maximum;
-        var proplabel;
 
-        if ($("#groupsize-unknown").is(":checked")) {
-            minimum = null;
-            maximum = null;
-            proplabel = "{{ "Unspecified"|trans }}";
-        } else {
-            var inputMinimum = $("#groupsize-minimum");
-            if (parseInt(inputMinimum.val()) > 0) {
-                minimum = inputMinimum.val();
-            } else { alert("{{ "Minimum group size needs to be at least 1"|trans }}"); return; }
-
-            if ($("#groupsize-no-maximum").is(":checked")) {
-                maximum = null;
-                proplabel = minimum + " {{ "or more participants"|trans }}";
-            } else {
-                var inputMaximum = $("#groupsize-maximum");
-                if (parseInt(inputMaximum.val()) > 0) {
-                    if (parseInt(inputMaximum.val()) >= parseInt(inputMinimum.val())) {
-                        maximum = inputMaximum.val();
-                        proplabel = minimum + " - " + maximum + " {{ "participants"|trans }}";
-                    } else { alert("{{ "Maximum group size needs to larger than or equal to minimimum group size"|trans }}"); return; }
-                } else { alert("{{ "Maximum group size needs to be at least 1"|trans }}"); return; }
-            }
-        }
-        $("#activity-prop-groupsize-min").val(minimum);
-        $("#activity-prop-groupsize-max").val(maximum);
-
-        // set label
-        $($(this).data("prop-label")).text(proplabel);
-
-        // hide editor
-        $($(this).data("prop-editor")).removeClass("active");
-
-        $($(this).data("property-edit")).show();
-    });
-
-    // groupsize editor
-    $("#groupsize-unknown").change(function() {
-        var inputMinimum = $("#groupsize-minimum");
-        var inputMaximum = $("#groupsize-maximum");
-        var inputNoMaximum = $("#groupsize-no-maximum");
-        if ($(this).is(":checked")) {
-            inputMinimum.prop("disabled", true);
-            inputMaximum.prop("disabled", true);
-            inputNoMaximum.prop("disabled", true);
-            inputMinimum.val("");
-            inputMaximum.val("");
-            inputNoMaximum.prop("checked", false);
-        } else {
-            inputMinimum.prop("disabled", false);
-            inputMaximum.prop("disabled", false);
-            inputNoMaximum.prop("disabled", false);
-            inputMinimum.val("1");
-            inputMaximum.val("1");
-        }
-    });
-
-    $("#groupsize-no-maximum").change(function() {
-        var inputMaximum = $("#groupsize-maximum");
-        if ($(this).is(":checked")) {
-            inputMaximum.prop("disabled", true);
-            inputMaximum.val("");
-        } else {
-            inputMaximum.prop("disabled", false);
-            inputMaximum.val("1");
-        }
-    });
 
     $(document).ready(function() {
         if(window.location.hash) {
@@ -181,163 +110,13 @@
 
 
 
-    $(".badge-selectors>li>label>input[type=checkbox]").change(function() {
-        $(this).parent().parent().toggleClass("active");
-    });
-
-
-    $(".badge-selectors>li>label>input[type=checkbox]:checked").parent().parent().addClass("active");
-
-
-
-    $(".wizard-label").click(function(e) {
-
-        e.preventDefault();
-        var hash = $(this).attr("data-wizard-tab");
-        window.location.hash = "#"+hash;
-
-        $(".wizard-label").removeClass("active");
-        $(".wizard-content").removeClass("active");
-
-        $(this).addClass("active");
-        $("#"+$(this).attr("data-wizard-tab")).addClass("active");
-
-        return false;
-    });
-
-    CKEDITOR.replace('activityElaboration', {
-        height: 250,
-        // Add plugins providing functionality popular in BBCode environment.
-        extraPlugins: 'bbcode,smiley,font,colorbutton',
-        // Remove unused plugins.
-        removePlugins: 'filebrowser,format,horizontalrule,pastetext,pastefromword,scayt,showborders,stylescombo,table,tabletools,wsc',
-        // Remove unused buttons.
-        removeButtons: 'Anchor,BGColor,Font,Strike,Subscript,Superscript',
-        // Width and height are not supported in the BBCode format, so object resizing is disabled.
-        disableObjectResizing: true,
-        // Define font sizes in percent values.
-        fontSize_sizes: "30/30%;50/50%;100/100%;120/120%;150/150%;200/200%;300/300%",
-        // Strip CKEditor smileys to those commonly used in BBCode.
-        smiley_images: [
-            'regular_smile.png', 'sad_smile.png', 'wink_smile.png', 'teeth_smile.png', 'tongue_smile.png',
-            'embarrassed_smile.png', 'omg_smile.png', 'whatchutalkingabout_smile.png', 'angel_smile.png',
-            'shades_smile.png', 'cry_smile.png', 'kiss.png'
-        ],
-        smiley_descriptions: [
-            'smiley', 'sad', 'wink', 'laugh', 'cheeky', 'blush', 'surprise',
-            'indecision', 'angel', 'cool', 'crying', 'kiss'
-        ],
-        skin: '../../ckeditor-skin-minimalist',
-        resize_minHeight: 500,
-        language: '{{ "en"|trans }}'
-    });
-
-    Dropzone.options.attachmentsDropzone = {
-        dictDefaultMessage: "{{ "Drop files here to upload"|trans }}",
-        dictFallbackMessage: "{{ "Your browser does not support drag'n'drop file uploads."|trans }}",
-        dictFallbackText: "{{ "Please use the fallback form below to upload your files like in the olden days."|trans }}",
-        dictInvalidFileType: "{{ "You can't upload files of this type."|trans }}",
-        dictFileTooBig: "{{ "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB."|trans }}",
-        dictResponseError: "{{ "Server responded with {{statusCode}} code."|trans }}",
-        dictCancelUpload: "{{ "Cancel upload"|trans }}",
-        dictCancelUploadConfirmation: "{{ "Are you sure you want to cancel this upload?"|trans }}",
-        dictRemoveFile: "{{ "Remove file"|trans }}",
-        dictMaxFilesExceeded: "{{ "You can not upload any more files."|trans }}",
-        addRemoveLinks: true,
-        paramName: "file",
-        headers: {"Authorization": "Bearer {{ authToken }}"},
-        init: function() {
-            // add existing files
-            {% set count = 0 %}
-            {% for item in activity.attachments %}
-                var file{{ count }} = { name: "{{ item.name }}", size: {{ item.size }},
-                    url: "{{ path_for('api-attachment-get', {"activityId": activity.id,
-                        "attachmentId": item.id, "fileName": item.slug}) }}", id: {{ item.id }} };
-                this.emit("addedfile", file{{ count }});
-                {% set count = count + 1 %}
-            {% endfor %}
-
-            this.on("success", function(file, responseText) {
-                {#var downloadButton = Dropzone.createElement("<button onclick=\"window.location.href=\'"+#}
-                        {#"{{ baseUrl }}/api/activity/{{ activity.id }}/attachment/"+responseText.id+#}
-                        {#"\'\" class='dz-download-button'>Download</button></a>");#}
-                {#file.previewElement.appendChild(downloadButton);#}
-                file.id = responseText.id;
-            });
-
-            this.on("removedfile", function(file) {
-                console.log(file);
-                $.ajax({
-                    url: '{{ baseUrl }}/api/activity/{{ activity.id }}/attachment/'+file.id,
-                    type: 'DELETE',
-                    beforeSend: function(xhr, settings) {
-                        xhr.setRequestHeader('Authorization', 'Bearer {{ authToken }}');
-                    }
-                });
-            });
-        }
-
-    };
-
-
-
     $("#save-button").click(function() {
-        $("#save-button").attr("disabled", "disabled");
-        $("#status-saving").show();
-        $.ajax({
-            type: "POST",
-            url: "{{ path_for('api-activity-post') }}",
-            data: JSON.stringify(generateActivityObject()),
-            beforeSend: function(xhr, settings) {
-                xhr.setRequestHeader('Authorization', 'Bearer {{ authToken }}');
-            }
-        })
-        .done(function(msg, textStatus, xhr) {
-            console.log(msg);
-            if (xhr.status == 201) {
-                window.location.href = "{{ baseUrl }}/edit/" + msg.id + "/" + msg.slug;
-            } else {
-                alert("Saving failed...");
-            }
-        })
-        .fail(function (a, b) {
-            console.log("No luck..." + b);
-            alert("{{ "Saving failed... Are you still connected?"|trans }}");
-            $("#save-button").removeAttr("disabled");
-        });
+        Editor.save("{{ path_for('api-activity-post') }}");
     });
 
 
     $("#update-button").click(function() {
-        $("#update-button").attr("disabled", "disabled");
-        $("#status-saving").show();
-        $.ajax({
-            type: "PUT",
-            url: "{{ path_for('api-activity-put', {"id": activity.id}) }}",
-            data: JSON.stringify(generateActivityObject()),
-            beforeSend: function(xhr, settings) {
-                xhr.setRequestHeader('Authorization', 'Bearer {{ authToken }}');
-            }
-        })
-        .done(function(msg, textStatus, xhr) {
-            console.log(msg);
-            if (xhr.status == 202) {
-                $("#update-button").removeAttr("disabled");
-                $("#status-saving").hide();
-                $("#status-saved").show();
-                setTimeout(function() { $("#status-saved").fadeOut(); }, 2000);
-            } else {
-                $("#update-button").removeAttr("disabled");
-                $("#status-saving").hide();
-                alert("Saving failed...");
-            }
-        })
-        .fail(function (a, b) {
-            console.log("No luck..." + b);
-            $("#status-saving").hide();
-            alert("{{ "Saving failed... Are you still connected?"|trans }}");
-            $("#update-button").removeAttr("disabled");
-        });
+        Editor.update("{{ path_for('api-activity-put', {"id": activity.id}) }}");
     });
 
     </script>

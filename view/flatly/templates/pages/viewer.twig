@@ -396,62 +396,21 @@
     {{ parent() }}
 
     <script type="application/javascript" src="{{ componentsUrl }}/bootstrap-rating/bootstrap-rating.min.js"></script>
+    <script src="{{ assetsUrl }}/js/comment.js"></script>
+    <script src="{{ assetsUrl }}/js/rating.js"></script>
 
-    {% if userMayRate %}
-        <script type="application/javascript">
+    <script type="application/javascript">
+        {% if userMayRate %}
             $("#my-rating").on('change', function() {
-                $.ajax({
-                    type: "PUT",
-                    url: "{{ path_for('api-rating-put', {"activityId": activity.id}) }}",
-                    data: JSON.stringify({rate: parseInt($("#my-rating").rating('rate'))}),
-                    beforeSend: function(xhr, settings) {
-                        xhr.setRequestHeader('Authorization', 'Bearer {{ authToken }}');
-                    }
-                })
-                .done(function(msg, textStatus, xhr) {
-                    console.log(msg);
-                    if (xhr.status != 201) {
-                        alert("{{ "Unable to save rating..."|trans }}");
-                    }
-                })
-                .fail(function (a, b) {
-                    console.log("No luck..." + b);
-                    alert("{{ "Unable to save rating..."|trans }}");
-                });
+                Rating.submit("{{ path_for('api-rating-put', {"activityId": activity.id}) }}")
             });
-        </script>
-    {% endif %}
+        {% endif %}
 
-    {% if userMayComment %}
-        <script type="application/javascript">
+        {% if userMayComment %}
             $("#comment-submit").on('click', function() {
-                if ($("#comment-body").val().length < 1) {
-                    alert("{{ "You need to supply a message"|trans }}");
-                } else {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ path_for('api-comment-create', {"activityId": activity.id}) }}",
-                    data: JSON.stringify({comment: $("#comment-body").val(), didIt: $("#comment-didit").is(":checked")}),
-                    beforeSend: function(xhr, settings) {
-                        xhr.setRequestHeader('Authorization', 'Bearer {{ authToken }}');
-                    }
-                })
-                .done(function(msg, textStatus, xhr) {
-                    console.log(msg);
-                    if (xhr.status != 201) {
-                        alert("{{ "Unable to save comment..."|trans }}");
-                    } else {
-                        $("#comment-body").val(""); // clear the comment box
-                        location.reload(true);
-                    }
-                })
-                .fail(function (a, b) {
-                    console.log("No luck..." + b);
-                    alert("{{ "Unable to save comment..."|trans }}");
-                });
-                }
+                Comment.submit("{{ path_for('api-comment-create', {"activityId": activity.id}) }}");
             });
-        </script>
-    {% endif %}
+        {% endif %}
+    </script>
 
 {% endblock javascripts %}
