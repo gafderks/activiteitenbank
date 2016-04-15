@@ -91,6 +91,21 @@
         <div class="filter-item">
             <h3 class="filter-title">
                 <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                {% trans "Rating" %}
+            </h3>
+            <div class="filter-content">
+                <input id="filter-rating" class="slider numbersplit" type="text"
+                       data-slider-min="0" data-slider-max="5"
+                       data-slider-step="1"
+                       data-slider-value="[0,5]" />
+                <span class="slider-left">0 <span class="glyphicon glyphicon-star-empty"></span></span>
+                <span class="slider-right">5 <span class="glyphicon glyphicon-star"></span></span>
+            </div>
+        </div>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
                 <span class="glyphicon glyphicon-time"></span>
                 {% trans "Duration" %}
             </h3>
@@ -184,6 +199,23 @@
                 <span class="slider-right">200</span>
             </div>
         </div>
+        {% if session.user is not empty %}
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-asterisk"></span>
+                {% trans "Creator" %}</h3>
+            <div class="filter-content">
+                <small><em>{{ "Only show activities created by"|trans }}</em></small>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" id="filter-author" value="{{ session.user.id }}">
+                        {{ session.user.firstName }} {{ session.user.lastName }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        {% endif %}
         <div class="filter-item">
             <h3 class="filter-title">
                 <span class="glyphicon chevron"></span>

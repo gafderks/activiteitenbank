@@ -119,5 +119,5 @@
                                        data-fractions="4" />
                             </span>
     </td>
-    <td>{{ activity.creator.firstName }} {{ activity.creator.lastName }}</td>
+    <td data-filter="{{ activity.creator.id }}">{{ activity.creator.firstName }} {{ activity.creator.lastName }}</td>
 </tr>

@@ -61,6 +61,11 @@ Explorer = {
                 }
             }
         });
+
+        $(".slider.numbersplit").slider({
+            tooltip: "always",
+            tooltip_split: true
+        });
     },
 
     /**
@@ -88,7 +93,8 @@ Explorer = {
         var groupsize = data[7];
         var activity_areas = data[8].split(",");
         var suitable_groups = data[9].split(",");
-//                var creator = data[10];
+        var rating = data[10];
+        var creator = data[11];
 
 
         /** Filter on search term */
@@ -146,6 +152,14 @@ Explorer = {
         var minMotivation = filter.slider('getValue')[0];
         var maxMotivation = filter.slider('getValue')[1];
         if (motivation > maxMotivation || motivation < minMotivation) {
+            return false;
+        }
+
+        /** Filter on rating */
+        filter = $("#filter-rating");
+        var minRating = filter.slider('getValue')[0];
+        var maxRating = filter.slider('getValue')[1];
+        if (rating > maxRating || rating < minRating) {
             return false;
         }
 
@@ -246,6 +260,13 @@ Explorer = {
             // none present in or
             return false;
         }
+
+        /** Filter on creator */
+        var filterAuthor = $("#filter-author");
+        if (filterAuthor.is(":checked") && creator !== filterAuthor.val()) {
+            return false; // not by this creator
+        }
+
 
         return true;
     }
