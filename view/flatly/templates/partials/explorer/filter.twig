@@ -1,14 +1,14 @@
 <div class="filter-bar">
-    <h3 class="filter-bar-title"><span class="glyphicon"></span>{% trans "Filters" %}</h3>
+    <h3 class="filter-bar-title"><span class="glyphicon chevron"></span>{% trans "Filters" %}</h3>
     <div class="filter-bar-content">
         <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Keyword" %}</h3>
+            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Keyword" %}</h3>
             <div class="filter-content">
                 <input id="filter-term" class="form-control" type="text" placeholder="{% trans "Narrow results" %}" />
             </div>
         </div>
         <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Category" %}</h3>
+            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Category" %}</h3>
             <div class="filter-content">
                 {% for category in session.user.team.organization.categories %}
                     <div class="radio">
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Duration" %}</h3>
+            <h3 class="filter-title"><span class="glyphicon chevron"></span><span class="glyphicon glyphicon-time"></span>{% trans "Duration" %}</h3>
             {% set durations = [] %}
             {% for activity in activities %}
                 {% set durations = durations|merge([activity.planning.totalDuration]) %}
@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Budgetary" %}</h3>
+            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Budgetary" %}</h3>
             {% set budgets = [] %}
             {% for activity in activities %}
                 {% set budgets = budgets|merge([activity.budget.totalCost]) %}
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Difficulty" %}</h3>
+            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Difficulty" %}</h3>
             <div class="filter-content">
                 <input id="filter-difficulty" class="slider level" type="text"
                        data-slider-min="{{ enum.level.Unspecified }}" data-slider-max="{{ enum.level.VeryHigh }}"
@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Guidance" %}</h3>
+            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Guidance" %}</h3>
             <div class="filter-content">
                 <input id="filter-guidance" class="slider level" type="text"
                        data-slider-min="{{ enum.level.Unspecified }}" data-slider-max="{{ enum.level.VeryHigh }}"
@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Motivation" %}</h3>
+            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Motivation" %}</h3>
             <div class="filter-content">
                 <input id="filter-motivation" class="slider level" type="text"
                        data-slider-min="{{ enum.level.Unspecified }}" data-slider-max="{{ enum.level.VeryHigh }}"
@@ -83,7 +83,7 @@
             </div>
         </div>
         <div class="filter-item active">
-            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Group size" %}</h3>
+            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Group size" %}</h3>
             <div class="filter-content">
                 <label class="checkbox-inline">
                     <input type="checkbox" id="filter-groupsize-ignore" class="" checked />{{ "Show all"|trans }}</label>
@@ -94,13 +94,13 @@
             </div>
         </div>
         <div class="filter-item">
-            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Activity areas" %}</h3>
+            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Activity areas" %}</h3>
             <div class="filter-content">
 
             </div>
         </div>
         <div class="filter-item">
-            <h3 class="filter-title"><span class="glyphicon"></span>{% trans "Suitable groups" %}</h3>
+            <h3 class="filter-title"><span class="glyphicon chevron"></span>{% trans "Suitable groups" %}</h3>
             <div class="filter-content">
                 <div class="radio">
                     <label>
