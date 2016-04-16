@@ -6,6 +6,7 @@
     <link href="{{ componentsUrl }}/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet" />
     <link href="{{ componentsUrl }}/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet" />
     <link href="{{ componentsUrl }}/bootstrap-rating/bootstrap-rating.css" media="all" rel="stylesheet">
+    <link href="{{ componentsUrl }}/bootstrap-toggle/css/bootstrap-toggle.min.css" rel="stylesheet" />
 
     {{ parent() }}
 {% endblock stylesheets %}
@@ -17,7 +18,7 @@
 
     <div class="col-md-3">
         {% block explorer_filter %}
-            {% include "partials/explorer/explorer_filter.twig" %}
+            {% include "partials/explorer/filter.twig" %}
         {% endblock %}
     </div>
 
@@ -69,6 +70,7 @@
 <script type="text/javascript" src="{{ componentsUrl }}/datatables.net-buttons/js/buttons.colVis.min.js"></script>
 <script type="text/javascript" src="{{ componentsUrl }}/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
 <script type="application/javascript" src="{{ componentsUrl }}/bootstrap-rating/bootstrap-rating.min.js"></script>
+<script type="application/javascript" src="{{ componentsUrl }}/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
 <script type="text/javascript" src="{{ assetsUrl }}/js/explorer.js"></script>
 
 <script type="text/javascript">
@@ -130,6 +132,26 @@
         });
 
         $("#filter-groupsize-ignore").change(function() {
+            activityTable.draw();
+        });
+
+        $("input[name=filter-group]").change(function() {
+            activityTable.draw();
+        });
+
+        $("input[name=filter-category]").change(function() {
+            activityTable.draw();
+        });
+
+        $("input[name=filter-activityarea]").change(function() {
+            activityTable.draw();
+        });
+
+        $("#filter-author").change(function () {
+            activityTable.draw();
+        });
+
+        $("input[data-toggle=toggle]").change(function() {
             activityTable.draw();
         });
 

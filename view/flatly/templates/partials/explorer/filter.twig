@@ -1,0 +1,284 @@
+<div class="filter-bar">
+    <h3 class="filter-bar-title"><span class="glyphicon chevron"></span>{% trans "Filters" %}</h3>
+    <div class="filter-bar-content">
+        <div class="filter-item active">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-filter"></span>
+                {% trans "Keyword" %}
+            </h3>
+            <div class="filter-content">
+                <input id="filter-term" class="form-control" type="text" placeholder="{% trans "Narrow results" %}" />
+            </div>
+        </div>
+        <div class="filter-item active">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-inbox"></span>
+                {% trans "Category" %}
+            </h3>
+            <div class="filter-content">
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-category" value="-">
+                        {{ "No category"|trans }}
+                    </label>
+                </div>
+                {% for category in session.user.team.organization.categories %}
+                    <div class="radio">
+                        <label>
+                            <input type="checkbox" checked="checked" name="filter-category" value="{{ category.id }}">
+                            {{ category.name }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-user"></span>
+                {% trans "Suitable groups" %}
+            </h3>
+            <div class="filter-content">
+                <input type="checkbox" id="filter-group-relation" data-toggle="toggle" data-size="small"
+                       data-on="{{ "AND"|trans }}" data-off="{{ "OR"|trans }}">
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" id="filter-group-unspecified" checked="checked" name="filter-group"
+                               value="-">
+                        {{ "Unspecified"|trans }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-group" value="bevers">
+                        {{ "Bevers"|trans }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-group" value="welpen">
+                        {{ "Welpen"|trans }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-group" value="scouts">
+                        {{ "Scouts"|trans }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-group" value="explorers">
+                        {{ "Explorers"|trans }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-group" value="roverscouts">
+                        {{ "Roverscouts"|trans }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-group" value="plusscouts">
+                        {{ "Plusscouts"|trans }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                {% trans "Rating" %}
+            </h3>
+            <div class="filter-content">
+                <input id="filter-rating" class="slider numbersplit" type="text"
+                       data-slider-min="0" data-slider-max="5"
+                       data-slider-step="1"
+                       data-slider-value="[0,5]" />
+                <span class="slider-left">0 <span class="glyphicon glyphicon-star-empty"></span></span>
+                <span class="slider-right">5 <span class="glyphicon glyphicon-star"></span></span>
+            </div>
+        </div>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-time"></span>
+                {% trans "Duration" %}
+            </h3>
+            {% set durations = [] %}
+            {% for activity in activities %}
+                {% set durations = durations|merge([activity.planning.totalDuration]) %}
+            {% endfor %}
+            <div class="filter-content">
+                <input id="filter-duration" class="slider time" type="text" data-slider-min="{{ min(durations) }}"
+                       data-slider-max="{{ max(durations) }}" data-slider-step="1"
+                       data-slider-value="[{{ min(durations) }},{{ max(durations) }}]"/>
+                {#<input type="hidden" value="" />#}
+                <span class="slider-left">{{ min(durations)|int2time }}</span>
+                <span class="slider-right">{{ max(durations)|int2time }}</span>
+            </div>
+        </div>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-euro"></span>
+                {% trans "Budgetary" %}
+            </h3>
+            {% set budgets = [] %}
+            {% for activity in activities %}
+                {% set budgets = budgets|merge([activity.budget.totalCost]) %}
+            {% endfor %}
+            <div class="filter-content">
+                <input id="filter-budget" class="slider budget" type="text" data-slider-min="{{ min(budgets) }}"
+                       data-slider-max="{{ max(budgets) }}" data-slider-step="1"
+                       data-slider-value="[{{ min(budgets) }},{{ max(budgets) }}]" />
+                <span class="slider-left">{{ min(budgets)|float2euro|raw }}</span>
+                <span class="slider-right">{{ max(budgets)|float2euro|raw }}</span>
+            </div>
+        </div>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-flash"></span>
+                {% trans "Difficulty" %}
+            </h3>
+            <div class="filter-content">
+                <input id="filter-difficulty" class="slider level" type="text"
+                       data-slider-min="{{ enum.level.Unspecified }}" data-slider-max="{{ enum.level.VeryHigh }}"
+                       data-slider-step="1"
+                       data-slider-value="[{{ enum.level.Unspecified }},{{ enum.level.VeryHigh }}]" />
+                <span class="slider-left">{% trans "Very low" %}</span>
+                <span class="slider-right">{% trans "Very high" %}</span>
+            </div>
+        </div>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                {% trans "Guidance" %}
+            </h3>
+            <div class="filter-content">
+                <input id="filter-guidance" class="slider level" type="text"
+                       data-slider-min="{{ enum.level.Unspecified }}" data-slider-max="{{ enum.level.VeryHigh }}"
+                       data-slider-step="1"
+                       data-slider-value="[{{ enum.level.Unspecified }},{{ enum.level.VeryHigh }}]" />
+                <span class="slider-left">{% trans "Very low" %}</span>
+                <span class="slider-right">{% trans "Very high" %}</span>
+            </div>
+        </div>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-heart"></span>
+                {% trans "Motivation" %}
+            </h3>
+            <div class="filter-content">
+                <input id="filter-motivation" class="slider level" type="text"
+                       data-slider-min="{{ enum.level.Unspecified }}" data-slider-max="{{ enum.level.VeryHigh }}"
+                       data-slider-step="1"
+                       data-slider-value="[{{ enum.level.Unspecified }},{{ enum.level.VeryHigh }}]" />
+                <span class="slider-left">{% trans "Very low" %}</span>
+                <span class="slider-right">{% trans "Very high" %}</span>
+            </div>
+        </div>
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-user"></span>
+                {% trans "Group size" %}</h3>
+            <div class="filter-content">
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="filter-groupsize-ignore" class="" checked />{{ "Show all"|trans }}</label>
+                <input id="filter-groupsize" class="slider logarithmic" type="text" data-slider-min="1"
+                       data-slider-max="200" data-slider-value="1" />
+                <span class="slider-left">1</span>
+                <span class="slider-right">200</span>
+            </div>
+        </div>
+        {% if session.user is not empty %}
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                <span class="glyphicon glyphicon-asterisk"></span>
+                {% trans "Creator" %}</h3>
+            <div class="filter-content">
+                <small><em>{{ "Only show activities created by"|trans }}</em></small>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" id="filter-author" value="{{ session.user.id }}">
+                        {{ session.user.firstName }} {{ session.user.lastName }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="filter-item">
+            <h3 class="filter-title">
+                <span class="glyphicon chevron"></span>
+                {% trans "Activity areas" %}
+            </h3>
+            <div class="filter-content">
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" id="filter-activityarea-unspecified" checked="checked"
+                               name="filter-activityarea" value="-" >
+                        {{ "Unspecified / None"|trans }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-activityarea" value="1">
+                        {{ "Challenging Scouting Techniques"|trans }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-activityarea" value="2">
+                        {{ "Expression"|trans }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-activityarea" value="3">
+                        {{ "Sports and Games"|trans }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-activityarea" value="4">
+                        {{ "Outdoor life"|trans }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-activityarea" value="5">
+                        {{ "Identity"|trans }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-activityarea" value="6">
+                        {{ "International"|trans }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-activityarea" value="7">
+                        {{ "Society"|trans }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" checked="checked" name="filter-activityarea" value="8">
+                        {{ "Safe and Healthy"|trans }}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

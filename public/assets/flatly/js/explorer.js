@@ -20,6 +20,11 @@ Explorer = {
             $("#filter-groupsize-ignore").prop("checked", false);
         });
 
+        $("#filter-group-relation").change(function () {
+            $("#filter-group-unspecified").prop('disabled', $("#filter-group-relation").is(":checked"));
+            $("#filter-group-unspecified").prop('checked', !$("#filter-group-relation").is(":checked"));
+        });
+
         $(".slider.time").slider({
             tooltip: "always",
             tooltip_split: true,
@@ -56,6 +61,11 @@ Explorer = {
                 }
             }
         });
+
+        $(".slider.numbersplit").slider({
+            tooltip: "always",
+            tooltip_split: true
+        });
     },
 
     /**
@@ -72,24 +82,19 @@ Explorer = {
      */
     filter: function (settings, data, dataIndex) {
         "use strict";
-//                var f_category = [];
-//                $("[name=filter-category]:checked").each(function() {
-//                    f_category.push($(this).data("filter-text"));
-//                });
-//                console.log(f_category);
-//
+
         var name = data[0];
-//                var category = data[1];
+        var category = data[1].split(",");
         var duration = data[2];
         var budget = data[3];
         var difficulty = data[4];
         var guidance = data[5];
         var motivation = data[6];
         var groupsize = data[7];
-//                var state = data[7];
-//                var activity_areas = data[8];
-//                var suitable_groups = data[9];
-//                var creator = data[10];
+        var activity_areas = data[8].split(",");
+        var suitable_groups = data[9].split(",");
+        var rating = data[10];
+        var creator = data[11];
 
 
         /** Filter on search term */
@@ -150,6 +155,14 @@ Explorer = {
             return false;
         }
 
+        /** Filter on rating */
+        filter = $("#filter-rating");
+        var minRating = filter.slider('getValue')[0];
+        var maxRating = filter.slider('getValue')[1];
+        if (rating > maxRating || rating < minRating) {
+            return false;
+        }
+
         /** Filter on group size */
         var ignoreGroupSize = $("#filter-groupsize-ignore").is(":checked");
         filter = $("#filter-groupsize");
@@ -180,14 +193,81 @@ Explorer = {
             }
         }
 
+        /** Filter on category */
+        var orFound = false;
+        var filterCategory = document.getElementsByName("filter-category");
+        for(var k = 0; k < filterCategory.length; k++) {
+            var categoryValue = filterCategory[k].value;
+            if (filterCategory[k].checked) {
+                if (category.indexOf(categoryValue) !== -1) {
+                    // present in or
+                    orFound = true;
+                }
+                if (category[0] === '' && categoryValue === '-') {
+                    // unspecified for an empty set
+                    orFound = true;
+                }
+            }
+        }
+        if (!orFound) {
+            // none present in or
+            return false;
+        }
 
-        // category filter
-//                if (f_category.length > 0) {
-//                    if (f_category.indexOf(category)==-1) {
-//                        return false;
-//                    }
-//                }
-//
+        /** Filter on suitable group */
+        var and = $("#filter-group-relation").is(":checked");
+        var orFound = false;
+        var filterGroup = document.getElementsByName("filter-group");
+        for(var j = 0; j < filterGroup.length; j++) {
+            var groupValue = filterGroup[j].value;
+            if (filterGroup[j].checked) {
+                if (and && suitable_groups.indexOf(groupValue) === -1 && groupValue !== '-') {
+                    // not present in and
+                    return false;
+                }
+                if (suitable_groups.indexOf(groupValue) !== -1) {
+                    // present in or
+                    orFound = true;
+                }
+                if (suitable_groups[0] === '' && groupValue === '-') {
+                    // unspecified for an empty set
+                    orFound = true;
+                }
+            }
+        }
+        if (!and && !orFound) {
+            // none present in or
+            return false;
+        }
+
+        /** Filter on activity area */
+        var orFound = false;
+        var filterArea = document.getElementsByName("filter-activityarea");
+        for(var l = 0; l < filterArea.length; l++) {
+            var areaValue = filterArea[l].value;
+            if (filterArea[l].checked) {
+                if (activity_areas.indexOf(areaValue) !== -1) {
+                    // present in or
+                    orFound = true;
+                }
+                if (activity_areas[0] === '' && areaValue === '-') {
+                    // unspecified for an empty set
+                    orFound = true;
+                }
+            }
+        }
+        if (!orFound) {
+            // none present in or
+            return false;
+        }
+
+        /** Filter on creator */
+        var filterAuthor = $("#filter-author");
+        if (filterAuthor.is(":checked") && creator !== filterAuthor.val()) {
+            return false; // not by this creator
+        }
+
+
         return true;
     }
 };

@@ -254,8 +254,8 @@
                                     <span class="activity-property editable" id="activity-prop-category-label">
                                         {% if activity.categories|length > 0 %}
                                             {% for category in activity.categories %}
-                                                {% set activityCategoriesNamed = activityCategoriesNamed|merge(category.name|e) %}
-                                                {% set activityCategories = activityCategories|merge(category.id) %}
+                                                {% set activityCategoriesNamed = activityCategoriesNamed|merge([category.name|e]) %}
+                                                {% set activityCategories = activityCategories|merge([category.id]) %}
                                             {% endfor %}
                                             {{ activityCategoriesNamed|join(', ') }}
                                         {% else %}

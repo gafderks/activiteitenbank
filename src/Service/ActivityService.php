@@ -2,6 +2,8 @@
 
 namespace Service;
 
+use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
+
 /**
  * Class ActivityService
  *
@@ -58,6 +60,24 @@ class ActivityService extends Service
         $activity->setGroupSizeMax($input->groupSizeMax);
         $activity->setActivityAreas($input->activityAreas);
         $activity->setSuitable_groups($input->groups);
+
+        // set categories
+        // first clear categories
+        $activity->setCategories(new ArrayCollection());
+        $categories = new ArrayCollection();
+        foreach($input->category as $categoryId) {
+            try {
+                $category = $this->getCategoryMapper()->findCategoryById($categoryId);
+                if ($category->getOrganization()->getId() == $activity->getCreator()->getOrganization()->getId()) {
+                    // creator and category belong to the same organization
+                    $categories->add($category);
+                }
+            } catch (\Exception\CategoryNotFoundException $e) {
+                // do not add the category
+            }
+        }
+        $activity->setCategories($categories);
+
 
         // set planning
         $planning = new \Model\Activity\Planning\Planning();
@@ -322,6 +342,15 @@ class ActivityService extends Service
      */
     protected function getActivityMapper() {
         return $this->container['mapper_activity'];
+    }
+
+    /**
+     * Get the category mapper.
+     *
+     * @return \Mapper\Category
+     */
+    protected function getCategoryMapper() {
+        return $this->container['mapper_category'];
     }
 
     /**

@@ -94,11 +94,8 @@ class Activity implements \JsonSerializable
     /**
      * The categories that this activity belongs to.
      *
-     * @ManyToMany(targetEntity="\Model\Activity\Category")
-     * @JoinTable(name="activities_categories",
-     *      joinColumns={@JoinColumn(name="activity_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="category_id", referencedColumnName="id", unique=true)}
-     *      )
+     * @ManyToMany(targetEntity="\Model\Activity\Category", inversedBy="activities")
+     * @JoinTable(name="activities_categories")
      * @var \Model\Activity\Category
      * @SWG\Property()
      */
@@ -293,7 +290,7 @@ class Activity implements \JsonSerializable
     /**
      * @param \Model\Activity\Category[] $category
      */
-    public function setCategories(array $categories) {
+    public function setCategories(ArrayCollection $categories) {
         $this->categories = $categories;
     }
 
@@ -574,7 +571,7 @@ class Activity implements \JsonSerializable
             'modified'       => $this->modified,
             'activityAreas'  => $this->activityAreas,
             'suitableGroups' => $this->suitableGroups,
-            'categories'     => $this->categories,
+            'categories'     => $this->categories->toArray(),
             'difficulty'     => $this->difficulty,
             'guidance'       => $this->guidance,
             'motivation'     => $this->motivation,

@@ -330,5 +330,9 @@ return [
             'type' => 'mapper',
             'mapper' => 'Comment',
         ],
+        'mapper_category' => [
+            'type' => 'mapper',
+            'mapper' => 'Category',
+        ],
     ],
 ];
