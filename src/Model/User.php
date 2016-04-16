@@ -112,6 +112,13 @@ class User implements \JsonSerializable
     private $attachments;
 
     /**
+     * Password reset code.
+     *
+     * @Column(type="string")
+     */
+    private $passwordResetCode;
+
+    /**
      * @return int
      */
     public function getId() {
@@ -242,6 +249,20 @@ class User implements \JsonSerializable
      */
     public function getRegistered() {
         return $this->registered;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPasswordResetCode() {
+        return $this->passwordResetCode;
+    }
+
+    /**
+     * @param mixed $passwordResetCode
+     */
+    public function setPasswordResetCode($passwordResetCode) {
+        $this->passwordResetCode = $passwordResetCode;
     }
 
     /**
