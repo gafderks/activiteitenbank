@@ -2,6 +2,7 @@
 
 namespace Service;
 use Facebook\Facebook;
+use Respect\Validation\Validator as v;
 
 /**
  * Class LoginService
@@ -148,6 +149,47 @@ class LoginService extends Service
         }
     }
 
+    public function sendPasswordResetEmail($email) {
+        // validate email address
+        $validator = v::email();
+        if (!v::email()->validate($email)) {
+            throw new \Exception(_("Invalid email address"));
+        }
+
+        // check if an account is attached to the email address
+        $user = $this->getUserMapper()->findUserByEmail($email);
+        if (is_null($user)) {
+            // send email stating that no account is connected
+            try {
+                $emailMessage = sprintf(_("<p>You have requested a new password for %s, but this email address is not linked to an account.</p><p>If you did not request this email, you can ignore it.<br/>If you keep receiving these emails, please contact <a href=\"mailto:%s\">%s</a>.</p>"),
+                    $this->container['config']['applicationName'],
+                    $this->container['config']['webmasterEmail'],
+                    $this->container['config']['webmasterEmail']);
+                $this->getMailService()->emailHtml(
+                    $email,
+                    sprintf("%s: %s",
+                        $this->container['config']['applicationName'],
+                        _("Password reset instructions")),
+                    $emailMessage
+                );
+            } catch (\Exception $e) {
+                throw new \Exception(_("Unable to send email"));
+            }
+        } else {
+            // send email with instructions
+            // TODO finish this
+            try {
+                $this->getMailService()->emailPlainString(
+                    $email,
+                    sprintf("%s: %s", $this->container['config']['applicationName'], _("Password reset instructions")),
+                    "body");
+            } catch (\Exception $e) {
+                throw new \Exception(_("Unable to send email"));
+            }
+        }
+
+    }
+
     /**
      * Destroys the current session.
      */
@@ -155,5 +197,16 @@ class LoginService extends Service
         unset($_SESSION);
         session_destroy();
     }
+
+    /**
+     * Get the Mail service.
+     *
+     * @return \Service\MailService
+     */
+    protected function getMailService() {
+        return $this->container['service_mail'];
+    }
+
+
 
 }

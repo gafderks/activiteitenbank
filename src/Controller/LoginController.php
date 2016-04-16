@@ -64,7 +64,7 @@ class LoginController extends Controller
         $referrer = $request->getParsedBody()['referrer'];
 
         if (empty($username)) {
-            array_push($errors, ['message' => 'You need to supply an email address or a username']);
+            array_push($errors, ['message' => _('You need to supply an email address or a username')]);
         } else {
 
             // retrieve user with username $username or with email $username
@@ -75,7 +75,7 @@ class LoginController extends Controller
 
             // check if user exists
             if ($user === null) {
-                array_push($errors, ['message' => 'Wrong username or password']);
+                array_push($errors, ['message' => _('Wrong username or password')]);
             }
 
             // attempt to login user
@@ -87,7 +87,7 @@ class LoginController extends Controller
                         return $this->getRedirectResponse($response, 'index');
                     }
                 } else {
-                    array_push($errors, ['message' => 'Wrong username or password']);
+                    array_push($errors, ['message' => _('Wrong username or password')]);
                 }
             }
         }
@@ -141,7 +141,7 @@ class LoginController extends Controller
             if ($loginSucceeded) {
                 return $this->getRedirectResponse($response, 'index');
             } else {
-                array_push($errors, ['message' => 'Facebook login failed']);
+                array_push($errors, ['message' => _('Facebook login failed')]);
             }
         } catch (\Exception $e) {
             array_push($errors, ['message' => $e->getMessage()]);
@@ -159,6 +159,70 @@ class LoginController extends Controller
             ]);
         }
         $this->container['view']->render($response, 'pages/login.twig', $params);
+        return $response;
+    }
+
+    /**
+     * Handles password reset request.
+     *
+     * Flowchart: @see http://lh5.ggpht.com/-ke9GVduXaaY/T7rBCWHFkYI/AAAAAAAADmY/xvEOczv44Zg/Password-Reset5.png?imgmax=800
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
+     */
+    public function requestPasswordResetAction(Request $request, Response $response, $args = []) {
+        // render form
+        $params = [
+            'recaptchaSiteKey' => $this->container['config']['recaptcha']['siteKey'],
+        ];
+        $this->container['view']->render($response, 'pages/password-reset-request.twig', $params);
+        return $response;
+    }
+
+    /**
+     * Sends email with password reset instructions.
+     * If no account is linked to the email, a mail is sent to the address informing this.
+     *
+     * Flowchart: @see http://lh5.ggpht.com/-ke9GVduXaaY/T7rBCWHFkYI/AAAAAAAADmY/xvEOczv44Zg/Password-Reset5.png?imgmax=800
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
+     */
+    public function sendPasswordInstructionsAction(Request $request, Response $response, $args = []) {
+        // collect errors during the process
+        $errors = [];
+        $infos = [];
+
+        $recaptcha = new \ReCaptcha\ReCaptcha($this->container['config']['recaptcha']['secretKey']);
+        $captchaResponse = $recaptcha->verify($request->getParsedBody()['g-recaptcha-response'],
+            $request->getAttribute('ip_address'));
+        if ($captchaResponse->isSuccess()) {
+            // captcha is verified, send email
+            try {
+                $this->getLoginService()->sendPasswordResetEmail($request->getParsedBody()['email']);
+                $infos = [["message" => _("Please check the inbox of your email for further instructions.")]];
+            } catch (\Exception $e) {
+                $errors = [["message" => $e->getMessage()]];
+            }
+        } else {
+            $errors = [["message" => _("Captcha was not correctly answered")]];
+        }
+
+
+        // render form
+        $params = [
+            'login' => [
+                'errors' => $errors,
+                'infos' => $infos,
+                'username' => $request->getParsedBody()['email'],
+            ],
+            'recaptchaSiteKey' => $this->container['config']['recaptcha']['siteKey'],
+        ];
+        $this->container['view']->render($response, 'pages/password-reset-request.twig', $params);
         return $response;
     }
 

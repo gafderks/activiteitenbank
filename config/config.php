@@ -39,6 +39,24 @@ return [
                     'action' => 'logout',
                 ],
             ],
+            'forgot-password-form' => [
+                'type' => 'literal',
+                'method' => 'get',
+                'options' => [
+                    'route' => '/forgot-password',
+                    'controller' => 'LoginController',
+                    'action' => 'requestPasswordReset',
+                ],
+            ],
+            'forgot-password' => [
+                'type' => 'literal',
+                'method' => 'post',
+                'options' => [
+                    'route' => '/forgot-password',
+                    'controller' => 'LoginController',
+                    'action' => 'sendPasswordInstructions',
+                ],
+            ],
             'settings' => [
                 'type' => 'literal',
                 'method' => 'get',
@@ -309,6 +327,10 @@ return [
         'service_comment' => [
             'type' => 'service',
             'service' => 'CommentService',
+        ],
+        'service_mail' => [
+            'type' => 'service',
+            'service' => 'MailService',
         ],
         'mapper_user' => [
             'type' => 'mapper',
