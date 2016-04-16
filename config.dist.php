@@ -8,6 +8,20 @@
  */
 
 return [
+
+    /**
+     * Application name.
+     *
+     * Default value: 'Activities'
+     */
+    'applicationName' => 'Activities',
+
+    /**
+     * Email of the webmaster.
+     * This email is used in the footer of emails e.g. to report abuse.
+     */
+    'webmasterEmail' => 'put your email here',
+
     /**
      * Settings for connecting to a database.
      *
@@ -86,6 +100,98 @@ return [
          * App secret for the Facebook app that is associated with the application.
          */
         'app_secret' => '{app-secret}',
+    ],
+
+    /**
+     * Google recaptcha settings.
+     *
+     * Keys can be registered at @link https://www.google.com/recaptcha/admin
+     */
+    'recaptcha' => [
+        /**
+         * This key is used in the HTML code that is served to users.
+         */
+        'siteKey' => '{siteKey}',
+
+        /**
+         * This key is used for communication between the application and Google.
+         * Be sure to keep this key a secret.
+         */
+        'secretKey' => '{secretKey}',
+    ],
+
+    /**
+     * Email settings.
+     */
+    'mail' => [
+        /**
+         * SMTP mail settings
+         */
+        'smtp' => [
+            /**
+             * Specify main and backup SMTP servers.
+             * Example: 'smtp1.example.com;smtp2.example.com'
+             */
+            'host' => 'put host here',
+
+            /**
+             * Enable SMTP authentication.
+             * Default value: true
+             */
+            'authentication' => true,
+
+            /**
+             * SMTP username
+             */
+            'username' => 'put username here',
+
+            /**
+             * SMTP password
+             */
+            'password' => 'put password here',
+
+            /**
+             * Enable TLS encryption, 'ssl' also accepted.
+             * Default value: 'tls'
+             */
+            'secure' => 'tls',
+
+            /**
+             * TCP port to connect to.
+             * Default value: 587
+             */
+            'port' => 587,
+        ],
+
+        /**
+         * Details of the FROM field for emails.
+         */
+        'from' => [
+            /**
+             * Email address
+             */
+            'address' => '',
+
+            /**
+             * Natural name
+             */
+            'name' => '',
+        ],
+
+        /**
+         * Details of the REPPLYTO field for emails.
+         */
+        'replyTo' => [
+            /**
+             * Email address
+             */
+            'address' => '',
+
+            /**
+             * Natural name
+             */
+            'name' => '',
+        ],
     ],
 
     /**
