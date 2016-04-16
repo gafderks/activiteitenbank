@@ -114,7 +114,7 @@ class User implements \JsonSerializable
     /**
      * Password reset code.
      *
-     * @Column(type="string")
+     * @Column(type="string", nullable=true)
      */
     private $passwordResetCode;
 
