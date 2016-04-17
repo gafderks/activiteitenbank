@@ -173,6 +173,11 @@ class LoginController extends Controller
      * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function requestPasswordResetAction(Request $request, Response $response, $args = []) {
+        // check if a user is already logged in
+        if ($this->getLoginService()->getLoggedInUser() !== null) {
+            return $this->getRedirectResponse($response, 'index');
+        }
+
         // render form
         $params = [
             'recaptchaSiteKey' => $this->container['config']['recaptcha']['siteKey'],
@@ -193,6 +198,11 @@ class LoginController extends Controller
      * @return \Psr\Http\Message\MessageInterface|Response
      */
     public function sendPasswordInstructionsAction(Request $request, Response $response, $args = []) {
+        // check if a user is already logged in
+        if ($this->getLoginService()->getLoggedInUser() !== null) {
+            return $this->getRedirectResponse($response, 'index');
+        }
+
         // collect errors during the process
         $errors = [];
         $infos = [];
