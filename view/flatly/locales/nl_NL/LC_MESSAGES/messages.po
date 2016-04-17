@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: activiteitenbank\n"
-"POT-Creation-Date: 2016-04-17 01:29+0200\n"
-"PO-Revision-Date: 2016-04-17 01:31+0200\n"
+"POT-Creation-Date: 2016-04-18 00:09+0200\n"
+"PO-Revision-Date: 2016-04-18 00:12+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -28,11 +28,11 @@ msgstr "Verkeerde gebruikersnaam of wachtwoord"
 msgid "Facebook login failed"
 msgstr "Inloggen via Facebook is mislukt"
 
-#: src/Controller/LoginController.php:207
+#: src/Controller/LoginController.php:208
 msgid "Please check the inbox of your email for further instructions."
 msgstr "Controleer alsjeblieft de inbox van je email voor verdere instructies."
 
-#: src/Controller/LoginController.php:212
+#: src/Controller/LoginController.php:213
 msgid "Captcha was not correctly answered"
 msgstr "De captcha is niet correct ingevuld"
 
@@ -40,26 +40,60 @@ msgstr "De captcha is niet correct ingevuld"
 msgid "Invalid email address"
 msgstr "Ongeldig e-mailadres"
 
-#: src/Service/LoginService.php:164
+#: src/Service/LoginService.php:165
 #, php-format
 msgid ""
-"<p>You have requested a new password for %s, but this email address is not "
-"linked to an account.</p><p>If you did not request this email, you can "
-"ignore it.<br/>If you keep receiving these emails, please contact <a href="
-"\"mailto:%s\">%s</a>.</p>"
+"<p>You (or someone else) entered this email address when trying to change "
+"the password of a account for %s.</p><p>However, this email address is not "
+"in our database of registered users and therefore the attempted password "
+"change has failed.</p><p>If you have an account and were expecting this "
+"email, please try again using the email address you gave when opening your "
+"account. This may be the email address that is linked to your Facebook-"
+"account.</p><p>If you do not have an account for %s, please ignore this "
+"email.</p><p>If you keep receiving these emails, please contact <a href="
+"\"mailto:%s\">%s</a>.</p><p><small>This action was requested from IP address "
+"%s. Find out more information about this address <a href='http://www.ip-"
+"tracker.org/locator/ip-lookup.php?ip=%s'>here</a>.</small></p>"
 msgstr ""
-"<p>U hebt een nieuw wachtwoord voor %s gevraagd, maar dit e-mailadres is "
-"niet gekoppeld aan een account.</p><p>Als u deze e-mail niet hebt "
-"aangevraagd, kunt u deze negeren.<br>Als u deze e-mails blijft ontvangen, "
-"neem dan alstublieft contact op met <a href=\"mailto:%s\">%s</a>.</p>"
+"<p>U (of iemand anders) heeft dit e-mailadres ingevuld bij een poging om het "
+"wachtwoord voor %s te wijzigen.</p><p>Dit e-mailadres komt echter niet voor "
+"in onze database van geregistreerde gebruikers en daarom is de poging om het "
+"wachtwoord te wijzigen mislukt.</p><p>Als u een account heeft en u deze e-"
+"mail verwachtte, probeer het dan opnieuw met het e-mailadres dat u gebruikte "
+"bij het aanmaken van uw account. Dit kan het e-mailadres zijn dat gekoppeld "
+"is aan uw Facebook-account.</p><p>Als u geen account heeft voor %s, negeer "
+"dan alstublieft deze e-mail.</p><p>Als u deze e-mails blijft ontvangen, neem "
+"dan alstublieft contact op met <a href=\"mailto:%s\">%s</a>.</"
+"p><p><small>Deze actie was aangevraagd vanaf IP-adres %s. U kunt <a "
+"href='http://www.ip-tracker.org/locator/ip-lookup.php?ip=%s'>hier</a> meer "
+"informatie vinden over dit adres.</small></p>"
 
-#: src/Service/LoginService.php:172 src/Service/LoginService.php:183
+#: src/Service/LoginService.php:187 src/Service/LoginService.php:228
 msgid "Password reset instructions"
 msgstr "Instructies voor het resetten van je wachtwoord"
 
-#: src/Service/LoginService.php:176 src/Service/LoginService.php:186
+#: src/Service/LoginService.php:191 src/Service/LoginService.php:232
 msgid "Unable to send email"
 msgstr "E-mail verzenden is mislukt"
+
+#: src/Service/LoginService.php:210
+#, php-format
+msgid ""
+"<p>We have sent this message because you requested that your password for %s "
+"be reset.<br>If you did not expect this message, please ignore it. If you "
+"keep receiving this message, please contact <a href='mailto:%s'>%s</a>.</"
+"p><p>Reset your password now:<br/><a href='%s'>%s</a></p><p><small>This "
+"action was requested from IP address %s. Find out more information about "
+"this address <a href='http://www.ip-tracker.org/locator/ip-lookup.php?ip="
+"%s'>here</a>.</small></p>"
+msgstr ""
+"<p>Wij hebben u dit bericht verstuurd omdat u heeft aangevraagd om uw "
+"wachtwoord voor %s te wijzigen.<br/>Als u dit bericht niet verwachtte, "
+"negeer het dan alstublieft. Als u dit bericht blijft ontvangen, neem dan "
+"alstublieft contact op met <a href='mailto:%s'>%s</a>.</p><p>Wijzig nu uw "
+"wachtwoord:<br/><a href='%s'>%s</a></p><p><small>Deze actie was aangevraagd "
+"vanaf IP-adres %s. U kunt <a href='http://www.ip-tracker.org/locator/ip-"
+"lookup.php?ip=%s'>hier</a> meer informatie vinden over dit adres.</small></p>"
 
 #: src/Service/MailService.php:80 src/Service/MailService.php:83
 msgid "Message could not be send:"
@@ -2045,6 +2079,17 @@ msgid "Maximum group size needs to larger than or equal to minimum group size"
 msgstr ""
 "Maximale groepsgrootte moet groter zijn of gelijk aan de minimale "
 "groepsgrootte"
+
+#~ msgid ""
+#~ "<p>You have requested a new password for %s, but this email address is "
+#~ "not linked to an account.</p><p>If you did not request this email, you "
+#~ "can ignore it.<br/>If you keep receiving these emails, please contact <a "
+#~ "href=\"mailto:%s\">%s</a>.</p>"
+#~ msgstr ""
+#~ "<p>U hebt een nieuw wachtwoord voor %s gevraagd, maar dit e-mailadres is "
+#~ "niet gekoppeld aan een account.</p><p>Als u deze e-mail niet hebt "
+#~ "aangevraagd, kunt u deze negeren.<br>Als u deze e-mails blijft ontvangen, "
+#~ "neem dan alstublieft contact op met <a href=\"mailto:%s\">%s</a>.</p>"
 
 #~ msgid ""
 #~ "<p>You have requested a new password for %s, but this email address is "

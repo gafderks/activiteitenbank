@@ -112,13 +112,6 @@ class User implements \JsonSerializable
     private $attachments;
 
     /**
-     * Password reset code.
-     *
-     * @Column(type="string", nullable=true)
-     */
-    private $passwordResetCode;
-
-    /**
      * @return int
      */
     public function getId() {

@@ -203,7 +203,8 @@ class LoginController extends Controller
         if ($captchaResponse->isSuccess()) {
             // captcha is verified, send email
             try {
-                $this->getLoginService()->sendPasswordResetEmail($request->getParsedBody()['email']);
+                $this->getLoginService()->sendPasswordResetEmail($request->getParsedBody()['email'],
+                    $request->getAttribute('ip_address'));
                 $infos = [["message" => _("Please check the inbox of your email for further instructions.")]];
             } catch (\Exception $e) {
                 $errors = [["message" => $e->getMessage()]];

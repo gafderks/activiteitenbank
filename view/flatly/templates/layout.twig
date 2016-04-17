@@ -39,7 +39,7 @@
             var authToken = "{{ authToken }}";
         </script>
 
-        <script src="{{ baseUrl }}/js/translator.js?locale={{ "en"|trans }}"></script>
+        <script src="{{ path_for('js-translate-helper') }}?locale={{ "en"|trans }}"></script>
     {% endblock %}
 </body>
 </html>

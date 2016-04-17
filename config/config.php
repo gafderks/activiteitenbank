@@ -57,6 +57,15 @@ return [
                     'action' => 'sendPasswordInstructions',
                 ],
             ],
+            'reset-password-form' => [
+                'type' => 'literal',
+                'method' => 'get',
+                'options' => [
+                    'route' => '/reset-password/{token}',
+                    'controller' => 'LoginController',
+                    'action' => 'resetPasswordForm',
+                ],
+            ],
             'settings' => [
                 'type' => 'literal',
                 'method' => 'get',
@@ -355,6 +364,10 @@ return [
         'mapper_category' => [
             'type' => 'mapper',
             'mapper' => 'Category',
+        ],
+        'mapper_password_reset_token' => [
+            'type' => 'mapper',
+            'mapper' => 'PasswordResetToken',
         ],
     ],
 ];
