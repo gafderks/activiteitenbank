@@ -345,18 +345,11 @@ class LoginController extends Controller
         }
 
         // update password
-        $user = $token->getUser();
-        $user->setPassword(password_hash($request->getParsedBody()['password'], PASSWORD_DEFAULT));
-        $this->getUserMapper()->persist($user);
-        $this->getUserMapper()->flush();
-
-        // delete all existing tokens for this user
-        foreach ($this->getPasswordResetTokenMapper()->findTokensByUser($user) as $t) {
-            $this->getPasswordResetTokenMapper()->remove($t);
-        }
-        $this->getPasswordResetTokenMapper()->flush();
-
-        // TODO send password reset confirmation email
+        $this->getLoginService()->changePassword(
+            $token->getUser(),
+            $request->getParsedBody()['password'],
+            $request->getAttribute('ip_address')
+        );
 
         // render form
         $params = [

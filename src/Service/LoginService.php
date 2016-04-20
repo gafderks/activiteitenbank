@@ -235,6 +235,42 @@ class LoginService extends Service
 
     }
 
+    public function changePassword(\Model\User $user, $password, $ip) {
+        $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
+        $this->getUserMapper()->persist($user);
+        $this->getUserMapper()->flush();
+
+        // delete all existing tokens for this user
+        foreach ($this->getPasswordResetTokenMapper()->findTokensByUser($user) as $t) {
+            $this->getPasswordResetTokenMapper()->remove($t);
+        }
+        $this->getPasswordResetTokenMapper()->flush();
+        
+        try {
+            $emailMessage = sprintf(
+                _("<p>Your password for %s has been changed.</p>"
+                    . "If it was not you changing the password, please contact <a href='mailto:%s'>%s</a>.</p>"
+                    . "<p><small>This action was requested from IP address %s. Find out more "
+                    . "information about this address "
+                    . "<a href='http://www.ip-tracker.org/locator/ip-lookup.php?ip=%s'>here</a>."
+                    . "</small></p>"),
+                $this->container['config']['applicationName'],
+                $this->container['config']['webmasterEmail'],
+                $this->container['config']['webmasterEmail'],
+                $ip, $ip);
+            $this->getMailService()->emailHtml(
+                $user->getEmail(),
+                sprintf(
+                    "%s: %s",
+                    $this->container['config']['applicationName'],
+                    _("Change password notification")
+                ),
+                $emailMessage);
+        } catch (\Exception $e) {
+            throw new \Exception(_("Unable to send email"));
+        }
+    }
+
     /**
      * Destroys the current session.
      */
