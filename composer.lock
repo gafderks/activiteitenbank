@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a81b4357a835ef30ef6211104417ebcf",
-    "content-hash": "364ca42a638a742f020be019c5fe708b",
+    "hash": "6f9f64bee2a04364cae76e0b788d40bd",
+    "content-hash": "289e3cec27a2a4f6dcd4b48fca81371e",
     "packages": [
         {
             "name": "akrabat/rka-ip-address-middleware",
@@ -54,6 +54,51 @@
                 "psr7"
             ],
             "time": "2015-11-06 10:38:17"
+        },
+        {
+            "name": "bjeavons/zxcvbn-php",
+            "version": "0.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bjeavons/zxcvbn-php.git",
+                "reference": "cbe160c886b09cde4f8bdf692ecc252bba43f4a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bjeavons/zxcvbn-php/zipball/cbe160c886b09cde4f8bdf692ecc252bba43f4a7",
+                "reference": "cbe160c886b09cde4f8bdf692ecc252bba43f4a7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.0",
+                "satooshi/php-coveralls": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ZxcvbnPhp": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "See contributors",
+                    "homepage": "https://github.com/bjeavons/zxcvbn-php"
+                }
+            ],
+            "description": "Realistic password strength estimation PHP library based on Zxcvbn JS",
+            "homepage": "https://github.com/bjeavons/zxcvbn-php",
+            "keywords": [
+                "password",
+                "zxcvbn"
+            ],
+            "time": "2015-06-04 22:51:56"
         },
         {
             "name": "codeguy/upload",

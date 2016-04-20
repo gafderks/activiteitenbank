@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: activiteitenbank\n"
-"POT-Creation-Date: 2016-04-18 00:09+0200\n"
-"PO-Revision-Date: 2016-04-18 00:12+0200\n"
+"POT-Creation-Date: 2016-04-19 23:13+0200\n"
+"PO-Revision-Date: 2016-04-19 23:13+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -16,25 +16,42 @@ msgstr ""
 "X-Poedit-SearchPath-0: view/flatly/cache\n"
 "X-Poedit-SearchPath-1: src\n"
 
-#: src/Controller/LoginController.php:67
+#: src/Controller/LoginController.php:76
 msgid "You need to supply an email address or a username"
 msgstr "Je moet een e-mailadres of een gebruikersnaam invullen"
 
-#: src/Controller/LoginController.php:78 src/Controller/LoginController.php:90
+#: src/Controller/LoginController.php:87 src/Controller/LoginController.php:99
 msgid "Wrong username or password"
 msgstr "Verkeerde gebruikersnaam of wachtwoord"
 
-#: src/Controller/LoginController.php:144
+#: src/Controller/LoginController.php:153
 msgid "Facebook login failed"
 msgstr "Inloggen via Facebook is mislukt"
 
-#: src/Controller/LoginController.php:208
+#: src/Controller/LoginController.php:227
 msgid "Please check the inbox of your email for further instructions."
 msgstr "Controleer alsjeblieft de inbox van je email voor verdere instructies."
 
-#: src/Controller/LoginController.php:213
+#: src/Controller/LoginController.php:232
 msgid "Captcha was not correctly answered"
 msgstr "De captcha is niet correct ingevuld"
+
+#: src/Controller/LoginController.php:274
+msgid "The reset link has expired. Request a new link."
+msgstr "De link is verlopen. Vraag een nieuwe link aan."
+
+#: src/Controller/LoginController.php:321
+msgid "The reset link has expired. Request a new password."
+msgstr "De link is verlopen. Vraag een nieuw wachtwoord aan."
+
+#: src/Controller/LoginController.php:336
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "The strength of the password is insufficient."
+msgstr "De sterkte van het wachtwoord is onvoldoende."
+
+#: src/Controller/LoginController.php:365
+msgid "Password has been reset successfully."
+msgstr "Wachtwoord is succesvol gewijzigd."
 
 #: src/Service/LoginService.php:156
 msgid "Invalid email address"
@@ -1117,42 +1134,43 @@ msgstr "Aanmelden"
 #: view/flatly/cache/1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:144
 #: view/flatly/cache/23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:144
 #: view/flatly/cache/41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:144
-#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:144
+#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:153
 msgid "Sign In"
 msgstr "Aanmelden"
 
 #: view/flatly/cache/1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:173
 #: view/flatly/cache/23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:173
 #: view/flatly/cache/41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:173
-#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:173
+#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:204
 msgid "Username"
 msgstr "Gebruikersnaam"
 
 #: view/flatly/cache/1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:181
 #: view/flatly/cache/23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:181
 #: view/flatly/cache/41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:181
-#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:181
+#: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:190
+#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:212
 msgid "Password"
 msgstr "Wachtwoord"
 
 #: view/flatly/cache/1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:191
 #: view/flatly/cache/23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:191
 #: view/flatly/cache/41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:191
-#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:193
+#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:224
 msgid "I forgot my password"
 msgstr "Wachtwoord vergeten"
 
 #: view/flatly/cache/1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:198
 #: view/flatly/cache/23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:198
 #: view/flatly/cache/41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:198
-#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:200
+#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:231
 msgid "Sign me in"
 msgstr "Aanmelden"
 
 #: view/flatly/cache/1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:210
 #: view/flatly/cache/23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:210
 #: view/flatly/cache/41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:210
-#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:212
+#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:243
 msgid "Log in with Facebook"
 msgstr "Aanmelden met Facebook"
 
@@ -2013,22 +2031,37 @@ msgstr "Je moet de datumvelden invullen"
 msgid "Your session has expired. Try reloading the page."
 msgstr "Je sessie is verlopen. Herlaad de pagina."
 
+#: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:33
+#: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:159
+#: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:213
+msgid "Reset password"
+msgstr "Wachtwoord wijzigen"
+
+#: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:194
+msgid "Password strength"
+msgstr "Wachtwoord sterkte"
+
+#: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:203
+msgid "Confirm password"
+msgstr "Bevestig wachtwoord"
+
+#: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:221
+#: view/flatly/cache/84/84e615f1a381f89649822977c8e881f265a5623537f57b955af15542004f065b.php:253
+msgid "Back to login form"
+msgstr "Terug naar het inlogformulier"
+
 #: view/flatly/cache/84/84e615f1a381f89649822977c8e881f265a5623537f57b955af15542004f065b.php:33
 #: view/flatly/cache/84/84e615f1a381f89649822977c8e881f265a5623537f57b955af15542004f065b.php:159
 msgid "Request new password"
 msgstr "Nieuw wachtwoord aanvragen"
 
-#: view/flatly/cache/84/84e615f1a381f89649822977c8e881f265a5623537f57b955af15542004f065b.php:215
+#: view/flatly/cache/84/84e615f1a381f89649822977c8e881f265a5623537f57b955af15542004f065b.php:218
 msgid "Email"
 msgstr "Email"
 
-#: view/flatly/cache/84/84e615f1a381f89649822977c8e881f265a5623537f57b955af15542004f065b.php:239
+#: view/flatly/cache/84/84e615f1a381f89649822977c8e881f265a5623537f57b955af15542004f065b.php:242
 msgid "Send me an email with instructions"
 msgstr "Stuur mij een email met instructies"
-
-#: view/flatly/cache/84/84e615f1a381f89649822977c8e881f265a5623537f57b955af15542004f065b.php:250
-msgid "Back to login form"
-msgstr "Terug naar het inlogformulier"
 
 #: view/flatly/cache/9c/9c59434b2a01836f20c6c79e211ca48d135c68f133cde91eec9ff48914feb6f9.php:63
 #: view/flatly/cache/ab/ab3739230fb33e09095a9146d5ee2436333d8d7f1b8c14e580efda75c2d62e8c.php:63
@@ -2079,6 +2112,145 @@ msgid "Maximum group size needs to larger than or equal to minimum group size"
 msgstr ""
 "Maximale groepsgrootte moet groter zijn of gelijk aan de minimale "
 "groepsgrootte"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Worst"
+msgstr "Slechtst"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Bad"
+msgstr "Slecht"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Weak"
+msgstr "Zwak"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Good"
+msgstr "Goed"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Strong"
+msgstr "Sterk"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Strength:"
+msgstr "Sterkte:"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Use a few words, avoid common phrases"
+msgstr "Gebruik een aantal woorden, vermijd veelvoorkomende zinnen"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "No need for symbols, digits, or uppercase letters"
+msgstr "Symbolen, cijfers of hoofdletters zijn niet nodig"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Add another word or two. Uncommon words are better."
+msgstr "Voeg een paar woorden toe. Woorden die niet vaak voorkomen zijn beter."
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Straight rows of keys are easy to guess"
+msgstr "Rechte rijen van toetsen zijn makkelijk om te raden"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Short keyboard patterns are easy to guess"
+msgstr "Korte patronen op het toetsenbord zijn makkelijk om te raden"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Use a longer keyboard pattern with more turns"
+msgstr "Gebruik een langer toetsenbord patroon met meer bochten"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Repeats like 'aaa' are easy to guess"
+msgstr "Herhalingen als 'aaa' zijn makkelijk om te raden"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Repeats like 'abcabcabc' are only slightly harder to guess than 'abc'"
+msgstr ""
+"Herhalingen als 'abcabcabc' zijn maar iets moeilijker om te raden dan 'abc'"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Avoid repeated words and characters"
+msgstr "Vermijd herhaling van woorden en tekens"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Sequences like abc or 6543 are easy to guess"
+msgstr "Reeksen als abc of 6543 zijn makkelijk om te raden"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Avoid sequences"
+msgstr "Vermijd reeksen"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Recent years are easy to guess"
+msgstr "Recente jaren zijn makkelijk om te raden"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Avoid recent years"
+msgstr "Vermijd recente jaren"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Avoid years that are associated with you"
+msgstr "Vermijd jaren die iets met jou te maken hebben"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Dates are often easy to guess"
+msgstr "Datums zijn vaak makkelijk te raden"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Avoid dates and years that are associated with you"
+msgstr "Vermijd datums en jaren die iets met jou te maken hebben"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "This is similar to a commonly used password"
+msgstr "Dit is vergelijkbaar met een vaak gebruikt wachtwoord"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "This is a top-10 common password"
+msgstr "Dit is een wachtwoord uit de top-10"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "This is a top-100 common password"
+msgstr "Dit is een wachtwoord uit de top-100"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "This is a very common password"
+msgstr "Dit is een vaak gebruikt wachtwoord"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "A word by itself is easy to guess"
+msgstr "Een woord op zich is makkelijk om te raden"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Names and surnames by themselves are easy to guess"
+msgstr "Namen en achternamen op zich zijn makkelijk om te raden"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Common names and surnames are easy to guess"
+msgstr "Veelvoorkomende namen en achternamen zijn makkelijk om te raden"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Capitalization doesn't help very much"
+msgstr "Het gebruik van hoofdletters maakt weinig verschil"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "All-uppercase is almost as easy to guess as all-lowercase"
+msgstr ""
+"Alles in hoofdletters is bijna net zo makkelijk om te raden als alles in "
+"kleine letters"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Reversed words aren't much harder to guess"
+msgstr "Omgekeerde woorden zijn niet veel moeilijker om te raden"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "Predictable substitutions like '@' instead of 'a' don't help very much"
+msgstr "Voorspelbare verwisselingen als '@' in plaats van 'a' helpen niet veel"
+
+#: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
+msgid "The passwords do not match."
+msgstr "De wachtwoorden komen niet overeen."
 
 #~ msgid ""
 #~ "<p>You have requested a new password for %s, but this email address is "

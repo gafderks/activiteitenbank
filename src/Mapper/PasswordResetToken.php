@@ -17,7 +17,7 @@ class PasswordResetToken extends \Mapper\Mapper
      * @param \Model\User $user
      * @return array
      */
-    public function findTokenByUser(\Model\User $user) {
+    public function findTokensByUser(\Model\User $user) {
         return $this->getRepository()->findBy([
             'user' => $user->getId()
         ]);
@@ -30,7 +30,9 @@ class PasswordResetToken extends \Mapper\Mapper
      * @return null|\Model\PasswordResetToken
      */
     public function findTokenById($id) {
-        return $this->getRepository()->find($id);
+        return $this->getRepository()->findOneBy([
+            'token' => $id
+        ]);
     }
 
     /**

@@ -21,7 +21,8 @@
         "phpmailer/phpmailer": "^5.2",
         "google/recaptcha": "^1.1",
         "akrabat/rka-ip-address-middleware": "^0.4.0",
-        "soundasleep/html2text": "^0.3.1"
+        "soundasleep/html2text": "^0.3.1",
+        "bjeavons/zxcvbn-php": "^0.1.4"
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "*"

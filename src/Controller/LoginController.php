@@ -5,6 +5,7 @@ namespace Controller;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use ZxcvbnPhp\Zxcvbn;
 
 /**
  * Class LoginController
@@ -13,6 +14,14 @@ use Psr\Http\Message\ResponseInterface as Response;
  */
 class LoginController extends Controller
 {
+
+    /**
+     * Interval of the validity of password reset tokens
+     *
+     * @see https://secure.php.net/manual/en/dateinterval.construct.php
+     * @var string
+     */
+    private $tokenExpiry = 'PT3H'; // 3 hours
 
     /**
      * Shows the login form.
@@ -238,6 +247,130 @@ class LoginController extends Controller
     }
 
     /**
+     * Shows a form for changing the password. If the token that is necessary for using this functionality
+     * is expired, the request password reset form is displayed.
+     *
+     * Flowchart: @see http://lh5.ggpht.com/-ke9GVduXaaY/T7rBCWHFkYI/AAAAAAAADmY/xvEOczv44Zg/Password-Reset5.png?imgmax=800
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
+     */
+    public function resetPasswordFormAction(Request $request, Response $response, $args = []) {
+        // check if a user is already logged in
+        if ($this->getLoginService()->getLoggedInUser() !== null) {
+            return $this->getRedirectResponse($response, 'index');
+        }
+
+        $token = $this->getPasswordResetTokenMapper()->findTokenById($args['token']);
+        $now = new \DateTime('now');
+        $errors = [];
+
+        // check if token has expired
+        if (is_null($token) || $token->getGenerated()->add(new \DateInterval($this->tokenExpiry))->getTimestamp()
+            - $now->getTimestamp() < 0) {
+            // token has expired
+            $errors = [["message" => _("The reset link has expired. Request a new link.")]];
+            $params = [
+                'login' => [
+                    'errors' => $errors,
+                ],
+                'recaptchaSiteKey' => $this->container['config']['recaptcha']['siteKey'],
+            ];
+            $this->container['view']->render($response, 'pages/password-reset-request.twig', $params);
+            return $response;
+        }
+
+        // render form
+        $params = [
+            'login' => [
+                'errors' => $errors,
+            ],
+            'resetToken' => $token->getToken(),
+        ];
+        $this->container['view']->render($response, 'pages/password-reset-form.twig', $params);
+        return $response;
+    }
+
+    /**
+     * Resets the password and shows the login page.
+     * If the reset token has expired, it shows the request password reset form.
+     *
+     * Flowchart: @see http://lh5.ggpht.com/-ke9GVduXaaY/T7rBCWHFkYI/AAAAAAAADmY/xvEOczv44Zg/Password-Reset5.png?imgmax=800
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args route parameters
+     * @return \Psr\Http\Message\MessageInterface|Response
+     */
+    public function resetPasswordAction(Request $request, Response $response, $args = []) {
+        // check if a user is already logged in
+        if ($this->getLoginService()->getLoggedInUser() !== null) {
+            return $this->getRedirectResponse($response, 'index');
+        }
+
+        $token = $this->getPasswordResetTokenMapper()->findTokenById($args['token']);
+        $now = new \DateTime('now');
+        $errors = [];
+
+        // check if token has expired
+        if (is_null($token) || $token->getGenerated()->add(new \DateInterval($this->tokenExpiry))->getTimestamp()
+            - $now->getTimestamp() < 0) {
+            // token has expired
+            $errors = [["message" => _("The reset link has expired. Request a new password.")]];
+            $params = [
+                'login' => [
+                    'errors' => $errors,
+                ],
+                'recaptchaSiteKey' => $this->container['config']['recaptcha']['siteKey'],
+            ];
+            $this->container['view']->render($response, 'pages/password-reset-request.twig', $params);
+            return $response;
+        }
+
+        // check password strength
+        $zxcvbn = new Zxcvbn();
+        $strength = $zxcvbn->passwordStrength($request->getParsedBody()['password'])['score'];
+        if ($strength < 3) {
+            $errors = [['message' => _("The strength of the password is insufficient.")]];
+            $params = [
+                'login' => [
+                    'errors' => $errors,
+                ],
+                'resetToken' => $token->getToken(),
+            ];
+            $this->container['view']->render($response, 'pages/password-reset-form.twig', $params);
+            return $response;
+        }
+
+        // update password
+        $user = $token->getUser();
+        $user->setPassword(password_hash($request->getParsedBody()['password'], PASSWORD_DEFAULT));
+        $this->getUserMapper()->persist($user);
+        $this->getUserMapper()->flush();
+
+        // delete all existing tokens for this user
+        foreach ($this->getPasswordResetTokenMapper()->findTokensByUser($user) as $t) {
+            $this->getPasswordResetTokenMapper()->remove($t);
+        }
+        $this->getPasswordResetTokenMapper()->flush();
+
+        // TODO send password reset confirmation email
+
+        // render form
+        $params = [
+            'login' => [
+                'errors' => $errors,
+                'infos' => [['message' => _("Password has been reset successfully.")]]
+            ],
+            'resetToken' => $token->getToken(),
+        ];
+        $this->container['view']->render($response, 'pages/login.twig', $params);
+        return $response;
+    }
+
+    /**
      * Get the Login service.
      *
      * @return \Service\LoginService
@@ -262,6 +395,24 @@ class LoginController extends Controller
      */
     protected function getUserService() {
         return $this->container['service_user'];
+    }
+
+    /**
+     * Get the PasswordResetToken Mapper.
+     *
+     * @return \Mapper\PasswordResetToken
+     */
+    protected function getPasswordResetTokenMapper() {
+        return $this->container['mapper_password_reset_token'];
+    }
+
+    /**
+     * Get the User Mapper.
+     *
+     * @return \Mapper\User
+     */
+    protected function getUserMapper() {
+        return $this->container['mapper_user'];
     }
 
 }

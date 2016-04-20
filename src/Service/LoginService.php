@@ -192,7 +192,7 @@ class LoginService extends Service
             }
         } else {
             // delete all pre-existing tokens for this user
-            foreach ($this->getPasswordResetTokenMapper()->findTokenByUser($user) as $t) {
+            foreach ($this->getPasswordResetTokenMapper()->findTokensByUser($user) as $t) {
                 $this->getPasswordResetTokenMapper()->remove($t);
             }
             $this->getPasswordResetTokenMapper()->flush();

@@ -66,6 +66,15 @@ return [
                     'action' => 'resetPasswordForm',
                 ],
             ],
+            'reset-password' => [
+                'type' => 'literal',
+                'method' => 'post',
+                'options' => [
+                    'route' => '/reset-password/{token}',
+                    'controller' => 'LoginController',
+                    'action' => 'resetPassword',
+                ],
+            ],
             'settings' => [
                 'type' => 'literal',
                 'method' => 'get',
