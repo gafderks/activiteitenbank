@@ -43,16 +43,18 @@ return [
     /**
      * Domain (root URI) that the application will run on.
      * Without trailing slash.
+     * WHENEVER POSSIBLE USE HTTPS
      *
-     * Example: 'http://example.com'
+     * Example: 'https://example.com'
      */
     'domain' => 'put domain URL here',
 
     /**
      * Public URL of the /public folder.
      * Without trailing slash.
+     * WHENEVER POSSIBLE USE HTTPS
      *
-     * Example: 'http://example.com/folder/folder/public'
+     * Example: 'https://example.com/folder/folder/public'
      */
     'baseUrl' => 'put public root URL here',
 
