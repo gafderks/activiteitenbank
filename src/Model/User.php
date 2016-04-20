@@ -245,20 +245,6 @@ class User implements \JsonSerializable
     }
 
     /**
-     * @return mixed
-     */
-    public function getPasswordResetCode() {
-        return $this->passwordResetCode;
-    }
-
-    /**
-     * @param mixed $passwordResetCode
-     */
-    public function setPasswordResetCode($passwordResetCode) {
-        $this->passwordResetCode = $passwordResetCode;
-    }
-
-    /**
      * Specify data which should be serialized to JSON
      *
      * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
