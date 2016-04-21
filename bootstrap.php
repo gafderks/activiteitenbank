@@ -137,7 +137,7 @@ $app->add(new RKA\Middleware\IpAddress(false, []));
  *******************************************************************************/
 
 // language configuration @see https://github.com/roboter/slim-i18n-working-example/blob/master/htdocs/index.php#L51
-$locality = 'nl_NL'; // locality should be determined here
+$locality = 'nl_NL.utf8'; // locality should be determined here
 if (defined('LC_MESSAGES')) {
     setlocale(LC_MESSAGES, $locality); // Linux
 } else {
@@ -153,7 +153,7 @@ if (false === function_exists('gettext')) {
  * that as well. The second parameter is the base directory to start
  * searching in.
  */
-bindtextdomain('messages', "view/{$config['template']}/locales");
+bindtextdomain('messages', dirname(__FILE__)."/view/{$config['template']}/locales");
 bind_textdomain_codeset('messages', 'UTF-8');
 // Tell the application to use this text domain, or messages.mo.
 textdomain('messages');
