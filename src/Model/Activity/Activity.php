@@ -58,7 +58,7 @@ class Activity implements \JsonSerializable
     /**
      * Date at which the activity was created.
      *
-     * @Column(type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+     * @Column(type="datetime", columnDefinition="TIMESTAMP DEFAULT 0")
      * @var \DateTime
      * @SWG\Property()
      */
