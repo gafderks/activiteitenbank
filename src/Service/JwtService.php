@@ -87,6 +87,31 @@ class JwtService extends Service
     }
 
     /**
+     * Filters the permissions that a role does not have from a scope array.
+     *
+     * @param $aclPrivileges array initial (unfiltered) array of privileges
+     * @param $role string role to check the permissions for
+     * @return array filtered array of privileges
+     */
+    public function filterScope($aclPrivileges, $role) {
+        $acl = $this->container['acl'];
+        $scope = [];
+        foreach ($aclPrivileges as $resourceKey => $resource) {
+            $allowedPrivileges = [];
+            foreach ($resource as $privilege) {
+                if ($acl->isAllowed($role,
+                    $resourceKey, $privilege)) {
+                    array_push($allowedPrivileges, $privilege);
+                }
+            }
+            if (count($allowedPrivileges) > 0) {
+                $scope[$resourceKey] = $allowedPrivileges;
+            }
+        }
+        return $scope;
+    }
+
+    /**
      * Returns the User that is associated with the token.
      *
      * @param object $token JSON web token

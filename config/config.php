@@ -84,6 +84,15 @@ return [
                     'action' => 'index',
                 ],
             ],
+            'change-password' => [
+                'type' => 'literal',
+                'method' => 'post',
+                'options' => [
+                    'route' => '/settings',
+                    'controller' => 'SettingsController',
+                    'action' => 'changePassword',
+                ],
+            ],
             'activity-explore' => [
                 'type' => 'literal',
                 'method' => 'get',

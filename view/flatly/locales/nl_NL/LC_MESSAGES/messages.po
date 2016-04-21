@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: activiteitenbank\n"
-"POT-Creation-Date: 2016-04-19 23:13+0200\n"
-"PO-Revision-Date: 2016-04-19 23:13+0200\n"
+"POT-Creation-Date: 2016-04-21 08:23+0200\n"
+"PO-Revision-Date: 2016-04-21 08:24+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -45,13 +45,19 @@ msgid "The reset link has expired. Request a new password."
 msgstr "De link is verlopen. Vraag een nieuw wachtwoord aan."
 
 #: src/Controller/LoginController.php:336
+#: src/Controller/SettingsController.php:106
 #: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 msgid "The strength of the password is insufficient."
 msgstr "De sterkte van het wachtwoord is onvoldoende."
 
-#: src/Controller/LoginController.php:365
+#: src/Controller/LoginController.php:358
+#: src/Controller/SettingsController.php:123
 msgid "Password has been reset successfully."
 msgstr "Wachtwoord is succesvol gewijzigd."
+
+#: src/Controller/SettingsController.php:94
+msgid "Your old password is not correct."
+msgstr "Het oude wachtwoord is incorrect."
 
 #: src/Service/LoginService.php:156
 msgid "Invalid email address"
@@ -90,6 +96,7 @@ msgid "Password reset instructions"
 msgstr "Instructies voor het resetten van je wachtwoord"
 
 #: src/Service/LoginService.php:191 src/Service/LoginService.php:232
+#: src/Service/LoginService.php:279
 msgid "Unable to send email"
 msgstr "E-mail verzenden is mislukt"
 
@@ -111,6 +118,25 @@ msgstr ""
 "wachtwoord:<br/><a href='%s'>%s</a></p><p><small>Deze actie was aangevraagd "
 "vanaf IP-adres %s. U kunt <a href='http://www.ip-tracker.org/locator/ip-"
 "lookup.php?ip=%s'>hier</a> meer informatie vinden over dit adres.</small></p>"
+
+#: src/Service/LoginService.php:260
+#, php-format
+msgid ""
+"<p>Your password for %s has been changed.</p><p>If it was not you changing "
+"the password, please contact <a href='mailto:%s'>%s</a>.</p><p><small>This "
+"action was requested from IP address %s. Find out more information about "
+"this address <a href='http://www.ip-tracker.org/locator/ip-lookup.php?ip="
+"%s'>here</a>.</small></p>"
+msgstr ""
+"<p>Uw wachtwoord voor %s is gewijzigd.</p><p>Als u het wachtwoord niet heeft "
+"gewijzigd, neem dan alstublieft contact op met <a href='mailto:%s'>%s</a>.</"
+"p><p><small>Deze actie is aangevraagd vanaf het IP-adres %s. Vind <a "
+"href='http://www.ip-tracker.org/locator/ip-lookup.php?ip=%s'>hier</a> meer "
+"informatie over dit adres.</small></p>"
+
+#: src/Service/LoginService.php:275
+msgid "Change password notification"
+msgstr "Wachtwoord gewijzigd melding"
 
 #: src/Service/MailService.php:80 src/Service/MailService.php:83
 msgid "Message could not be send:"
@@ -979,7 +1005,7 @@ msgstr "Budget"
 #: view/flatly/cache/15/1535567117f87bb48b9f1dcaaa414d07f98586fc4c4fd641bd0ba83e5dc444fa.php:163
 #: view/flatly/cache/1b/1b57c8413b9e447cacf443df1e5db2d874c348ad1f9d17b00e76e9f8ea7af26e.php:344
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:265
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:265
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:365
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:265
 #: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 #: view/flatly/cache/e5/e5712f1bce0ad5503629a450c85a098162d1438ecf786b0869e847c2e13dde0b.php:344
@@ -1141,36 +1167,37 @@ msgstr "Aanmelden"
 #: view/flatly/cache/1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:173
 #: view/flatly/cache/23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:173
 #: view/flatly/cache/41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:173
-#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:204
+#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:207
 msgid "Username"
 msgstr "Gebruikersnaam"
 
 #: view/flatly/cache/1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:181
 #: view/flatly/cache/23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:181
 #: view/flatly/cache/41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:181
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:163
 #: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:190
-#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:212
+#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:215
 msgid "Password"
 msgstr "Wachtwoord"
 
 #: view/flatly/cache/1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:191
 #: view/flatly/cache/23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:191
 #: view/flatly/cache/41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:191
-#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:224
+#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:227
 msgid "I forgot my password"
 msgstr "Wachtwoord vergeten"
 
 #: view/flatly/cache/1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:198
 #: view/flatly/cache/23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:198
 #: view/flatly/cache/41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:198
-#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:231
+#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:234
 msgid "Sign me in"
 msgstr "Aanmelden"
 
 #: view/flatly/cache/1c/1c09346e43e9626b74f0807abb0f4b3be4681f659d819267b737806bf395fdc2.php:210
 #: view/flatly/cache/23/231745ca5bbde3c0c6a1ca9fe180a242f5c46e30692630c4eec4d53845ded4bb.php:210
 #: view/flatly/cache/41/4198b010c891a70bd74880f0f27a593ad7ae90e781d21b2686b1773ff5ebe7c8.php:210
-#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:243
+#: view/flatly/cache/ae/ae24e91ca13cef8a76c3a81bfea6c763d74cd55e6eefc11f03df862d6444ad1f.php:246
 msgid "Log in with Facebook"
 msgstr "Aanmelden met Facebook"
 
@@ -1929,43 +1956,43 @@ msgid "By"
 msgstr "Door"
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:70
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:70
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:128
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:70
 msgid "Account settings"
 msgstr "Accountinstellingen"
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:78
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:78
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:136
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:78
 msgid "API tokens"
 msgstr "API tokens"
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:92
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:92
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:192
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:92
 msgid "Warning"
 msgstr "Waarschuwing"
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:96
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:96
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:196
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:96
 msgid "API tokens are like passwords, so treat them as such."
 msgstr "API tokens zijn als wachtwoorden, behandel ze dus als zodanig."
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:101
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:101
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:201
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:101
 msgid "API tokens cannot be revoked!"
 msgstr "API tokens kunnen niet worden ingetrokken!"
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:106
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:106
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:206
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:106
 msgid "New token"
 msgstr "Nieuwe token"
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:110
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:110
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:210
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:110
 msgid ""
 "Using this form, you can generate API tokens. It is important to note that "
@@ -1975,75 +2002,94 @@ msgstr ""
 "beseffen dat API tokens niet kunnen worden ingetrokken."
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:116
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:116
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:216
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:116
 msgid "Expiry"
 msgstr "Vervaldatum"
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:123
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:123
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:223
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:123
 msgid "Valid from"
 msgstr "Geldig vanaf"
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:137
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:137
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:237
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:137
 msgid "Valid to"
 msgstr "Geldig tot"
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:152
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:152
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:252
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:152
 msgid "Scope"
 msgstr "Rechten"
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:216
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:216
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:316
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:216
 msgid "Generate token"
 msgstr "Token genereren"
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:221
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:221
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:321
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:221
 msgid "API token"
 msgstr "API token"
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:227
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:227
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:327
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:227
 msgid "How to use API tokens"
 msgstr "Hoe gebruik ik een API token?"
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:302
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:302
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:402
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:302
 msgid "You need to fill in the date fields"
 msgstr "Je moet de datumvelden invullen"
 
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:327
 #: view/flatly/cache/45/4547fb8f9ff4986d0e7e389f695df7a5deecc2e6c2183203a0e79762c6a68e91.php:335
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:327
-#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:335
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:427
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:435
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:327
 #: view/flatly/cache/a9/a9a4f9684cfbea6097efa343414f42cebafa4f051b39d214f153f4e8c58f0e56.php:335
 msgid "Your session has expired. Try reloading the page."
 msgstr "Je sessie is verlopen. Herlaad de pagina."
 
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:77
+msgid "Success"
+msgstr "Gelukt"
+
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:106
+msgid "Failure"
+msgstr "Mislukt"
+
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:148
+msgid "Change password"
+msgstr "Wachtwoord wijzigen"
+
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:155
+msgid "Old password"
+msgstr "Oud wachtwoord"
+
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:167
+#: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:194
+msgid "Password strength"
+msgstr "Wachtwoord sterkte"
+
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:175
+#: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:203
+msgid "Confirm password"
+msgstr "Bevestig wachtwoord"
+
+#: view/flatly/cache/4a/4a3242d2c17b3a88ee374d9b6b8dcba866ad605b5aa942923ef971a33415c464.php:182
 #: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:33
 #: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:159
 #: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:213
 msgid "Reset password"
 msgstr "Wachtwoord wijzigen"
-
-#: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:194
-msgid "Password strength"
-msgstr "Wachtwoord sterkte"
-
-#: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:203
-msgid "Confirm password"
-msgstr "Bevestig wachtwoord"
 
 #: view/flatly/cache/7f/7fa7216d408cbf04b186bbbf2225aa78a3eea2096f8438a4dbfdb23ef113e184.php:221
 #: view/flatly/cache/84/84e615f1a381f89649822977c8e881f265a5623537f57b955af15542004f065b.php:253
@@ -2251,6 +2297,19 @@ msgstr "Voorspelbare verwisselingen als '@' in plaats van 'a' helpen niet veel"
 #: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19
 msgid "The passwords do not match."
 msgstr "De wachtwoorden komen niet overeen."
+
+#~ msgid ""
+#~ "<p>Your password for %s has been changed.</p>If it was not you changing "
+#~ "the password, please contact <a href='mailto:%s'>%s</a>.</"
+#~ "p><p><small>This action was requested from IP address %s. Find out more "
+#~ "information about this address <a href='http://www.ip-tracker.org/locator/"
+#~ "ip-lookup.php?ip=%s'>here</a>.</small></p>"
+#~ msgstr ""
+#~ "<p>Uw wachtwoord voor %s is gewijzigd.</p>Als u het wachtwoord niet heeft "
+#~ "gewijzigd, neem dan alstublieft contact op met <a href='mailto:%s'>%s</a>."
+#~ "</p><p><small>Deze actie is aangevraagd vanaf het IP-adres %s. Vind <a "
+#~ "href='http://www.ip-tracker.org/locator/ip-lookup.php?ip=%s'>hier</a> "
+#~ "meer informatie over dit adres.</small></p>"
 
 #~ msgid ""
 #~ "<p>You have requested a new password for %s, but this email address is "

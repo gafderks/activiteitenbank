@@ -235,6 +235,15 @@ class LoginService extends Service
 
     }
 
+    /**
+     * Changes the password of the specified user to the specified password.
+     * Deletes all the password reset tokens for that user and notifies the user with an email.
+     *
+     * @param \Model\User $user subject for the change of password
+     * @param             $password string new password
+     * @param             $ip string source of the request
+     * @throws \Exception If the email cannot be send
+     */
     public function changePassword(\Model\User $user, $password, $ip) {
         $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
         $this->getUserMapper()->persist($user);
@@ -245,11 +254,11 @@ class LoginService extends Service
             $this->getPasswordResetTokenMapper()->remove($t);
         }
         $this->getPasswordResetTokenMapper()->flush();
-        
+
         try {
             $emailMessage = sprintf(
                 _("<p>Your password for %s has been changed.</p>"
-                    . "If it was not you changing the password, please contact <a href='mailto:%s'>%s</a>.</p>"
+                    . "<p>If it was not you changing the password, please contact <a href='mailto:%s'>%s</a>.</p>"
                     . "<p><small>This action was requested from IP address %s. Find out more "
                     . "information about this address "
                     . "<a href='http://www.ip-tracker.org/locator/ip-lookup.php?ip=%s'>here</a>."
