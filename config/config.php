@@ -39,6 +39,42 @@ return [
                     'action' => 'logout',
                 ],
             ],
+            'forgot-password-form' => [
+                'type' => 'literal',
+                'method' => 'get',
+                'options' => [
+                    'route' => '/forgot-password',
+                    'controller' => 'LoginController',
+                    'action' => 'requestPasswordReset',
+                ],
+            ],
+            'forgot-password' => [
+                'type' => 'literal',
+                'method' => 'post',
+                'options' => [
+                    'route' => '/forgot-password',
+                    'controller' => 'LoginController',
+                    'action' => 'sendPasswordInstructions',
+                ],
+            ],
+            'reset-password-form' => [
+                'type' => 'literal',
+                'method' => 'get',
+                'options' => [
+                    'route' => '/reset-password/{token}',
+                    'controller' => 'LoginController',
+                    'action' => 'resetPasswordForm',
+                ],
+            ],
+            'reset-password' => [
+                'type' => 'literal',
+                'method' => 'post',
+                'options' => [
+                    'route' => '/reset-password/{token}',
+                    'controller' => 'LoginController',
+                    'action' => 'resetPassword',
+                ],
+            ],
             'settings' => [
                 'type' => 'literal',
                 'method' => 'get',
@@ -310,6 +346,10 @@ return [
             'type' => 'service',
             'service' => 'CommentService',
         ],
+        'service_mail' => [
+            'type' => 'service',
+            'service' => 'MailService',
+        ],
         'mapper_user' => [
             'type' => 'mapper',
             'mapper' => 'User',
@@ -333,6 +373,10 @@ return [
         'mapper_category' => [
             'type' => 'mapper',
             'mapper' => 'Category',
+        ],
+        'mapper_password_reset_token' => [
+            'type' => 'mapper',
+            'mapper' => 'PasswordResetToken',
         ],
     ],
 ];

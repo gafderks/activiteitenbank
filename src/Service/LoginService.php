@@ -2,6 +2,7 @@
 
 namespace Service;
 use Facebook\Facebook;
+use Respect\Validation\Validator as v;
 
 /**
  * Class LoginService
@@ -148,6 +149,128 @@ class LoginService extends Service
         }
     }
 
+    public function sendPasswordResetEmail($email, $ip) {
+        // validate email address
+        $validator = v::email();
+        if (!v::email()->validate($email)) {
+            throw new \Exception(_("Invalid email address"));
+        }
+
+        // check if an account is attached to the email address
+        $user = $this->getUserMapper()->findUserByEmail($email);
+        if (is_null($user)) {
+            // send email stating that no account is connected
+            try {
+                $emailMessage = sprintf(
+                    _("<p>You (or someone else) entered this email address when trying to change "
+                        . "the password of a account for %s.</p><p>However, this email address is "
+                        . "not in our database of registered users and therefore the attempted "
+                        . "password change has failed.</p><p>If you have an account and were "
+                        . "expecting this email, please try again using the email address you "
+                        . "gave when opening your account. This may be the email address that is "
+                        . "linked to your Facebook-account.</p><p>If you do not have an account "
+                        . "for %s, please ignore this email.</p><p>If you keep receiving these "
+                        . "emails, please contact <a href=\"mailto:%s\">%s</a>.</p>"
+                        . "<p><small>This action was requested from IP address %s. Find out more "
+                        . "information about this address "
+                        . "<a href='http://www.ip-tracker.org/locator/ip-lookup.php?ip=%s'>here</a>."
+                        . "</small></p>"),
+                    $this->container['config']['applicationName'],
+                    $this->container['config']['applicationName'],
+                    $this->container['config']['webmasterEmail'],
+                    $this->container['config']['webmasterEmail'],
+                    $ip, $ip);
+                $this->getMailService()->emailHtml(
+                    $email,
+                    sprintf("%s: %s",
+                        $this->container['config']['applicationName'],
+                        _("Password reset instructions")),
+                    $emailMessage
+                );
+            } catch (\Exception $e) {
+                throw new \Exception(_("Unable to send email"));
+            }
+        } else {
+            // delete all pre-existing tokens for this user
+            foreach ($this->getPasswordResetTokenMapper()->findTokensByUser($user) as $t) {
+                $this->getPasswordResetTokenMapper()->remove($t);
+            }
+            $this->getPasswordResetTokenMapper()->flush();
+
+            // generate new token
+            $token = new \Model\PasswordResetToken($user);
+            $this->getPasswordResetTokenMapper()->persist($token);
+            $this->getPasswordResetTokenMapper()->flush();
+
+            // send email with instructions
+            try {
+                $resetUrl = $this->container['config']['domain']
+                    . $this->container['router']->pathFor('reset-password-form', ['token' => $token->getToken()]);
+                $emailMessage = sprintf(
+                        _("<p>We have sent this message because you requested that your password "
+                        . "for %s be reset.<br>If you did not expect this message, please ignore it. "
+                        . "If you keep receiving this message, please contact <a href='mailto:%s'>%s</a>.</p>"
+                        . "<p>Reset your password now:<br/><a href='%s'>%s</a></p>"
+                        . "<p><small>This action was requested from IP address %s. Find out more "
+                        . "information about this address "
+                        . "<a href='http://www.ip-tracker.org/locator/ip-lookup.php?ip=%s'>here</a>."
+                        . "</small></p>"),
+                    $this->container['config']['applicationName'],
+                    $this->container['config']['webmasterEmail'],
+                    $this->container['config']['webmasterEmail'],
+                    $resetUrl, $resetUrl,
+                    $ip, $ip);
+                $this->getMailService()->emailHtml(
+                    $email,
+                    sprintf(
+                        "%s: %s",
+                        $this->container['config']['applicationName'],
+                        _("Password reset instructions")
+                    ),
+                    $emailMessage);
+            } catch (\Exception $e) {
+                throw new \Exception(_("Unable to send email"));
+            }
+        }
+
+    }
+
+    public function changePassword(\Model\User $user, $password, $ip) {
+        $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
+        $this->getUserMapper()->persist($user);
+        $this->getUserMapper()->flush();
+
+        // delete all existing tokens for this user
+        foreach ($this->getPasswordResetTokenMapper()->findTokensByUser($user) as $t) {
+            $this->getPasswordResetTokenMapper()->remove($t);
+        }
+        $this->getPasswordResetTokenMapper()->flush();
+        
+        try {
+            $emailMessage = sprintf(
+                _("<p>Your password for %s has been changed.</p>"
+                    . "If it was not you changing the password, please contact <a href='mailto:%s'>%s</a>.</p>"
+                    . "<p><small>This action was requested from IP address %s. Find out more "
+                    . "information about this address "
+                    . "<a href='http://www.ip-tracker.org/locator/ip-lookup.php?ip=%s'>here</a>."
+                    . "</small></p>"),
+                $this->container['config']['applicationName'],
+                $this->container['config']['webmasterEmail'],
+                $this->container['config']['webmasterEmail'],
+                $ip, $ip);
+            $this->getMailService()->emailHtml(
+                $user->getEmail(),
+                sprintf(
+                    "%s: %s",
+                    $this->container['config']['applicationName'],
+                    _("Change password notification")
+                ),
+                $emailMessage);
+        } catch (\Exception $e) {
+            throw new \Exception(_("Unable to send email"));
+        }
+    }
+
     /**
      * Destroys the current session.
      */
@@ -155,5 +278,24 @@ class LoginService extends Service
         unset($_SESSION);
         session_destroy();
     }
+
+    /**
+     * Get the Mail service.
+     *
+     * @return \Service\MailService
+     */
+    protected function getMailService() {
+        return $this->container['service_mail'];
+    }
+
+    /**
+     * Get the PasswordResetToken mapper.
+     *
+     * @return \Mapper\PasswordResetToken
+     */
+    protected function getPasswordResetTokenMapper() {
+        return $this->container['mapper_password_reset_token'];
+    }
+
 
 }
