@@ -8,6 +8,7 @@ Database management system for Scouting Activities.
 * Copy `config.dist.php` to `config.php` and configure the database settings in it.
 * Run `./vendor/bin/doctrine orm:schema-tool:create` to populate the database.
 * Install dependencies using bower: `bower install`
+* Make sure that `/upload` and `/view/flatly/cache` are writeable by PHP.
 
 ## Translation
 The website is generated using `gettext`. By default, all strings are written in English.
