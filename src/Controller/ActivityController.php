@@ -84,8 +84,15 @@ class ActivityController extends Controller
                     '/vendor/wemersonjanuario/wkhtmltopdf-windows/bin/32bit/wkhtmltopdf.exe');
             } else {
                 // not on Windows
-                $snappy = new Pdf($this->container['config']['absolutePath'] .
-                'vendor/h4cc/wkhtmltopdf-i386/bin/wkhtmltopdf-i386');
+                if (2147483647 == PHP_INT_MAX) {
+                    // i386 architecture
+                    $snappy = new Pdf($this->container['config']['absolutePath'] .
+                        '/vendor/h4cc/wkhtmltopdf-i386/bin/wkhtmltopdf-i386');
+                } else {
+                    // amd64 architecture
+                    $snappy = new Pdf($this->container['config']['absolutePath'] .
+                        '/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64');
+                }
             }
             $snappy->setOptions([
                 'page-size' => 'A4',
