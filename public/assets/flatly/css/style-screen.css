@@ -1154,3 +1154,10 @@ meter[value="4"]::-moz-meter-bar { background: green; }
     padding: 0 .25em;
     margin-top: 1em;
 }
+
+/* Markdown generated content
+-------------------------------------------------- */
+
+.md-generated-content img {
+    max-width: 100%;
+}

@@ -29,8 +29,9 @@
                         </span>
                     {% endif %}
                 </h3>
-                {{ activity.elaboration|bb2html|raw }}
-
+                <div class="md-generated-content">
+                    {{ activity.elaboration|bb2html|raw }}
+                </div>
 
                 <h3 class="activity-section">
                     {{ "Planning"|trans }}
