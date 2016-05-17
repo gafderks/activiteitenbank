@@ -146,7 +146,7 @@ $(".list-timeable").on("updateTimes", function() {
     "use strict";
     var totalMins = 0;
     
-    $(this).find("li:not(.list-new-action)").each(function () {
+    $(this).find("li:not(.list-ignore)").each(function () {
         var timeText = $(this).find(".list-time-endurance").val();
         var time = timeToIntMins(timeText);
 
@@ -159,7 +159,7 @@ $(".list-timeable").on("updateTimes", function() {
     // update graph
     $("#activity-planning-graph").empty();
     var count = 0;    
-    $(this).find("li:not(.list-new-action)").each(function () {
+    $(this).find("li:not(.list-ignore)").each(function () {
         var timeText = $(this).find(".list-time-endurance").val();
         var time = timeToIntMins(timeText);
 

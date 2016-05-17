@@ -32,6 +32,17 @@
         <div>
             <h3 class="wizard-title">{% trans "Planning" %}</h3>
             <ul id="list-planning" class="list list-timeable list-removable" style="padding-bottom: 40px;">
+                <li class="list-header list-ignore">
+                    <span></span>
+                    <span>{{ "Duration"|trans }}</span>
+                    <span></span>
+                    <span>{{ "Action"|trans }}</span>
+                </li>
+                <li class="list-subheader list-ignore">
+                    <span></span>
+                    <span>{{ "Step"|trans }}</span>
+                    <span>{{ "Total"|trans }}</span>
+                </li>
                 {% for action in activity.planning.actions %}
                 <li>
                     <a href="javascript:void(0);" class="remove-action">
@@ -44,7 +55,7 @@
                 </li>
                 {% endfor %}
 
-                <li class="list-new-action" data-list="planning">
+                <li class="list-new-action list-ignore" data-list="planning">
                     <span class="glyphicon glyphicon-plus"></span><a href="javascript:void(0);">{% trans "Add new" %}</a>
                 </li>
             </ul>
