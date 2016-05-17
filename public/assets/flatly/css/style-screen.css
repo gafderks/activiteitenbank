@@ -104,8 +104,12 @@ input[type=checkbox]:focus, input[type=email]:focus, input[type=number]:focus, i
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, #logo {
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 400;
-    line-height: 2.1;
+    line-height: 1.2;
     color: inherit;
+}
+
+h1 {
+    margin-top: 1em;
 }
 
 h3 {
