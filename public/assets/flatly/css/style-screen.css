@@ -548,6 +548,17 @@ ul.list.list-timeable > li > input[data-list-field=name] {
     width: 60%;
 }
 
+ul.list > li.list-header {
+    font-weight: bold;
+    border: none;
+    padding-bottom: 0;
+}
+
+ul.list > li.list-subheader {
+    font-size: 80%;
+    padding-top: 0;
+}
+
 /* CKEditor override
 -------------------------------------------------- */
 

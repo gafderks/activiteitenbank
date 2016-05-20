@@ -45,6 +45,15 @@
                     {% endif %}
                 </h3>
                 <ul class="list">
+                    <li class="list-header">
+                        <span>{{ "Duration"|trans }}</span>
+                        <span></span>
+                        <span>{{ "Action"|trans }}</span>
+                    </li>
+                    <li class="list-subheader">
+                        <span>{{ "Step"|trans }}</span>
+                        <span>{{ "Total"|trans }}</span>
+                    </li>
                     {% set planningTimeCumulative = 0 %}
                     {% for action in activity.planning.actions %}
                         <li>
