@@ -345,7 +345,7 @@ Editor = {
 
         // planning
         var planning = [];
-        $("#list-planning").find("li:not(.list-new-action)").each(function () {
+        $("#list-planning").find("li:not(.list-ignore)").each(function () {
             var planning_part = {};
             planning_part.duration = timeToIntMins($(this).find("[data-list-field=endurance]").val());
             planning_part.description = $(this).find("[data-list-field=name]").val();
