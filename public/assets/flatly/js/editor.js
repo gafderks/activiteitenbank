@@ -283,6 +283,37 @@ Editor = {
     },
 
     /**
+     * Deleted the activity.
+     *
+     * @param apiUrl URL of the API endpoint
+     */
+    delete: function(apiUrl) {
+        "use strict";
+        if (confirm(Translator.translate("Are you sure you want to delete this activity?"))) {
+            $.ajax({
+                type: "DELETE",
+                url: apiUrl,
+                beforeSend: function(xhr, settings) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + authToken);
+                }
+            })
+            .done(function(msg, textStatus, xhr) {
+                console.log(msg);
+                if (xhr.status === 204) {
+                    window.location.href = baseUrl;
+                } else {
+                    alert(Translator.translate("Deleting failed..."));
+                }
+            })
+            .fail(function (a, b) {
+                console.log("No luck..." + b);
+                alert(Translator.translate("Deleting failed... Are you still connected?"));
+                $("#save-button").removeAttr("disabled");
+            });
+        }
+    },
+
+    /**
      * Generates an object from the current inputs representing the activity.
      * This object can be posted to the API.
      *

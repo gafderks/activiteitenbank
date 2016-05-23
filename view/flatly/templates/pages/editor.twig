@@ -114,6 +114,9 @@
         Editor.save("{{ path_for('api-activity-post') }}");
     });
 
+    $("#delete-button").click(function() {
+        Editor.delete("{{ path_for('api-activity-delete', {"id": activity.id}) }}");
+    });
 
     $("#update-button").click(function() {
         Editor.update("{{ path_for('api-activity-put', {"id": activity.id}) }}");
