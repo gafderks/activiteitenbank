@@ -308,7 +308,6 @@ Editor = {
             .fail(function (a, b) {
                 console.log("No luck..." + b);
                 alert(Translator.translate("Deleting failed... Are you still connected?"));
-                $("#save-button").removeAttr("disabled");
             });
         }
     },
