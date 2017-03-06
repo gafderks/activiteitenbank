@@ -39,5 +39,8 @@
     },
     "autoload": {
         "psr-0": {"": "src/"}
+    },
+    "scripts": {
+        "extract-strings": "php generate-cache.php"
     }
 }
