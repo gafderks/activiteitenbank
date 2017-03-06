@@ -777,7 +777,7 @@
             "time": "2016-12-18T15:42:34+00:00"
         },
         {
-            "name": "facebook/php-sdk-v4",
+            "name": "facebook/graph-sdk",
             "version": "5.4.4",
             "source": {
                 "type": "git",
@@ -832,7 +832,6 @@
                 "facebook",
                 "sdk"
             ],
-            "abandoned": "facebook/graph-sdk",
             "time": "2017-01-19T15:42:20+00:00"
         },
         {
