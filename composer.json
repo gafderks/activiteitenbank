@@ -1,4 +1,11 @@
 {
+    "type": "project",
+    "homepage": "https://github.com/gafderks/activiteitenbank",
+    "license": "GPL-2.0",
+    "support": {
+        "issues": "https://github.com/gafderks/activiteitenbank/issues",
+        "source": "https://github.com/gafderks/activiteitenbank"
+    },
     "require": {
         "doctrine/orm": "2.*",
         "symfony/yaml": "2.*",
