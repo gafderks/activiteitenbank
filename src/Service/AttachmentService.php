@@ -33,7 +33,7 @@ class AttachmentService extends Service
         'application/zip', // .zip
     ];
     private $permission = 0644;
-    private $maxSize = '20M';
+    private $maxSize = '20M'; // make sure this value matches the value upload_max_filesize in /public/.htaccess
 
     /**
      * AttachmentService constructor.

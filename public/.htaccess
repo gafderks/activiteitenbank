@@ -3,3 +3,6 @@ RewriteEngine On
 RewriteRule .* - [env=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
+
+# Make sure this value matches the value $maxSize in /src/Service/AttachmentService.php.
+php_value upload_max_filesize 20M
