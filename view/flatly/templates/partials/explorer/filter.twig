@@ -1,7 +1,7 @@
 <div class="filter-bar">
     <h3 class="filter-bar-title"><span class="glyphicon chevron"></span>{% trans "Filters" %}</h3>
     <div class="filter-bar-content">
-        <div class="filter-item active">
+        <div class="filter-item active" id="filter-item-keyword">
             <h3 class="filter-title">
                 <span class="glyphicon chevron"></span>
                 <span class="glyphicon glyphicon-filter"></span>
@@ -11,7 +11,7 @@
                 <input id="filter-term" class="form-control" type="text" placeholder="{% trans "Narrow results" %}" />
             </div>
         </div>
-        <div class="filter-item active">
+        <div class="filter-item active" id="filter-item-category">
             <h3 class="filter-title">
                 <span class="glyphicon chevron"></span>
                 <span class="glyphicon glyphicon-inbox"></span>
@@ -34,7 +34,7 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="filter-item">
+        <div class="filter-item" id="filter-item-group">
             <h3 class="filter-title">
                 <span class="glyphicon chevron"></span>
                 <span class="glyphicon glyphicon-user"></span>
@@ -88,7 +88,7 @@
                 </div>
             </div>
         </div>
-        <div class="filter-item">
+        <div class="filter-item" id="filter-item-rating">
             <h3 class="filter-title">
                 <span class="glyphicon chevron"></span>
                 <span class="glyphicon glyphicon-star"></span>
@@ -103,7 +103,7 @@
                 <span class="slider-right">5 <span class="glyphicon glyphicon-star"></span></span>
             </div>
         </div>
-        <div class="filter-item">
+        <div class="filter-item" id="filter-item-duration">
             <h3 class="filter-title">
                 <span class="glyphicon chevron"></span>
                 <span class="glyphicon glyphicon-time"></span>
@@ -122,7 +122,7 @@
                 <span class="slider-right">{{ max(durations)|int2time }}</span>
             </div>
         </div>
-        <div class="filter-item">
+        <div class="filter-item" id="filter-item-budget">
             <h3 class="filter-title">
                 <span class="glyphicon chevron"></span>
                 <span class="glyphicon glyphicon-euro"></span>
@@ -140,7 +140,7 @@
                 <span class="slider-right">{{ max(budgets)|float2euro|raw }}</span>
             </div>
         </div>
-        <div class="filter-item">
+        <div class="filter-item" id="filter-item-difficulty">
             <h3 class="filter-title">
                 <span class="glyphicon chevron"></span>
                 <span class="glyphicon glyphicon-flash"></span>
@@ -155,7 +155,7 @@
                 <span class="slider-right">{% trans "Very high" %}</span>
             </div>
         </div>
-        <div class="filter-item">
+        <div class="filter-item" id="filter-item-guidance">
             <h3 class="filter-title">
                 <span class="glyphicon chevron"></span>
                 <span class="glyphicon glyphicon-eye-open"></span>
@@ -170,7 +170,7 @@
                 <span class="slider-right">{% trans "Very high" %}</span>
             </div>
         </div>
-        <div class="filter-item">
+        <div class="filter-item" id="filter-item-motivation">
             <h3 class="filter-title">
                 <span class="glyphicon chevron"></span>
                 <span class="glyphicon glyphicon-heart"></span>
@@ -185,7 +185,7 @@
                 <span class="slider-right">{% trans "Very high" %}</span>
             </div>
         </div>
-        <div class="filter-item">
+        <div class="filter-item" id="filter-item-groupsize">
             <h3 class="filter-title">
                 <span class="glyphicon chevron"></span>
                 <span class="glyphicon glyphicon-user"></span>
@@ -200,7 +200,7 @@
             </div>
         </div>
         {% if session.user is not empty %}
-        <div class="filter-item">
+        <div class="filter-item" id="filter-item-creator">
             <h3 class="filter-title">
                 <span class="glyphicon chevron"></span>
                 <span class="glyphicon glyphicon-asterisk"></span>
@@ -216,7 +216,7 @@
             </div>
         </div>
         {% endif %}
-        <div class="filter-item">
+        <div class="filter-item" id="filter-item-activityareas">
             <h3 class="filter-title">
                 <span class="glyphicon chevron"></span>
                 {% trans "Activity areas" %}
