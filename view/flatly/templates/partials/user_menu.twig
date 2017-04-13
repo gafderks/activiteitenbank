@@ -1,11 +1,20 @@
 <div class=" pull-right">
     <ul class="nav navbar-nav navbar-right" id="account-menu">
         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="{{ assetsUrl }}/img/scouting-groups/{{ session.user.team.type.value }}.png"
-                 alt="{{ session.user.team.name }}" class="account-image-bar" />
+            {% if session.user.team is not empty %}
+                <img src="{{ assetsUrl }}/img/scouting-groups/{{ session.user.team.type.value }}.png" alt="{{ session.user.team.name }}" class="account-image-bar" />
+            {% else %}
+                <img src="{{ assetsUrl }}/img/scouting-groups/volunteer.png" alt="{% trans "Volunteer" %}" class="account-image-bar" />
+            {% endif %}
             <div class="account-information">
                 <span class="account-name">{{ session.user.firstName }} {{ session.user.lastName }}</span><br/>
-                <span class="account-teamname">{{ session.user.team.name }}</span>
+                <span class="account-teamname">
+                    {% if session.user.team is not empty %}
+                        {{ session.user.team.name }}
+                    {% else %}
+                        {% trans "Volunteer" %}
+                    {% endif %}
+                </span>
             </div>
             <b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -13,15 +22,24 @@
                     <div class="navbar-content">
                         <div class="row">
                             <div class="col-md-5 col-sm-5">
-                                <img src="{{ assetsUrl }}/img/scouting-groups/{{ session.user.team.type.value }}.png" alt="Alternate Text" class="img-responsive account-image-menu" />
+                                {% if session.user.team is not empty %}
+                                    <img src="{{ assetsUrl }}/img/scouting-groups/{{ session.user.team.type.value }}.png" alt="{{ session.user.team.name }}" class="img-responsive account-image-menu" />
+                                {% else %}
+                                    <img src="{{ assetsUrl }}/img/scouting-groups/volunteer.png" class="img-responsive account-image-menu" />
+                                {% endif %}
                             </div>
                             <div class="col-md-7 col-sm-7">
                                 <span>{{ session.user.firstName }} {{ session.user.lastName }}</span>
                                 <p class="text-muted small">
                                     {{ session.user.email }}</p>
                                 <p class="text-muted small">
-                                    {{ session.user.team.name }}<br />
-                                    {{ session.user.team.organization.name }}</p>
+                                    {% if session.user.team is not empty %}
+                                        {{ session.user.team.name }}<br />
+                                        {{ session.user.team.organization.name }}
+                                    {% else %}
+                                        {% trans "Volunteer" %}
+                                    {% endif %}
+                                </p>
                                 <div class="divider">
                                 </div>
                                 {# <a href="#" class="btn btn-primary btn-sm active">{% trans "View profile" %}</a> #}
