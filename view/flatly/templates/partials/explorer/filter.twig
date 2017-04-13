@@ -132,12 +132,14 @@
             {% for activity in activities %}
                 {% set budgets = budgets|merge([activity.budget.totalCost]) %}
             {% endfor %}
+            {% set minimumBudget = min(budgets)|round(-1, 'floor') %}
+            {% set maximumBudget = max(budgets)|round(-1, 'ceil') %}
             <div class="filter-content">
-                <input id="filter-budget" class="slider budget" type="text" data-slider-min="{{ min(budgets) }}"
-                       data-slider-max="{{ max(budgets) }}" data-slider-step="1"
-                       data-slider-value="[{{ min(budgets) }},{{ max(budgets) }}]" />
-                <span class="slider-left">{{ min(budgets)|float2euro|raw }}</span>
-                <span class="slider-right">{{ max(budgets)|float2euro|raw }}</span>
+                <input id="filter-budget" class="slider budget" type="text" data-slider-min="{{ minimumBudget }}"
+                       data-slider-max="{{ maximumBudget }}" data-slider-step="1"
+                       data-slider-value="[{{ minimumBudget }},{{ maximumBudget }}]" />
+                <span class="slider-left">{{ minimumBudget|float2euro|raw }}</span>
+                <span class="slider-right">{{ maximumBudget|float2euro|raw }}</span>
             </div>
         </div>
         <div class="filter-item">
