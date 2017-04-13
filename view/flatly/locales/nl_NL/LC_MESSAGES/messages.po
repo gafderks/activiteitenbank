@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: activiteitenbank\n"
-"POT-Creation-Date: 2017-04-13 13:49+0200\n"
-"PO-Revision-Date: 2017-04-13 13:49+0200\n"
+"POT-Creation-Date: 2017-04-13 23:34+0200\n"
+"PO-Revision-Date: 2017-04-13 23:34+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -176,7 +176,7 @@ msgstr "Terug naar het inlogformulier"
 #: view/flatly/cache/2b/2bbf44ed9d2c23c2b0905ee93c10ea254609615647e212219e27ac53abcced99.php:558
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:33
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:37
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:175
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:184
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:580
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:580
 #: view/flatly/cache/89/89a16f0ada5979fde2633af458397ad44bf1ca073961de25badcb44b8eaf2c44.php:33
@@ -251,7 +251,7 @@ msgstr "Reacties"
 #: view/flatly/cache/4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:627
 #: view/flatly/cache/4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:662
 #: view/flatly/cache/4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:684
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:109
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:118
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:750
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:750
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:554
@@ -375,7 +375,7 @@ msgstr "deelnemers"
 #: view/flatly/cache/3d/3dd84efd17a5b9886d42d63d467c3d52b488577ab7cf558ae523afbcc106daef.php:49
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:198
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:202
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:474
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:483
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:920
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:920
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:724
@@ -409,7 +409,7 @@ msgstr "Uitdagende Scouting Technieken"
 #: view/flatly/cache/3d/3dd84efd17a5b9886d42d63d467c3d52b488577ab7cf558ae523afbcc106daef.php:70
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:215
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:217
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:483
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:492
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:931
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:931
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:735
@@ -443,7 +443,7 @@ msgstr "Expressie"
 #: view/flatly/cache/3d/3dd84efd17a5b9886d42d63d467c3d52b488577ab7cf558ae523afbcc106daef.php:91
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:230
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:234
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:492
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:501
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:942
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:942
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:746
@@ -477,7 +477,7 @@ msgstr "Sport en Spel"
 #: view/flatly/cache/3d/3dd84efd17a5b9886d42d63d467c3d52b488577ab7cf558ae523afbcc106daef.php:112
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:247
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:249
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:501
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:510
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:953
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:953
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:757
@@ -511,7 +511,7 @@ msgstr "Buitenleven"
 #: view/flatly/cache/3d/3dd84efd17a5b9886d42d63d467c3d52b488577ab7cf558ae523afbcc106daef.php:133
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:262
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:264
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:510
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:519
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:964
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:964
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:768
@@ -545,7 +545,7 @@ msgstr "Identiteit"
 #: view/flatly/cache/3d/3dd84efd17a5b9886d42d63d467c3d52b488577ab7cf558ae523afbcc106daef.php:154
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:277
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:279
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:519
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:528
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:975
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:975
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:779
@@ -579,7 +579,7 @@ msgstr "Internationaal"
 #: view/flatly/cache/3d/3dd84efd17a5b9886d42d63d467c3d52b488577ab7cf558ae523afbcc106daef.php:175
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:292
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:294
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:528
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:537
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:986
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:986
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:790
@@ -613,7 +613,7 @@ msgstr "Samenleving"
 #: view/flatly/cache/3d/3dd84efd17a5b9886d42d63d467c3d52b488577ab7cf558ae523afbcc106daef.php:196
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:307
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:311
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:537
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:546
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:997
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:997
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:801
@@ -649,7 +649,7 @@ msgstr "Veilig en Gezond"
 #: view/flatly/cache/45/45eb10b8afd20760712f3729216cecc45a5ca9bfe0770998ce1b7a9edad117f9.php:49
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:330
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:332
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:118
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:127
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:833
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:833
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:637
@@ -683,7 +683,7 @@ msgstr "Bevers"
 #: view/flatly/cache/45/45eb10b8afd20760712f3729216cecc45a5ca9bfe0770998ce1b7a9edad117f9.php:70
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:345
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:347
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:127
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:136
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:844
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:844
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:648
@@ -717,7 +717,7 @@ msgstr "Welpen"
 #: view/flatly/cache/45/45eb10b8afd20760712f3729216cecc45a5ca9bfe0770998ce1b7a9edad117f9.php:91
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:360
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:362
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:136
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:145
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:855
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:855
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:659
@@ -751,7 +751,7 @@ msgstr "Scouts"
 #: view/flatly/cache/45/45eb10b8afd20760712f3729216cecc45a5ca9bfe0770998ce1b7a9edad117f9.php:112
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:375
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:379
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:145
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:154
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:866
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:866
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:670
@@ -785,7 +785,7 @@ msgstr "Explorers"
 #: view/flatly/cache/45/45eb10b8afd20760712f3729216cecc45a5ca9bfe0770998ce1b7a9edad117f9.php:133
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:392
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:396
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:154
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:163
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:877
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:877
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:681
@@ -819,7 +819,7 @@ msgstr "Roverscouts"
 #: view/flatly/cache/45/45eb10b8afd20760712f3729216cecc45a5ca9bfe0770998ce1b7a9edad117f9.php:154
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:409
 #: view/flatly/cache/46/46fdc7c303f952376c7acb6d79f9f2b6ee844ce856bcaaaa31585f7a14597f5a.php:413
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:163
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:172
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:888
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:888
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:692
@@ -873,7 +873,7 @@ msgstr "van"
 #: view/flatly/cache/29/29c5ef7b6ebbe131166e57e5faaf4898c46dba8a13651c31903a92b691e44d38.php:285
 #: view/flatly/cache/2b/2bbf44ed9d2c23c2b0905ee93c10ea254609615647e212219e27ac53abcced99.php:794
 #: view/flatly/cache/45/45eb10b8afd20760712f3729216cecc45a5ca9bfe0770998ce1b7a9edad117f9.php:23
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:92
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:101
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:816
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:816
 #: view/flatly/cache/63/63e827c80b58190ffd2f5eada74f52175e5c92bcfe7402c768618854f52cd9c7.php:285
@@ -979,7 +979,7 @@ msgstr "Categorie"
 #: view/flatly/cache/45/45a6c516e9ece3a6b60121c732fa0d7c1f7e89cdc9b9cf4673abefeea7f22ce9.php:82
 #: view/flatly/cache/47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:800
 #: view/flatly/cache/4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:800
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:193
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:202
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:128
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:786
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:128
@@ -1012,7 +1012,7 @@ msgstr "Tijdsduur"
 #: view/flatly/cache/37/371b0109422b63627c0ae5b171ca920de975420ab07fd36712b4fa9fe3f19397.php:202
 #: view/flatly/cache/45/45a6c516e9ece3a6b60121c732fa0d7c1f7e89cdc9b9cf4673abefeea7f22ce9.php:48
 #: view/flatly/cache/45/45a6c516e9ece3a6b60121c732fa0d7c1f7e89cdc9b9cf4673abefeea7f22ce9.php:225
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:246
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:255
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:323
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:323
 #: view/flatly/cache/63/63e827c80b58190ffd2f5eada74f52175e5c92bcfe7402c768618854f52cd9c7.php:121
@@ -1044,7 +1044,7 @@ msgstr "Begroting"
 #: view/flatly/cache/2b/2bbf44ed9d2c23c2b0905ee93c10ea254609615647e212219e27ac53abcced99.php:684
 #: view/flatly/cache/47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:138
 #: view/flatly/cache/4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:138
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:298
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:307
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:706
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:706
 #: view/flatly/cache/63/63e827c80b58190ffd2f5eada74f52175e5c92bcfe7402c768618854f52cd9c7.php:169
@@ -1091,9 +1091,9 @@ msgstr "Moeilijkheidsgraad"
 #: view/flatly/cache/4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:347
 #: view/flatly/cache/4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:493
 #: view/flatly/cache/4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:505
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:318
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:352
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:386
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:327
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:361
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:395
 #: view/flatly/cache/63/63e827c80b58190ffd2f5eada74f52175e5c92bcfe7402c768618854f52cd9c7.php:188
 #: view/flatly/cache/63/63e827c80b58190ffd2f5eada74f52175e5c92bcfe7402c768618854f52cd9c7.php:218
 #: view/flatly/cache/63/63e827c80b58190ffd2f5eada74f52175e5c92bcfe7402c768618854f52cd9c7.php:248
@@ -1160,9 +1160,9 @@ msgstr "Zeer laag"
 #: view/flatly/cache/4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:427
 #: view/flatly/cache/4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:573
 #: view/flatly/cache/4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:585
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:322
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:356
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:390
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:331
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:365
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:399
 #: view/flatly/cache/63/63e827c80b58190ffd2f5eada74f52175e5c92bcfe7402c768618854f52cd9c7.php:192
 #: view/flatly/cache/63/63e827c80b58190ffd2f5eada74f52175e5c92bcfe7402c768618854f52cd9c7.php:222
 #: view/flatly/cache/63/63e827c80b58190ffd2f5eada74f52175e5c92bcfe7402c768618854f52cd9c7.php:252
@@ -1209,7 +1209,7 @@ msgstr "Zeer hoog"
 #: view/flatly/cache/2b/2bbf44ed9d2c23c2b0905ee93c10ea254609615647e212219e27ac53abcced99.php:696
 #: view/flatly/cache/47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:296
 #: view/flatly/cache/4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:296
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:332
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:341
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:718
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:718
 #: view/flatly/cache/63/63e827c80b58190ffd2f5eada74f52175e5c92bcfe7402c768618854f52cd9c7.php:199
@@ -1236,7 +1236,7 @@ msgstr "Begeleiding"
 #: view/flatly/cache/2b/2bbf44ed9d2c23c2b0905ee93c10ea254609615647e212219e27ac53abcced99.php:708
 #: view/flatly/cache/47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:455
 #: view/flatly/cache/4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:455
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:366
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:375
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:730
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:730
 #: view/flatly/cache/63/63e827c80b58190ffd2f5eada74f52175e5c92bcfe7402c768618854f52cd9c7.php:229
@@ -1263,7 +1263,7 @@ msgstr "Motivatie"
 #: view/flatly/cache/2b/2bbf44ed9d2c23c2b0905ee93c10ea254609615647e212219e27ac53abcced99.php:720
 #: view/flatly/cache/47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:616
 #: view/flatly/cache/4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:616
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:400
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:409
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:742
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:742
 #: view/flatly/cache/63/63e827c80b58190ffd2f5eada74f52175e5c92bcfe7402c768618854f52cd9c7.php:259
@@ -1286,7 +1286,7 @@ msgstr "Groepsgrootte"
 #: view/flatly/cache/09/09ba319a977b7a07a078cca3ae5f0652aa9bf96dc2796fc4238304e3379452e3.php:265
 #: view/flatly/cache/1b/1b55d6c5104025f55844409a7bbdcc1972b45768d3133f39f2b2cc92000242f9.php:406
 #: view/flatly/cache/29/29c5ef7b6ebbe131166e57e5faaf4898c46dba8a13651c31903a92b691e44d38.php:265
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:406
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:415
 #: view/flatly/cache/63/63e827c80b58190ffd2f5eada74f52175e5c92bcfe7402c768618854f52cd9c7.php:265
 #: view/flatly/cache/7b/7b3bd74c8a7f6fa707147e56247bf6b3a580ecd55759183eaf75603a06724d19.php:265
 #: view/flatly/cache/83/83475050b6ae59f063df6d3d65543218568235ebe69533f77c879bcea120278a.php:265
@@ -1302,7 +1302,7 @@ msgstr "Alles weergeven"
 #: view/flatly/cache/2b/2bbf44ed9d2c23c2b0905ee93c10ea254609615647e212219e27ac53abcced99.php:881
 #: view/flatly/cache/2d/2d950a04930f3cb4d9dc411dfbea87f16e5bc04e420c5e93a2cc9cc365091d90.php:23
 #: view/flatly/cache/3d/3dd84efd17a5b9886d42d63d467c3d52b488577ab7cf558ae523afbcc106daef.php:23
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:455
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:464
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:903
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:903
 #: view/flatly/cache/63/63e827c80b58190ffd2f5eada74f52175e5c92bcfe7402c768618854f52cd9c7.php:276
@@ -1345,7 +1345,7 @@ msgstr "Eigenschappen"
 #: view/flatly/cache/2b/2bbf44ed9d2c23c2b0905ee93c10ea254609615647e212219e27ac53abcced99.php:674
 #: view/flatly/cache/47/477e2231962d7841baa8ccfa0ca3865b5fcaa9a769883f4149ec1c6c3da10ae6.php:71
 #: view/flatly/cache/4d/4dbeca1f6c660f2b2ee51a5463ab47ddcbd210565136bf04536191c7708c4bcf.php:71
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:56
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:65
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:696
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:696
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:500
@@ -1868,7 +1868,7 @@ msgid "Name"
 msgstr "Naam"
 
 # Thousand separator
-#: view/flatly/cache/17/179556445e7c1c10c0725fe66a5e1fbf4d3e5fbe3dbd622e1efab5a8cefdefed.php:288
+#: view/flatly/cache/17/179556445e7c1c10c0725fe66a5e1fbf4d3e5fbe3dbd622e1efab5a8cefdefed.php:291
 #: view/flatly/cache/2e/2e5830c7778d26c247e4406178f77ea68f9b4f1e1a019d3f0b31b10e3a46cb54.php:288
 #: view/flatly/cache/79/79aa07f39b1da59e39637f7ebabc119d134774e54612fe07afda1d7ba9ca5c12.php:641
 #: view/flatly/cache/8c/8c81619d234e5b0c4fe299a155505a23c79596f1a85c9f0b49f4fa0312653eba.php:639
@@ -1879,20 +1879,20 @@ msgid ","
 msgstr "."
 
 #: view/flatly/cache/1b/1b55d6c5104025f55844409a7bbdcc1972b45768d3133f39f2b2cc92000242f9.php:99
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:99
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:108
 #: view/flatly/cache/9c/9c6f5e481e5766838a3c1ae19a957dfe41b5a59cf040d61f37a3f24919340a6d.php:99
 msgid "AND"
 msgstr "EN"
 
 #: view/flatly/cache/1b/1b55d6c5104025f55844409a7bbdcc1972b45768d3133f39f2b2cc92000242f9.php:101
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:101
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:110
 #: view/flatly/cache/9c/9c6f5e481e5766838a3c1ae19a957dfe41b5a59cf040d61f37a3f24919340a6d.php:101
 msgid "OR"
 msgstr "OF"
 
 #: view/flatly/cache/1b/1b55d6c5104025f55844409a7bbdcc1972b45768d3133f39f2b2cc92000242f9.php:424
 #: view/flatly/cache/2b/2bbf44ed9d2c23c2b0905ee93c10ea254609615647e212219e27ac53abcced99.php:623
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:424
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:433
 #: view/flatly/cache/5b/5bc06afa36770b2bd1b20dc5ec0fb3748ac9e211a1096d406b33cf141d1c5fc7.php:645
 #: view/flatly/cache/5e/5e6fd4c0bb1b20c88c487289f4c1e10cb3e5ec378d14cbe466e565f5a57031ed.php:645
 #: view/flatly/cache/63/63eaa9d01af0a28125919c53697a5f278e4048998667ef3e0e785764c021a515.php:449
@@ -1904,13 +1904,13 @@ msgid "Creator"
 msgstr "Maker"
 
 #: view/flatly/cache/1b/1b55d6c5104025f55844409a7bbdcc1972b45768d3133f39f2b2cc92000242f9.php:429
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:429
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:438
 #: view/flatly/cache/9c/9c6f5e481e5766838a3c1ae19a957dfe41b5a59cf040d61f37a3f24919340a6d.php:429
 msgid "Only show activities created by"
 msgstr "Toon alleen activiteiten gemaakt door"
 
 #: view/flatly/cache/1b/1b55d6c5104025f55844409a7bbdcc1972b45768d3133f39f2b2cc92000242f9.php:465
-#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:465
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:474
 #: view/flatly/cache/9c/9c6f5e481e5766838a3c1ae19a957dfe41b5a59cf040d61f37a3f24919340a6d.php:465
 msgid "Unspecified / None"
 msgstr "Onbekend / geen"
@@ -2834,6 +2834,10 @@ msgstr "door"
 #: view/flatly/cache/6a/6a521a525dc228993c1e68c47b9b1cf48c88c4bcb9bb53ffc0bbf1e4004b160f.php:31
 msgid "Activiteitenbank is an open-source project."
 msgstr "Activiteitenbank is een open-source project."
+
+#: view/flatly/cache/59/594b173e3de1600b8aa5484ad63c05b2110be439977dba1f136b7c978a1a41a9.php:56
+msgid "All categories"
+msgstr "Alle categorieën"
 
 #: view/flatly/cache/91/9123ff5a18ea786a5aa438cd53ef4e6a02cfe09fe90b15f72460c30560e36b02.php:19
 #: view/flatly/cache/ca/ca5749b06e48f5b15763bea84c52d76c1b59ffd4445f0cfa3296f16a3ab62ede.php:19

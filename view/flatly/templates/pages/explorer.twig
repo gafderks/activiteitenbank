@@ -76,6 +76,9 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
+
+        Explorer.init();
+
         var activityTable = $('#activity-table').DataTable( {
             "dom": '<"colvis"B><"table-top">t<"table-bottom"lip>',
             "order": [[ 0, "asc" ]],
@@ -186,8 +189,6 @@
 
             }
         });
-
-        Explorer.init();
 
         // attach filtering method to the data table
         $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
