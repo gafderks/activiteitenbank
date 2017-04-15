@@ -137,6 +137,7 @@ Explorer = {
                 }
             }
             if (!one) {
+                $('#filter-item-keyword').addClass('filtering');
                 return false; // regular expression was never matched
             }
         }
@@ -148,6 +149,7 @@ Explorer = {
         var minDuration = filter.slider('getValue')[0];
         var maxDuration = filter.slider('getValue')[1];
         if (duration > maxDuration || duration < minDuration) {
+            $('#filter-item-duration').addClass('filtering');
             return false;
         }
 
@@ -156,6 +158,7 @@ Explorer = {
         var minBudget = filter.slider('getValue')[0];
         var maxBudget = filter.slider('getValue')[1];
         if (budget > maxBudget || budget < minBudget) {
+            $('#filter-item-budget').addClass('filtering');
             return false;
         }
 
@@ -164,6 +167,7 @@ Explorer = {
         var minDifficulty = filter.slider('getValue')[0];
         var maxDifficulty = filter.slider('getValue')[1];
         if (difficulty > maxDifficulty || difficulty < minDifficulty) {
+            $('#filter-item-difficulty').addClass('filtering');
             return false;
         }
 
@@ -172,6 +176,7 @@ Explorer = {
         var minGuidance = filter.slider('getValue')[0];
         var maxGuidance = filter.slider('getValue')[1];
         if (guidance > maxGuidance || guidance < minGuidance) {
+            $('#filter-item-guidance').addClass('filtering');
             return false;
         }
 
@@ -180,6 +185,7 @@ Explorer = {
         var minMotivation = filter.slider('getValue')[0];
         var maxMotivation = filter.slider('getValue')[1];
         if (motivation > maxMotivation || motivation < minMotivation) {
+            $('#filter-item-motivation').addClass('filtering');
             return false;
         }
 
@@ -188,6 +194,7 @@ Explorer = {
         var minRating = filter.slider('getValue')[0];
         var maxRating = filter.slider('getValue')[1];
         if (rating > maxRating || rating < minRating) {
+            $('#filter-item-rating').addClass('filtering');
             return false;
         }
 
@@ -209,13 +216,16 @@ Explorer = {
         var filteredSize = filter.slider('getValue');
         if (!ignoreGroupSize) {
             if (minGroupSize === null) {
+                $('#filter-item-groupsize').addClass('filtering');
                 return false; // do not show items with unknown groupsize
             }
             if (filteredSize < minGroupSize) {
+                $('#filter-item-groupsize').addClass('filtering');
                 return false;
             }
             if (maxGroupSize !== null) {
                 if (filteredSize > maxGroupSize) {
+                    $('#filter-item-groupsize').addClass('filtering');
                     return false;
                 }
             }
@@ -237,9 +247,11 @@ Explorer = {
                 }
             }
         }
+
         // check whether the 'show all' has been enabled
         var filterAllEnabled = $("#category-filter-all").is(':checked') && !$("#category-filter-all").is(':indeterminate');
         if (!orFound && !filterAllEnabled) {
+            $('#filter-item-category').addClass('filtering');
             // none present in or
             return false;
         }
@@ -253,6 +265,7 @@ Explorer = {
             if (filterGroup[j].checked) {
                 if (and && suitable_groups.indexOf(groupValue) === -1 && groupValue !== '-') {
                     // not present in and
+                    $('#filter-item-group').addClass('filtering');
                     return false;
                 }
                 if (suitable_groups.indexOf(groupValue) !== -1) {
@@ -287,6 +300,7 @@ Explorer = {
             }
         }
         if (!orFound) {
+            $('#filter-item-activityarea').addClass('filtering');
             // none present in or
             return false;
         }
@@ -294,6 +308,7 @@ Explorer = {
         /** Filter on creator */
         var filterAuthor = $("#filter-author");
         if (filterAuthor.is(":checked") && creator !== filterAuthor.val()) {
+            $('#filter-item-creator').addClass('filtering');
             return false; // not by this creator
         }
 

@@ -122,40 +122,43 @@
                     "colvis": Translator.translate("Change columns")
                 }
             }
-
-
         });
 
-        $('#filter-term').keyup(function() {
+        function tableApplyFilters() {
+            $('.filter-item').removeClass('filtering');
             activityTable.draw();
+        }
+
+        $('#filter-term').keyup(function() {
+            tableApplyFilters();
         });
 
         $(".slider").change(function() {
-            activityTable.draw();
+            tableApplyFilters();
         });
 
         $("#filter-groupsize-ignore").change(function() {
-            activityTable.draw();
+            tableApplyFilters();
         });
 
         $("input[name=filter-group]").change(function() {
-            activityTable.draw();
+            tableApplyFilters();
         });
 
         $("input[name=filter-category]").change(function() {
-            activityTable.draw();
+            tableApplyFilters();
         });
 
         $("input[name=filter-activityarea]").change(function() {
-            activityTable.draw();
+            tableApplyFilters();
         });
 
         $("#filter-author").change(function () {
-            activityTable.draw();
+            tableApplyFilters();
         });
 
         $("input[data-toggle=toggle]").change(function() {
-            activityTable.draw();
+            tableApplyFilters();
         });
 
         $(".filter-title, .filter-bar-title").click(function() {

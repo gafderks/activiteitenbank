@@ -737,6 +737,12 @@ span[data-dz-errormessage] {
     padding: 10px;
 }
 
+.filter-item.filtering h3 {
+    font-weight: bold;
+    font-style: italic;
+    color: green;
+}
+
 .filter-content {
     display: none;
 }
