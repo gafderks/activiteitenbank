@@ -10,6 +10,34 @@ Explorer = {
     init: function () {
         "use strict";
 
+        $("#category-filter-all").change(function() {
+            if ($(this).is(':checked')) {
+                $("input[name=filter-category]").prop('checked', true);
+            } else {
+                $("input[name=filter-category]").prop('checked', false);
+            }
+        });
+
+        $("input[name=filter-category]:not(#category-filter-all)").change(function() {
+            // count the number of checked and unchecked items
+            var checked = 0;
+            var unchecked = 0;
+            $("input[name=filter-category]:not(#category-filter-all)").each(function() {
+                if ($(this).is(':checked')) {
+                    checked++;
+                } else {
+                    unchecked++;
+                }
+            });
+            if (checked === 0) {
+                $("#category-filter-all").prop('checked', false).prop('indeterminate', false);
+            } else if (unchecked === 0) {
+                $("#category-filter-all").prop('checked', true).prop('indeterminate', false);
+            } else {
+                $("#category-filter-all").prop('indeterminate', true);
+            }
+        });
+
         var logarithmicSliders = $(".slider.logarithmic");
         logarithmicSliders.slider({
             tooltip: "always",
@@ -219,7 +247,10 @@ Explorer = {
                 }
             }
         }
-        if (!orFound) {
+
+        // check whether the 'show all' has been enabled
+        var filterAllEnabled = $("#category-filter-all").is(':checked') && !$("#category-filter-all").is(':indeterminate');
+        if (!orFound && !filterAllEnabled) {
             $('#filter-item-category').addClass('filtering');
             // none present in or
             return false;
