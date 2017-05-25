@@ -109,6 +109,10 @@ $(".list-removable:not(.list-countable):not(.list-budgetary):not(.list-timeable)
 
     $($(this).prev()).find("input[data-list-field=name][type=text]").focus();
 
+    // check for changes on newly created inputs
+    $(":input, textarea").change(function() {
+        Editor.dirty(true);
+    });
 });
 
 /**
@@ -133,6 +137,11 @@ $(".list-countable:not(.list-budgetary) .list-new-action").click(function () {
     });
 
     $($(this).prev()).find("input[data-list-field=name][type=text]").focus();
+
+    // check for changes on newly created inputs
+    $(":input, textarea").change(function() {
+        Editor.dirty(true);
+    });
 
 });
 
@@ -170,7 +179,11 @@ $(".list-timeable").on("updateTimes", function() {
     });
     
     $("#activity-prop-duration-label").text(minsToTime(totalMins));
-    
+
+    // check for changes on newly created inputs
+    $(":input, textarea").change(function() {
+        Editor.dirty(true);
+    });
     
 });
 
@@ -203,6 +216,11 @@ $(".list-timeable .list-new-action").click(function () {
     $($(this).prev()).find("input[data-list-field=name][type=text]").focus();
     
     $(this).parent().trigger("updateTimes");
+
+    // check for changes on newly created inputs
+    $(":input, textarea").change(function() {
+        Editor.dirty(true);
+    });
 
 });
 
@@ -250,6 +268,11 @@ $(".list-budgetary").on("updateSums", function () {
     
     // update property total
     $("#activity-prop-budget-label").text(prettyCurrency(totalsum));
+
+    // check for changes on newly created inputs
+    $(":input, textarea").change(function() {
+        Editor.dirty(true);
+    });
 });
 
 $(".list-budgetary .list-new-action").click(function () {
@@ -285,6 +308,11 @@ $(".list-budgetary .list-new-action").click(function () {
     $($(this).prev()).find("input[data-list-field=name][type=text]").focus();
 
     $(this).parent().trigger("updateSums");
+
+    // check for changes on newly created inputs
+    $(":input, textarea").change(function() {
+        Editor.dirty(true);
+    });
 
 });
 

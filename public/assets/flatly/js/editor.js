@@ -107,7 +107,30 @@ Editor = {
 
         Editor.initDropzone();
 
+        // Setup checks for dirty editor
+        $(":input, textarea").change(function() {
+            Editor.dirty(true);
+        });
+        for (var i in CKEDITOR.instances) {
+            CKEDITOR.instances[i].on('change', function() { Editor.dirty(true); });
+        }
 
+    },
+
+    /**
+     * Enables a warning onblur that there are unsaved changes if isDirty is true.
+     *
+     * @param isDirty whether the editor is dirty (i.e. has unsaved changes).
+     */
+    dirty: function(isDirty) {
+        "use strict";
+        if (isDirty) {
+            window.onbeforeunload = function() {
+                return true;
+            };
+        } else {
+            window.onbeforeunload = null;
+        }
     },
 
     /**
@@ -232,6 +255,7 @@ Editor = {
         .done(function(msg, textStatus, xhr) {
             console.log(msg);
             if (xhr.status === 201) {
+                Editor.dirty(false);
                 window.location.href = baseUrl + "/edit/" + msg.id + "/" + msg.slug;
             } else {
                 alert(Translator.translate("Saving failed..."));
@@ -264,6 +288,7 @@ Editor = {
         .done(function(msg, textStatus, xhr) {
             console.log(msg);
             if (xhr.status === 202) {
+                Editor.dirty(false);
                 $("#update-button").removeAttr("disabled");
                 $("#status-saving").hide();
                 $("#status-saved").show();
