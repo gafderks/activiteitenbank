@@ -55,6 +55,11 @@ class ViewerController extends Controller
                     $params['ratings']['ownRating'] = 0;
                 }
             }
+    
+            $params = array_merge($params, [
+                // check if PDF generation is possible
+                'pdfEnabled' => $this->container['config']['runEnvironment']['shellAccess'] ? true : false
+            ]);
 
             // add jwt token to parameters
             if ($loggedInUser !== null) {

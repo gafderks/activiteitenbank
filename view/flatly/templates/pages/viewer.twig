@@ -202,7 +202,7 @@
                                         {{ "Print activity"|trans }}
                                     </a>
                                 </p>
-                                {% if userMayDownload %}
+                                {% if userMayDownload and pdfEnabled %}
                                     <p>
                                         <a href="{{ path_for('api-activity-get-pdf', {"id": activity.id}) }}" style="color: #000; margin: 5px;"
                                         data-token="{{ authToken }}">

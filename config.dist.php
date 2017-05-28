@@ -81,6 +81,22 @@ return [
      * Default value: dirname(__FILE__) . '/temp'
      */
     'tempDirectory' => dirname(__FILE__) . '/temp',
+    
+    /**
+     * Settings for the run environment. Depending on the environment, some features might be disabled.
+     */
+    'runEnvironment' => [
+        /**
+         * Whether shell access, e.g. via SSH, is enabled.
+         * On shared hosting environments, shell access is often disabled.
+         *
+         * If shell access is disabled, the following features will be disabled:
+         *   - PDF file generation
+         *
+         * Default value: true
+         */
+        'shellAccess' => true,
+    ],
 
     /**
      * Facebook integration settings.

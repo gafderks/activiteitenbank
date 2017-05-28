@@ -45,6 +45,10 @@ class SettingsController extends Controller
         foreach ($aclPrivileges as $resourceKey => $resource) {
             $allowedPrivileges = [];
             foreach ($resource as $privilege) {
+                if (!$this->container['config']['runEnvironment']['shellAccess'] &&
+                    $privilege == 'download') {
+                    continue; // download feature is not enabled
+                }
                 if ($acl->isAllowed($this->getLoginService()->getLoggedInUserRole()->value(),
                     $resourceKey, $privilege)) {
                     array_push($allowedPrivileges, $privilege);
