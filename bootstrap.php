@@ -11,6 +11,14 @@ $config = include("config.php");
 $applicationConfig = include("config/config.php");
 
 /********************************************************************************
+ * If the URL contains the directory 'public', then redirect.
+ *******************************************************************************/
+if (strpos($_SERVER['REQUEST_URI'], '/public/') !== false) {
+    header('Location: '.$config['domain'].str_replace('/public/', '/', $_SERVER['REQUEST_URI']), true, 301);
+    exit();
+}
+
+/********************************************************************************
  * Set up autoloader
  *******************************************************************************/
 

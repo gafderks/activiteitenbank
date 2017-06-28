@@ -1,3 +1,12 @@
 # Only the /public folder needs to be reachable.
-# It is best to set that folder as the webroot
-Deny from all
+# It is best for security to set that folder as the webroot. It is then safe to delete this file and /index.php.
+#
+# This file and /index.php are used purely as a fallback for serving the application on a shared hosting environment
+# where the webroot cannot be changed while we want to remove the /public/ from the URL.
+
+RewriteEngine On
+RewriteRule .* - [env=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteRule ^ index.php [QSA,L]
+
+# Make sure this value matches the value $maxSize in /src/Service/AttachmentService.php.
+php_value upload_max_filesize 20M
