@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f40a700abb6ad61aa4385597bfea349",
+    "content-hash": "ed0296865ecf089883b5e9328acae678",
     "packages": [
         {
             "name": "akrabat/rka-ip-address-middleware",
@@ -1208,20 +1208,20 @@
         },
         {
             "name": "knplabs/knp-snappy",
-            "version": "0.4.3",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/snappy.git",
-                "reference": "44f7a9b37d5686fd7db4c1e9569a802a5d16923f"
+                "reference": "370da31fa92a8e583e34558c589e630647617a38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/snappy/zipball/44f7a9b37d5686fd7db4c1e9569a802a5d16923f",
-                "reference": "44f7a9b37d5686fd7db4c1e9569a802a5d16923f",
+                "url": "https://api.github.com/repos/KnpLabs/snappy/zipball/370da31fa92a8e583e34558c589e630647617a38",
+                "reference": "370da31fa92a8e583e34558c589e630647617a38",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
+                "php": ">=5.6",
                 "symfony/process": "~2.3|~3.0"
             },
             "require-dev": {
@@ -1241,8 +1241,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Knp\\Snappy": "src/"
+                "psr-4": {
+                    "Knp\\Snappy\\": "src/Knp/Snappy"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1269,7 +1269,7 @@
                 "thumbnail",
                 "wkhtmltopdf"
             ],
-            "time": "2015-11-17T13:16:27+00:00"
+            "time": "2017-06-16T07:50:40+00:00"
         },
         {
             "name": "kokspflanze/sbb-code-parser",
@@ -1307,6 +1307,61 @@
                 "SBBCodeParser"
             ],
             "time": "2016-08-13T18:15:26+00:00"
+        },
+        {
+            "name": "lifewatch/wkhtmltopdf-windows",
+            "version": "0.12.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lifewatch/wkhtmltopdf-windows.git",
+                "reference": "411d48af64d961d5117ca758543e9aee64482032"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lifewatch/wkhtmltopdf-windows/zipball/411d48af64d961d5117ca758543e9aee64482032",
+                "reference": "411d48af64d961d5117ca758543e9aee64482032",
+                "shasum": ""
+            },
+            "suggest": {
+                "h4cc/wkhtmltopdf-amd64": "*",
+                "h4cc/wkhtmltopdf-i386": "*",
+                "wemersonjanuario/laravelpdf": "1.0.*"
+            },
+            "bin": [
+                "bin/wkhtmltopdf32.exe",
+                "bin/wkhtmltopdf64.exe"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL Version 3"
+            ],
+            "authors": [
+                {
+                    "name": "LifeWatch",
+                    "homepage": "http://www.lifewatch.eu/",
+                    "role": "wkhtmltopdf-windows maintainer"
+                },
+                {
+                    "name": "Wemerson Januario",
+                    "email": "wemerson.januario@gmail.com",
+                    "homepage": "http://wemersonjanuario.com.br",
+                    "role": "Initial wkhtmltopdf-windows creator"
+                }
+            ],
+            "description": "Convert html to pdf using webkit (qtwebkit). Static linked windows binary for 32 bit and 64 bit systems.",
+            "homepage": "http://wkhtmltopdf.org/",
+            "keywords": [
+                "binary",
+                "convert",
+                "htmltoimage",
+                "htmltopdf",
+                "pdf",
+                "snapshot",
+                "thumbnail",
+                "wkhtmltopdf"
+            ],
+            "time": "2017-03-13T08:14:04+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -2280,57 +2335,6 @@
                 "templating"
             ],
             "time": "2017-02-27T00:07:03+00:00"
-        },
-        {
-            "name": "wemersonjanuario/wkhtmltopdf-windows",
-            "version": "0.12.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wemersonjanuario/wkhtmltopdf-windows.git",
-                "reference": "90fcd3487cad5931287742113c449b926e9e48d8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wemersonjanuario/wkhtmltopdf-windows/zipball/90fcd3487cad5931287742113c449b926e9e48d8",
-                "reference": "90fcd3487cad5931287742113c449b926e9e48d8",
-                "shasum": ""
-            },
-            "suggest": {
-                "h4cc/wkhtmltopdf-amd64": "*",
-                "h4cc/wkhtmltopdf-i386": "*",
-                "wemersonjanuario/laravelpdf": "1.0.*"
-            },
-            "bin": [
-                "bin/32bit/wkhtmltopdf.exe",
-                "bin/32bit/wkhtmltoimage.exe",
-                "bin/64bit/wkhtmltopdf.exe",
-                "bin/64bit/wkhtmltoimage.exe"
-            ],
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL Version 3"
-            ],
-            "authors": [
-                {
-                    "name": "Wemerson Januario",
-                    "email": "wemerson.januario@gmail.com",
-                    "homepage": "http://wemersonjanuario.com.br"
-                }
-            ],
-            "description": "Convert html to pdf using webkit (qtwebkit). Static linked windows binary for 32 bit and 64 bit systems.",
-            "homepage": "http://wkhtmltopdf.org/",
-            "keywords": [
-                "binary",
-                "convert",
-                "htmltoimage",
-                "htmltopdf",
-                "pdf",
-                "snapshot",
-                "thumbnail",
-                "wkhtmltopdf"
-            ],
-            "time": "2015-06-30T20:19:22+00:00"
         },
         {
             "name": "wp-cli/php-cli-tools",
