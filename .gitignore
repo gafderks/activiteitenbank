@@ -3,8 +3,8 @@
 cache/
 *.mo
 upload/
-!*.htaccess
 temp/
+!*.htaccess
 
 ## Covers Composer
 composer.phar
