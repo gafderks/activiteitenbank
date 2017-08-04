@@ -18,7 +18,6 @@
         "knplabs/knp-snappy": "^0.5.0",
         "h4cc/wkhtmltopdf-i386": "0.12.3",
         "h4cc/wkhtmltoimage-i386": "0.12.x",
-        "facebook/php-sdk-v4": "^5.1",
         "slim/twig-view": "^2.0",
         "jeremykendall/slim-auth": "^1.0",
         "firebase/php-jwt": "^3.0",
@@ -32,7 +31,8 @@
         "ext-gettext": "^0.0.0",
         "h4cc/wkhtmltopdf-amd64": "0.12.3",
         "kokspflanze/sbb-code-parser": "^0.1.2",
-        "lifewatch/wkhtmltopdf-windows": "^0.12.4"
+        "lifewatch/wkhtmltopdf-windows": "^0.12.4",
+        "facebook/graph-sdk": "^5.4"
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "*"
