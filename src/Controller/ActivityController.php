@@ -81,7 +81,7 @@ class ActivityController extends Controller
             if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
                 // on Windows
                 $snappy = new Pdf($this->container['config']['absolutePath'] .
-                    '/vendor/wemersonjanuario/wkhtmltopdf-windows/bin/32bit/wkhtmltopdf.exe');
+                    '/vendor/lifewatch/wkhtmltopdf-windows/bin/wkhtmltopdf32.exe');
             } else {
                 // not on Windows
                 if (2147483647 == PHP_INT_MAX) {
@@ -95,6 +95,7 @@ class ActivityController extends Controller
                 }
             }
             $snappy->setOptions([
+                'resolve-relative-links' => true,
                 'page-size' => 'A4',
                 'title' => $activity->getName(),
                 'orientation' => 'Portrait',
