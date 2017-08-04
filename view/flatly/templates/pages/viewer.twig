@@ -159,7 +159,7 @@
                 <ul class="list">
                     {% for item in activity.attachments %}
                         <li>
-                            <a href="{{ path_for('api-attachment-get', {"activityId": activity.id,
+                            <a href="{{ domain }}{{ path_for('api-attachment-get', {"activityId": activity.id,
                                 "attachmentId": item.id, "fileName": item.slug}) }}" data-token="{{ authToken }}">
                                 {{ item.name }}</a>
                         </li>
