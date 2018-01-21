@@ -28,7 +28,7 @@
         "soundasleep/html2text": "^0.3.1",
         "bjeavons/zxcvbn-php": "^0.1.4",
         "ext-intl": "^1.1",
-        "ext-gettext": "^0.0.0",
+        "ext-gettext": "^7.1",
         "h4cc/wkhtmltopdf-amd64": "0.12.3",
         "kokspflanze/sbb-code-parser": "^0.1.2",
         "lifewatch/wkhtmltopdf-windows": "^0.12.4",
