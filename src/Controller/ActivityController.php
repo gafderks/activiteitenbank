@@ -56,6 +56,11 @@ class ActivityController extends Controller
         try {
             $activity = $this->getActivityMapper()->findActivityById($args['id']);
 
+            if (! $this->container['config']['runEnvironment']['shellAccess']) {
+                return $this->getExceptionResponse($response,
+                    new \Exception("PDF generation is not enabled for this application"), 401);
+            }
+            
             if (!$this->container['acl']->isAllowed('guest', 'activity', 'download')) {
                 // if token is not allowed to download this activity, output 401
                 if (!$this->getActivityService()->tokenMayDownload($activity, $this->container['jwt'])) {

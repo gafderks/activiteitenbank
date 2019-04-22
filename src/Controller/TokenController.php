@@ -38,7 +38,7 @@ class TokenController extends Controller
             // load input
             $input = json_decode($request->getBody());
             $scope = get_object_vars($input->scopes);
-            // remove permissions that are not allowed
+            // remove permissions that are not allowed or disabled
             foreach ($scope as $resource => $privileges) {
                 if ($privileges === null) {
                     if (!$this->container['acl']->isAllowed($user->getRole()->value(), $resource)) {
@@ -47,6 +47,13 @@ class TokenController extends Controller
                     }
                 } else {
                     foreach ($privileges as $key => $privilege) {
+                        if (!$this->container['config']['runEnvironment']['shellAccess'] &&
+                            $privilege == 'download') { // downloading is disabled
+                            unset($scope[$resource][$key]);
+                            if (count($scope[$resource]) === 0) {
+                                unset($scope[$resource]);
+                            }
+                        }
                         if (!$this->container['acl']->isAllowed($user->getRole()->value(), $resource, $privilege)) {
                             // remove privilege
                             unset($scope[$resource][$key]);
